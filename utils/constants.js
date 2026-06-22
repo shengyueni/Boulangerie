@@ -1,8 +1,8 @@
 const APP_META = {
   appName: "吗喽的出走",
   slogan: "保护好你的猩",
-  version: "0.3A",
-  stage: "核心体验视觉升级版"
+  version: "0.3B",
+  stage: "体验增强版"
 };
 
 const CHARACTERS = {
@@ -97,7 +97,7 @@ const TOOLBOX_ITEMS = [
   { title: "深呼吸练习", subtitle: "4-4-6，把自己从工作现场里拿回来一点", path: "/pages/breathing/index", color: "green", enabled: true },
   { title: "离职状态自测", subtitle: "看见自己更接近哪种过渡状态", path: "/pages/exit-test/index", color: "pink", enabled: true },
   { title: "情绪急救卡片", subtitle: "自责、害怕、无力时先接住自己", path: "/pages/emergency-cards/index", color: "yellow", enabled: true },
-  { title: "skills 链接", subtitle: "后续版本上线", path: "", color: "plain", enabled: false }
+  { title: "出走小技能", subtitle: "事实纪要、算钱、求助和离职后第一周", path: "/pages/skills/index", color: "plain", enabled: true }
 ];
 
 const PROTECTION_ADVICE = {
@@ -209,6 +209,65 @@ const FEEDBACK_QUESTIONS = [
   "6. 你会不会愿意第二天再打开？"
 ];
 
+const BODY_REACTION_OPTIONS = ["失眠", "胸闷", "头痛", "胃痛", "心跳快", "想哭", "麻木", "疲惫", "没胃口", "其他"];
+
+const EMOTION_OPTIONS = ["委屈", "愤怒", "害怕", "羞耻", "无力", "恶心", "失望", "焦虑", "空", "平静一点了"];
+
+const TRIED_ACTION_OPTIONS = ["忍了", "沟通过", "找朋友说了", "写下来了", "请假 / 休息", "保存证据", "投简历", "准备离职", "暂时不处理"];
+
+const SECONDARY_TAG_GROUPS = {
+  "身心消耗": ["加班", "睡眠受影响", "身体不适", "工作量过大", "情绪耗竭"],
+  "尊严与边界": ["被贬低", "被羞辱", "被越界", "被控制", "被情绪勒索"],
+  "关系压力": ["领导关系", "同事氛围", "团队冲突", "被孤立", "被甩锅"],
+  "制度与公平": ["规则混乱", "不公平", "画饼", "管理混乱", "责任不清"],
+  "钱与保障": ["工资太低", "涨薪无望", "社保公积金", "通勤成本", "生活压力"],
+  "成长与转向": ["成长停滞", "工作内容不匹配", "价值感下降", "外部机会", "想 gap", "想转行", "想申博", "想做自己的项目"]
+};
+
+const PLAN_CATEGORIES = {
+  pre_exit: ["钱与保障", "材料与机会", "工作交接", "关系支持", "身体保护"],
+  post_exit: ["第 1 周：睡觉、吃饭、恢复身体", "第 2 周：整理材料、恢复节奏", "第 3 周：探索方向、联系朋友", "第 4 周：建立下一阶段计划", "我想找回的生活"]
+};
+
+const DEFAULT_PLAN_ITEMS_03B = [
+  { type: "pre_exit", category: "钱与保障", title: "计算每月固定开销" },
+  { type: "pre_exit", category: "钱与保障", title: "确认可支撑月数" },
+  { type: "pre_exit", category: "材料与机会", title: "更新简历" },
+  { type: "pre_exit", category: "材料与机会", title: "整理作品集或项目材料" },
+  { type: "pre_exit", category: "工作交接", title: "保存重要工作材料" },
+  { type: "pre_exit", category: "关系支持", title: "找一个可信任的人聊聊状态" },
+  { type: "pre_exit", category: "身体保护", title: "预约一次真正的休息" },
+  { type: "post_exit", category: "第 1 周：睡觉、吃饭、恢复身体", title: "连续睡满三天" },
+  { type: "post_exit", category: "第 2 周：整理材料、恢复节奏", title: "整理离职后的材料文件夹" },
+  { type: "post_exit", category: "第 3 周：探索方向、联系朋友", title: "约一个喜欢的朋友见面" },
+  { type: "post_exit", category: "第 4 周：建立下一阶段计划", title: "写下一阶段的三个小目标" },
+  { type: "post_exit", category: "我想找回的生活", title: "去喜欢的咖啡馆写东西" },
+  { type: "post_exit", category: "我想找回的生活", title: "晒太阳" },
+  { type: "post_exit", category: "我想找回的生活", title: "和喜欢的朋友见面" },
+  { type: "post_exit", category: "我想找回的生活", title: "做自己的项目 demo" },
+  { type: "post_exit", category: "我想找回的生活", title: "找回“我喜欢的生活”" },
+  { type: "post_exit", category: "我想找回的生活", title: "给自己一个没有 KPI 的下午" }
+];
+
+const LOCAL_VOICE_PREFIXES = ["荔枝吗喽", "顺毛吗喽", "加班逃生吗喽", "树洞里的一只猴", "今天也想出走的喽", "被工作搓毛的喽", "暂时不想上班的喽"];
+
+const FEATURED_VOICES = [
+  { id: "荔枝吗喽 0427", text: "我今天又想离职了，但我不知道这是清醒还是崩溃。", reply: "先不用给它下结论。能说出来，就已经不是一个人硬扛了。" },
+  { id: "顺毛吗喽 1188", text: "我不是不想努力了，我只是觉得自己快被耗空了。", reply: "耗空不是你的错。请先把电量当成正事。" },
+  { id: "加班逃生吗喽 2031", text: "我好像每天都在等一个不会来的下班。", reply: "那就先替自己记录下来：这不是偶然，是一种模式。" },
+  { id: "树洞里的一只猩 0912", text: "我怕离开之后更糟，也怕留下来慢慢不像自己。", reply: "害怕说明这件事很重要。我们先准备，不用立刻跳。" },
+  { id: "今天也想出走的喽 0520", text: "我只是想过一种不用反复解释边界的生活。", reply: "这个愿望很正当。它值得被温柔地放进计划里。" },
+  { id: "被工作搓毛的喽 0821", text: "我开始怀疑是不是我太敏感，但身体已经先替我报警了。", reply: "身体的报警值得被听见。你不是小题大做。" }
+];
+
+const SKILL_CARDS = [
+  { title: "事实纪要怎么写", content: "先写发生了什么，再写谁做了什么，最后写它对你造成了什么影响。尽量少写评价，多写事实。" },
+  { title: "离职前先算什么", content: "先算每月固定开销、可支撑月数、社保公积金、房租和必要医疗开销。钱不是全部，但它会影响你的安全感。" },
+  { title: "怎么和朋友说我撑不住了", content: "可以不用解释完整人生。先说：我最近状态不太好，想找你说 20 分钟，不需要你解决，只想有人听我说。" },
+  { title: "怎么判断我是逃避还是转向", content: "只想离开痛苦是逃离的信号；开始想象新生活、新方向和准备动作，是转向的信号。两者可以同时存在。" },
+  { title: "离职后第一周做什么", content: "先恢复身体，再整理材料。睡觉、吃饭、晒太阳、散步，都不是浪费时间。" }
+];
+
 module.exports = {
   APP_META,
   CHARACTERS,
@@ -222,5 +281,14 @@ module.exports = {
   EXIT_TEST_OPTIONS,
   EXIT_TEST_RESULTS,
   EMERGENCY_CARDS,
-  FEEDBACK_QUESTIONS
+  FEEDBACK_QUESTIONS,
+  BODY_REACTION_OPTIONS,
+  EMOTION_OPTIONS,
+  TRIED_ACTION_OPTIONS,
+  SECONDARY_TAG_GROUPS,
+  PLAN_CATEGORIES,
+  DEFAULT_PLAN_ITEMS_03B,
+  LOCAL_VOICE_PREFIXES,
+  FEATURED_VOICES,
+  SKILL_CARDS
 };

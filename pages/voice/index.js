@@ -1,36 +1,12 @@
+const { FEATURED_VOICES, LOCAL_VOICE_PREFIXES } = require("../../utils/constants");
+const { createId, getLocalVoicePosts, saveLocalVoicePost, deleteLocalVoicePost } = require("../../utils/storage");
+function createAnonymousId() { const prefix = LOCAL_VOICE_PREFIXES[Math.floor(Math.random() * LOCAL_VOICE_PREFIXES.length)]; const suffix = String(Math.floor(Math.random() * 10000)).padStart(4, "0"); return prefix + " " + suffix; }
+function formatDate(value) { const date = new Date(value); if (Number.isNaN(date.getTime())) return ""; return date.getMonth() + 1 + "-" + date.getDate() + " " + String(date.getHours()).padStart(2, "0") + ":" + String(date.getMinutes()).padStart(2, "0"); }
 Page({
-  data: {
-    voices: [
-      {
-        id: "荔枝吗喽 0427",
-        text: "我今天又想离职了，但我不知道这是清醒还是崩溃。",
-        reply: "先不用给它下结论。能说出来，就已经不是一个人硬扛了。"
-      },
-      {
-        id: "顺毛吗喽 1188",
-        text: "我不是不想努力了，我只是觉得自己快被耗空了。",
-        reply: "耗空不是你的错。请先把电量当成正事。"
-      },
-      {
-        id: "加班逃生吗喽 2031",
-        text: "我好像每天都在等一个不会来的下班。",
-        reply: "那就先替自己记录下来：这不是偶然，是一种模式。"
-      },
-      {
-        id: "树洞里的一只猩 0912",
-        text: "我怕离开之后更糟，也怕留下来慢慢不像自己。",
-        reply: "害怕说明这件事很重要。我们先准备，不用立刻跳。"
-      },
-      {
-        id: "今天也想出走的喽 0520",
-        text: "我只是想过一种不用反复解释边界的生活。",
-        reply: "这个愿望很正当。它值得被温柔地放进计划里。"
-      },
-      {
-        id: "被工作揉毛的喽 0821",
-        text: "我开始怀疑是不是我太敏感，但身体已经先替我报警了。",
-        reply: "身体的报警值得被听见。你不是小题大做。"
-      }
-    ]
-  }
+  data: { featuredVoices: FEATURED_VOICES, localPosts: [], content: "" },
+  onShow() { this.refresh(); },
+  refresh() { this.setData({ localPosts: getLocalVoicePosts().map((post) => ({ ...post, displayDate: formatDate(post.createdAt) })) }); },
+  onInput(event) { this.setData({ content: event.detail.value }); },
+  publishLocal() { const content = this.data.content.trim(); if (!content) { wx.showToast({ title: "先写下一句想放下的话。", icon: "none" }); return; } saveLocalVoicePost({ id: createId("voice"), anonymousId: createAnonymousId(), content, createdAt: new Date().toISOString() }); this.setData({ content: "" }); this.refresh(); wx.showToast({ title: "已经放进本地树洞。它只存在这台设备上。", icon: "none", duration: 2400 }); },
+  deletePost(event) { const id = event.currentTarget.dataset.id; wx.showModal({ title: "确认删除", content: "确定要删除这条本地心声吗？删除后无法恢复。", confirmText: "删除", confirmColor: "#e9785f", success: (res) => { if (!res.confirm) return; deleteLocalVoicePost(id); this.refresh(); wx.showToast({ title: "这条心声已经删除。", icon: "none" }); } }); }
 });

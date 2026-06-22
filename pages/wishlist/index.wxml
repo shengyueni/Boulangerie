@@ -1,29 +1,8 @@
 <view class="page">
-  <text class="hero-title">吗喽的愿望清单</text>
-  <text class="subtext">有些事是离开前的护栏，有些事是离开后的光。</text>
-
-  <view class="tabs">
-    <view class="tab {{activeType === 'pre_exit' ? 'active' : ''}}" data-type="pre_exit" bindtap="switchTab">离职前要做的事</view>
-    <view class="tab {{activeType === 'post_exit' ? 'active' : ''}}" data-type="post_exit" bindtap="switchTab">离职后想做的事</view>
-  </view>
-
-  <view class="card">
-    <input class="input" value="{{newTitle}}" bindinput="onInput" placeholder="新增一个小事项" />
-    <button class="sticker-button green" bindtap="addItem">加入清单</button>
-  </view>
-
-  <view class="card">
-    <text class="section-title">{{activeTitle}}</text>
-    <view wx:if="{{!visibleItems.length}}" class="empty wish-empty">
-      <text>这里还没有愿望。先放一个很小、很具体的也可以。</text>
-    </view>
-    <view
-      wx:for="{{visibleItems}}"
-      wx:key="id"
-      class="wish-row {{item.completed ? 'done' : ''}}"
-    >
-      <text class="wish-title" data-id="{{item.id}}" bindtap="toggleItem">{{item.completed ? '已完成' : '待完成'}} · {{item.title}}</text>
-      <text class="delete" data-id="{{item.id}}" bindtap="deleteItem">删除</text>
-    </view>
-  </view>
+  <view class="page-head"><text class="eyebrow">本地出走计划</text><text class="hero-title">吗喽的出走计划</text><text class="subtext">把“想走”拆成更小、更现实、更能保护你的准备。</text></view>
+  <view class="paper-card progress-card"><text class="section-title">计划进度</text><view class="progress-line"><text>{{completed}} / {{total}}</text><text>{{percent}}%</text></view><view class="bar-track"><view class="bar-fill" style="width: {{percent}}%;"></view></view><text class="body-text">{{progressText}}</text></view>
+  <view class="tabs"><view class="tab {{activeType === 'pre_exit' ? 'active' : ''}}" data-type="pre_exit" bindtap="switchTab">离职前准备</view><view class="tab {{activeType === 'post_exit' ? 'active' : ''}}" data-type="post_exit" bindtap="switchTab">离职后 30 天重建</view></view>
+  <view class="paper-card"><text class="section-title">新增一个小计划</text><input class="input" value="{{newTitle}}" bindinput="onInput" placeholder="新增一个可以很小的事项" /><view class="category-row"><view wx:for="{{categories}}" wx:key="*this" class="chip {{newCategory === item ? 'green' : ''}}" data-category="{{item}}" bindtap="selectCategory">{{item}}</view></view><button class="sticker-button green" bindtap="addItem">加入出走计划</button></view>
+  <view wx:if="{{!groups.length}}" class="empty-card"><text>这里还没有计划事项。可以先放一个很小、很具体的也可以。</text></view>
+  <view wx:for="{{groups}}" wx:key="category" class="paper-card"><text class="section-title">{{item.category}}</text><view wx:for="{{item.items}}" wx:for-item="plan" wx:key="id" class="wish-row {{plan.completed ? 'done' : ''}}"><text class="wish-title" data-id="{{plan.id}}" bindtap="toggleItem">{{plan.completed ? '已完成' : '待完成'}} · {{plan.title}}</text><text class="delete" data-id="{{plan.id}}" bindtap="deleteItem">删除</text></view></view>
 </view>

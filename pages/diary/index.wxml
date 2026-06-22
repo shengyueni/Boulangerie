@@ -1,33 +1,14 @@
 <view class="page diary-page">
-  <view class="page-head">
-    <text class="eyebrow">事实小纸条</text>
-    <text class="hero-title">吗喽的日记本</text>
-    <text class="subtext">记录不是为了立刻做决定，是为了看见自己发生了什么。</text>
-  </view>
-
+  <view class="page-head"><text class="eyebrow">事实小纸条</text><text class="hero-title">吗喽的日记本</text><text class="subtext">记录不是为了立刻做决定，是为了看见自己发生了什么。</text></view>
   <button class="sticker-button secondary" bindtap="goNew">写一条日记</button>
-
-  <view wx:if="{{!entries.length}}" class="empty-card diary-empty">
-    <text>这里还没有记录。</text>
-    <text>第一条日记不需要完美，只要真实。</text>
-    <text>你不是在小题大做，你是在替自己留下线索。</text>
-    <button class="sticker-button green" bindtap="goNew">写下第一条日记</button>
-  </view>
-
+  <view class="filter-panel"><view wx:for="{{typeFilters}}" wx:key="key" class="chip {{activeFilter === item.key ? 'pink' : ''}}" data-key="{{item.key}}" bindtap="switchTypeFilter">{{item.label}}</view></view>
+  <scroll-view class="reason-scroll" scroll-x="true"><view class="reason-row-filter"><view wx:for="{{reasonFilters}}" wx:key="*this" class="chip {{(activeReason === 'all' && item === '全部原因') || activeReason === item ? 'green' : ''}}" data-reason="{{item}}" bindtap="switchReasonFilter">{{item}}</view></view></scroll-view>
+  <view wx:if="{{!entries.length}}" class="empty-card diary-empty"><text>这里暂时没有符合筛选的记录。</text><text>第一条日记不需要完美，只要真实。</text><text>你不是在小题大做，你是在替自己留下线索。</text><button class="sticker-button green" bindtap="goNew">写下第一条日记</button></view>
   <view wx:for="{{entries}}" wx:key="id" class="paper-card entry-card {{item.cardClass}}" data-id="{{item.id}}" bindtap="goDetail">
-    <view class="row between entry-top">
-      <text class="date">{{item.displayDate}}</text>
-      <text class="chip {{item.type === 'positive' ? 'green' : 'dark'}}">{{item.typeLabel}}</text>
-    </view>
+    <view class="row between entry-top"><text class="date">{{item.displayDate}}</text><text class="chip {{item.type === 'positive' ? 'green' : 'dark'}}">{{item.typeLabel}}</text></view>
     <text class="summary">{{item.summary}}</text>
-    <view class="meta-chips">
-      <text class="chip {{item.impactClass}}">影响等级 {{item.impactLevel}}</text>
-      <text class="chip pink">{{item.primaryReason}}</text>
-    </view>
-    <view class="memo-slip">
-      <text class="memo-label">事实纪要摘录</text>
-      <text class="memo">{{item.memoPreview}}</text>
-    </view>
+    <view class="meta-chips"><text class="chip {{item.impactClass}}">影响等级 {{item.impactLevel}}</text><text class="chip pink">{{item.primaryReason}}</text></view>
+    <view class="memo-slip"><text class="memo-label">事实纪要摘录</text><text class="memo">{{item.memoPreview}}</text></view>
     <text class="detail-hint">点开查看完整记录</text>
   </view>
 </view>
