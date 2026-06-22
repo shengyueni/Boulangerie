@@ -8,7 +8,7 @@
   margin: 20rpx auto 30rpx;
   border: 4rpx solid var(--border);
   border-radius: 50%;
-  background: #f8c9d2;
+  background: #fffefb;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,17 +20,17 @@
 
 .breath-ball.inhale {
   transform: scale(1.1);
-  background: #c9e7b6;
+  background: #fffefb;
 }
 
 .breath-ball.hold {
   transform: scale(1.06);
-  background: #ffe8a8;
+  background: #fffefb;
 }
 
 .breath-ball.exhale {
   transform: scale(0.9);
-  background: #f8c9d2;
+  background: #fffefb;
 }
 
 .phase-label {
@@ -68,9 +68,12 @@
 
 .breath-ball.ready {
   transform: scale(1);
-  background: #fff2c4;
+  background: #fffefb;
 }
 
 .muted-button {
   opacity: 0.58;
 }
+
+.breath-card { background: linear-gradient(180deg, #fffefb, #fff8ed); }
+.breath-ball { border-color: rgba(185,139,75,.48); }

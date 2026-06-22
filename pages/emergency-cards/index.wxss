@@ -44,3 +44,7 @@
   font-size: 28rpx;
   line-height: 1.6;
 }
+
+.rescue-card { background: #fffefb; }
+.rescue-card.open { background: linear-gradient(180deg, #fffefb, #fff8ed); }
+.go-wish-card { background: #fffefb; border-color: rgba(47,123,103,.34); }

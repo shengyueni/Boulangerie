@@ -1,8 +1,11 @@
 <view class="page">
-  <text class="hero-title">离职状态自测</text>
-  <text class="subtext">它只帮你看见当前状态，不会替你做“必须离职”的绝对结论。</text>
+  <view class="page-head">
+    <text class="eyebrow">温柔问答页</text>
+    <text class="hero-title">离职状态自测</text>
+    <text class="subtext">它只帮你看见当前状态，不会替你做“必须离职”的绝对结论。</text>
+  </view>
 
-  <view wx:for="{{questions}}" wx:for-item="question" wx:for-index="questionIndex" wx:key="title" class="card question-card">
+  <view wx:for="{{questions}}" wx:for-item="question" wx:for-index="questionIndex" wx:key="title" class="ornament-card question-card">
     <text class="question-title">{{questionIndex + 1}}. {{question.title}}</text>
     <view class="score-row">
       <view
@@ -23,7 +26,7 @@
 
   <button class="sticker-button green" bindtap="showResult">查看结果</button>
 
-  <view wx:if="{{result}}" class="card result-card">
+  <view wx:if="{{result}}" class="amulet-card result-card">
     <text class="score-total">总分：{{totalScore}}</text>
     <text class="section-title">结果类型：{{result.title}}</text>
     <text class="result-text">{{result.text}}</text>

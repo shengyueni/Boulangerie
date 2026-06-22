@@ -7,3 +7,8 @@
 .local-post { margin-top: 18rpx; padding: 18rpx; border: 2rpx dashed rgba(74,57,47,.38); border-radius: 18rpx; background: rgba(255,250,240,.75); }
 .post-date { display: block; color: var(--muted); font-size: 23rpx; font-weight: 800; }
 .delete { display: inline-flex; margin-top: 12rpx; color: var(--orange); font-size: 25rpx; font-weight: 900; }
+
+.voice-card, .local-post { background: #fffefb; }
+.local-post { border-color: rgba(185,139,75,.34); }
+.safe-note { padding: 14rpx 16rpx; border: 2rpx dashed rgba(185,139,75,.34); border-radius: 16rpx; background: #fffaf2; }
+.reply-slip { background: #fffaf2; border-color: rgba(185,139,75,.34); }

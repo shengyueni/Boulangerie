@@ -1,4 +1,4 @@
-<view class="page">
-  <view class="page-head"><text class="eyebrow">只读小技能</text><text class="hero-title">出走小技能</text><text class="subtext">这些不是指令，只是一些可以复制走的小提醒。</text></view>
-  <view wx:for="{{skills}}" wx:key="title" class="paper-card"><text class="section-title">{{item.title}}</text><text class="body-text">{{item.content}}</text><button class="sticker-button green" data-index="{{index}}" bindtap="copySkill">复制这条</button></view>
+<view class="page skills-page">
+  <view class="page-head"><text class="eyebrow">只读小册页</text><text class="hero-title">出走小技能</text><text class="subtext">这些不是指令，只是一些可以复制走的小提醒。</text></view>
+  <view wx:for="{{skills}}" wx:key="title" class="archive-card skill-card"><text class="tiny-seal">小技能</text><text class="section-title">{{item.title}}</text><text class="body-text">{{item.content}}</text><button class="sticker-button green" data-index="{{index}}" bindtap="copySkill">复制这条</button></view>
 </view>

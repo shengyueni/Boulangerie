@@ -1,13 +1,16 @@
 <view class="page">
-  <text class="hero-title">情绪急救卡片</text>
-  <text class="subtext">自责、嫉妒、害怕、无力的时候，先给自己一个温柔但可执行的小回应。</text>
+  <view class="page-head">
+    <text class="eyebrow">护身贴纸</text>
+    <text class="hero-title">情绪急救卡片</text>
+    <text class="subtext">自责、嫉妒、害怕、无力的时候，先给自己一个温柔但可执行的小回应。</text>
+  </view>
 
-  <view wx:if="{{lastAdded}}" class="card go-wish-card">
+  <view wx:if="{{lastAdded}}" class="note-card go-wish-card">
     <text>小动作已经收好。</text>
     <button class="sticker-button secondary" bindtap="goWishlist">去愿望清单看看</button>
   </view>
 
-  <view wx:for="{{cards}}" wx:key="title" class="card rescue-card {{item.expanded ? 'open' : ''}}" data-index="{{index}}" bindtap="toggleCard">
+  <view wx:for="{{cards}}" wx:key="title" class="ornament-card rescue-card {{item.expanded ? 'open' : ''}}" data-index="{{index}}" bindtap="toggleCard">
     <view class="row between">
       <text class="card-title">{{item.title}}</text>
       <text class="toggle-text">{{item.expanded ? '收起' : '展开'}}</text>

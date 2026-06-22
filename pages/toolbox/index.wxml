@@ -1,12 +1,12 @@
-<view class="page">
+<view class="page toolbox-page">
   <view class="page-head">
-    <text class="eyebrow">轻量工具包</text>
+    <text class="eyebrow">精致工具抽屉</text>
     <text class="hero-title">吗喽的百宝箱</text>
-    <text class="subtext">先放几件轻量工具：让情绪降一点、让状态清楚一点、让下一步小一点。</text>
+    <text class="subtext">呼吸、自测、急救卡片和出走小技能，都先收在这个小抽屉里。</text>
   </view>
-
   <view class="tool-grid">
-    <view wx:for="{{items}}" wx:key="title" class="tool-card {{item.color}}" data-index="{{index}}" bindtap="openTool">
+    <view wx:for="{{items}}" wx:key="title" class="tool-card ornament-card {{item.color}}" data-index="{{index}}" bindtap="openTool">
+      <text class="tiny-seal">工具签</text>
       <text class="tool-title">{{item.title}}</text>
       <text class="subtext">{{item.subtitle}}</text>
     </view>

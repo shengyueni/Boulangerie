@@ -96,3 +96,11 @@
 .impact-summary { display: block; margin: 8rpx 0 12rpx; font-size: 28rpx; line-height: 1.5; font-weight: 900; }
 .high-empty { margin-top: 12rpx; box-shadow: none; }
 .review-card { background: linear-gradient(135deg, #fffdf6, #fff2c4); }
+
+.stats-grid { gap: 16rpx; }
+.stat-card { background: #fffefb; border-color: rgba(185,139,75,.36); box-shadow: 0 10rpx 24rpx rgba(78,58,38,.06); }
+.tendency-card, .review-card, .advice-card { background: #fffefb; }
+.reason-row { padding-top: 8rpx; }
+.bar-track { background: #fffaf2; border-color: rgba(185,139,75,.35); }
+.bar-fill { background: linear-gradient(90deg, rgba(47,123,103,.5), rgba(185,139,75,.45)); }
+.impact-row { background: #fffaf2; border-color: rgba(185,139,75,.36); }

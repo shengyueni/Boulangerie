@@ -1,8 +1,8 @@
 const APP_META = {
   appName: "吗喽的出走",
   slogan: "保护好你的猩",
-  version: "0.3B",
-  stage: "体验增强版"
+  version: "0.3C",
+  stage: "花纸视觉重塑版"
 };
 
 const CHARACTERS = {

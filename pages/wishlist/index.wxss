@@ -10,3 +10,9 @@
 .wish-row.done { opacity: 0.62; background: rgba(156, 207, 154, 0.18); }
 .done .wish-title { color: var(--muted); text-decoration: line-through; }
 .delete { color: var(--orange); font-size: 25rpx; }
+
+.progress-card { background: linear-gradient(180deg, #fffefb, #fff8ed); }
+.tabs { border-top: 2rpx solid rgba(185,139,75,.18); padding-top: 22rpx; }
+.tab { background: #fffefb; border-color: rgba(90,70,56,.26); }
+.tab.active { color: var(--purple); background: #fff8ed; border-color: rgba(76,54,95,.38); }
+.wish-row { background: #fffefb; }

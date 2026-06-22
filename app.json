@@ -19,9 +19,9 @@
   ],
   "window": {
     "navigationBarTitleText": "吗喽的出走",
-    "navigationBarBackgroundColor": "#f8ead8",
+    "navigationBarBackgroundColor": "#fffaf2",
     "navigationBarTextStyle": "black",
-    "backgroundColor": "#fff8ed"
+    "backgroundColor": "#fffaf2"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

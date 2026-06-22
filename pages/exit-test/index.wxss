@@ -64,3 +64,8 @@
   font-size: 42rpx;
   font-weight: 900;
 }
+
+.question-card { background: #fffefb; }
+.score-pill { background: #fffefb; border-color: rgba(185,139,75,.32); }
+.score-pill.active { color: var(--purple); background: #fff8ed; border-color: rgba(76,54,95,.42); }
+.result-card { background: linear-gradient(180deg, #fffefb, #fff8ed); }

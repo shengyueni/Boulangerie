@@ -1,33 +1,33 @@
 <view class="page bubble-page">
   <view class="page-head">
-    <text class="eyebrow">小型护身符工坊</text>
+    <text class="eyebrow">泡泡站</text>
     <text class="hero-title">吗喽的泡泡机</text>
     <text class="subtext">不用立刻解决人生。先摇一颗泡泡。</text>
   </view>
 
-  <view class="bubble-machine paper-card">
-    <view class="machine-window">
-      <view class="floating-dot pink"></view>
-      <view class="floating-dot green"></view>
-      <view class="floating-dot yellow"></view>
-      <text class="machine-label">MALO BUBBLE</text>
-    </view>
-    <button class="sticker-button" bindtap="drawBubble">摇一颗泡泡</button>
+  <view class="note-card bubble-note">
+    <text>泡泡会轻轻提醒你：有些话可以接住，有些职场废话可以点破。</text>
   </view>
 
-  <view wx:if="{{bubble}}" class="paper-card bubble-card {{bubble.tone}}">
+  <view class="ornament-card bubble-machine">
+    <view class="machine-window">
+      <view class="machine-line"></view>
+      <view class="floating-dot pink"></view>
+      <view class="floating-dot green"></view>
+      <view class="floating-dot gold"></view>
+      <text class="machine-label">MALO BUBBLE</text>
+    </view>
+  </view>
+
+  <view wx:if="{{bubble}}" class="ornament-card bubble-card {{bubble.tone}}">
     <view class="bubble-orb" style="background: {{bubble.color}};"></view>
-    <text class="source">{{bubble.source}}</text>
+    <text class="tiny-seal">{{bubble.source}}</text>
     <text class="chip bubble-type">{{bubble.type}}</text>
     <text class="bubble-text">{{bubble.text}}</text>
-
-    <button wx:if="{{bubble.tone === 'ld' && !poppedMessage}}" class="sticker-button secondary" bindtap="popLdBubble">
-      点破这句职场废话
-    </button>
+    <button wx:if="{{bubble.tone === 'ld' && !poppedMessage}}" class="sticker-button secondary" bindtap="popLdBubble">点破这句职场废话</button>
     <text wx:if="{{poppedMessage}}" class="popped">{{poppedMessage}}</text>
   </view>
 
-  <view wx:else class="empty-card bubble-empty">
-    <text>泡泡还没出现。按一下按钮，让它咕噜一下。</text>
-  </view>
+  <view wx:else class="empty-card bubble-empty"><text>泡泡还没出现。按一下按钮，让它咕噜一下。</text></view>
+  <button class="sticker-button" bindtap="drawBubble">摇一颗泡泡</button>
 </view>

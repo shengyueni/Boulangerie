@@ -5,31 +5,29 @@
     <text class="subtext">{{appMeta.slogan}}</text>
   </view>
 
-  <view class="paper-card status-card {{croissant.statusClass}} kingdom-status">
-    <text class="section-title">Croissant 当前状态</text>
+  <view class="amulet-card status-card {{croissant.statusClass}} kingdom-status">
+    <view class="corner-flower"></view>
+    <text class="tiny-seal">Croissant 护身符</text>
     <text class="status-name">{{croissant.status}}</text>
     <text class="status-wear">磨损值：{{croissant.wear}}</text>
     <text class="body-text">{{croissant.explanation}}</text>
-    <text class="protect-note">护身符：{{croissant.advice}}</text>
+    <text class="protect-note">{{croissant.advice}}</text>
   </view>
 
-  <view class="welcome-card">
+  <view class="note-card welcome-card">
     <text>欢迎回到吗喽王国。</text>
     <text>今天也不用立刻做决定。</text>
     <text>先看看 Croissant 现在需要什么。</text>
   </view>
 
-  <text class="group-title">今天要去哪里</text>
-  <view class="map-grid">
-    <view
-      wx:for="{{navItems}}"
-      wx:key="path"
-      class="map-card {{item.color}} {{item.size}}"
-      data-path="{{item.path}}"
-      bindtap="goTo"
-    >
-      <text class="map-title">{{item.label}}</text>
-      <text class="map-subtitle">{{item.subtitle}}</text>
+  <view class="map-shell">
+    <text class="ribbon-title">王国地点</text>
+    <view class="map-grid">
+      <view wx:for="{{navItems}}" wx:key="path" class="map-card {{item.color}} {{item.size}}" data-path="{{item.path}}" bindtap="goTo">
+        <text class="tiny-seal">{{item.alias}}</text>
+        <text class="map-title">{{item.label}}</text>
+        <text class="map-subtitle">{{item.subtitle}}</text>
+      </view>
     </view>
   </view>
 
