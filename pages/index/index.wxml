@@ -1,35 +1,65 @@
 <view class="page kingdom-page">
-  <view class="page-head kingdom-head">
-    <text class="eyebrow">吗喽王国地图</text>
+  <view class="page-head kingdom-head floral-title-box">
+    <view class="corner-ornament corner-ornament-left corner-ornament--red"></view>
+    <view class="corner-ornament corner-ornament-right corner-ornament--green"></view>
+    <text class="seal-flower">吗喽王国地图</text>
     <text class="hero-title">{{appMeta.appName}}</text>
     <text class="subtext">{{appMeta.slogan}}</text>
+    <view class="floral-divider">
+      <view class="floral-divider__line"></view>
+      <view class="floral-divider__dot red"></view>
+      <view class="floral-divider__dot green"></view>
+      <view class="floral-divider__line"></view>
+    </view>
   </view>
 
-  <view class="amulet-card status-card {{croissant.statusClass}} kingdom-status">
-    <view class="corner-flower"></view>
-    <text class="tiny-seal">Croissant 护身符</text>
+  <view class="amulet-card amulet-frame status-card {{croissant.statusClass}} kingdom-status">
+    <view class="corner-ornament corner-ornament-left corner-ornament--gold"></view>
+    <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
+    <view class="corner-ornament corner-ornament-bottom-left corner-ornament--green"></view>
+    <view class="corner-ornament corner-ornament-bottom-right corner-ornament--red"></view>
+    <text class="amulet-frame__seal">Croissant 护身符</text>
     <text class="status-name">{{croissant.status}}</text>
     <text class="status-wear">磨损值：{{croissant.wear}}</text>
     <text class="body-text">{{croissant.explanation}}</text>
+    <view class="ornament-line amulet-frame__bottom"></view>
     <text class="protect-note">{{croissant.advice}}</text>
   </view>
 
-  <view class="note-card welcome-card">
+  <view class="note-card welcome-card paper-edge">
     <text>欢迎回到吗喽王国。</text>
     <text>今天也不用立刻做决定。</text>
     <text>先看看 Croissant 现在需要什么。</text>
   </view>
 
   <view class="map-shell">
+    <view class="floral-divider">
+      <view class="floral-divider__line"></view>
+      <view class="floral-divider__dot blue"></view>
+      <view class="floral-divider__dot"></view>
+      <view class="floral-divider__line"></view>
+    </view>
     <text class="ribbon-title">王国地点</text>
+    <view class="map-route-line"></view>
     <view class="map-grid">
-      <view wx:for="{{navItems}}" wx:key="path" class="map-card {{item.color}} {{item.size}}" data-path="{{item.path}}" bindtap="goTo">
-        <text class="tiny-seal">{{item.alias}}</text>
-        <text class="map-title">{{item.label}}</text>
-        <text class="map-subtitle">{{item.subtitle}}</text>
-      </view>
+      <block wx:for="{{navItems}}" wx:key="path">
+        <view class="map-place map-card {{item.color}} {{item.size}}" data-path="{{item.path}}" bindtap="goTo">
+          <view class="corner-ornament corner-ornament-left corner-ornament--gold"></view>
+          <text class="map-place__seal">{{item.alias}}</text>
+          <text class="map-place__title">{{item.label}}</text>
+          <text class="map-place__desc">{{item.subtitle}}</text>
+        </view>
+        <view wx:if="{{index < navItems.length - 1}}" class="map-route"></view>
+      </block>
     </view>
   </view>
 
+  <view class="floral-divider bottom-divider">
+    <view class="floral-divider__line"></view>
+    <view class="floral-divider__dot red"></view>
+    <view class="floral-divider__dot"></view>
+    <view class="floral-divider__dot green"></view>
+    <view class="floral-divider__line"></view>
+  </view>
   <text class="version-note">当前版本：{{appMeta.version}} {{appMeta.stage}}</text>
 </view>

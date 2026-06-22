@@ -1,1 +1,2 @@
 .amulet-card { text-align: left; }
+.route-button { border-color: rgba(184,138,74,.58); }

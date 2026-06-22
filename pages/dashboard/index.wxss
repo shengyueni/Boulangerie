@@ -104,3 +104,9 @@
 .bar-track { background: #fffaf2; border-color: rgba(185,139,75,.35); }
 .bar-fill { background: linear-gradient(90deg, rgba(47,123,103,.5), rgba(185,139,75,.45)); }
 .impact-row { background: #fffaf2; border-color: rgba(185,139,75,.36); }
+
+.range-tags .chip { border-color: rgba(184,138,74,.62); box-shadow: 0 8rpx 18rpx rgba(74,52,40,.06); }
+.status-card { padding-top: 48rpx; }
+.tendency-card, .review-card { padding-top: 42rpx; }
+.bar-fill { background: repeating-linear-gradient(90deg, rgba(47,107,79,.72) 0 18rpx, rgba(184,138,74,.72) 18rpx 36rpx); }
+.impact-row { border-left-width: 8rpx; border-left-style: solid; border-left-color: #B84A3A; }

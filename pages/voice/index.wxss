@@ -12,3 +12,8 @@
 .local-post { border-color: rgba(185,139,75,.34); }
 .safe-note { padding: 14rpx 16rpx; border: 2rpx dashed rgba(185,139,75,.34); border-radius: 16rpx; background: #fffaf2; }
 .reply-slip { background: #fffaf2; border-color: rgba(185,139,75,.34); }
+
+.tree-hole-input { padding-top: 42rpx; }
+.paper-note { border-color: rgba(184,138,74,.5); box-shadow: 0 10rpx 24rpx rgba(74,52,40,.08); }
+.voice-id { border-color: rgba(184,74,58,.7); color: #B84A3A; }
+.safe-note { border-color: rgba(90,42,95,.5); color: var(--purple); }

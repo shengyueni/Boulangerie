@@ -1,1 +1,2 @@
 .skill-card { background: #fffefb; }
+.skill-card { padding-top: 42rpx; }

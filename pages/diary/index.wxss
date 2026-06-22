@@ -89,3 +89,7 @@
 .entry-card.worn-note.high-impact { border-color: rgba(76,54,95,.58); box-shadow: 0 12rpx 34rpx rgba(76,54,95,.1); }
 .entry-card.smooth-note { border-color: rgba(47,123,103,.42); background: linear-gradient(180deg, #fffefb, #f8fcf9); }
 .memo-slip { background: #fffaf2; border-color: rgba(185,139,75,.38); }
+
+.entry-card { padding-top: 42rpx; }
+.entry-card .corner-ornament { width: 34rpx; height: 34rpx; border-width: 3rpx; opacity: .55; }
+.filter-panel .chip, .reason-row-filter .chip { border-style: solid; border-color: rgba(184,138,74,.52); background: #fffefb; }

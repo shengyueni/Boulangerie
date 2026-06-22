@@ -1,106 +1,22 @@
-.kingdom-page {
-  background:
-    linear-gradient(180deg, #fffefb 0%, #fffaf2 100%);
-}
-
-.kingdom-head {
-  text-align: left;
-}
-
-.kingdom-head::before {
-  content: "";
-  position: absolute;
-  right: 8rpx;
-  top: 6rpx;
-  width: 92rpx;
-  height: 92rpx;
-  border: 2rpx solid rgba(185, 139, 75, 0.42);
-  border-radius: 28rpx;
-  transform: rotate(45deg);
-  opacity: 0.32;
-}
-
-.kingdom-status {
-  margin-top: 18rpx;
-}
-
-.kingdom-status .corner-flower {
-  top: 18rpx;
-  right: 18rpx;
-  left: auto;
-  transform: rotate(90deg);
-}
-
-.protect-note {
-  display: block;
-  margin-top: 18rpx;
-  padding: 18rpx 20rpx;
-  border: 2rpx dashed rgba(185, 139, 75, 0.45);
-  border-radius: 18rpx;
-  background: rgba(255, 254, 251, 0.72);
-  font-size: 27rpx;
-  line-height: 1.6;
-  font-weight: 800;
-}
-
-.welcome-card {
-  display: flex;
-  flex-direction: column;
-  gap: 8rpx;
-  color: var(--ink);
-  font-size: 29rpx;
-  line-height: 1.58;
-  font-weight: 800;
-}
-
-.map-shell {
-  margin-top: 32rpx;
-  padding: 10rpx 0 0;
-  border-top: 2rpx solid rgba(185, 139, 75, 0.22);
-}
-
-.map-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18rpx;
-  margin-top: 18rpx;
-}
-
-.map-card {
-  min-height: 176rpx;
-  box-sizing: border-box;
-  padding: 24rpx;
-  border: 2rpx solid rgba(90, 70, 56, 0.28);
-  border-radius: 24rpx;
-  background: #fffefb;
-  box-shadow: 0 10rpx 26rpx rgba(78, 58, 38, 0.07);
-}
-
-.map-card:nth-child(2n) { margin-top: 18rpx; }
-.map-card:nth-child(3n) { margin-top: -6rpx; }
-.map-card.large,
-.map-card.wide { grid-column: span 2; }
-
-.map-card.orange { border-color: rgba(201, 111, 69, 0.38); }
-.map-card.blue { border-color: rgba(36, 74, 124, 0.36); }
-.map-card.green { border-color: rgba(47, 123, 103, 0.34); }
-.map-card.pink { border-color: rgba(201, 134, 150, 0.42); }
-.map-card.purple { border-color: rgba(76, 54, 95, 0.38); }
-.map-card.gold { border-color: rgba(185, 139, 75, 0.48); }
-
-.map-title {
-  display: block;
-  margin-bottom: 10rpx;
-  color: var(--ink);
-  font-size: 31rpx;
-  line-height: 1.25;
-  font-weight: 900;
-}
-
-.map-subtitle {
-  display: block;
-  color: var(--muted);
-  font-size: 25rpx;
-  line-height: 1.55;
-  font-weight: 700;
-}
+.kingdom-page { background: linear-gradient(180deg, #fffefb 0%, #fff9ef 100%); }
+.kingdom-head { text-align: center; }
+.kingdom-head .hero-title { margin-top: 8rpx; }
+.kingdom-status { margin-top: 26rpx; padding-top: 46rpx; padding-bottom: 36rpx; text-align: center; }
+.kingdom-status .body-text, .kingdom-status .protect-note { text-align: left; }
+.protect-note { display: block; margin-top: 18rpx; padding: 18rpx 20rpx; border: 2rpx dashed rgba(184,138,74,.55); border-radius: 18rpx; background: rgba(255,254,251,.82); font-size: 27rpx; line-height: 1.6; font-weight: 800; }
+.welcome-card { display: flex; flex-direction: column; gap: 8rpx; color: var(--ink); font-size: 29rpx; line-height: 1.58; font-weight: 800; }
+.map-shell { margin-top: 34rpx; padding: 24rpx 0 0; }
+.map-route-line { height: 36rpx; margin: 4rpx 70rpx -6rpx; border-top: 4rpx dotted rgba(184,138,74,.62); border-radius: 50%; }
+.map-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14rpx 18rpx; margin-top: 12rpx; }
+.map-card { min-height: 184rpx; box-sizing: border-box; padding: 24rpx; }
+.map-card:nth-child(4n + 1) { margin-top: 0; }
+.map-card:nth-child(4n + 3) { margin-top: -8rpx; }
+.map-card.large, .map-card.wide { grid-column: span 2; }
+.map-card.orange { border-color: rgba(184,74,58,.66); }
+.map-card.blue { border-color: rgba(27,58,92,.62); }
+.map-card.green { border-color: rgba(47,107,79,.62); }
+.map-card.pink { border-color: rgba(212,90,76,.58); }
+.map-card.purple { border-color: rgba(90,42,95,.62); }
+.map-card.gold { border-color: rgba(184,138,74,.72); }
+.map-card .corner-ornament { width: 34rpx; height: 34rpx; border-width: 3rpx; opacity: .55; }
+.bottom-divider { margin-top: 34rpx; }
