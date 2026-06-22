@@ -31,5 +31,11 @@ Page({
     wx.navigateTo({
       url: "/pages/diary-new/index"
     });
+  },
+
+  goDetail(event) {
+    wx.navigateTo({
+      url: `/pages/diary-detail/index?id=${event.currentTarget.dataset.id}`
+    });
   }
 });

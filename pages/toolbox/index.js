@@ -5,10 +5,15 @@ Page({
     items: TOOLBOX_ITEMS
   },
 
-  showComingSoon() {
-    wx.showToast({
-      title: "这个工具会在 0.2 版本上线。",
-      icon: "none"
-    });
+  openTool(event) {
+    const item = this.data.items[event.currentTarget.dataset.index];
+    if (!item || !item.enabled) {
+      wx.showToast({
+        title: "skills 链接会在后续版本上线。",
+        icon: "none"
+      });
+      return;
+    }
+    wx.navigateTo({ url: item.path });
   }
 });

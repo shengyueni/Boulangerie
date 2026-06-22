@@ -1,11 +1,11 @@
 <view class="page">
   <text class="hero-title">吗喽的百宝箱</text>
-  <text class="subtext">这里先放几个工具入口。0.1 先做占位，不急着把世界修完。</text>
+  <text class="subtext">先放三件轻量工具：让情绪降一点、让状态清楚一点、让下一步小一点。</text>
 
   <view class="tool-grid">
-    <view wx:for="{{items}}" wx:key="*this" class="tool-card" bindtap="showComingSoon">
-      <text>{{item}}</text>
-      <text class="subtext">0.2 上线</text>
+    <view wx:for="{{items}}" wx:key="title" class="tool-card {{item.color}}" data-index="{{index}}" bindtap="openTool">
+      <text class="tool-title">{{item.title}}</text>
+      <text class="subtext">{{item.subtitle}}</text>
     </view>
   </view>
 </view>

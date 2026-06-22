@@ -1,0 +1,35 @@
+<view class="page">
+  <text class="hero-title">日记详情</text>
+  <text class="subtext">一条记录，就是你把自己从混乱里捞出来的一小步。</text>
+
+  <view wx:if="{{!entry}}" class="card empty">
+    <text>没有找到这条记录。它可能已经被删除了。</text>
+  </view>
+
+  <block wx:else>
+    <view class="card detail-card">
+      <view class="row between">
+        <text class="date">{{entry.displayDate}}</text>
+        <text class="type {{entry.type}}">{{entry.typeLabel}}</text>
+      </view>
+      <text class="section-title detail-title">事件描述</text>
+      <text class="detail-text">{{entry.summary}}</text>
+    </view>
+
+    <view class="card">
+      <text class="section-title">记录信息</text>
+      <view class="info-row"><text>影响等级</text><text>{{entry.impactLevel}}</text></view>
+      <view class="info-row"><text>主要原因</text><text>{{entry.primaryReason}}</text></view>
+      <view class="info-row vertical"><text>补充标签</text><text>{{entry.tagsText}}</text></view>
+      <view class="info-row vertical"><text>下一步我可以做什么</text><text>{{entry.nextStepText}}</text></view>
+    </view>
+
+    <view class="card memo-card">
+      <text class="section-title">完整事实纪要</text>
+      <text class="fact-memo">{{entry.factMemo}}</text>
+      <button class="sticker-button green" bindtap="copyFactMemo">复制事实纪要</button>
+    </view>
+
+    <button class="delete-button" bindtap="deleteEntry">删除这条记录</button>
+  </block>
+</view>

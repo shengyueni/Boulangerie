@@ -1,0 +1,66 @@
+.breath-card {
+  text-align: center;
+}
+
+.breath-ball {
+  width: 260rpx;
+  height: 260rpx;
+  margin: 20rpx auto 30rpx;
+  border: 4rpx solid var(--border);
+  border-radius: 50%;
+  background: #f8c9d2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38rpx;
+  font-weight: 900;
+  transition: transform 0.4s ease;
+  box-shadow: inset 0 0 0 16rpx rgba(255, 255, 255, 0.28), 8rpx 8rpx 0 rgba(63, 52, 45, 0.12);
+}
+
+.breath-ball.inhale {
+  transform: scale(1.1);
+  background: #c9e7b6;
+}
+
+.breath-ball.hold {
+  transform: scale(1.06);
+  background: #ffe8a8;
+}
+
+.breath-ball.exhale {
+  transform: scale(0.9);
+  background: #f8c9d2;
+}
+
+.phase-label {
+  display: block;
+  font-size: 31rpx;
+  font-weight: 800;
+}
+
+.countdown {
+  display: block;
+  margin: 16rpx 0;
+  color: var(--orange);
+  font-size: 78rpx;
+  line-height: 1;
+  font-weight: 900;
+}
+
+.control-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14rpx;
+}
+
+.control-row .sticker-button {
+  padding: 0 10rpx;
+  font-size: 26rpx;
+}
+
+.safety {
+  color: var(--muted);
+  font-size: 26rpx;
+  line-height: 1.7;
+}

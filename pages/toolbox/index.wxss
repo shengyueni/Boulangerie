@@ -6,7 +6,7 @@
 }
 
 .tool-card {
-  min-height: 176rpx;
+  min-height: 190rpx;
   box-sizing: border-box;
   padding: 26rpx;
   border: 3rpx solid var(--border);
@@ -15,7 +15,23 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  font-size: 30rpx;
-  font-weight: 800;
   box-shadow: 6rpx 6rpx 0 rgba(63, 52, 45, 0.13);
+}
+
+.tool-card.green {
+  background: #d9efc8;
+}
+
+.tool-card.pink {
+  background: #f8c9d2;
+}
+
+.tool-card.yellow {
+  background: #ffe8a8;
+}
+
+.tool-title {
+  margin-bottom: 18rpx;
+  font-size: 31rpx;
+  font-weight: 900;
 }

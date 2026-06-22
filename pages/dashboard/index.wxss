@@ -37,3 +37,36 @@
   font-size: 36rpx;
   font-weight: 800;
 }
+
+.reason-row {
+  margin-top: 22rpx;
+  font-size: 26rpx;
+  font-weight: 800;
+}
+
+.bar-track {
+  height: 20rpx;
+  margin-top: 10rpx;
+  border: 2rpx solid var(--border);
+  border-radius: 999rpx;
+  overflow: hidden;
+  background: #fffaf0;
+}
+
+.bar-fill {
+  height: 100%;
+  min-width: 8rpx;
+  border-radius: 999rpx;
+  background: #f6a6b8;
+}
+
+.advice-card {
+  background: #fff2c4;
+}
+
+.advice {
+  display: block;
+  font-size: 30rpx;
+  line-height: 1.7;
+  font-weight: 800;
+}

@@ -1,3 +1,7 @@
+const {
+  REASON_OPTIONS,
+  PROTECTION_ADVICE
+} = require("../../utils/constants");
 const { getDiaryEntries } = require("../../utils/storage");
 
 function getCroissantReport(entries) {
@@ -16,15 +20,25 @@ function getCroissantReport(entries) {
   return { wear, status };
 }
 
-function getTopReason(entries) {
-  const counts = {};
-  entries.forEach((entry) => {
-    if (entry.primaryReason) {
-      counts[entry.primaryReason] = (counts[entry.primaryReason] || 0) + 1;
-    }
-  });
-  const sorted = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
-  return sorted[0] || "还没有足够记录";
+function getReasonCounts(entries) {
+  return REASON_OPTIONS.map((reason) => ({
+    reason,
+    count: entries.filter((entry) => entry.primaryReason === reason).length,
+    percent: 0
+  }));
+}
+
+function getTopReason(reasonDistribution) {
+  const sorted = reasonDistribution.slice().sort((a, b) => b.count - a.count);
+  return sorted[0] && sorted[0].count ? sorted[0].reason : "还没有足够记录";
+}
+
+function withPercent(reasonDistribution) {
+  const max = Math.max(...reasonDistribution.map((item) => item.count), 1);
+  return reasonDistribution.map((item) => ({
+    ...item,
+    percent: Math.round((item.count / max) * 100)
+  }));
 }
 
 Page({
@@ -36,8 +50,10 @@ Page({
       highImpact30Days: 0,
       topReason: "还没有足够记录",
       wear: 0,
-      status: "毛很顺"
-    }
+      status: "毛很顺",
+      advice: "先记录几条真实发生的事，Croissant 会慢慢看见规律。"
+    },
+    reasonDistribution: []
   },
 
   onShow() {
@@ -45,6 +61,8 @@ Page({
     const now = Date.now();
     const thirtyDays = 30 * 24 * 60 * 60 * 1000;
     const report = getCroissantReport(entries);
+    const reasonDistribution = withPercent(getReasonCounts(entries));
+    const topReason = getTopReason(reasonDistribution);
 
     this.setData({
       stats: {
@@ -55,10 +73,20 @@ Page({
           const created = new Date(entry.createdAt).getTime();
           return now - created <= thirtyDays && Number(entry.impactLevel) >= 4;
         }).length,
-        topReason: getTopReason(entries),
+        topReason,
         wear: report.wear,
-        status: report.status
-      }
+        status: report.status,
+        advice: PROTECTION_ADVICE[topReason] || "先记录几条真实发生的事，Croissant 会慢慢看见规律。"
+      },
+      reasonDistribution
     });
+  },
+
+  goNewDiary() {
+    wx.navigateTo({ url: "/pages/diary-new/index" });
+  },
+
+  goExitTest() {
+    wx.navigateTo({ url: "/pages/exit-test/index" });
   }
 });

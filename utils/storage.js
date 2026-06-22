@@ -30,8 +30,18 @@ function getDiaryEntries() {
   return Array.isArray(entries) ? sortByNewest(entries) : [];
 }
 
+function getDiaryEntryById(id) {
+  return getDiaryEntries().find((entry) => entry.id === id) || null;
+}
+
 function saveDiaryEntry(entry) {
   const nextEntries = sortByNewest([entry].concat(getDiaryEntries()));
+  wx.setStorageSync(DIARY_KEY, nextEntries);
+  return nextEntries;
+}
+
+function deleteDiaryEntry(id) {
+  const nextEntries = getDiaryEntries().filter((entry) => entry.id !== id);
   wx.setStorageSync(DIARY_KEY, nextEntries);
   return nextEntries;
 }
@@ -45,6 +55,21 @@ function saveWishItems(items) {
   const nextItems = Array.isArray(items) ? items : [];
   wx.setStorageSync(WISH_KEY, nextItems);
   return nextItems;
+}
+
+function addWishItem(title, type = "post_exit") {
+  const cleanTitle = String(title || "").trim();
+  if (!cleanTitle) return null;
+  const item = {
+    id: createId("wish"),
+    type,
+    title: cleanTitle,
+    completed: false,
+    createdAt: new Date().toISOString(),
+    completedAt: null
+  };
+  saveWishItems([item].concat(getWishItems()));
+  return item;
 }
 
 function initializeDefaultWishItems() {
@@ -74,8 +99,11 @@ function initializeDefaultWishItems() {
 module.exports = {
   createId,
   getDiaryEntries,
+  getDiaryEntryById,
   saveDiaryEntry,
+  deleteDiaryEntry,
   getWishItems,
   saveWishItems,
+  addWishItem,
   initializeDefaultWishItems
 };

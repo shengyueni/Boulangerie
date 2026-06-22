@@ -1,0 +1,39 @@
+.rescue-card {
+  background: #fffdf6;
+}
+
+.rescue-card.open {
+  background: #fff2c4;
+}
+
+.card-title {
+  flex: 1;
+  font-size: 31rpx;
+  font-weight: 900;
+  line-height: 1.45;
+}
+
+.toggle-text {
+  color: var(--orange);
+  font-size: 24rpx;
+  font-weight: 800;
+}
+
+.card-body {
+  margin-top: 24rpx;
+}
+
+.label {
+  display: block;
+  margin-top: 20rpx;
+  color: var(--muted);
+  font-size: 24rpx;
+  font-weight: 800;
+}
+
+.body-text {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 29rpx;
+  line-height: 1.7;
+}

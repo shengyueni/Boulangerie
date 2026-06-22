@@ -1,0 +1,57 @@
+.detail-card {
+  line-height: 1.65;
+}
+
+.detail-title {
+  margin-top: 24rpx;
+}
+
+.detail-text,
+.fact-memo {
+  display: block;
+  font-size: 29rpx;
+  line-height: 1.75;
+  white-space: pre-wrap;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20rpx;
+  padding: 18rpx 0;
+  border-bottom: 2rpx dashed rgba(74, 57, 47, 0.18);
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+
+.info-row text:first-child {
+  flex: 0 0 210rpx;
+  color: var(--muted);
+}
+
+.info-row text:last-child {
+  flex: 1;
+  text-align: right;
+  font-weight: 800;
+}
+
+.info-row.vertical {
+  flex-direction: column;
+}
+
+.info-row.vertical text:last-child {
+  text-align: left;
+}
+
+.memo-card {
+  background: #fff2c4;
+}
+
+.delete-button {
+  margin-top: 30rpx;
+  min-height: 76rpx;
+  border: 0;
+  color: var(--orange);
+  background: transparent;
+  font-size: 26rpx;
+}

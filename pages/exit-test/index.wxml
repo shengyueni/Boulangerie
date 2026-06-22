@@ -1,0 +1,34 @@
+<view class="page">
+  <text class="hero-title">离职状态自测</text>
+  <text class="subtext">它只帮你看见当前状态，不会替你做“必须离职”的绝对结论。</text>
+
+  <view wx:for="{{questions}}" wx:for-item="question" wx:for-index="questionIndex" wx:key="title" class="card question-card">
+    <text class="question-title">{{questionIndex + 1}}. {{question.title}}</text>
+    <view class="score-row">
+      <view
+        wx:for="{{options}}"
+        wx:for-item="option"
+        wx:for-index="scoreIndex"
+        wx:key="score"
+        class="score-pill {{question.selectedScore === option.score ? 'active' : ''}}"
+        data-index="{{questionIndex}}"
+        data-score="{{option.score}}"
+        bindtap="selectScore"
+      >
+        <text>{{option.score}}</text>
+        <text class="score-label">{{option.label}}</text>
+      </view>
+    </view>
+  </view>
+
+  <button class="sticker-button green" bindtap="showResult">查看结果</button>
+
+  <view wx:if="{{result}}" class="card result-card">
+    <text class="section-title">{{totalScore}} 分：{{result.title}}</text>
+    <text class="result-text">{{result.text}}</text>
+    <text class="section-title small-title">下一步建议</text>
+    <view wx:for="{{result.suggestions}}" wx:key="*this" class="suggestion">· {{item}}</view>
+    <button class="sticker-button secondary" bindtap="goDiary">去写一条日记</button>
+    <button class="sticker-button" bindtap="goWishlist">去愿望清单</button>
+  </view>
+</view>

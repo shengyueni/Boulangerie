@@ -47,3 +47,12 @@
   color: #5d4b40;
   font-size: 25rpx;
 }
+
+
+.detail-hint {
+  display: block;
+  margin-top: 14rpx;
+  color: var(--orange);
+  font-size: 24rpx;
+  font-weight: 800;
+}
