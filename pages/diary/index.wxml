@@ -1,0 +1,24 @@
+<view class="page">
+  <text class="hero-title">吗喽的日记本</text>
+  <text class="subtext">记录不是为了立刻做决定，是为了看见自己发生了什么。</text>
+
+  <button class="sticker-button secondary" bindtap="goNew">写一条日记</button>
+
+  <view wx:if="{{!entries.length}}" class="card empty">
+    <text>这里还没有记录。
+第一条日记不需要完美，只要真实。</text>
+  </view>
+
+  <view wx:for="{{entries}}" wx:key="id" class="card entry-card">
+    <view class="row between">
+      <text class="date">{{item.displayDate}}</text>
+      <text class="type {{item.type}}">{{item.typeLabel}}</text>
+    </view>
+    <text class="summary">{{item.summary}}</text>
+    <view class="meta">
+      <text>影响等级：{{item.impactLevel}}</text>
+      <text>主要原因：{{item.primaryReason}}</text>
+    </view>
+    <text class="memo">{{item.memoPreview}}</text>
+  </view>
+</view>

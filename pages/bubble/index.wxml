@@ -1,0 +1,23 @@
+<view class="page">
+  <text class="hero-title">吗喽的泡泡机</text>
+  <text class="subtext">摇一颗泡泡，看看今天飘出来的是照顾、提醒，还是该点破的职场废话。</text>
+
+  <button class="sticker-button" bindtap="drawBubble">摇一颗泡泡</button>
+
+  <view wx:if="{{bubble}}" class="card bubble-card {{bubble.tone}}">
+    <view class="bubble-dot" style="background: {{bubble.color}};"></view>
+    <text class="source">{{bubble.source}}</text>
+    <text class="subtext">{{bubble.type}}</text>
+    <text class="bubble-text">{{bubble.text}}</text>
+
+    <button wx:if="{{bubble.tone === 'ld' && !poppedMessage}}" class="sticker-button secondary" bindtap="popLdBubble">
+      点破这句职场废话
+    </button>
+    <text wx:if="{{poppedMessage}}" class="popped">{{poppedMessage}}</text>
+  </view>
+
+  <view wx:else class="card empty">
+    <text>泡泡还没出现。
+先按一下按钮，让它咕噜一下。</text>
+  </view>
+</view>

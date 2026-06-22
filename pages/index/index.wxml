@@ -1,0 +1,33 @@
+<view class="page">
+  <view class="kingdom-head">
+    <text class="hero-title">吗喽的出走</text>
+    <text class="subtext">保护好你的猩</text>
+  </view>
+
+  <view class="card hero-card">
+    <view class="placeholder" style="background: {{croissant.color}};">
+      <text>Croissant 角色形象占位</text>
+    </view>
+    <view class="hero-copy">
+      <text class="section-title">Croissant 当前状态：{{status}}</text>
+      <text class="subtext">Croissant 的形象正在出走路上。0.1 先保留角色形象占位文案。</text>
+      <text class="welcome">欢迎回到吗喽王国。
+今天的 Croissant 看起来{{status}}。
+要不要先记录一下发生了什么？</text>
+    </view>
+  </view>
+
+  <view class="grid">
+    <view
+      wx:for="{{navItems}}"
+      wx:key="path"
+      class="nav-card {{item.color}}"
+      data-path="{{item.path}}"
+      bindtap="goTo"
+    >
+      <text>{{item.label}}</text>
+    </view>
+  </view>
+
+  <navigator class="diary-link" url="/pages/diary/index">查看吗喽的日记本</navigator>
+</view>

@@ -1,0 +1,42 @@
+.bubble-card {
+  text-align: center;
+}
+
+.bubble-card.ld {
+  color: #fffaf0;
+  background: #3f342d;
+}
+
+.bubble-card.ld .subtext,
+.bubble-card.ld .popped {
+  color: #f7d982;
+}
+
+.bubble-dot {
+  width: 112rpx;
+  height: 112rpx;
+  margin: 0 auto 18rpx;
+  border: 3rpx solid var(--border);
+  border-radius: 50%;
+}
+
+.source {
+  display: block;
+  font-size: 36rpx;
+  font-weight: 900;
+}
+
+.bubble-text {
+  display: block;
+  margin-top: 28rpx;
+  font-size: 36rpx;
+  line-height: 1.6;
+  font-weight: 800;
+}
+
+.popped {
+  display: block;
+  margin-top: 24rpx;
+  font-size: 28rpx;
+  font-weight: 800;
+}

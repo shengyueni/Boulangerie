@@ -1,0 +1,49 @@
+.entry-card {
+  line-height: 1.6;
+}
+
+.date {
+  color: var(--muted);
+  font-size: 25rpx;
+}
+
+.type {
+  padding: 8rpx 18rpx;
+  border: 2rpx solid var(--border);
+  border-radius: 999rpx;
+  font-size: 24rpx;
+}
+
+.type.positive {
+  background: #c9e7b6;
+}
+
+.type.negative {
+  color: #fffaf0;
+  background: #3f342d;
+}
+
+.summary {
+  display: block;
+  margin-top: 18rpx;
+  font-size: 32rpx;
+  font-weight: 800;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  margin-top: 14rpx;
+  color: var(--muted);
+  font-size: 25rpx;
+}
+
+.memo {
+  display: block;
+  margin-top: 16rpx;
+  padding: 18rpx;
+  border-radius: 18rpx;
+  background: #fff2c4;
+  color: #5d4b40;
+  font-size: 25rpx;
+}

@@ -1,0 +1,82 @@
+.kingdom-head {
+  margin-bottom: 8rpx;
+}
+
+.hero-card {
+  display: flex;
+  gap: 24rpx;
+  align-items: center;
+}
+
+.placeholder {
+  flex: 0 0 184rpx;
+  width: 184rpx;
+  height: 184rpx;
+  border: 3rpx solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #3f342d;
+  font-weight: 800;
+  box-shadow: inset 0 0 0 10rpx rgba(255, 255, 255, 0.28);
+}
+
+.hero-copy {
+  flex: 1;
+}
+
+.welcome {
+  display: block;
+  margin-top: 18rpx;
+  padding: 20rpx;
+  border-radius: 22rpx;
+  background: #fff2c4;
+  font-size: 27rpx;
+  line-height: 1.65;
+  white-space: pre-line;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22rpx;
+  margin-top: 30rpx;
+}
+
+.nav-card {
+  min-height: 150rpx;
+  box-sizing: border-box;
+  padding: 24rpx;
+  border: 3rpx solid var(--border);
+  border-radius: 26rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 28rpx;
+  font-weight: 800;
+  box-shadow: 6rpx 6rpx 0 rgba(63, 52, 45, 0.14);
+}
+
+.nav-card.pink {
+  background: #f8c9d2;
+}
+
+.nav-card.green {
+  background: #c9e7b6;
+}
+
+.nav-card.yellow {
+  background: #ffe8a8;
+}
+
+.diary-link {
+  display: block;
+  margin-top: 26rpx;
+  color: var(--muted);
+  font-size: 26rpx;
+  text-align: center;
+  text-decoration: underline;
+}

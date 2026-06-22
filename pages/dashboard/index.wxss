@@ -1,0 +1,39 @@
+.status-card {
+  background: #f8c9d2;
+}
+
+.status {
+  display: block;
+  margin: 8rpx 0;
+  font-size: 48rpx;
+  font-weight: 900;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20rpx;
+  margin-top: 24rpx;
+}
+
+.stat-card {
+  min-height: 156rpx;
+  padding: 24rpx;
+  border: 3rpx solid var(--border);
+  border-radius: 24rpx;
+  background: #fffdf6;
+  box-shadow: 5rpx 5rpx 0 rgba(63, 52, 45, 0.12);
+}
+
+.num {
+  display: block;
+  margin-bottom: 8rpx;
+  color: var(--orange);
+  font-size: 50rpx;
+  font-weight: 900;
+}
+
+.reason {
+  font-size: 36rpx;
+  font-weight: 800;
+}

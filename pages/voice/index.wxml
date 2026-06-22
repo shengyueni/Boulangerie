@@ -1,0 +1,12 @@
+<view class="page">
+  <text class="hero-title">吗喽的心声</text>
+  <text class="subtext">0.1 只做只读占位，不发帖，不评论，也不收集真实社区内容。</text>
+
+  <view wx:for="{{voices}}" wx:key="*this" class="card voice-card">
+    <text>“{{item}}”</text>
+  </view>
+
+  <view class="card footer-note">
+    <text>真实匿名树洞会在后续版本上线。0.1 先保护好你的隐私。</text>
+  </view>
+</view>

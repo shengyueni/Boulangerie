@@ -1,0 +1,46 @@
+﻿<view class="page">
+  <text class="hero-title">记录今天发生了什么</text>
+  <text class="subtext">不用写得漂亮。先把事实放到纸片上。</text>
+
+  <view class="card">
+    <text class="section-title">今天发生了什么？</text>
+    <textarea class="textarea" value="{{summary}}" bindinput="onSummaryInput" placeholder="写下一个职场事件、一个感受，或者一件让你顺毛的事。" />
+  </view>
+
+  <view class="card">
+    <text class="section-title">这是一条什么记录？</text>
+    <view class="row">
+      <view class="tag {{type === 'negative' ? 'active' : ''}}" data-type="negative" bindtap="selectType">负面记录</view>
+      <view class="tag {{type === 'positive' ? 'active' : ''}}" data-type="positive" bindtap="selectType">正面记录</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <text class="section-title">影响等级</text>
+    <view wx:for="{{impactLevels}}" wx:key="value" class="tag {{impactLevel === item.value ? 'active' : ''}}" data-value="{{item.value}}" bindtap="selectImpact">
+      {{item.label}}
+    </view>
+  </view>
+
+  <view class="card">
+    <text class="section-title">主要原因</text>
+    <view wx:for="{{reasonOptions}}" wx:key="*this" class="tag {{primaryReason === item ? 'active' : ''}}" data-reason="{{item}}" bindtap="selectReason">
+      {{item}}
+    </view>
+  </view>
+
+  <view class="card">
+    <text class="section-title">补充标签</text>
+    <view wx:for="{{tagOptions}}" wx:key="label" class="tag {{item.selected ? 'active' : ''}}" data-tag="{{item.label}}" bindtap="toggleTag">
+      {{item.label}}
+    </view>
+  </view>
+
+  <view class="card">
+    <text class="section-title">下一步我可以做什么？</text>
+    <input class="input" value="{{nextStep}}" bindinput="onNextStepInput" placeholder="比如：下班后先吃饭，明天整理证据，找朋友聊聊。" />
+  </view>
+
+  <button class="sticker-button" bindtap="saveEntry">保存这条记录</button>
+</view>
+

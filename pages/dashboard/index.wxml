@@ -1,0 +1,35 @@
+<view class="page">
+  <text class="hero-title">决心仪表盘</text>
+  <text class="subtext">这个仪表盘不会替你决定要不要离职。
+它只是帮你看见：哪些事情正在反复消耗你。</text>
+
+  <view class="card status-card">
+    <text class="section-title">Croissant 当前状态</text>
+    <text class="status">{{stats.status}}</text>
+    <text class="subtext">磨损值：{{stats.wear}}</text>
+  </view>
+
+  <view class="stats-grid">
+    <view class="stat-card">
+      <text class="num">{{stats.total}}</text>
+      <text>总记录数</text>
+    </view>
+    <view class="stat-card">
+      <text class="num">{{stats.negative}}</text>
+      <text>负面记录</text>
+    </view>
+    <view class="stat-card">
+      <text class="num">{{stats.positive}}</text>
+      <text>正面记录</text>
+    </view>
+    <view class="stat-card">
+      <text class="num">{{stats.highImpact30Days}}</text>
+      <text>近30天高影响事件</text>
+    </view>
+  </view>
+
+  <view class="card">
+    <text class="section-title">最常见的主要原因</text>
+    <text class="reason">{{stats.topReason}}</text>
+  </view>
+</view>

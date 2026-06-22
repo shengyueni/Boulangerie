@@ -1,0 +1,29 @@
+<view class="page">
+  <text class="hero-title">吗喽的愿望清单</text>
+  <text class="subtext">有些事是离开前的护栏，有些事是离开后的光。</text>
+
+  <view class="tabs">
+    <view class="tab {{activeType === 'pre_exit' ? 'active' : ''}}" data-type="pre_exit" bindtap="switchTab">离职前要做的事</view>
+    <view class="tab {{activeType === 'post_exit' ? 'active' : ''}}" data-type="post_exit" bindtap="switchTab">离职后想做的事</view>
+  </view>
+
+  <view class="card">
+    <input class="input" value="{{newTitle}}" bindinput="onInput" placeholder="新增一个小事项" />
+    <button class="sticker-button green" bindtap="addItem">加入清单</button>
+  </view>
+
+  <view class="card">
+    <text class="section-title">{{activeTitle}}</text>
+    <view wx:if="{{!visibleItems.length}}" class="empty wish-empty">
+      <text>这里还没有愿望。先放一个很小、很具体的也可以。</text>
+    </view>
+    <view
+      wx:for="{{visibleItems}}"
+      wx:key="id"
+      class="wish-row {{item.completed ? 'done' : ''}}"
+    >
+      <text class="wish-title" data-id="{{item.id}}" bindtap="toggleItem">{{item.completed ? '已完成' : '待完成'}} · {{item.title}}</text>
+      <text class="delete" data-id="{{item.id}}" bindtap="deleteItem">删除</text>
+    </view>
+  </view>
+</view>

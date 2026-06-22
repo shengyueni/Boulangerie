@@ -1,0 +1,21 @@
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22rpx;
+  margin-top: 28rpx;
+}
+
+.tool-card {
+  min-height: 176rpx;
+  box-sizing: border-box;
+  padding: 26rpx;
+  border: 3rpx solid var(--border);
+  border-radius: 26rpx;
+  background: #fffdf6;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 30rpx;
+  font-weight: 800;
+  box-shadow: 6rpx 6rpx 0 rgba(63, 52, 45, 0.13);
+}

@@ -1,0 +1,20 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/diary/index",
+    "pages/diary-new/index",
+    "pages/dashboard/index",
+    "pages/bubble/index",
+    "pages/wishlist/index",
+    "pages/toolbox/index",
+    "pages/voice/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "吗喽的出走",
+    "navigationBarBackgroundColor": "#f8ead8",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#fff8ed"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

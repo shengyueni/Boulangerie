@@ -1,0 +1,137 @@
+page {
+  --bg: #fff7ea;
+  --card: #fffdf6;
+  --pink: #f6a6b8;
+  --green: #9ccf9a;
+  --orange: #e9785f;
+  --yellow: #f7d982;
+  --dark: #3f342d;
+  --muted: #89776b;
+  --border: #4a392f;
+  --radius: 28rpx;
+  --space: 24rpx;
+  min-height: 100%;
+  color: var(--dark);
+  background: var(--bg);
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.page {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 32rpx 28rpx 56rpx;
+  background:
+    radial-gradient(circle at 16rpx 16rpx, rgba(233, 120, 95, 0.08) 0 4rpx, transparent 5rpx) 0 0 / 44rpx 44rpx,
+    var(--bg);
+}
+
+.hero-title {
+  display: block;
+  margin-bottom: 12rpx;
+  font-size: 48rpx;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: 1rpx;
+}
+
+.subtext {
+  display: block;
+  color: var(--muted);
+  font-size: 28rpx;
+  line-height: 1.65;
+}
+
+.card {
+  box-sizing: border-box;
+  margin-top: var(--space);
+  padding: 28rpx;
+  border: 3rpx solid rgba(74, 57, 47, 0.86);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: 8rpx 8rpx 0 rgba(63, 52, 45, 0.12);
+}
+
+.section-title {
+  display: block;
+  margin-bottom: 18rpx;
+  font-size: 34rpx;
+  font-weight: 800;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 12rpx 12rpx 0;
+  padding: 10rpx 18rpx;
+  border: 2rpx solid var(--border);
+  border-radius: 999rpx;
+  color: var(--dark);
+  background: #fff3c7;
+  font-size: 24rpx;
+}
+
+.tag.active {
+  background: var(--pink);
+}
+
+.sticker-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 84rpx;
+  margin-top: 20rpx;
+  padding: 0 24rpx;
+  border: 3rpx solid var(--border);
+  border-radius: 999rpx;
+  color: var(--dark);
+  background: var(--yellow);
+  font-size: 28rpx;
+  font-weight: 700;
+  box-shadow: 5rpx 5rpx 0 rgba(63, 52, 45, 0.14);
+}
+
+.sticker-button.secondary {
+  background: #f8c9d2;
+}
+
+.sticker-button.green {
+  background: #c9e7b6;
+}
+
+.input,
+.textarea {
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 12rpx;
+  padding: 22rpx;
+  border: 3rpx solid rgba(74, 57, 47, 0.7);
+  border-radius: 22rpx;
+  background: #fffaf0;
+  color: var(--dark);
+  font-size: 28rpx;
+}
+
+.textarea {
+  min-height: 180rpx;
+}
+
+.empty {
+  padding: 48rpx 28rpx;
+  text-align: center;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.between {
+  justify-content: space-between;
+}
+
+.muted {
+  color: var(--muted);
+}
