@@ -1,5 +1,17 @@
 const { BUBBLES } = require("../../utils/constants");
 
+function pickBubble(currentIndex) {
+  const ldBubbles = BUBBLES.map((bubble, index) => ({ bubble, index })).filter((item) => item.bubble.tone === "ld");
+  const gentleBubbles = BUBBLES.map((bubble, index) => ({ bubble, index })).filter((item) => item.bubble.tone !== "ld");
+  const pool = Math.random() < 0.2 && ldBubbles.length ? ldBubbles : gentleBubbles;
+  let picked = pool[Math.floor(Math.random() * pool.length)];
+  if (pool.length > 1 && picked.index === currentIndex) {
+    const nextIndex = (pool.findIndex((item) => item.index === picked.index) + 1) % pool.length;
+    picked = pool[nextIndex];
+  }
+  return picked;
+}
+
 Page({
   data: {
     bubble: null,
@@ -8,13 +20,10 @@ Page({
   },
 
   drawBubble() {
-    let index = Math.floor(Math.random() * BUBBLES.length);
-    if (BUBBLES.length > 1 && index === this.data.bubbleIndex) {
-      index = (index + 1) % BUBBLES.length;
-    }
+    const picked = pickBubble(this.data.bubbleIndex);
     this.setData({
-      bubble: BUBBLES[index],
-      bubbleIndex: index,
+      bubble: picked.bubble,
+      bubbleIndex: picked.index,
       poppedMessage: ""
     });
   },

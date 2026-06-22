@@ -1,8 +1,8 @@
 const APP_META = {
   appName: "吗喽的出走",
   slogan: "保护好你的猩",
-  version: "0.2.2",
-  stage: "试用准备版"
+  version: "0.3A",
+  stage: "核心体验视觉升级版"
 };
 
 const CHARACTERS = {
@@ -61,16 +61,36 @@ const SECONDARY_TAGS = [
 ];
 
 const BUBBLES = [
-  { source: "Gapchick", type: "粉色泡泡 · 自我关怀", tone: "care", color: "#f6a6b8", text: "今天你已经很棒了。睡前泡个脚，让身体先下班。" },
+  { source: "Gapchick", type: "粉色泡泡 · 自我关怀", tone: "care", color: "#f6a6b8", text: "今天你已经很努力了。睡前泡个脚，让身体先下班。" },
   { source: "Gapchick", type: "粉色泡泡 · 自我关怀", tone: "care", color: "#f6a6b8", text: "先喝水，再处理人生。顺序不能乱。" },
-  { source: "Gapchick", type: "粉色泡泡 · 自我关怀", tone: "care", color: "#f6a6b8", text: "你不是废物，你是电量过低。" },
-  { source: "Elodie", type: "绿色泡泡 · 鼓励提醒", tone: "encourage", color: "#9ccf9a", text: "抛掉预设，忘掉结果，再试试看吧。" },
-  { source: "Elodie", type: "绿色泡泡 · 鼓励提醒", tone: "encourage", color: "#9ccf9a", text: "不是每条路都要走到尽头，才配换方向。" },
-  { source: "Elodie", type: "绿色泡泡 · 鼓励提醒", tone: "encourage", color: "#9ccf9a", text: "你可以慢一点，但不要把自己弄丢。" },
-  { source: "LD", type: "黑色泡泡 · 职场负能量", tone: "ld", color: "#3f342d", text: "你这个事情怎么还没弄完？" },
-  { source: "LD", type: "黑色泡泡 · 职场负能量", tone: "ld", color: "#3f342d", text: "你要主动一点。" },
-  { source: "LD", type: "黑色泡泡 · 职场负能量", tone: "ld", color: "#3f342d", text: "年轻人不要太计较。" },
-  { source: "LD", type: "黑色泡泡 · 职场负能量", tone: "ld", color: "#3f342d", text: "这个很简单，你怎么做了这么久？" }
+  { source: "Gapchick", type: "粉色泡泡 · 自我关怀", tone: "care", color: "#f6a6b8", text: "你不是废物，你只是电量过低。" },
+  { source: "Gapchick", type: "粉色泡泡 · 自我关怀", tone: "care", color: "#f6a6b8", text: "今天可以只完成一件小事。小也算数。" },
+  { source: "Gapchick", type: "粉色泡泡 · 自我关怀", tone: "care", color: "#f6a6b8", text: "把肩膀放下来。不是所有事都要用脖子扛。" },
+  { source: "Gapchick", type: "粉色泡泡 · 自我关怀", tone: "care", color: "#f6a6b8", text: "你可以慢一点。慢不是失败，是正在保命。" },
+  { source: "Gapchick", type: "粉色泡泡 · 自我关怀", tone: "care", color: "#f6a6b8", text: "别急着证明你还能撑。先确认你还舒服吗。" },
+  { source: "Gapchick", type: "粉色泡泡 · 自我关怀", tone: "care", color: "#f6a6b8", text: "今天的你不需要被优化，只需要被照顾。" },
+  { source: "Gapchick", type: "粉色泡泡 · 自我关怀", tone: "care", color: "#f6a6b8", text: "把自己从工位里捞出来，哪怕只捞出十分钟。" },
+  { source: "Gapchick", type: "粉色泡泡 · 自我关怀", tone: "care", color: "#f6a6b8", text: "先吃饭。很多崩溃其实是在提醒你血糖太低。" },
+  { source: "Elodie", type: "绿色泡泡 · 清醒提醒", tone: "encourage", color: "#9ccf9a", text: "抛掉预设，忘掉结果，再试试看吧。" },
+  { source: "Elodie", type: "绿色泡泡 · 清醒提醒", tone: "encourage", color: "#9ccf9a", text: "不是每条路都要走到尽头，才配换方向。" },
+  { source: "Elodie", type: "绿色泡泡 · 清醒提醒", tone: "encourage", color: "#9ccf9a", text: "你可以慢一点，但不要把自己弄丢。" },
+  { source: "Elodie", type: "绿色泡泡 · 清醒提醒", tone: "encourage", color: "#9ccf9a", text: "如果一件事反复让你缩小，它值得被认真记录。" },
+  { source: "Elodie", type: "绿色泡泡 · 清醒提醒", tone: "encourage", color: "#9ccf9a", text: "先区分事实和评价。事实可以帮你，评价只会压你。" },
+  { source: "Elodie", type: "绿色泡泡 · 清醒提醒", tone: "encourage", color: "#9ccf9a", text: "离开不是唯一选项，但准备会让你重新有选择。" },
+  { source: "Elodie", type: "绿色泡泡 · 清醒提醒", tone: "encourage", color: "#9ccf9a", text: "你感到不舒服，不等于你不专业。" },
+  { source: "Elodie", type: "绿色泡泡 · 清醒提醒", tone: "encourage", color: "#9ccf9a", text: "把下一步缩小到今天能做的一厘米。" },
+  { source: "Elodie", type: "绿色泡泡 · 清醒提醒", tone: "encourage", color: "#9ccf9a", text: "真正的清醒不是立刻辞职，是看清自己在消耗什么。" },
+  { source: "Elodie", type: "绿色泡泡 · 清醒提醒", tone: "encourage", color: "#9ccf9a", text: "你不需要一次解释清楚全部人生。先写下这一件事。" },
+  { source: "LD", type: "深色泡泡 · 职场废话", tone: "ld", color: "#3f342d", text: "这个很简单，你怎么做了这么久？" },
+  { source: "LD", type: "深色泡泡 · 职场废话", tone: "ld", color: "#3f342d", text: "年轻人不要太计较。" },
+  { source: "LD", type: "深色泡泡 · 职场废话", tone: "ld", color: "#3f342d", text: "你要主动一点。" },
+  { source: "LD", type: "深色泡泡 · 职场废话", tone: "ld", color: "#3f342d", text: "这个需求很急，今天先处理一下。" },
+  { source: "LD", type: "深色泡泡 · 职场废话", tone: "ld", color: "#3f342d", text: "你自己再想想。" },
+  { source: "LD", type: "深色泡泡 · 职场废话", tone: "ld", color: "#3f342d", text: "我们这里比较锻炼人。" },
+  { source: "LD", type: "深色泡泡 · 职场废话", tone: "ld", color: "#3f342d", text: "不要总想着边界。" },
+  { source: "LD", type: "深色泡泡 · 职场废话", tone: "ld", color: "#3f342d", text: "你先把这个改一下，很快的。" },
+  { source: "LD", type: "深色泡泡 · 职场废话", tone: "ld", color: "#3f342d", text: "这不是压力，是成长。" },
+  { source: "LD", type: "深色泡泡 · 职场废话", tone: "ld", color: "#3f342d", text: "大家都是这么过来的。" }
 ];
 
 const TOOLBOX_ITEMS = [

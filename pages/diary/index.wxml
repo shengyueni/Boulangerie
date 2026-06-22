@@ -1,25 +1,33 @@
-<view class="page">
-  <text class="hero-title">吗喽的日记本</text>
-  <text class="subtext">记录不是为了立刻做决定，是为了看见自己发生了什么。</text>
+<view class="page diary-page">
+  <view class="page-head">
+    <text class="eyebrow">事实小纸条</text>
+    <text class="hero-title">吗喽的日记本</text>
+    <text class="subtext">记录不是为了立刻做决定，是为了看见自己发生了什么。</text>
+  </view>
 
   <button class="sticker-button secondary" bindtap="goNew">写一条日记</button>
 
-  <view wx:if="{{!entries.length}}" class="card empty">
-    <text>这里还没有记录。
-第一条日记不需要完美，只要真实。</text>
+  <view wx:if="{{!entries.length}}" class="empty-card diary-empty">
+    <text>这里还没有记录。</text>
+    <text>第一条日记不需要完美，只要真实。</text>
+    <text>你不是在小题大做，你是在替自己留下线索。</text>
+    <button class="sticker-button green" bindtap="goNew">写下第一条日记</button>
   </view>
 
-  <view wx:for="{{entries}}" wx:key="id" class="card entry-card" data-id="{{item.id}}" bindtap="goDetail">
-    <view class="row between">
+  <view wx:for="{{entries}}" wx:key="id" class="paper-card entry-card {{item.cardClass}}" data-id="{{item.id}}" bindtap="goDetail">
+    <view class="row between entry-top">
       <text class="date">{{item.displayDate}}</text>
-      <text class="type {{item.type}}">{{item.typeLabel}}</text>
+      <text class="chip {{item.type === 'positive' ? 'green' : 'dark'}}">{{item.typeLabel}}</text>
     </view>
     <text class="summary">{{item.summary}}</text>
-    <view class="meta">
-      <text>影响等级：{{item.impactLevel}}</text>
-      <text>主要原因：{{item.primaryReason}}</text>
+    <view class="meta-chips">
+      <text class="chip {{item.impactClass}}">影响等级 {{item.impactLevel}}</text>
+      <text class="chip pink">{{item.primaryReason}}</text>
     </view>
-    <text class="memo">{{item.memoPreview}}</text>
-    <text class="detail-hint">点击查看完整事实纪要</text>
+    <view class="memo-slip">
+      <text class="memo-label">事实纪要摘录</text>
+      <text class="memo">{{item.memoPreview}}</text>
+    </view>
+    <text class="detail-hint">点开查看完整记录</text>
   </view>
 </view>

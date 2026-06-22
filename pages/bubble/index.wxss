@@ -1,29 +1,108 @@
+.bubble-machine {
+  background: linear-gradient(135deg, #fffdf6, #fff2c4);
+}
+
+.machine-window {
+  position: relative;
+  height: 230rpx;
+  border: 3rpx solid var(--border);
+  border-radius: 34rpx;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 28%, rgba(246, 166, 184, 0.42) 0 34rpx, transparent 36rpx),
+    radial-gradient(circle at 74% 40%, rgba(156, 207, 154, 0.42) 0 42rpx, transparent 44rpx),
+    linear-gradient(135deg, #fffaf0, #ffe8a8);
+}
+
+.machine-label {
+  position: absolute;
+  left: 28rpx;
+  bottom: 24rpx;
+  padding: 8rpx 16rpx;
+  border: 2rpx solid rgba(74, 57, 47, 0.62);
+  border-radius: 999rpx;
+  background: rgba(255, 253, 246, 0.74);
+  font-size: 22rpx;
+  font-weight: 900;
+  letter-spacing: 1rpx;
+}
+
+.floating-dot {
+  position: absolute;
+  border: 3rpx solid rgba(74, 57, 47, 0.72);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 8rpx rgba(255, 255, 255, 0.32);
+}
+
+.floating-dot.pink {
+  width: 82rpx;
+  height: 82rpx;
+  right: 46rpx;
+  top: 36rpx;
+  background: var(--pink);
+}
+
+.floating-dot.green {
+  width: 54rpx;
+  height: 54rpx;
+  left: 68rpx;
+  top: 76rpx;
+  background: var(--green);
+}
+
+.floating-dot.yellow {
+  width: 44rpx;
+  height: 44rpx;
+  right: 152rpx;
+  bottom: 44rpx;
+  background: var(--yellow);
+}
+
 .bubble-card {
   text-align: center;
 }
 
+.bubble-card.care {
+  background: linear-gradient(135deg, #fffdf6, #ffe5ec);
+}
+
+.bubble-card.encourage {
+  background: linear-gradient(135deg, #fffdf6, #e7f6df);
+}
+
 .bubble-card.ld {
   color: #fffaf0;
-  background: #3f342d;
+  background: linear-gradient(135deg, #3f342d, #2b2230);
 }
 
 .bubble-card.ld .subtext,
-.bubble-card.ld .popped {
+.bubble-card.ld .popped,
+.bubble-card.ld .bubble-type {
   color: #f7d982;
 }
 
-.bubble-dot {
-  width: 112rpx;
-  height: 112rpx;
+.bubble-card.ld .bubble-type {
+  background: rgba(255, 242, 196, 0.1);
+  border-color: #f7d982;
+}
+
+.bubble-orb {
+  width: 128rpx;
+  height: 128rpx;
   margin: 0 auto 18rpx;
   border: 3rpx solid var(--border);
   border-radius: 50%;
+  box-shadow: inset 0 0 0 12rpx rgba(255, 255, 255, 0.28), 0 8rpx 0 rgba(63, 52, 45, 0.1);
 }
 
 .source {
   display: block;
-  font-size: 36rpx;
+  font-size: 38rpx;
   font-weight: 900;
+}
+
+.bubble-type {
+  margin-top: 12rpx;
 }
 
 .bubble-text {
@@ -31,12 +110,19 @@
   margin-top: 28rpx;
   font-size: 36rpx;
   line-height: 1.6;
-  font-weight: 800;
+  font-weight: 900;
 }
 
 .popped {
   display: block;
   margin-top: 24rpx;
+  padding: 18rpx;
+  border: 2rpx dashed currentColor;
+  border-radius: 20rpx;
   font-size: 28rpx;
-  font-weight: 800;
+  font-weight: 900;
+}
+
+.bubble-empty {
+  background: rgba(255, 253, 246, 0.72);
 }

@@ -20,18 +20,3 @@
   border-color: #e9785f;
   background: #fff1ec;
 }
-
-.danger-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 84rpx;
-  margin-top: 22rpx;
-  padding: 0 24rpx;
-  border: 3rpx solid var(--border);
-  border-radius: 999rpx;
-  color: #fffdf6;
-  background: #e9785f;
-  font-size: 28rpx;
-  font-weight: 800;
-}

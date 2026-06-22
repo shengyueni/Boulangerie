@@ -1,58 +1,79 @@
+.diary-empty {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
 .entry-card {
   line-height: 1.6;
+}
+
+.entry-card.worn-note {
+  border-color: #c96f54;
+  background: linear-gradient(135deg, #fffdf6, #fff0e8);
+}
+
+.entry-card.worn-note.high-impact {
+  border-width: 4rpx;
+  box-shadow: 9rpx 9rpx 0 rgba(233, 120, 95, 0.18);
+}
+
+.entry-card.smooth-note {
+  border-color: #7fb77c;
+  background: linear-gradient(135deg, #fffdf6, #eef9e8);
+}
+
+.entry-top {
+  align-items: flex-start;
 }
 
 .date {
   color: var(--muted);
   font-size: 25rpx;
-}
-
-.type {
-  padding: 8rpx 18rpx;
-  border: 2rpx solid var(--border);
-  border-radius: 999rpx;
-  font-size: 24rpx;
-}
-
-.type.positive {
-  background: #c9e7b6;
-}
-
-.type.negative {
-  color: #fffaf0;
-  background: #3f342d;
+  font-weight: 800;
 }
 
 .summary {
   display: block;
   margin-top: 18rpx;
   font-size: 32rpx;
-  font-weight: 800;
+  line-height: 1.48;
+  font-weight: 900;
 }
 
-.meta {
+.meta-chips {
   display: flex;
-  flex-direction: column;
-  margin-top: 14rpx;
+  flex-wrap: wrap;
+  margin-top: 18rpx;
+}
+
+.memo-slip {
+  margin-top: 16rpx;
+  padding: 18rpx;
+  border: 2rpx dashed rgba(74, 57, 47, 0.42);
+  border-radius: 18rpx;
+  background: rgba(255, 242, 196, 0.7);
+}
+
+.memo-label {
+  display: block;
+  margin-bottom: 8rpx;
   color: var(--muted);
-  font-size: 25rpx;
+  font-size: 23rpx;
+  font-weight: 900;
 }
 
 .memo {
   display: block;
-  margin-top: 16rpx;
-  padding: 18rpx;
-  border-radius: 18rpx;
-  background: #fff2c4;
   color: #5d4b40;
   font-size: 25rpx;
+  line-height: 1.6;
 }
-
 
 .detail-hint {
   display: block;
   margin-top: 14rpx;
   color: var(--orange);
   font-size: 24rpx;
-  font-weight: 800;
+  font-weight: 900;
 }

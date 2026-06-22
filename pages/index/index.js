@@ -1,38 +1,27 @@
-const { APP_META, CHARACTERS } = require("../../utils/constants");
+const { APP_META } = require("../../utils/constants");
 const { getDiaryEntries } = require("../../utils/storage");
-
-function getCroissantStatus(entries) {
-  const negativeWear = entries.reduce((total, entry) => {
-    if (entry.type !== "negative") return total;
-    return total + Number(entry.impactLevel || 0);
-  }, 0);
-  const positiveRelief = entries.filter((entry) => entry.type === "positive").length;
-  const wear = Math.max(0, negativeWear - positiveRelief);
-
-  if (wear <= 5) return "毛很顺";
-  if (wear <= 12) return "有点炸毛";
-  if (wear <= 20) return "被搓成毛球";
-  return "进入保护模式";
-}
+const { getCroissantReport } = require("../../utils/croissant");
 
 Page({
   data: {
-    croissant: CHARACTERS.croissant,
     appMeta: APP_META,
-    status: "毛很顺",
+    croissant: getCroissantReport([]),
     navItems: [
-      { label: "写一条日记", path: "/pages/diary-new/index", color: "pink" },
-      { label: "看我的决心仪表盘", path: "/pages/dashboard/index", color: "green" },
-      { label: "摇一颗泡泡", path: "/pages/bubble/index", color: "yellow" },
-      { label: "打开愿望清单", path: "/pages/wishlist/index", color: "pink" },
-      { label: "打开百宝箱", path: "/pages/toolbox/index", color: "green" },
-      { label: "听听吗喽的心声", path: "/pages/voice/index", color: "yellow" }
+      { label: "写一条日记", subtitle: "把今天发生的事先放下来。", path: "/pages/diary-new/index", color: "pink", size: "large" },
+      { label: "吗喽的日记本", subtitle: "看看那些不是你幻想出来的消耗。", path: "/pages/diary/index", color: "paper" },
+      { label: "决心仪表盘", subtitle: "看见反复出现的模式。", path: "/pages/dashboard/index", color: "green" },
+      { label: "吗喽的泡泡机", subtitle: "摇一颗小小的安慰。", path: "/pages/bubble/index", color: "yellow" },
+      { label: "愿望清单", subtitle: "把出走变成可以准备的事。", path: "/pages/wishlist/index", color: "pink" },
+      { label: "百宝箱", subtitle: "呼吸、自测和急救卡片都在这里。", path: "/pages/toolbox/index", color: "green", size: "wide" },
+      { label: "心声", subtitle: "先看看别的吗喽也在想什么。", path: "/pages/voice/index", color: "paper" },
+      { label: "隐私与安全说明", subtitle: "看看数据都放在哪里。", path: "/pages/about/index", color: "yellow" },
+      { label: "试用反馈", subtitle: "帮 Croissant 试走这一步。", path: "/pages/feedback/index", color: "pink" }
     ]
   },
 
   onShow() {
     this.setData({
-      status: getCroissantStatus(getDiaryEntries())
+      croissant: getCroissantReport(getDiaryEntries())
     });
   },
 

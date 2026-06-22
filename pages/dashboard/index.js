@@ -3,22 +3,7 @@ const {
   PROTECTION_ADVICE
 } = require("../../utils/constants");
 const { getDiaryEntries } = require("../../utils/storage");
-
-function getCroissantReport(entries) {
-  const negativeWear = entries.reduce((total, entry) => {
-    if (entry.type !== "negative") return total;
-    return total + Number(entry.impactLevel || 0);
-  }, 0);
-  const positiveRelief = entries.filter((entry) => entry.type === "positive").length;
-  const wear = Math.max(0, negativeWear - positiveRelief);
-
-  let status = "毛很顺";
-  if (wear >= 21) status = "进入保护模式";
-  else if (wear >= 13) status = "被搓成毛球";
-  else if (wear >= 6) status = "有点炸毛";
-
-  return { wear, status };
-}
+const { getCroissantReport } = require("../../utils/croissant");
 
 function getReasonCounts(entries) {
   return REASON_OPTIONS.map((reason) => ({
@@ -44,14 +29,13 @@ function withPercent(reasonDistribution) {
 Page({
   data: {
     hasRecords: false,
+    croissant: getCroissantReport([]),
     stats: {
       total: 0,
       negative: 0,
       positive: 0,
       highImpact30Days: 0,
       topReason: "还没有足够记录",
-      wear: 0,
-      status: "毛很顺",
       advice: "本周先保护好自己。第一步不是判断，而是记录。"
     },
     reasonDistribution: []
@@ -62,12 +46,13 @@ Page({
     const hasRecords = entries.length > 0;
     const now = Date.now();
     const thirtyDays = 30 * 24 * 60 * 60 * 1000;
-    const report = getCroissantReport(entries);
+    const croissant = getCroissantReport(entries);
     const reasonDistribution = withPercent(getReasonCounts(entries));
     const topReason = getTopReason(reasonDistribution);
 
     this.setData({
       hasRecords,
+      croissant,
       stats: {
         total: entries.length,
         negative: entries.filter((entry) => entry.type === "negative").length,
@@ -77,8 +62,6 @@ Page({
           return now - created <= thirtyDays && Number(entry.impactLevel) >= 4;
         }).length,
         topReason,
-        wear: report.wear,
-        status: report.status,
         advice: hasRecords
           ? PROTECTION_ADVICE[topReason] || "本周先保护好自己。第一步不是判断，而是记录。"
           : "本周先保护好自己。第一步不是判断，而是记录。"
