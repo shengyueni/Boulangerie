@@ -24,11 +24,13 @@
   <button class="sticker-button green" bindtap="showResult">查看结果</button>
 
   <view wx:if="{{result}}" class="card result-card">
-    <text class="section-title">{{totalScore}} 分：{{result.title}}</text>
+    <text class="score-total">总分：{{totalScore}}</text>
+    <text class="section-title">结果类型：{{result.title}}</text>
     <text class="result-text">{{result.text}}</text>
     <text class="section-title small-title">下一步建议</text>
     <view wx:for="{{result.suggestions}}" wx:key="*this" class="suggestion">· {{item}}</view>
     <button class="sticker-button secondary" bindtap="goDiary">去写一条日记</button>
     <button class="sticker-button" bindtap="goWishlist">去愿望清单</button>
+    <button class="sticker-button green" bindtap="resetTest">重新测试</button>
   </view>
 </view>

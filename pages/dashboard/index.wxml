@@ -3,6 +3,10 @@
   <text class="subtext">这个仪表盘不会替你决定要不要离职。
 它只是帮你看见：哪些事情正在反复消耗你。</text>
 
+  <view wx:if="{{!hasRecords}}" class="card empty trend-empty">
+    <text>还没有足够记录生成趋势。先写下一条真实的日记就好。</text>
+  </view>
+
   <view class="card status-card">
     <text class="section-title">Croissant 当前状态</text>
     <text class="status">{{stats.status}}</text>

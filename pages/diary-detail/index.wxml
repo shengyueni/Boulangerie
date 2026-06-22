@@ -3,7 +3,8 @@
   <text class="subtext">一条记录，就是你把自己从混乱里捞出来的一小步。</text>
 
   <view wx:if="{{!entry}}" class="card empty">
-    <text>没有找到这条记录。它可能已经被删除了。</text>
+    <text>这条记录可能已经出走了。</text>
+    <button class="sticker-button secondary" bindtap="goDiary">回到日记本</button>
   </view>
 
   <block wx:else>
@@ -30,6 +31,8 @@
       <button class="sticker-button green" bindtap="copyFactMemo">复制事实纪要</button>
     </view>
 
+    <button class="sticker-button secondary" bindtap="goDiary">回到日记本</button>
+    <button class="sticker-button green" bindtap="goDashboard">去看决心仪表盘</button>
     <button class="delete-button" bindtap="deleteEntry">删除这条记录</button>
   </block>
 </view>

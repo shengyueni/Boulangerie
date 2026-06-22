@@ -70,3 +70,8 @@
   line-height: 1.7;
   font-weight: 800;
 }
+
+
+.trend-empty {
+  background: #fff2c4;
+}

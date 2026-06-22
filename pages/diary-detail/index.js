@@ -34,7 +34,7 @@ Page({
   copyFactMemo() {
     const factMemo = this.data.entry && this.data.entry.factMemo;
     if (!factMemo) {
-      wx.showToast({ title: "没有可复制的事实纪要。", icon: "none" });
+      wx.showToast({ title: "这条记录还没有生成事实纪要。", icon: "none" });
       return;
     }
 
@@ -68,5 +68,13 @@ Page({
         }, 500);
       }
     });
+  },
+
+  goDiary() {
+    wx.redirectTo({ url: "/pages/diary/index" });
+  },
+
+  goDashboard() {
+    wx.redirectTo({ url: "/pages/dashboard/index" });
   }
 });

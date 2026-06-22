@@ -37,12 +37,13 @@ function withPercent(reasonDistribution) {
   const max = Math.max(...reasonDistribution.map((item) => item.count), 1);
   return reasonDistribution.map((item) => ({
     ...item,
-    percent: Math.round((item.count / max) * 100)
+    percent: item.count ? Math.round((item.count / max) * 100) : 0
   }));
 }
 
 Page({
   data: {
+    hasRecords: false,
     stats: {
       total: 0,
       negative: 0,
@@ -51,13 +52,14 @@ Page({
       topReason: "还没有足够记录",
       wear: 0,
       status: "毛很顺",
-      advice: "先记录几条真实发生的事，Croissant 会慢慢看见规律。"
+      advice: "本周先保护好自己。第一步不是判断，而是记录。"
     },
     reasonDistribution: []
   },
 
   onShow() {
     const entries = getDiaryEntries();
+    const hasRecords = entries.length > 0;
     const now = Date.now();
     const thirtyDays = 30 * 24 * 60 * 60 * 1000;
     const report = getCroissantReport(entries);
@@ -65,6 +67,7 @@ Page({
     const topReason = getTopReason(reasonDistribution);
 
     this.setData({
+      hasRecords,
       stats: {
         total: entries.length,
         negative: entries.filter((entry) => entry.type === "negative").length,
@@ -76,7 +79,9 @@ Page({
         topReason,
         wear: report.wear,
         status: report.status,
-        advice: PROTECTION_ADVICE[topReason] || "先记录几条真实发生的事，Croissant 会慢慢看见规律。"
+        advice: hasRecords
+          ? PROTECTION_ADVICE[topReason] || "本周先保护好自己。第一步不是判断，而是记录。"
+          : "本周先保护好自己。第一步不是判断，而是记录。"
       },
       reasonDistribution
     });

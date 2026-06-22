@@ -1,4 +1,4 @@
-﻿const {
+const {
   createId,
   getWishItems,
   saveWishItems,
@@ -63,6 +63,7 @@ Page({
     saveWishItems([item].concat(this.data.items));
     this.setData({ newTitle: "" });
     this.refresh();
+    wx.showToast({ title: "已经加入愿望清单。", icon: "none" });
   },
 
   toggleItem(event) {
@@ -89,10 +90,17 @@ Page({
 
   deleteItem(event) {
     const id = event.currentTarget.dataset.id;
-    saveWishItems(this.data.items.filter((item) => item.id !== id));
-    this.refresh();
+    wx.showModal({
+      title: "确认删除",
+      content: "确定要删除这个愿望吗？",
+      confirmText: "删除",
+      confirmColor: "#e9785f",
+      success: (res) => {
+        if (!res.confirm) return;
+        saveWishItems(this.data.items.filter((item) => item.id !== id));
+        this.refresh();
+        wx.showToast({ title: "这个愿望已经删除。", icon: "none" });
+      }
+    });
   }
 });
-
-
-

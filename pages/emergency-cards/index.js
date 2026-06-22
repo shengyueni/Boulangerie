@@ -1,5 +1,9 @@
 const { EMERGENCY_CARDS } = require("../../utils/constants");
-const { addWishItem, initializeDefaultWishItems } = require("../../utils/storage");
+const {
+  addWishItem,
+  getWishItems,
+  initializeDefaultWishItems
+} = require("../../utils/storage");
 
 function buildCards(expandedIndex = -1) {
   return EMERGENCY_CARDS.map((card, index) => ({
@@ -10,7 +14,8 @@ function buildCards(expandedIndex = -1) {
 
 Page({
   data: {
-    cards: buildCards()
+    cards: buildCards(),
+    lastAdded: false
   },
 
   onShow() {
@@ -29,11 +34,24 @@ Page({
     const index = Number(event.currentTarget.dataset.index);
     const card = this.data.cards[index];
     if (!card) return;
+
+    const exists = getWishItems().some((item) => item.title === card.action);
+    if (exists) {
+      wx.showToast({ title: "这个小动作已经在愿望清单里了。", icon: "none" });
+      this.setData({ lastAdded: true });
+      return;
+    }
+
     addWishItem(card.action, "post_exit");
+    this.setData({ lastAdded: true });
     wx.showToast({
       title: "已经放进愿望清单。慢慢来，Croissant 会陪你。",
       icon: "none",
       duration: 2200
     });
+  },
+
+  goWishlist() {
+    wx.navigateTo({ url: "/pages/wishlist/index" });
   }
 });

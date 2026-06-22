@@ -55,3 +55,12 @@
   margin-top: 24rpx;
   font-size: 30rpx;
 }
+
+
+.score-total {
+  display: block;
+  margin-bottom: 14rpx;
+  color: var(--orange);
+  font-size: 42rpx;
+  font-weight: 900;
+}

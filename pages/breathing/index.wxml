@@ -13,8 +13,8 @@
   </view>
 
   <view class="control-row">
-    <button class="sticker-button green" bindtap="start">开始</button>
-    <button class="sticker-button secondary" bindtap="pause">暂停</button>
+    <button class="sticker-button green {{running ? 'muted-button' : ''}}" bindtap="start">{{running ? '进行中' : '开始'}}</button>
+    <button class="sticker-button secondary {{running ? '' : 'muted-button'}}" bindtap="pause">暂停</button>
     <button class="sticker-button" bindtap="reset">重置</button>
   </view>
 

@@ -30,13 +30,13 @@ Page({
       ...item,
       selectedScore: itemIndex === index ? score : item.selectedScore
     }));
-    this.setData({ questions, result: null });
+    this.setData({ questions, result: null, totalScore: 0 });
   },
 
   showResult() {
     const unanswered = this.data.questions.findIndex((item) => !item.selectedScore);
     if (unanswered >= 0) {
-      wx.showToast({ title: `第 ${unanswered + 1} 题还没有选择。`, icon: "none" });
+      wx.showToast({ title: "还有题目没有回答完，先慢慢选完，不用急。", icon: "none" });
       return;
     }
     const totalScore = this.data.questions.reduce((total, item) => total + item.selectedScore, 0);
@@ -44,6 +44,15 @@ Page({
       totalScore,
       result: getResult(totalScore)
     });
+  },
+
+  resetTest() {
+    this.setData({
+      questions: buildQuestions(),
+      result: null,
+      totalScore: 0
+    });
+    wx.showToast({ title: "已经清空，可以重新慢慢测。", icon: "none" });
   },
 
   goDiary() {

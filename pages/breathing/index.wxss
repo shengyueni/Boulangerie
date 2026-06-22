@@ -64,3 +64,13 @@
   font-size: 26rpx;
   line-height: 1.7;
 }
+
+
+.breath-ball.ready {
+  transform: scale(1);
+  background: #fff2c4;
+}
+
+.muted-button {
+  opacity: 0.58;
+}

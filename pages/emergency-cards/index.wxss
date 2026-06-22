@@ -37,3 +37,10 @@
   font-size: 29rpx;
   line-height: 1.7;
 }
+
+
+.go-wish-card {
+  background: #d9efc8;
+  font-size: 28rpx;
+  line-height: 1.6;
+}
