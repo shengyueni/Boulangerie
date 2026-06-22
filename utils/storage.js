@@ -96,6 +96,12 @@ function initializeDefaultWishItems() {
   return defaults;
 }
 
+function clearLocalData() {
+  wx.removeStorageSync(DIARY_KEY);
+  wx.removeStorageSync(WISH_KEY);
+  wx.removeStorageSync(WISH_INIT_KEY);
+}
+
 module.exports = {
   createId,
   getDiaryEntries,
@@ -105,5 +111,6 @@ module.exports = {
   getWishItems,
   saveWishItems,
   addWishItem,
-  initializeDefaultWishItems
+  initializeDefaultWishItems,
+  clearLocalData
 };

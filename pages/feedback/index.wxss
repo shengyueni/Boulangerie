@@ -1,0 +1,16 @@
+.question-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18rpx;
+}
+
+.question {
+  display: block;
+  padding: 18rpx 20rpx;
+  border: 2rpx solid rgba(74, 57, 47, 0.42);
+  border-radius: 18rpx;
+  background: #fffaf0;
+  color: var(--dark);
+  font-size: 28rpx;
+  line-height: 1.55;
+}

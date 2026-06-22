@@ -1,0 +1,50 @@
+<view class="page">
+  <text class="hero-title">隐私与安全说明</text>
+  <text class="subtext">{{appMeta.appName}} · {{appMeta.version}} {{appMeta.stage}}</text>
+
+  <view class="card">
+    <text class="section-title">关于这个小程序</text>
+    <text class="body-text">「吗喽的出走」是一个帮助你记录职场消耗、整理离职想法、准备过渡计划的小工具。</text>
+    <text class="body-text">它不会替你决定要不要离职，也不会评价你是不是“太脆弱”。</text>
+    <text class="body-text">它只是陪你把混乱的感受整理成记录、趋势和下一步。</text>
+  </view>
+
+  <view class="card">
+    <text class="section-title">数据存在哪里</text>
+    <text class="body-text">当前试用版不会上传数据。</text>
+    <text class="body-text">你的日记、愿望清单和测试内容都保存在当前设备的本地存储中。</text>
+    <text class="body-text">如果你清空小程序缓存、换设备或删除数据，内容可能无法恢复。</text>
+  </view>
+
+  <view class="card">
+    <text class="section-title">重要提醒</text>
+    <text class="body-text">这个小程序不是：</text>
+    <view class="list">
+      <text>· 医疗诊断工具</text>
+      <text>· 心理治疗工具</text>
+      <text>· 法律咨询工具</text>
+      <text>· 劳动仲裁建议工具</text>
+      <text>· 让你立刻离职的指令机器</text>
+    </view>
+    <text class="body-text">如果你正在经历严重身体不适、持续惊恐、强烈自伤念头，或无法保证自己的安全，请优先联系现实中的可信任的人、当地紧急帮助或专业支持。</text>
+  </view>
+
+  <view class="card">
+    <text class="section-title">给试用者</text>
+    <text class="body-text">如果你愿意反馈，请告诉我：</text>
+    <view class="list">
+      <text>· 哪个页面最让你想继续点下去？</text>
+      <text>· 哪句文案让你觉得被理解？</text>
+      <text>· 哪个功能让你困惑？</text>
+      <text>· 你会不会愿意第二天再打开？</text>
+      <text>· 你觉得这个工具更像“记录工具”“情绪陪伴”还是“离职准备工具”？</text>
+    </view>
+    <button class="sticker-button green" bindtap="goFeedback">打开试用反馈问题</button>
+  </view>
+
+  <view class="card danger-card">
+    <text class="section-title">危险操作区</text>
+    <text class="body-text">这里只会清理本设备上的小程序本地数据，不涉及云端。</text>
+    <button class="danger-button" bindtap="clearData">清空本地数据</button>
+  </view>
+</view>

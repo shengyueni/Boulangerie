@@ -1,0 +1,13 @@
+<view class="page">
+  <text class="hero-title">试用反馈</text>
+  <text class="subtext">先不用写长评。把这 6 个问题复制出去，凭第一感觉回答就很好。</text>
+
+  <view class="card">
+    <text class="section-title">反馈问题</text>
+    <view class="question-list">
+      <text wx:for="{{questions}}" wx:key="*this" class="question">{{item}}</text>
+    </view>
+  </view>
+
+  <button class="sticker-button green" bindtap="copyQuestions">复制反馈问题</button>
+</view>

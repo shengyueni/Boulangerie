@@ -80,3 +80,11 @@
   text-align: center;
   text-decoration: underline;
 }
+
+.version-note {
+  display: block;
+  margin-top: 18rpx;
+  color: var(--muted);
+  font-size: 22rpx;
+  text-align: center;
+}

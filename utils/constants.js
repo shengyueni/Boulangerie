@@ -1,3 +1,10 @@
+const APP_META = {
+  appName: "吗喽的出走",
+  slogan: "保护好你的猩",
+  version: "0.2.2",
+  stage: "试用准备版"
+};
+
 const CHARACTERS = {
   croissant: {
     name: "Croissant",
@@ -173,7 +180,17 @@ const EMERGENCY_CARDS = [
   }
 ];
 
+const FEEDBACK_QUESTIONS = [
+  "1. 你打开后，能不能立刻看懂这是做什么的？",
+  "2. 你最想点哪个模块？",
+  "3. 写日记这一步有没有压力？",
+  "4. 哪一句文案让你觉得它懂你？",
+  "5. 哪个地方让你困惑、不想继续、觉得多余？",
+  "6. 你会不会愿意第二天再打开？"
+];
+
 module.exports = {
+  APP_META,
   CHARACTERS,
   REASON_OPTIONS,
   IMPACT_LEVELS,
@@ -184,5 +201,6 @@ module.exports = {
   EXIT_TEST_QUESTIONS,
   EXIT_TEST_OPTIONS,
   EXIT_TEST_RESULTS,
-  EMERGENCY_CARDS
+  EMERGENCY_CARDS,
+  FEEDBACK_QUESTIONS
 };

@@ -1,4 +1,4 @@
-const { CHARACTERS } = require("../../utils/constants");
+const { APP_META, CHARACTERS } = require("../../utils/constants");
 const { getDiaryEntries } = require("../../utils/storage");
 
 function getCroissantStatus(entries) {
@@ -18,6 +18,7 @@ function getCroissantStatus(entries) {
 Page({
   data: {
     croissant: CHARACTERS.croissant,
+    appMeta: APP_META,
     status: "毛很顺",
     navItems: [
       { label: "写一条日记", path: "/pages/diary-new/index", color: "pink" },

@@ -30,4 +30,5 @@
   </view>
 
   <navigator class="diary-link" url="/pages/diary/index">查看吗喽的日记本</navigator>
+  <text class="version-note">当前版本：{{appMeta.version}} {{appMeta.stage}}</text>
 </view>

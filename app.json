@@ -8,6 +8,8 @@
     "pages/bubble/index",
     "pages/wishlist/index",
     "pages/toolbox/index",
+    "pages/feedback/index",
+    "pages/about/index",
     "pages/breathing/index",
     "pages/exit-test/index",
     "pages/emergency-cards/index",
