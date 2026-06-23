@@ -1,15 +1,37 @@
-<view class="page">
-  <view class="page-head floral-title-box"><view class="corner-ornament corner-ornament-left corner-ornament--purple"></view><view class="corner-ornament corner-ornament-right corner-ornament--gold"></view><text class="eyebrow">趋势不是审判</text><text class="hero-title">吗喽复盘台</text><text class="subtext">它不会替你决定要不要离职，只帮你看见哪些事正在反复消耗你。</text></view>
-  <view class="floral-divider"><view class="floral-divider__line"></view><view class="floral-divider__dot red"></view><view class="floral-divider__dot green"></view><view class="floral-divider__line"></view></view>
+<view class="page paper-page dashboard-page">
+  <view class="page-head paper-title dashboard-title-board">
+    <view class="corner-ornament corner-ornament-left corner-ornament--purple"></view>
+    <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
+    <view class="paper-corner bottom-left"></view>
+    <view class="paper-corner bottom-right"></view>
+    <text class="paper-title__stamp">趋势不是审判</text>
+    <text class="hero-title">吗喽复盘台</text>
+    <text class="subtext">它不会替你决定要不要离职，只帮你看见哪些事正在反复消耗你。</text>
+    <view class="paper-title__rail"><view class="paper-title__rail-line"></view><view class="paper-title__rail-dot"></view><view class="paper-title__rail-dot"></view><view class="paper-title__rail-line"></view></view>
+  </view>
+
   <view class="filter-panel range-tags"><view wx:for="{{ranges}}" wx:key="key" class="chip {{activeRange === item.key ? 'pink' : ''}}" data-key="{{item.key}}" bindtap="switchRange">{{item.label}}</view></view>
   <view wx:if="{{!hasRecords}}" class="empty-card trend-empty"><text>还没有足够记录生成趋势。</text><text>先写下一条真实的日记就好。</text></view>
-  <view class="ornament-card amulet-card status-card {{croissant.statusClass}}"><view class="corner-ornament corner-ornament-left corner-ornament--gold"></view><view class="corner-ornament corner-ornament-right corner-ornament--purple"></view><text class="amulet-frame__seal">复盘护身符</text><text class="section-title">Croissant 当前状态</text><text class="status-name">{{croissant.status}}</text><text class="status-wear">磨损值：{{croissant.wear}}</text><text class="body-text">{{croissant.explanation}}</text><text class="dashboard-protect">保护建议：{{croissant.advice}}</text></view>
+
+  <view class="ornament-card amulet-card amulet-frame croissant-amulet status-card {{croissant.statusClass}}">
+    <view class="corner-ornament corner-ornament-left corner-ornament--gold"></view>
+    <view class="corner-ornament corner-ornament-right corner-ornament--purple"></view>
+    <view class="corner-ornament corner-ornament-bottom-left corner-ornament--green"></view>
+    <view class="corner-ornament corner-ornament-bottom-right corner-ornament--red"></view>
+    <text class="amulet-frame__seal">Croissant 状态护身符</text>
+    <text class="section-title">当前状态</text>
+    <text class="status-name">{{croissant.status}}</text>
+    <view class="wear-paper"><text>磨损值</text><text>{{croissant.wear}}</text></view>
+    <text class="body-text status-explain">{{croissant.explanation}}</text>
+    <view class="amulet-note dashboard-protect"><text class="protect-label">保护建议</text><text>{{croissant.advice}}</text></view>
+  </view>
+
   <view class="ornament-card ornament-card--purple tendency-card"><view class="corner-ornament corner-ornament-left corner-ornament--purple"></view><text class="section-title">离职倾向提示</text><text class="tendency-title">{{tendency.title}}</text><text class="body-text">{{tendency.text}}</text></view>
   <view class="stats-grid"><view class="stat-card"><text class="num">{{stats.total}}</text><text>总记录数</text></view><view class="stat-card"><text class="num">{{stats.negative}}</text><text>负面记录</text></view><view class="stat-card"><text class="num">{{stats.positive}}</text><text>正面记录</text></view><view class="stat-card"><text class="num">{{stats.highImpact30Days}}</text><text>高影响事件</text></view></view>
   <view class="ornament-card"><text class="section-title">最常见的主要原因</text><text class="reason">{{stats.topReason}}</text></view>
   <view class="ornament-card"><text class="section-title">主要原因分布</text><view wx:for="{{reasonDistribution}}" wx:key="reason" class="reason-row"><view class="row between"><text>{{item.reason}}</text><text>{{item.count}} 次</text></view><view class="bar-track"><view class="bar-fill" style="width: {{item.percent}}%;"></view></view></view></view>
   <view class="ornament-card ornament-card--red"><text class="section-title">最近的高影响事件</text><view class="ornament-line"></view><view wx:if="{{!highImpactEntries.length}}" class="empty-card high-empty"><text>这个时间段里没有高影响记录。希望这是真的松了一口气，而不是你又把自己藏起来了。</text></view><view wx:for="{{highImpactEntries}}" wx:key="id" class="impact-row red-mark" data-id="{{item.id}}" bindtap="goDetail"><text class="impact-date">{{item.displayDate}}</text><text class="impact-summary">{{item.summaryPreview}}</text><text class="chip orange">{{item.impactLevel}} 级</text><text class="chip pink">{{item.primaryReason}}</text></view></view>
-  <view class="ornament-card advice-card"><text class="section-title">当前保护建议</text><text class="advice">{{stats.advice}}</text></view>
+  <view class="ornament-card advice-card"><text class="section-title">当前保护建议</text><view class="amulet-note"><text class="advice">{{stats.advice}}</text></view></view>
   <view class="ornament-card ornament-card--gold review-card"><view class="corner-ornament corner-ornament-left corner-ornament--gold"></view><view class="corner-ornament corner-ornament-right corner-ornament--gold"></view><text class="section-title">本周复盘小纸条</text><text class="body-text">{{reviewText}}</text></view>
   <button class="sticker-button secondary" bindtap="goNewDiary">去写一条新日记</button><button class="sticker-button green" bindtap="goExitTest">去做离职状态自测</button>
 </view>

@@ -1,15 +1,20 @@
-<view class="page kingdom-page">
-  <view class="page-head kingdom-head floral-title-box">
+<view class="page paper-page kingdom-page">
+  <view class="page-head kingdom-head paper-title kingdom-title-board">
     <view class="corner-ornament corner-ornament-left corner-ornament--red"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--green"></view>
-    <text class="seal-flower">吗喽王国地图</text>
+    <view class="paper-corner bottom-left"></view>
+    <view class="paper-corner bottom-right"></view>
+    <text class="paper-title__stamp">吗喽王国地图</text>
     <text class="hero-title">{{appMeta.appName}}</text>
     <text class="subtext">{{appMeta.slogan}}</text>
-    <view class="floral-divider">
-      <view class="floral-divider__line"></view>
-      <view class="floral-divider__dot red"></view>
-      <view class="floral-divider__dot green"></view>
-      <view class="floral-divider__line"></view>
+    <view class="kingdom-title-markers">
+      <text>记录处</text><text>复盘台</text><text>计划屋</text>
+    </view>
+    <view class="paper-title__rail">
+      <view class="paper-title__rail-line"></view>
+      <view class="paper-title__rail-dot"></view>
+      <view class="paper-title__rail-dot"></view>
+      <view class="paper-title__rail-line"></view>
     </view>
   </view>
 
@@ -27,6 +32,7 @@
   </view>
 
   <view class="note-card welcome-card paper-edge">
+    <view class="paper-corner right"></view>
     <text>欢迎回到吗喽王国。</text>
     <text>今天也不用立刻做决定。</text>
     <text>先看看 Croissant 现在需要什么。</text>
@@ -36,18 +42,21 @@
     <view class="floral-divider">
       <view class="floral-divider__line"></view>
       <view class="floral-divider__dot blue"></view>
-      <view class="floral-divider__dot"></view>
+      <view class="floral-divider__dot gold"></view>
       <view class="floral-divider__line"></view>
     </view>
     <text class="ribbon-title">王国地点</text>
-    <view class="map-route-line"></view>
-    <view class="map-grid">
+    <view class="map-trail">
       <block wx:for="{{navItems}}" wx:key="path">
-        <view class="map-place map-card {{item.color}} {{item.size}}" data-path="{{item.path}}" bindtap="goTo">
-          <view class="corner-ornament corner-ornament-left corner-ornament--gold"></view>
-          <text class="map-place__seal">{{item.alias}}</text>
-          <text class="map-place__title">{{item.label}}</text>
-          <text class="map-place__desc">{{item.subtitle}}</text>
+        <view class="map-stop {{index % 2 === 0 ? 'left' : 'right'}}">
+          <view class="map-route-pin"><text>{{index + 1}}</text></view>
+          <view class="map-place map-card {{item.color}} {{item.size}}" data-path="{{item.path}}" bindtap="goTo">
+            <view class="corner-ornament corner-ornament-left corner-ornament--gold"></view>
+            <view class="paper-corner bottom-right"></view>
+            <text class="map-place__seal">{{item.alias}}</text>
+            <text class="map-place__title">{{item.label}}</text>
+            <text class="map-place__desc">{{item.subtitle}}</text>
+          </view>
         </view>
         <view wx:if="{{index < navItems.length - 1}}" class="map-route"></view>
       </block>
@@ -57,7 +66,7 @@
   <view class="floral-divider bottom-divider">
     <view class="floral-divider__line"></view>
     <view class="floral-divider__dot red"></view>
-    <view class="floral-divider__dot"></view>
+    <view class="floral-divider__dot gold"></view>
     <view class="floral-divider__dot green"></view>
     <view class="floral-divider__line"></view>
   </view>

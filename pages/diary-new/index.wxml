@@ -1,18 +1,107 @@
-<view class="page">
-  <view class="page-head floral-title-box"><view class="corner-ornament corner-ornament-left corner-ornament--red"></view><view class="corner-ornament corner-ornament-right corner-ornament--green"></view>
-    <text class="eyebrow">事实小纸条</text>
+<view class="page paper-page diary-new-page">
+  <view class="page-head paper-title diary-new-head">
+    <view class="corner-ornament corner-ornament-left corner-ornament--red"></view>
+    <view class="corner-ornament corner-ornament-right corner-ornament--green"></view>
+    <view class="paper-corner bottom-left"></view>
+    <view class="paper-corner bottom-right"></view>
+    <text class="paper-title__stamp">护身符记录纸</text>
     <text class="hero-title">记录今天发生了什么</text>
     <text class="subtext">不用写得漂亮。先把事实、身体和情绪都放到纸片上。</text>
+    <view class="paper-title__rail">
+      <view class="paper-title__rail-line"></view>
+      <view class="paper-title__rail-dot"></view>
+      <view class="paper-title__rail-dot"></view>
+      <view class="paper-title__rail-line"></view>
+    </view>
   </view>
-  <view class="floral-divider"><view class="floral-divider__line"></view><view class="floral-divider__dot red"></view><view class="floral-divider__dot green"></view><view class="floral-divider__line"></view></view>
-  <view class="ornament-card ornament-card--gold"><text class="section-title">今天发生了什么？</text><textarea class="textarea" value="{{summary}}" bindinput="onSummaryInput" placeholder="写下一个职场事件、一个感受，或者一件让你顺毛的事。" /></view>
-  <view class="ornament-card ornament-card--gold"><view class="ornament-line"></view><text class="section-title">这是一条什么记录？</text><view class="row wrap"><view class="chip {{type === 'negative' ? 'pink' : ''}}" data-type="negative" bindtap="selectType">负面记录</view><view class="chip {{type === 'positive' ? 'green' : ''}}" data-type="positive" bindtap="selectType">正面记录</view></view></view>
-  <view class="ornament-card ornament-card--gold"><view class="ornament-line"></view><text class="section-title">影响等级</text><view wx:for="{{impactLevels}}" wx:key="value" class="chip {{impactLevel === item.value ? 'orange' : ''}}" data-value="{{item.value}}" bindtap="selectImpact">{{item.label}}</view></view>
-  <view class="ornament-card ornament-card--gold"><view class="ornament-line"></view><text class="section-title">主要原因</text><view wx:for="{{reasonOptions}}" wx:key="*this" class="chip {{primaryReason === item ? 'pink' : ''}}" data-reason="{{item}}" bindtap="selectReason">{{item}}</view></view>
-  <view class="ornament-card ornament-card--gold"><view class="ornament-line"></view><text class="section-title">补充标签</text><text class="subtext">会根据主要原因变化，切换原因时会重新选择。</text><view wx:for="{{tagOptions}}" wx:key="label" class="chip {{item.selected ? 'green' : ''}}" data-tag="{{item.label}}" bindtap="toggleTag">{{item.label}}</view></view>
-  <view class="ornament-card ornament-card--gold"><view class="ornament-line"></view><text class="section-title">身体反应</text><view wx:for="{{bodyReactionOptions}}" wx:key="label" class="chip {{item.selected ? 'orange' : ''}}" data-value="{{item.label}}" bindtap="toggleBodyReaction">{{item.label}}</view></view>
-  <view class="ornament-card ornament-card--gold"><view class="ornament-line"></view><text class="section-title">当时的情绪</text><view wx:for="{{emotionOptions}}" wx:key="label" class="chip {{item.selected ? 'pink' : ''}}" data-value="{{item.label}}" bindtap="toggleEmotion">{{item.label}}</view></view>
-  <view class="ornament-card ornament-card--gold"><view class="ornament-line"></view><text class="section-title">已经尝试过什么？</text><view wx:for="{{triedActionOptions}}" wx:key="label" class="chip {{item.selected ? 'green' : ''}}" data-value="{{item.label}}" bindtap="toggleTriedAction">{{item.label}}</view></view>
-  <view class="ornament-card ornament-card--gold"><view class="ornament-line"></view><text class="section-title">下一步我可以做什么？</text><input class="input" value="{{nextStep}}" bindinput="onNextStepInput" placeholder="比如：下班后先吃饭，明天整理证据，找朋友聊聊。" /></view>
-  <button class="sticker-button" bindtap="saveEntry">保存这条记录</button>
+
+  <view class="ornament-card paper-card--record record-paper summary-paper">
+    <view class="paper-corner left"></view>
+    <view class="paper-corner right"></view>
+    <text class="paper-seal">第一张纸</text>
+    <text class="section-title">今天发生了什么？</text>
+    <textarea class="textarea record-textarea" value="{{summary}}" bindinput="onSummaryInput" placeholder="写下一个职场事件、一个感受，或者一件让你顺毛的事。" />
+  </view>
+
+  <view class="paper-divider"><view class="paper-divider__line"></view><text class="paper-divider__tag">记录分类</text><view class="paper-divider__line"></view></view>
+
+  <view class="ornament-card paper-card--record record-paper">
+    <view class="paper-corner left"></view>
+    <view class="paper-corner right"></view>
+    <text class="section-title">这是一条什么记录？</text>
+    <view class="row wrap tag-row">
+      <view class="paper-tag {{type === 'negative' ? 'pink' : ''}}" data-type="negative" bindtap="selectType">负面记录</view>
+      <view class="paper-tag {{type === 'positive' ? 'green' : ''}}" data-type="positive" bindtap="selectType">正面记录</view>
+    </view>
+  </view>
+
+  <view class="paper-divider"><view class="paper-divider__line"></view><text class="paper-divider__tag">影响与原因</text><view class="paper-divider__line"></view></view>
+
+  <view class="ornament-card paper-card--record record-paper">
+    <view class="paper-corner left"></view>
+    <view class="paper-corner right"></view>
+    <text class="section-title">影响等级</text>
+    <view class="tag-row">
+      <view wx:for="{{impactLevels}}" wx:key="value" class="paper-tag {{impactLevel === item.value ? 'orange' : ''}}" data-value="{{item.value}}" bindtap="selectImpact">{{item.label}}</view>
+    </view>
+  </view>
+
+  <view class="ornament-card paper-card--record record-paper">
+    <view class="paper-corner left"></view>
+    <view class="paper-corner right"></view>
+    <text class="section-title">主要原因</text>
+    <view class="tag-row">
+      <view wx:for="{{reasonOptions}}" wx:key="*this" class="paper-tag {{primaryReason === item ? 'pink' : ''}}" data-reason="{{item}}" bindtap="selectReason">{{item}}</view>
+    </view>
+  </view>
+
+  <view class="paper-divider"><view class="paper-divider__line"></view><text class="paper-divider__tag">身体与情绪</text><view class="paper-divider__line"></view></view>
+
+  <view class="ornament-card paper-card--record record-paper">
+    <view class="paper-corner left"></view>
+    <view class="paper-corner right"></view>
+    <text class="section-title">补充标签</text>
+    <text class="subtext">会根据主要原因变化，切换原因时会重新选择。</text>
+    <view class="tag-row">
+      <view wx:for="{{tagOptions}}" wx:key="label" class="paper-tag {{item.selected ? 'green' : ''}}" data-tag="{{item.label}}" bindtap="toggleTag">{{item.label}}</view>
+    </view>
+  </view>
+
+  <view class="ornament-card paper-card--record record-paper">
+    <view class="paper-corner left"></view>
+    <view class="paper-corner right"></view>
+    <text class="section-title">身体反应</text>
+    <view class="tag-row">
+      <view wx:for="{{bodyReactionOptions}}" wx:key="label" class="paper-tag {{item.selected ? 'orange' : ''}}" data-value="{{item.label}}" bindtap="toggleBodyReaction">{{item.label}}</view>
+    </view>
+  </view>
+
+  <view class="ornament-card paper-card--record record-paper">
+    <view class="paper-corner left"></view>
+    <view class="paper-corner right"></view>
+    <text class="section-title">当时的情绪</text>
+    <view class="tag-row">
+      <view wx:for="{{emotionOptions}}" wx:key="label" class="paper-tag {{item.selected ? 'pink' : ''}}" data-value="{{item.label}}" bindtap="toggleEmotion">{{item.label}}</view>
+    </view>
+  </view>
+
+  <view class="paper-divider"><view class="paper-divider__line"></view><text class="paper-divider__tag">收口</text><view class="paper-divider__line"></view></view>
+
+  <view class="ornament-card paper-card--record record-paper">
+    <view class="paper-corner left"></view>
+    <view class="paper-corner right"></view>
+    <text class="section-title">已经尝试过什么？</text>
+    <view class="tag-row">
+      <view wx:for="{{triedActionOptions}}" wx:key="label" class="paper-tag {{item.selected ? 'green' : ''}}" data-value="{{item.label}}" bindtap="toggleTriedAction">{{item.label}}</view>
+    </view>
+  </view>
+
+  <view class="ornament-card paper-card--record record-paper">
+    <view class="paper-corner left"></view>
+    <view class="paper-corner right"></view>
+    <text class="section-title">下一步我可以做什么？</text>
+    <input class="input record-input" value="{{nextStep}}" bindinput="onNextStepInput" placeholder="比如：下班后先吃饭，明天整理证据，找朋友聊聊。" />
+  </view>
+
+  <button class="sticker-button save-seal" bindtap="saveEntry">保存这条记录</button>
 </view>

@@ -1,28 +1,74 @@
-.status-card {
-  background: #f8c9d2;
+.filter-panel { display: flex; flex-wrap: wrap; margin-top: 18rpx; }
+.range-tags .chip { border-color: rgba(184,138,74,.62); box-shadow: 0 8rpx 18rpx rgba(74,52,40,.06); }
+
+.trend-empty {
+  background: rgba(255, 254, 251, 0.88);
 }
 
-.status {
-  display: block;
-  margin: 8rpx 0;
-  font-size: 48rpx;
+.croissant-amulet {
+  padding-top: 50rpx;
+  text-align: center;
+  background: linear-gradient(180deg, #fffefb, #fff8ed) !important;
+}
+
+.status-name {
+  margin: 8rpx 0 18rpx;
+}
+
+.wear-paper {
+  display: inline-flex;
+  align-items: center;
+  gap: 14rpx;
+  margin-bottom: 20rpx;
+  padding: 10rpx 22rpx;
+  border: 3rpx double rgba(184, 138, 74, 0.66);
+  border-radius: 999rpx;
+  background: #fffefb;
+  color: var(--orange);
+  font-size: 25rpx;
   font-weight: 900;
+}
+
+.wear-paper text:last-child {
+  font-size: 34rpx;
+  line-height: 1;
+}
+
+.status-explain {
+  text-align: left;
+}
+
+.dashboard-protect {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+  margin-top: 20rpx;
+  text-align: left;
+  font-size: 27rpx;
+  line-height: 1.65;
+  font-weight: 900;
+}
+
+.protect-label {
+  color: var(--muted);
+  font-size: 22rpx;
+  letter-spacing: 1rpx;
 }
 
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20rpx;
+  gap: 16rpx;
   margin-top: 24rpx;
 }
 
 .stat-card {
   min-height: 156rpx;
   padding: 24rpx;
-  border: 3rpx solid var(--border);
-  border-radius: 24rpx;
-  background: #fffdf6;
-  box-shadow: 5rpx 5rpx 0 rgba(63, 52, 45, 0.12);
+  border: 3rpx solid rgba(185,139,75,.36);
+  border-radius: 20rpx;
+  background: #fffefb;
+  box-shadow: 0 10rpx 24rpx rgba(78,58,38,.06);
 }
 
 .num {
@@ -40,6 +86,7 @@
 
 .reason-row {
   margin-top: 22rpx;
+  padding-top: 8rpx;
   font-size: 26rpx;
   font-weight: 800;
 }
@@ -47,21 +94,35 @@
 .bar-track {
   height: 20rpx;
   margin-top: 10rpx;
-  border: 2rpx solid var(--border);
+  border: 2rpx solid rgba(185,139,75,.35);
   border-radius: 999rpx;
   overflow: hidden;
-  background: #fffaf0;
+  background: #fffaf2;
 }
 
 .bar-fill {
   height: 100%;
   min-width: 8rpx;
   border-radius: 999rpx;
-  background: #f6a6b8;
+  background: repeating-linear-gradient(90deg, rgba(47,107,79,.72) 0 18rpx, rgba(184,138,74,.72) 18rpx 36rpx);
 }
 
+.tendency-card,
+.review-card,
 .advice-card {
-  background: #fff2c4;
+  background: #fffefb;
+}
+
+.tendency-card,
+.review-card {
+  padding-top: 42rpx;
+}
+
+.tendency-title {
+  display: block;
+  margin-bottom: 12rpx;
+  font-size: 36rpx;
+  font-weight: 900;
 }
 
 .advice {
@@ -71,42 +132,18 @@
   font-weight: 800;
 }
 
-
-.trend-empty {
-  background: #fff2c4;
-}
-
-.dashboard-protect {
-  display: block;
+.impact-row {
   margin-top: 18rpx;
   padding: 18rpx;
-  border: 2rpx dashed rgba(74, 57, 47, 0.45);
+  border: 2rpx dashed rgba(185,139,75,.36);
+  border-left-width: 8rpx;
+  border-left-style: solid;
+  border-left-color: #B84A3A;
   border-radius: 18rpx;
-  background: rgba(255, 253, 246, 0.62);
-  font-size: 27rpx;
-  line-height: 1.65;
-  font-weight: 900;
+  background: #fffaf2;
 }
 
-.filter-panel { display: flex; flex-wrap: wrap; margin-top: 18rpx; }
-.tendency-card { background: #fff2c4; }
-.tendency-title { display: block; margin-bottom: 12rpx; font-size: 36rpx; font-weight: 900; }
-.impact-row { margin-top: 18rpx; padding: 18rpx; border: 2rpx dashed rgba(74,57,47,.38); border-radius: 18rpx; background: rgba(255,250,240,.75); }
 .impact-date { display: block; color: var(--muted); font-size: 23rpx; font-weight: 800; }
 .impact-summary { display: block; margin: 8rpx 0 12rpx; font-size: 28rpx; line-height: 1.5; font-weight: 900; }
 .high-empty { margin-top: 12rpx; box-shadow: none; }
-.review-card { background: linear-gradient(135deg, #fffdf6, #fff2c4); }
-
-.stats-grid { gap: 16rpx; }
-.stat-card { background: #fffefb; border-color: rgba(185,139,75,.36); box-shadow: 0 10rpx 24rpx rgba(78,58,38,.06); }
-.tendency-card, .review-card, .advice-card { background: #fffefb; }
-.reason-row { padding-top: 8rpx; }
-.bar-track { background: #fffaf2; border-color: rgba(185,139,75,.35); }
-.bar-fill { background: linear-gradient(90deg, rgba(47,123,103,.5), rgba(185,139,75,.45)); }
-.impact-row { background: #fffaf2; border-color: rgba(185,139,75,.36); }
-
-.range-tags .chip { border-color: rgba(184,138,74,.62); box-shadow: 0 8rpx 18rpx rgba(74,52,40,.06); }
-.status-card { padding-top: 48rpx; }
-.tendency-card, .review-card { padding-top: 42rpx; }
-.bar-fill { background: repeating-linear-gradient(90deg, rgba(47,107,79,.72) 0 18rpx, rgba(184,138,74,.72) 18rpx 36rpx); }
-.impact-row { border-left-width: 8rpx; border-left-style: solid; border-left-color: #B84A3A; }
+.review-card { background: linear-gradient(135deg, #fffdf6, #fff9ef); }

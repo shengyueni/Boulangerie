@@ -1,6 +1,27 @@
 .detail-card {
+  padding: 46rpx 28rpx 30rpx;
   line-height: 1.65;
 }
+
+.detail-top {
+  align-items: flex-start;
+}
+
+.date {
+  padding-top: 8rpx;
+  color: var(--muted);
+  font-size: 25rpx;
+  font-weight: 900;
+}
+
+.detail-type {
+  min-height: 42rpx;
+  padding: 4rpx 16rpx;
+  font-size: 22rpx;
+}
+
+.detail-type.positive { color: var(--green); border-color: rgba(47, 123, 103, 0.52); }
+.detail-type.negative { color: var(--purple); border-color: rgba(90, 42, 95, 0.52); }
 
 .detail-title {
   margin-top: 24rpx;
@@ -14,37 +35,75 @@
   white-space: pre-wrap;
 }
 
+.info-card {
+  margin-top: 0;
+  padding: 42rpx 28rpx 28rpx;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14rpx;
+}
+
 .info-row {
   display: flex;
-  justify-content: space-between;
-  gap: 20rpx;
-  padding: 18rpx 0;
-  border-bottom: 2rpx dashed rgba(74, 57, 47, 0.18);
-  font-size: 28rpx;
-  line-height: 1.6;
+  flex-direction: column;
+  gap: 8rpx;
+  min-height: 112rpx;
+  box-sizing: border-box;
+  padding: 18rpx;
+  border: 2rpx solid rgba(184, 138, 74, 0.34);
+  border-radius: 16rpx;
+  background: rgba(255, 254, 251, 0.82);
+  font-size: 27rpx;
+  line-height: 1.55;
 }
 
 .info-row text:first-child {
-  flex: 0 0 210rpx;
   color: var(--muted);
+  font-size: 23rpx;
+  font-weight: 900;
 }
 
 .info-row text:last-child {
-  flex: 1;
-  text-align: right;
-  font-weight: 800;
+  color: var(--ink);
+  font-weight: 900;
 }
 
-.info-row.vertical {
-  flex-direction: column;
+.info-row.vertical,
+.info-row.full {
+  grid-column: span 2;
 }
 
-.info-row.vertical text:last-child {
-  text-align: left;
+.evidence-card {
+  margin-top: 0;
+  padding: 46rpx 28rpx 30rpx;
+  background:
+    linear-gradient(180deg, rgba(255, 254, 251, 0.98), rgba(255, 248, 237, 0.98)),
+    repeating-linear-gradient(180deg, transparent 0 44rpx, rgba(184, 138, 74, 0.12) 44rpx 46rpx);
 }
 
-.memo-card {
-  background: #fff2c4;
+.memo-seal {
+  margin-bottom: 12rpx;
+}
+
+.fact-memo {
+  margin-top: 12rpx;
+  padding: 22rpx;
+  border: 2rpx dashed rgba(90, 70, 56, 0.34);
+  border-radius: 16rpx;
+  background: rgba(255, 254, 251, 0.72);
+  color: #5d4b40;
+  font-size: 27rpx;
+}
+
+.copy-seal {
+  min-height: 78rpx;
+  margin-top: 22rpx;
+  border: 4rpx double rgba(184, 74, 58, 0.74);
+  color: #B84A3A;
+  background: #fffefb;
 }
 
 .delete-button {

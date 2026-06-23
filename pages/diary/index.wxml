@@ -1,14 +1,40 @@
-<view class="page diary-page">
-  <view class="page-head floral-title-box"><view class="corner-ornament corner-ornament-left corner-ornament--blue"></view><view class="corner-ornament corner-ornament-right corner-ornament--gold"></view><text class="eyebrow">事实小纸条</text><text class="hero-title">吗喽的日记本</text><text class="subtext">记录不是为了立刻做决定，是为了看见自己发生了什么。</text></view>
-  <view class="floral-divider"><view class="floral-divider__line"></view><view class="floral-divider__dot blue"></view><view class="floral-divider__dot gold"></view><view class="floral-divider__line"></view></view>
+<view class="page paper-page diary-page">
+  <view class="page-head paper-title diary-title-board">
+    <view class="corner-ornament corner-ornament-left corner-ornament--blue"></view>
+    <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
+    <view class="paper-corner bottom-left"></view>
+    <view class="paper-corner bottom-right"></view>
+    <text class="paper-title__stamp">事实小纸条</text>
+    <text class="hero-title">吗喽的日记本</text>
+    <text class="subtext">记录不是为了立刻做决定，是为了看见自己发生了什么。</text>
+    <view class="paper-title__rail"><view class="paper-title__rail-line"></view><view class="paper-title__rail-dot"></view><view class="paper-title__rail-dot"></view><view class="paper-title__rail-line"></view></view>
+  </view>
+
   <button class="sticker-button secondary" bindtap="goNew">写一条日记</button>
   <view class="filter-panel archive-filter"><view wx:for="{{typeFilters}}" wx:key="key" class="chip {{activeFilter === item.key ? 'pink' : ''}}" data-key="{{item.key}}" bindtap="switchTypeFilter">{{item.label}}</view></view>
   <scroll-view class="reason-scroll" scroll-x="true"><view class="reason-row-filter"><view wx:for="{{reasonFilters}}" wx:key="*this" class="chip {{(activeReason === 'all' && item === '全部原因') || activeReason === item ? 'green' : ''}}" data-reason="{{item}}" bindtap="switchReasonFilter">{{item}}</view></view></scroll-view>
-  <view wx:if="{{!entries.length}}" class="empty-card diary-empty"><text>这里暂时没有符合筛选的记录。</text><text>第一条日记不需要完美，只要真实。</text><text>你不是在小题大做，你是在替自己留下线索。</text><button class="sticker-button green" bindtap="goNew">写下第一条日记</button></view>
-  <view wx:for="{{entries}}" wx:key="id" class="archive-card entry-card {{item.cardClass}} paper-edge {{item.impactLevel >= 4 ? 'red-mark' : ''}}" data-id="{{item.id}}" bindtap="goDetail">
-    <view class="corner-ornament corner-ornament-left corner-ornament--gold"></view><view class="corner-ornament corner-ornament-right corner-ornament--blue"></view><view class="row between entry-top"><text class="date">{{item.displayDate}}</text><text class="chip {{item.type === 'positive' ? 'green' : 'dark'}}">{{item.typeLabel}}</text></view>
+
+  <view wx:if="{{!entries.length}}" class="empty-card diary-empty">
+    <view class="paper-divider"><view class="paper-divider__line"></view><text class="paper-divider__tag">空白纸页</text><view class="paper-divider__line"></view></view>
+    <text>这里暂时没有符合筛选的记录。</text>
+    <text>第一条日记不需要完美，只要真实。</text>
+    <text>你不是在小题大做，你是在替自己留下线索。</text>
+    <button class="sticker-button green" bindtap="goNew">写下第一条日记</button>
+  </view>
+
+  <view wx:for="{{entries}}" wx:key="id" class="archive-card memo-paper entry-card {{item.cardClass}} paper-edge {{item.impactLevel >= 4 ? 'red-mark' : ''}}" data-id="{{item.id}}" bindtap="goDetail">
+    <view class="corner-ornament corner-ornament-left corner-ornament--gold"></view>
+    <view class="corner-ornament corner-ornament-right corner-ornament--blue"></view>
+    <view class="paper-corner bottom-right"></view>
+    <view class="entry-topline">
+      <text class="date">{{item.displayDate}}</text>
+      <text class="paper-seal entry-type {{item.type === 'positive' ? 'positive' : 'negative'}}">{{item.typeLabel}}</text>
+    </view>
     <text class="summary">{{item.summary}}</text>
-    <view class="meta-chips"><text class="chip {{item.impactClass}}">影响等级 {{item.impactLevel}}</text><text class="chip pink">{{item.primaryReason}}</text></view>
+    <view class="entry-meta-grid">
+      <view class="entry-meta-item"><text class="meta-label">影响</text><text class="meta-value {{item.impactClass}}">{{item.impactLevel}} 级</text></view>
+      <view class="entry-meta-item"><text class="meta-label">原因</text><text class="meta-value">{{item.primaryReason}}</text></view>
+    </view>
     <view class="memo-slip"><text class="memo-label">事实纪要摘录</text><text class="memo">{{item.memoPreview}}</text></view>
     <text class="detail-hint">点开查看完整记录</text>
   </view>
