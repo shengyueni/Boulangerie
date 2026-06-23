@@ -1,65 +1,118 @@
 <view class="page paper-page kingdom-page">
-  <view class="page-head kingdom-head paper-title kingdom-title-board">
-    <view class="corner-ornament corner-ornament-left corner-ornament--red"></view>
-    <view class="corner-ornament corner-ornament-right corner-ornament--green"></view>
-    <view class="paper-corner bottom-left"></view>
-    <view class="paper-corner bottom-right"></view>
-    <text class="paper-title__stamp">吗喽王国地图</text>
+  <view class="page-head home-brand-head">
     <text class="hero-title">{{appMeta.appName}}</text>
     <text class="subtext">{{appMeta.slogan}}</text>
-    <view class="kingdom-title-markers">
-      <text>记录处</text><text>复盘台</text><text>计划屋</text>
+  </view>
+
+  <view class="oracle-card paper-title">
+    <view class="corner-ornament corner-ornament-left corner-ornament--blue"></view>
+    <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
+    <view class="corner-ornament corner-ornament-bottom-left corner-ornament--purple"></view>
+    <view class="corner-ornament corner-ornament-bottom-right corner-ornament--red"></view>
+    <view class="oracle-sky">
+      <view class="oracle-ring"></view>
+      <view class="oracle-star star-a"></view>
+      <view class="oracle-star star-b"></view>
+      <view class="oracle-star star-c"></view>
     </view>
+    <text class="paper-title__stamp">{{oracle.dateLabel}}</text>
+    <text class="oracle-title">今日职场猩象</text>
+    <text class="oracle-subtitle">来自吗喽宇宙的今日指引</text>
     <view class="paper-title__rail">
       <view class="paper-title__rail-line"></view>
       <view class="paper-title__rail-dot"></view>
       <view class="paper-title__rail-dot"></view>
       <view class="paper-title__rail-line"></view>
     </view>
-  </view>
 
-  <view class="amulet-card amulet-frame status-card {{croissant.statusClass}} kingdom-status">
-    <view class="corner-ornament corner-ornament-left corner-ornament--gold"></view>
-    <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
-    <view class="corner-ornament corner-ornament-bottom-left corner-ornament--green"></view>
-    <view class="corner-ornament corner-ornament-bottom-right corner-ornament--red"></view>
-    <text class="amulet-frame__seal">Croissant 护身符</text>
-    <text class="status-name">{{croissant.status}}</text>
-    <text class="status-wear">磨损值：{{croissant.wear}}</text>
-    <text class="body-text">{{croissant.explanation}}</text>
-    <view class="ornament-line amulet-frame__bottom"></view>
-    <text class="protect-note">{{croissant.advice}}</text>
-  </view>
-
-  <view class="note-card welcome-card paper-edge">
-    <view class="paper-corner right"></view>
-    <text>欢迎回到吗喽王国。</text>
-    <text>今天也不用立刻做决定。</text>
-    <text>先看看 Croissant 现在需要什么。</text>
-  </view>
-
-  <view class="map-shell">
-    <view class="floral-divider">
-      <view class="floral-divider__line"></view>
-      <view class="floral-divider__dot blue"></view>
-      <view class="floral-divider__dot gold"></view>
-      <view class="floral-divider__line"></view>
+    <view class="oracle-metrics">
+      <view wx:for="{{oracle.metrics}}" wx:key="name" class="oracle-metric">
+        <text class="metric-name">{{item.name}}：{{item.value}}</text>
+        <text class="metric-desc">{{item.description}}</text>
+      </view>
     </view>
-    <text class="ribbon-title">王国地点</text>
-    <view class="map-trail">
-      <block wx:for="{{navItems}}" wx:key="path">
-        <view class="map-stop {{index % 2 === 0 ? 'left' : 'right'}}">
-          <view class="map-route-pin"><text>{{index + 1}}</text></view>
-          <view class="map-place map-card {{item.color}} {{item.size}}" data-path="{{item.path}}" bindtap="goTo">
-            <view class="corner-ornament corner-ornament-left corner-ornament--gold"></view>
-            <view class="paper-corner bottom-right"></view>
-            <text class="map-place__seal">{{item.alias}}</text>
-            <text class="map-place__title">{{item.label}}</text>
-            <text class="map-place__desc">{{item.subtitle}}</text>
+
+    <view class="oracle-slip-row">
+      <view class="oracle-slip amulet-note">
+        <text class="slip-label">今日护身符</text>
+        <text class="slip-text">{{oracle.talisman}}</text>
+      </view>
+      <view class="oracle-slip amulet-note">
+        <text class="slip-label">推荐行动</text>
+        <text class="slip-text">{{oracle.action}}</text>
+      </view>
+    </view>
+
+    <text class="oracle-disclaimer">本卡不预测命运，只帮你识别今天的职场天气。</text>
+    <view class="oracle-actions">
+      <button class="sticker-button green oracle-primary" bindtap="recordToday">记录今天</button>
+      <button class="sticker-button secondary oracle-secondary" bindtap="enterKingdom">进入吗喽王国</button>
+    </view>
+  </view>
+
+  <view id="kingdom-map" class="kingdom-section">
+    <view class="page-head kingdom-head paper-title kingdom-title-board">
+      <view class="corner-ornament corner-ornament-left corner-ornament--red"></view>
+      <view class="corner-ornament corner-ornament-right corner-ornament--green"></view>
+      <view class="paper-corner bottom-left"></view>
+      <view class="paper-corner bottom-right"></view>
+      <text class="paper-title__stamp">吗喽王国地图</text>
+      <text class="hero-title">{{appMeta.appName}}</text>
+      <text class="subtext">{{appMeta.slogan}}</text>
+      <view class="kingdom-title-markers">
+        <text>记录处</text><text>复盘台</text><text>计划屋</text>
+      </view>
+      <view class="paper-title__rail">
+        <view class="paper-title__rail-line"></view>
+        <view class="paper-title__rail-dot"></view>
+        <view class="paper-title__rail-dot"></view>
+        <view class="paper-title__rail-line"></view>
+      </view>
+    </view>
+
+    <view class="amulet-card amulet-frame status-card {{croissant.statusClass}} kingdom-status">
+      <view class="corner-ornament corner-ornament-left corner-ornament--gold"></view>
+      <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
+      <view class="corner-ornament corner-ornament-bottom-left corner-ornament--green"></view>
+      <view class="corner-ornament corner-ornament-bottom-right corner-ornament--red"></view>
+      <text class="amulet-frame__seal">Croissant 护身符</text>
+      <text class="status-name">{{croissant.status}}</text>
+      <text class="status-wear">磨损值：{{croissant.wear}}</text>
+      <text class="body-text">{{croissant.explanation}}</text>
+      <view class="ornament-line amulet-frame__bottom"></view>
+      <text class="protect-note">{{croissant.advice}}</text>
+    </view>
+
+    <view class="note-card welcome-card paper-edge">
+      <view class="paper-corner right"></view>
+      <text>欢迎回到吗喽王国。</text>
+      <text>今天也不用立刻做决定。</text>
+      <text>先看看 Croissant 现在需要什么。</text>
+    </view>
+
+    <view class="map-shell">
+      <view class="floral-divider">
+        <view class="floral-divider__line"></view>
+        <view class="floral-divider__dot blue"></view>
+        <view class="floral-divider__dot gold"></view>
+        <view class="floral-divider__line"></view>
+      </view>
+      <text class="ribbon-title">王国地点</text>
+      <view class="map-trail">
+        <block wx:for="{{navItems}}" wx:key="path">
+          <view class="map-stop {{index % 2 === 0 ? 'left' : 'right'}}">
+            <view class="map-route-pin"><text>{{index + 1}}</text></view>
+            <view class="map-place map-card {{item.color}} {{item.size}}" data-path="{{item.path}}" bindtap="goTo">
+              <view class="corner-ornament corner-ornament-left corner-ornament--gold"></view>
+              <view class="paper-corner bottom-right"></view>
+              <text class="map-place__seal">{{item.alias}}</text>
+              <text class="map-place__title">{{item.label}}</text>
+              <text class="map-place__desc">{{item.subtitle}}</text>
+            </view>
           </view>
-        </view>
-        <view wx:if="{{index < navItems.length - 1}}" class="map-route"></view>
-      </block>
+          <view wx:if="{{index < navItems.length - 1}}" class="map-route"></view>
+        </block>
+      </view>
     </view>
   </view>
 

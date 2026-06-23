@@ -1,4 +1,167 @@
 .kingdom-page { background: linear-gradient(180deg, #fffefb 0%, #fff9ef 100%); }
+.home-brand-head { margin-bottom: 18rpx; padding-bottom: 8rpx; text-align: center; }
+.home-brand-head .hero-title { margin-bottom: 8rpx; }
+
+.oracle-card {
+  margin-top: 12rpx;
+  padding: 46rpx 32rpx 34rpx;
+  overflow: hidden;
+  text-align: center;
+}
+
+.oracle-sky {
+  position: absolute;
+  top: 22rpx;
+  right: 26rpx;
+  width: 150rpx;
+  height: 150rpx;
+  opacity: .38;
+  pointer-events: none;
+}
+
+.oracle-ring {
+  position: absolute;
+  left: 18rpx;
+  top: 20rpx;
+  width: 98rpx;
+  height: 98rpx;
+  border: 3rpx solid rgba(27, 58, 92, .48);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 16rpx rgba(184, 138, 74, .08);
+}
+
+.oracle-star {
+  position: absolute;
+  width: 14rpx;
+  height: 14rpx;
+  border: 3rpx solid rgba(184, 138, 74, .9);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(45deg);
+  background: #fffefb;
+}
+
+.star-a { left: 10rpx; top: 18rpx; }
+.star-b { right: 20rpx; top: 42rpx; border-color: rgba(184, 74, 58, .75); }
+.star-c { left: 56rpx; bottom: 8rpx; border-color: rgba(47, 107, 79, .75); }
+
+.oracle-title {
+  display: block;
+  margin-top: 10rpx;
+  color: var(--ink);
+  font-size: 50rpx;
+  line-height: 1.16;
+  font-weight: 900;
+  letter-spacing: 1rpx;
+}
+
+.oracle-subtitle {
+  display: block;
+  margin-top: 12rpx;
+  color: var(--blue);
+  font-size: 27rpx;
+  font-weight: 900;
+}
+
+.oracle-metrics {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14rpx;
+  margin-top: 28rpx;
+  text-align: left;
+}
+
+.oracle-metric {
+  position: relative;
+  padding: 18rpx 20rpx 18rpx 26rpx;
+  border: 2rpx solid rgba(184, 138, 74, .38);
+  border-left-width: 8rpx;
+  border-radius: 18rpx;
+  background: rgba(255, 254, 251, .78);
+  box-shadow: 0 8rpx 20rpx rgba(74, 52, 40, .05);
+}
+
+.metric-name {
+  display: block;
+  color: var(--ink);
+  font-size: 28rpx;
+  line-height: 1.36;
+  font-weight: 900;
+}
+
+.metric-desc {
+  display: block;
+  margin-top: 6rpx;
+  color: var(--muted);
+  font-size: 25rpx;
+  line-height: 1.55;
+}
+
+.oracle-slip-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14rpx;
+  margin-top: 22rpx;
+  text-align: left;
+}
+
+.oracle-slip {
+  min-height: 116rpx;
+}
+
+.slip-label {
+  display: block;
+  margin-bottom: 8rpx;
+  color: var(--muted);
+  font-size: 22rpx;
+  font-weight: 900;
+  letter-spacing: 1rpx;
+}
+
+.slip-text {
+  display: block;
+  color: var(--ink);
+  font-size: 28rpx;
+  line-height: 1.58;
+  font-weight: 900;
+}
+
+.oracle-disclaimer {
+  display: block;
+  margin-top: 22rpx;
+  padding: 16rpx 18rpx;
+  border: 2rpx dashed rgba(27, 58, 92, .32);
+  border-radius: 18rpx;
+  color: var(--muted);
+  background: rgba(255, 254, 251, .72);
+  font-size: 24rpx;
+  line-height: 1.55;
+  text-align: left;
+}
+
+.oracle-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14rpx;
+  margin-top: 24rpx;
+}
+
+.oracle-actions .sticker-button {
+  margin-top: 0;
+}
+
+.oracle-primary {
+  border: 4rpx double rgba(47, 107, 79, .62);
+}
+
+.oracle-secondary {
+  border-color: rgba(184, 138, 74, .56);
+}
+
+.kingdom-section {
+  margin-top: 42rpx;
+  scroll-margin-top: 20rpx;
+}
+
 .kingdom-head { text-align: center; }
 .kingdom-head .hero-title { margin-top: 8rpx; }
 .kingdom-title-board { padding-top: 42rpx; }

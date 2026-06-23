@@ -1,10 +1,12 @@
 const { APP_META } = require("../../utils/constants");
 const { getDiaryEntries } = require("../../utils/storage");
 const { getCroissantReport } = require("../../utils/croissant");
+const { getTodayOracle } = require("../../utils/oracle");
 
 Page({
   data: {
     appMeta: APP_META,
+    oracle: getTodayOracle(),
     croissant: getCroissantReport([]),
     navItems: [
       { label: "写一条日记", alias: "记录处", subtitle: "把今天发生的事先放下来。", path: "/pages/diary-new/index", color: "orange", size: "large" },
@@ -20,10 +22,21 @@ Page({
   },
 
   onShow() {
-    this.setData({ croissant: getCroissantReport(getDiaryEntries()) });
+    this.setData({
+      oracle: getTodayOracle(),
+      croissant: getCroissantReport(getDiaryEntries())
+    });
   },
 
   goTo(event) {
     wx.navigateTo({ url: event.currentTarget.dataset.path });
+  },
+
+  recordToday() {
+    wx.navigateTo({ url: "/pages/diary-new/index" });
+  },
+
+  enterKingdom() {
+    wx.pageScrollTo({ selector: "#kingdom-map", duration: 320 });
   }
 });
