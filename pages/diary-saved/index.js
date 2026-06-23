@@ -15,5 +15,5 @@ Page({
   goDetail() { wx.redirectTo({ url: "/pages/diary-detail/index?id=" + this.data.id }); },
   goDashboard() { wx.redirectTo({ url: "/pages/dashboard/index" }); },
   goBubble() { wx.redirectTo({ url: "/pages/bubble/index" }); },
-  goPlan() { wx.redirectTo({ url: "/pages/wishlist/index?type=pre_exit" }); }
+  goPlan() { wx.switchTab({ url: "/pages/wishlist/index" }); }
 });

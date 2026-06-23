@@ -1,7 +1,58 @@
-.tool-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18rpx; margin-top: 28rpx; }
-.tool-card { min-height: 200rpx; margin-top: 0; display: flex; flex-direction: column; justify-content: flex-start; }
-.tool-card:nth-child(2n) { margin-top: 18rpx; }
-.tool-title { display: block; margin-bottom: 12rpx; font-size: 31rpx; line-height: 1.28; font-weight: 900; }
+.drawer-head {
+  margin-bottom: 24rpx;
+}
 
-.tool-card { padding-top: 42rpx; }
-.tool-card .corner-ornament { width: 32rpx; height: 32rpx; border-width: 3rpx; opacity: .6; }
+.drawer-note {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  gap: 8rpx;
+  color: var(--ink);
+  font-size: 27rpx;
+  line-height: 1.6;
+  font-weight: 800;
+}
+
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18rpx;
+  margin-top: 28rpx;
+}
+
+.tool-card {
+  min-height: 210rpx;
+  margin-top: 0;
+  padding-top: 42rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.tool-card:nth-child(2n) {
+  margin-top: 18rpx;
+}
+
+.tool-title {
+  display: block;
+  margin: 10rpx 0 12rpx;
+  font-size: 31rpx;
+  line-height: 1.28;
+  font-weight: 900;
+}
+
+.tool-card .corner-ornament {
+  width: 32rpx;
+  height: 32rpx;
+  border-width: 3rpx;
+  opacity: .6;
+}
+
+.tool-card .paper-corner {
+  opacity: .38;
+}
+
+.tool-card.pink { border-color: rgba(201, 134, 150, .52); }
+.tool-card.green { border-color: rgba(47, 107, 79, .52); }
+.tool-card.yellow { border-color: rgba(184, 138, 74, .56); }
+.tool-card.plain { border-color: rgba(90, 70, 56, .32); }

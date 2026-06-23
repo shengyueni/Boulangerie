@@ -7,7 +7,7 @@ Page({
   data: { id: "", entry: null },
   onLoad(options) { const id = options && options.id ? options.id : ""; this.setData({ id, entry: normalizeEntry(getDiaryEntryById(id)) }); },
   copyFactMemo() { const factMemo = this.data.entry && this.data.entry.factMemo; if (!factMemo) { wx.showToast({ title: "这条记录还没有生成事实纪要。", icon: "none" }); return; } wx.setClipboardData({ data: factMemo, success() { wx.showToast({ title: "事实纪要已复制。", icon: "none" }); }, fail() { wx.showToast({ title: "复制失败，请稍后再试。", icon: "none" }); } }); },
-  deleteEntry() { wx.showModal({ title: "确认删除", content: "删除后无法恢复，确定要删除这条记录吗？", confirmText: "删除", confirmColor: "#e9785f", success: (res) => { if (!res.confirm) return; deleteDiaryEntry(this.data.id); wx.showToast({ title: "这条记录已经删除。", icon: "none" }); setTimeout(() => { wx.redirectTo({ url: "/pages/diary/index" }); }, 500); } }); },
-  goDiary() { wx.redirectTo({ url: "/pages/diary/index" }); },
-  goDashboard() { wx.redirectTo({ url: "/pages/dashboard/index" }); }
+  deleteEntry() { wx.showModal({ title: "确认删除", content: "删除后无法恢复，确定要删除这条记录吗？", confirmText: "删除", confirmColor: "#e9785f", success: (res) => { if (!res.confirm) return; deleteDiaryEntry(this.data.id); wx.showToast({ title: "这条记录已经删除。", icon: "none" }); setTimeout(() => { wx.switchTab({ url: "/pages/diary/index" }); }, 500); } }); },
+  goDiary() { wx.switchTab({ url: "/pages/diary/index" }); },
+  goDashboard() { wx.navigateTo({ url: "/pages/dashboard/index" }); }
 });

@@ -60,6 +60,6 @@ Page({
   },
 
   goWishlist() {
-    wx.navigateTo({ url: "/pages/wishlist/index" });
+    wx.switchTab({ url: "/pages/wishlist/index" });
   }
 });

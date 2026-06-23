@@ -24,5 +24,33 @@
     "backgroundColor": "#fffaf2"
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "color": "#8b7a6e",
+    "selectedColor": "#B84A3A",
+    "backgroundColor": "#fffaf2",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "今日"
+      },
+      {
+        "pagePath": "pages/diary/index",
+        "text": "日记"
+      },
+      {
+        "pagePath": "pages/wishlist/index",
+        "text": "出走"
+      },
+      {
+        "pagePath": "pages/toolbox/index",
+        "text": "百宝箱"
+      },
+      {
+        "pagePath": "pages/voice/index",
+        "text": "心声"
+      }
+    ]
+  }
 }
