@@ -1,7 +1,7 @@
 const { REASON_OPTIONS, PROTECTION_ADVICE } = require("../../utils/constants");
 const { getDiaryEntries } = require("../../utils/storage");
 const { getCroissantReport } = require("../../utils/croissant");
-const { CHARACTERS, buildCompanion, getCharacterLine } = require("../../utils/characters");
+const { buildCompanion, getCharacterLine, getCroissantStateImage } = require("../../utils/characters");
 
 const RANGES = [
   { key: "7", label: "近 7 天", days: 7 },
@@ -22,7 +22,7 @@ function getTendency(entries, croissant, highImpactCount, topReason) {
   return { title: "先休息观察", text: "现在可能还不适合立刻做重大决定。先观察这些不舒服会不会反复出现。" };
 }
 function buildReview(entries, topReason, croissant) { if (!entries.length) return "这段时间还没有记录。先给混乱一个落脚点，Croissant 会慢慢陪你看清楚。"; return "这段时间你记录了 " + entries.length + " 件事，其中最常出现的是「" + topReason + "」。Croissant 现在是「" + croissant.status + "」。你不是太敏感，是有些事情值得被看见。"; }
-function buildDashboardCompanion(croissant) { return buildCompanion("croissant", "dashboard." + croissant.statusKey, { image: CHARACTERS.croissant.avatar, tag: "Croissant 状态陪伴", message: getCharacterLine("dashboard." + croissant.statusKey) }); }
+function buildDashboardCompanion(croissant) { return buildCompanion("croissant", "dashboard." + croissant.statusKey, { image: getCroissantStateImage(croissant.statusKey), tag: "Croissant 状态陪伴", message: getCharacterLine("dashboard." + croissant.statusKey), size: "bust" }); }
 
 Page({
   data: { ranges: RANGES, activeRange: "30", hasRecords: false, croissant: getCroissantReport([]), companion: buildDashboardCompanion(getCroissantReport([])), stats: { total: 0, negative: 0, positive: 0, highImpact30Days: 0, topReason: "还没有足够记录", advice: "本周先保护好自己。第一步不是判断，而是记录。" }, reasonDistribution: [], highImpactEntries: [], tendency: {}, reviewText: "" },

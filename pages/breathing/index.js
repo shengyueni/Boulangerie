@@ -1,4 +1,4 @@
-const { CHARACTERS, buildCompanion } = require("../../utils/characters");
+const { buildCompanion, getGapchickVariantImage } = require("../../utils/characters");
 
 const READY_PHASE = { key: "ready", label: "准备开始", seconds: 4 };
 const PHASES = [
@@ -14,7 +14,7 @@ Page({
     secondsLeft: READY_PHASE.seconds,
     running: false,
     companion: buildCompanion("gapchick", "breathing", {
-      image: CHARACTERS.gapchick.bust,
+      image: getGapchickVariantImage("breathe"),
       tag: "Gapchick 陪你慢一点",
       size: "bust",
       variant: "rest"

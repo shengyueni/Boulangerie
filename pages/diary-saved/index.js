@@ -1,5 +1,5 @@
 const { getDiaryEntryById } = require("../../utils/storage");
-const { CHARACTERS, buildCompanion } = require("../../utils/characters");
+const { buildCompanion, getCroissantStateImage, getElodieVariantImage, getGapchickVariantImage } = require("../../utils/characters");
 
 function preview(text) {
   const value = text || "这条记录还没有事实纪要。";
@@ -9,14 +9,25 @@ function preview(text) {
 function buildSavedCompanion(entry) {
   if (entry && entry.type === "positive") {
     return buildCompanion("gapchick", "positive", {
-      image: CHARACTERS.gapchick.avatar,
-      tag: "亮光已保存"
+      image: getGapchickVariantImage("drink"),
+      tag: "亮光已保存",
+      message: "这点亮光值得被你留住。",
+      size: "bust",
+      variant: "rest"
     });
   }
-  return buildCompanion("croissant", "diarySavedNegative", {
-    image: CHARACTERS.croissant.bust,
-    size: "bust",
-    tag: "已经被接住"
+  if (entry && Number(entry.impactLevel) >= 4) {
+    return buildCompanion("croissant", "diarySavedNegative", {
+      image: getCroissantStateImage("ball"),
+      tag: "已经被接住",
+      size: "bust"
+    });
+  }
+  return buildCompanion("elodie", "diarySavedNegative", {
+    image: getElodieVariantImage("encourage"),
+    tag: "已经被接住",
+    message: "你已经把这件事从身体里拿出来了一点。",
+    size: "bust"
   });
 }
 

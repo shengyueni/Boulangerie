@@ -1,5 +1,5 @@
 const { BUBBLES } = require("../../utils/constants");
-const { buildCompanion, getCharacterLine } = require("../../utils/characters");
+const { buildCompanion, getCharacterLine, getLdVariantImage } = require("../../utils/characters");
 
 function pickBubble(currentIndex) {
   const ldBubbles = BUBBLES.map((bubble, index) => ({ bubble, index })).filter((item) => item.bubble.tone === "ld");
@@ -13,11 +13,13 @@ function pickBubble(currentIndex) {
   return picked;
 }
 
-function buildLdCompanion(groupKey, tag, variant) {
+function buildLdCompanion(groupKey, tag, variant, imageVariant) {
   return buildCompanion("ld", groupKey, {
+    image: getLdVariantImage(imageVariant),
     tag,
     message: getCharacterLine(groupKey),
-    variant
+    variant,
+    size: "bust"
   });
 }
 
@@ -26,7 +28,7 @@ Page({
     bubble: null,
     bubbleIndex: -1,
     poppedMessage: "",
-    companion: buildLdCompanion("bubble", "LD 废话警报", "ld")
+    companion: buildLdCompanion("bubble", "LD 废话警报", "ld", "nonsense")
   },
 
   drawBubble() {
@@ -35,14 +37,14 @@ Page({
       bubble: picked.bubble,
       bubbleIndex: picked.index,
       poppedMessage: "",
-      companion: buildLdCompanion("bubble", "LD 废话警报", "ld")
+      companion: buildLdCompanion("bubble", "LD 废话警报", "ld", "nonsense")
     });
   },
 
   popLdBubble() {
     this.setData({
       poppedMessage: "已识别职场废话，建议不要内化。",
-      companion: buildLdCompanion("bubbleAfterPop", "泡泡已破", "warning")
+      companion: buildLdCompanion("bubbleAfterPop", "泡泡已破", "warning", "exposed")
     });
   }
 });

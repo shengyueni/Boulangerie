@@ -1,5 +1,5 @@
 const { EMERGENCY_CARDS } = require("../../utils/constants");
-const { buildCompanion } = require("../../utils/characters");
+const { buildCompanion, getGapchickVariantImage } = require("../../utils/characters");
 const {
   addWishItem,
   getWishItems,
@@ -18,8 +18,11 @@ Page({
     cards: buildCards(),
     lastAdded: false,
     companion: buildCompanion("gapchick", "emergencyCards", {
+      image: getGapchickVariantImage("drink"),
       tag: "先让身体落地",
-      variant: "rest"
+      message: "先喝口水，先呼吸，先回到自己这里。",
+      variant: "rest",
+      size: "bust"
     })
   },
 

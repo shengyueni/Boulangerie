@@ -4,6 +4,12 @@ const CHARACTERS = {
     name: "Croissant",
     avatar: "/assets/characters/croissant-avatar.png",
     bust: "/assets/characters/croissant-bust.png",
+    states: {
+      smooth: "/assets/characters/croissant-state-smooth-bust.png",
+      frizzy: "/assets/characters/croissant-state-frizzy-bust.png",
+      furball: "/assets/characters/croissant-state-furball-bust.png",
+      protect: "/assets/characters/croissant-state-protect-bust.png"
+    },
     role: "用户自己的内在小动物 / 当前状态"
   },
   elodie: {
@@ -11,6 +17,11 @@ const CHARACTERS = {
     name: "Elodie",
     avatar: "/assets/characters/elodie-avatar.png",
     bust: "/assets/characters/elodie-bust.png",
+    variants: {
+      remind: "/assets/characters/elodie-remind-bust.png",
+      encourage: "/assets/characters/elodie-encourage-bust.png",
+      think: "/assets/characters/elodie-think-bust.png"
+    },
     role: "清醒提醒 / 事实整理"
   },
   gapchick: {
@@ -18,6 +29,11 @@ const CHARACTERS = {
     name: "Gapchick",
     avatar: "/assets/characters/gapchick-avatar.png",
     bust: "/assets/characters/gapchick-bust.png",
+    variants: {
+      rest: "/assets/characters/gapchick-rest-bust.png",
+      breathe: "/assets/characters/gapchick-breathe-bust.png",
+      drink: "/assets/characters/gapchick-drink-bust.png"
+    },
     role: "休息恢复 / 生命力重建"
   },
   ld: {
@@ -25,6 +41,11 @@ const CHARACTERS = {
     name: "LD",
     avatar: "/assets/characters/ld-avatar.png",
     bust: "/assets/characters/ld-bust.png",
+    variants: {
+      nonsense: "/assets/characters/ld-nonsense-bust.png",
+      blame: "/assets/characters/ld-blame-bust.png",
+      exposed: "/assets/characters/ld-exposed-bust.png"
+    },
     role: "职场废话与压迫来源"
   }
 };
@@ -169,9 +190,31 @@ function buildCompanion(characterKey, groupKey, options = {}) {
   };
 }
 
+function getCroissantStateImage(statusKey) {
+  const keyMap = { ruffled: "frizzy", ball: "furball" };
+  const imageKey = keyMap[statusKey] || statusKey || "smooth";
+  return CHARACTERS.croissant.states[imageKey] || CHARACTERS.croissant.bust;
+}
+
+function getElodieVariantImage(variant) {
+  return CHARACTERS.elodie.variants[variant] || CHARACTERS.elodie.bust;
+}
+
+function getGapchickVariantImage(variant) {
+  return CHARACTERS.gapchick.variants[variant] || CHARACTERS.gapchick.bust;
+}
+
+function getLdVariantImage(variant) {
+  return CHARACTERS.ld.variants[variant] || CHARACTERS.ld.bust;
+}
+
 module.exports = {
   CHARACTERS,
   CHARACTER_COPY,
   getCharacterLine,
-  buildCompanion
+  buildCompanion,
+  getCroissantStateImage,
+  getElodieVariantImage,
+  getGapchickVariantImage,
+  getLdVariantImage
 };

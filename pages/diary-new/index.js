@@ -7,7 +7,7 @@ const {
   TRIED_ACTION_OPTIONS
 } = require("../../utils/constants");
 const { createId, saveDiaryEntry } = require("../../utils/storage");
-const { buildCompanion } = require("../../utils/characters");
+const { buildCompanion, getElodieVariantImage } = require("../../utils/characters");
 
 function toOptions(labels, selected = []) {
   return labels.map((label) => ({ label, selected: selected.includes(label) }));
@@ -42,8 +42,9 @@ Page({
     triedActions: [],
     nextStep: "",
     companion: buildCompanion("elodie", "diaryNew", {
+      image: getElodieVariantImage("remind"),
       tag: "先写事实",
-      size: "avatar"
+      size: "bust"
     }),
     reasonOptions: REASON_OPTIONS,
     impactLevels: IMPACT_LEVELS,
