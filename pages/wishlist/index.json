@@ -1,1 +1,6 @@
-{"navigationBarTitleText":"吗喽的出走"}
+{
+  "navigationBarTitleText": "吗喽的出走",
+  "usingComponents": {
+    "character-card": "/components/character-card/index"
+  }
+}

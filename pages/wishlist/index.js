@@ -1,5 +1,6 @@
 const { PLAN_CATEGORIES } = require("../../utils/constants");
 const { createId, getWishItems, saveWishItems, initializeDefaultWishItems } = require("../../utils/storage");
+const { buildCompanion } = require("../../utils/characters");
 
 function getProgressText(percent) {
   if (percent === 0) return "出走计划还没开始。没关系，第一步可以小到离谱。";
@@ -10,7 +11,7 @@ function getProgressText(percent) {
 function groupItems(items, categories) { return categories.map((category) => ({ category, items: items.filter((item) => (item.category || "未分类") === category) })).filter((group) => group.items.length); }
 
 Page({
-  data: { items: [], activeType: "pre_exit", newTitle: "", newCategory: "钱与保障", categories: PLAN_CATEGORIES.pre_exit, groups: [], total: 0, completed: 0, percent: 0, progressText: "" },
+  data: { items: [], activeType: "pre_exit", newTitle: "", newCategory: "钱与保障", categories: PLAN_CATEGORIES.pre_exit, groups: [], total: 0, completed: 0, percent: 0, progressText: "", companion: buildCompanion("gapchick", "wishlist", { tag: "慢慢重建", variant: "rest" }) },
   onLoad(options) { if (options && options.type) this.setData({ activeType: options.type }); },
   onShow() { initializeDefaultWishItems(); this.refresh(); },
   refresh() {

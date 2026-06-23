@@ -1,4 +1,5 @@
 const { BUBBLES } = require("../../utils/constants");
+const { buildCompanion, getCharacterLine } = require("../../utils/characters");
 
 function pickBubble(currentIndex) {
   const ldBubbles = BUBBLES.map((bubble, index) => ({ bubble, index })).filter((item) => item.bubble.tone === "ld");
@@ -12,11 +13,20 @@ function pickBubble(currentIndex) {
   return picked;
 }
 
+function buildLdCompanion(groupKey, tag, variant) {
+  return buildCompanion("ld", groupKey, {
+    tag,
+    message: getCharacterLine(groupKey),
+    variant
+  });
+}
+
 Page({
   data: {
     bubble: null,
     bubbleIndex: -1,
-    poppedMessage: ""
+    poppedMessage: "",
+    companion: buildLdCompanion("bubble", "LD 废话警报", "ld")
   },
 
   drawBubble() {
@@ -24,13 +34,15 @@ Page({
     this.setData({
       bubble: picked.bubble,
       bubbleIndex: picked.index,
-      poppedMessage: ""
+      poppedMessage: "",
+      companion: buildLdCompanion("bubble", "LD 废话警报", "ld")
     });
   },
 
   popLdBubble() {
     this.setData({
-      poppedMessage: "已识别职场废话，建议不要内化。"
+      poppedMessage: "已识别职场废话，建议不要内化。",
+      companion: buildLdCompanion("bubbleAfterPop", "泡泡已破", "warning")
     });
   }
 });

@@ -1,0 +1,11 @@
+<view class="character-card character-card--{{variant}} character-card--{{size}}">
+  <view class="character-card__corner character-card__corner--left"></view>
+  <view class="character-card__corner character-card__corner--right"></view>
+  <view class="character-card__copy">
+    <text class="character-card__tag">{{tag}}</text>
+    <text class="character-card__name">{{name}}</text>
+    <text class="character-card__message">{{message}}</text>
+    <text wx:if="{{subMessage}}" class="character-card__sub">{{subMessage}}</text>
+  </view>
+  <image class="character-card__image" src="{{image}}" mode="aspectFit" />
+</view>

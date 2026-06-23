@@ -1,0 +1,123 @@
+.character-card {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+  margin: 24rpx 0;
+  padding: 24rpx 24rpx 22rpx;
+  border: 3rpx double rgba(184, 138, 74, 0.62);
+  border-radius: 24rpx;
+  background: linear-gradient(180deg, #fffefb, #fff8ed);
+  box-shadow: 0 12rpx 28rpx rgba(74, 52, 40, 0.08);
+  overflow: hidden;
+}
+
+.character-card::before {
+  content: "";
+  position: absolute;
+  left: 18rpx;
+  right: 18rpx;
+  top: 12rpx;
+  height: 10rpx;
+  border-top: 2rpx solid rgba(184, 138, 74, 0.36);
+  border-radius: 999rpx;
+}
+
+.character-card__corner {
+  position: absolute;
+  width: 34rpx;
+  height: 34rpx;
+  border-top: 3rpx solid rgba(184, 138, 74, 0.74);
+  border-left: 3rpx solid rgba(184, 138, 74, 0.74);
+  border-radius: 12rpx 0 0 0;
+  opacity: 0.74;
+}
+
+.character-card__corner--left { left: 14rpx; top: 14rpx; }
+.character-card__corner--right { right: 14rpx; top: 14rpx; transform: rotate(90deg); }
+
+.character-card__copy {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-width: 0;
+}
+
+.character-card__tag {
+  display: inline-flex;
+  margin-bottom: 10rpx;
+  padding: 5rpx 14rpx;
+  border: 2rpx solid rgba(184, 74, 58, 0.48);
+  border-radius: 999rpx;
+  color: #B84A3A;
+  background: #fffefb;
+  font-size: 21rpx;
+  line-height: 1.3;
+  font-weight: 900;
+}
+
+.character-card__name {
+  display: block;
+  margin-bottom: 8rpx;
+  color: #4A3428;
+  font-size: 29rpx;
+  line-height: 1.28;
+  font-weight: 900;
+}
+
+.character-card__message {
+  display: block;
+  color: #4A3428;
+  font-size: 26rpx;
+  line-height: 1.58;
+  font-weight: 800;
+}
+
+.character-card__sub {
+  display: block;
+  margin-top: 8rpx;
+  color: #8b7a6e;
+  font-size: 23rpx;
+  line-height: 1.55;
+}
+
+.character-card__image {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  width: 96rpx;
+  height: 96rpx;
+}
+
+.character-card--bust .character-card__image {
+  width: 166rpx;
+  height: 176rpx;
+}
+
+.character-card--croissant { border-color: rgba(184, 138, 74, 0.68); }
+.character-card--elodie { border-color: rgba(47, 107, 79, 0.54); background: linear-gradient(180deg, #fffefb, #f7fbf5); }
+.character-card--gapchick,
+.character-card--rest { border-color: rgba(201, 134, 150, 0.52); background: linear-gradient(180deg, #fffefb, #fff6f7); }
+.character-card--ld,
+.character-card--warning { border-color: rgba(90, 70, 56, 0.42); background: linear-gradient(180deg, #fffefb, #f7f2ed); }
+.character-card--ld .character-card__tag,
+.character-card--warning .character-card__tag { color: #5A2A5F; border-color: rgba(90, 42, 95, 0.36); }
+
+@media (max-width: 360px) {
+  .character-card {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .character-card__image {
+    width: 82rpx;
+    height: 82rpx;
+    margin-left: auto;
+  }
+
+  .character-card--bust .character-card__image {
+    width: 132rpx;
+    height: 148rpx;
+  }
+}

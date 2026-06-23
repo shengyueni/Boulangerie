@@ -10,6 +10,8 @@
     <view class="paper-title__rail"><view class="paper-title__rail-line"></view><view class="paper-title__rail-dot"></view><view class="paper-title__rail-dot"></view><view class="paper-title__rail-line"></view></view>
   </view>
 
+  <character-card image="{{companion.image}}" name="{{companion.name}}" tag="{{companion.tag}}" message="{{companion.message}}" sub-message="{{companion.subMessage}}" variant="{{companion.variant}}" size="{{companion.size}}" />
+
   <view class="filter-panel range-tags"><view wx:for="{{ranges}}" wx:key="key" class="chip {{activeRange === item.key ? 'pink' : ''}}" data-key="{{item.key}}" bindtap="switchRange">{{item.label}}</view></view>
   <view wx:if="{{!hasRecords}}" class="empty-card trend-empty"><text>还没有足够记录生成趋势。</text><text>先写下一条真实的日记就好。</text></view>
 

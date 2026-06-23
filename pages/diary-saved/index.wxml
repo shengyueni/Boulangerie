@@ -1,5 +1,6 @@
 <view class="page">
   <view class="page-head floral-title-box"><view class="corner-ornament corner-ornament-left corner-ornament--green"></view><view class="corner-ornament corner-ornament-right corner-ornament--gold"></view><text class="eyebrow">记录已保存</text><text class="hero-title">记录已经放下来了。</text><text class="subtext">{{message}}</text></view>
+  <character-card image="{{companion.image}}" name="{{companion.name}}" tag="{{companion.tag}}" message="{{companion.message}}" sub-message="{{companion.subMessage}}" variant="{{companion.variant}}" size="{{companion.size}}" />
   <view class="amulet-card amulet-frame"><view class="corner-ornament corner-ornament-left corner-ornament--gold"></view><view class="corner-ornament corner-ornament-right corner-ornament--green"></view><text class="amulet-frame__seal">放下来了</text><text class="section-title">事实纪要摘要</text><text class="body-text">{{memoPreview}}</text></view>
   <view class="floral-divider"><view class="floral-divider__line"></view><view class="floral-divider__dot green"></view><view class="floral-divider__dot gold"></view><view class="floral-divider__line"></view></view>
   <button class="sticker-button route-button green route-button" bindtap="goDetail">查看这条日记</button>

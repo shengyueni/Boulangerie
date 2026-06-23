@@ -2,12 +2,17 @@ const { APP_META } = require("../../utils/constants");
 const { getDiaryEntries } = require("../../utils/storage");
 const { getCroissantReport } = require("../../utils/croissant");
 const { getTodayOracle } = require("../../utils/oracle");
-
+const { CHARACTERS, buildCompanion } = require("../../utils/characters");
 Page({
   data: {
     appMeta: APP_META,
     oracle: getTodayOracle(),
-    croissant: getCroissantReport([])
+    croissant: getCroissantReport([]),
+    companion: buildCompanion("croissant", "home", {
+      image: CHARACTERS.croissant.bust,
+      tag: "今日陪伴",
+      size: "bust"
+    })
   },
 
   onShow() {

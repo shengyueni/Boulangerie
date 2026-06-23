@@ -93,3 +93,15 @@
 - 原有功能迁移到对应 tab 或子页面，泡泡机补入百宝箱。
 - 修正 tabBar 页面跳转方式，tabBar 页面使用 wx.switchTab。
 - 不新增登录、云开发、AI 或后端。
+## mvp-0.7-character-companions
+
+- 新增四个角色的本地素材接入：Croissant、Elodie、Gapchick、LD。
+- 新增 character-card 角色陪伴卡组件，并统一角色卡样式。
+- 新增 utils/characters.js，集中管理角色图片路径和文案池。
+- 首页加入 Croissant 今日陪伴。
+- 写日记页加入 Elodie 记录提示。
+- 保存承接页加入正负记录对应陪伴：负面记录使用 Elodie，正面记录使用 Gapchick。
+- 泡泡机加入 LD 废话识别提示，并在点破泡泡后切换承接文案。
+- 深呼吸和情绪急救相关页面加入 Gapchick 恢复陪伴。
+- 增强仪表盘、日记详情、出走计划页的角色提示。
+- 不新增登录、AI、后端、角色养成或复杂剧情系统。

@@ -1,4 +1,5 @@
 const { EMERGENCY_CARDS } = require("../../utils/constants");
+const { buildCompanion } = require("../../utils/characters");
 const {
   addWishItem,
   getWishItems,
@@ -15,7 +16,11 @@ function buildCards(expandedIndex = -1) {
 Page({
   data: {
     cards: buildCards(),
-    lastAdded: false
+    lastAdded: false,
+    companion: buildCompanion("gapchick", "emergencyCards", {
+      tag: "先让身体落地",
+      variant: "rest"
+    })
   },
 
   onShow() {

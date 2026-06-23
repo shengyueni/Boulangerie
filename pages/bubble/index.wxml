@@ -7,6 +7,8 @@
     <text class="subtext">不用立刻解决人生。先摇一颗泡泡。</text>
   </view>
 
+  <character-card image="{{companion.image}}" name="{{companion.name}}" tag="{{companion.tag}}" message="{{companion.message}}" sub-message="{{companion.subMessage}}" variant="{{companion.variant}}" size="{{companion.size}}" />
+
   <view class="floral-divider"><view class="floral-divider__line"></view><view class="floral-divider__dot blue"></view><view class="floral-divider__dot"></view><view class="floral-divider__line"></view></view>
   <view class="note-card bubble-note paper-edge"><text>泡泡会轻轻提醒你：有些话可以接住，有些职场废话可以点破。</text></view>
 

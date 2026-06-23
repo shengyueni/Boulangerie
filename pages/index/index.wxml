@@ -46,6 +46,8 @@
     <text class="oracle-disclaimer">本卡不预测命运，只帮你识别今天的职场天气。</text>
   </view>
 
+  <character-card image="{{companion.image}}" name="{{companion.name}}" tag="{{companion.tag}}" message="{{companion.message}}" sub-message="{{companion.subMessage}}" variant="{{companion.variant}}" size="{{companion.size}}" />
+
   <view class="amulet-card amulet-frame status-card {{croissant.statusClass}} today-status-card">
     <view class="corner-ornament corner-ornament-left corner-ornament--gold"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--green"></view>

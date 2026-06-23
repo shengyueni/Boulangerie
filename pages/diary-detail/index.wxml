@@ -44,6 +44,8 @@
 
     <view class="paper-divider"><view class="paper-divider__line"></view><text class="paper-divider__tag">可复制证据纸</text><view class="paper-divider__line"></view></view>
 
+    <character-card image="{{companion.image}}" name="{{companion.name}}" tag="{{companion.tag}}" message="{{companion.message}}" sub-message="{{companion.subMessage}}" variant="{{companion.variant}}" size="{{companion.size}}" />
+
     <view class="archive-card memo-paper evidence-card">
       <view class="corner-ornament corner-ornament-left corner-ornament--red"></view>
       <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>

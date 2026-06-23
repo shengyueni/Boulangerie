@@ -1,3 +1,5 @@
+const { CHARACTERS, buildCompanion } = require("../../utils/characters");
+
 const READY_PHASE = { key: "ready", label: "准备开始", seconds: 4 };
 const PHASES = [
   { key: "inhale", label: "吸气", seconds: 4 },
@@ -10,7 +12,13 @@ Page({
     phaseIndex: -1,
     phase: READY_PHASE,
     secondsLeft: READY_PHASE.seconds,
-    running: false
+    running: false,
+    companion: buildCompanion("gapchick", "breathing", {
+      image: CHARACTERS.gapchick.bust,
+      tag: "Gapchick 陪你慢一点",
+      size: "bust",
+      variant: "rest"
+    })
   },
 
   timer: null,
