@@ -1,5 +1,5 @@
 <view class="page feedback-page paper-page">
-  <view class="page-head floral-title-box feedback-head">
+  <view class="page-head floral-title-box feedback-head title-pattern-card"><image class="title-pattern-bg" src="/assets/title-patterns/light-pink.png" mode="aspectFill" />
     <view class="corner-ornament corner-ornament-left corner-ornament--green"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
     <text class="eyebrow">试用反馈</text>

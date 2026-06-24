@@ -25,7 +25,7 @@ function buildReview(entries, topReason, croissant) { if (!entries.length) retur
 function buildDashboardCompanion(croissant) { return buildCompanion("croissant", "dashboard." + croissant.statusKey, { image: getCroissantStateImage(croissant.statusKey), tag: "Croissant 状态陪伴", message: getCharacterLine("dashboard." + croissant.statusKey), size: "bust" }); }
 
 Page({
-  data: { ranges: RANGES, activeRange: "30", hasRecords: false, croissant: getCroissantReport([]), companion: buildDashboardCompanion(getCroissantReport([])), stats: { total: 0, decisionFactors: 0, legacyPositive: 0, highImpact30Days: 0, topReason: "还没有足够记录", advice: "本周先保护好自己。第一步不是判断，而是记录。" }, reasonDistribution: [], highImpactEntries: [], tendency: {}, reviewText: "" },
+  data: { ranges: RANGES, activeRange: "30", hasRecords: false, croissant: getCroissantReport([]), companion: buildDashboardCompanion(getCroissantReport([])), stats: { total: 0, decisionFactors: 0, reasonTypes: 0, highImpact30Days: 0, topReason: "还没有足够记录", advice: "本周先保护好自己。第一步不是判断，而是记录。" }, reasonDistribution: [], highImpactEntries: [], tendency: {}, reviewText: "" },
   onShow() { this.refresh(); },
   switchRange(event) { this.setData({ activeRange: event.currentTarget.dataset.key }); this.refresh(); },
   refresh() {
@@ -40,7 +40,7 @@ Page({
       hasRecords,
       croissant,
       companion: buildDashboardCompanion(croissant),
-      stats: { total: entries.length, decisionFactors: entries.filter((entry) => entry.type === "negative").length, legacyPositive: entries.filter((entry) => entry.type === "positive").length, highImpact30Days: highImpactEntries.length, topReason, advice: hasRecords ? PROTECTION_ADVICE[topReason] || croissant.advice : "本周先保护好自己。第一步不是判断，而是记录。" },
+      stats: { total: entries.length, decisionFactors: entries.length, reasonTypes: reasonDistribution.filter((item) => item.count > 0).length, highImpact30Days: highImpactEntries.length, topReason, advice: hasRecords ? PROTECTION_ADVICE[topReason] || croissant.advice : "本周先保护好自己。第一步不是判断，而是记录。" },
       reasonDistribution,
       highImpactEntries,
       tendency,

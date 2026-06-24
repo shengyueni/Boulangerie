@@ -102,10 +102,6 @@
   font-size: 22rpx;
 }
 
-.entry-type.positive {
-  color: var(--green);
-  border-color: rgba(47, 123, 103, 0.52);
-}
 
 .entry-type.negative {
   color: var(--purple);

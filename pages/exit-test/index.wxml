@@ -1,5 +1,5 @@
 <view class="page">
-  <view class="page-head floral-title-box"><view class="corner-ornament corner-ornament-left corner-ornament--purple"></view><view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
+  <view class="page-head floral-title-box title-pattern-card"><image class="title-pattern-bg" src="/assets/title-patterns/deep-purple.png" mode="aspectFill" /><view class="corner-ornament corner-ornament-left corner-ornament--purple"></view><view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
     <text class="eyebrow">温柔问答页</text>
     <text class="hero-title">离职状态自测</text>
     <text class="subtext">它只帮你看见当前状态，不会替你做“必须离职”的绝对结论。</text>

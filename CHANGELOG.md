@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## mvp-0.9C-bubble-balance-tabbar-source-headers-and-diary-cleanup
+
+- 继续调整泡泡机比例：机器从 0.9B 的 70vw / 560rpx 上调到 78vw / 650rpx，泡泡卡片 max-width 从 610rpx 收到 540rpx，并缩短舞台和机器区域间距。
+- 新增 `assets/title-patterns/`，由 `assets/tabbar-source/` 的同源花纸素材派生轻量标题纹理图，不使用 81x81 tabBar 小图标铺背景。
+- 为主要页面标题卡接入低透明花纸背景；页面标题纹理映射：今日=warm-orange.png，日记及日记子页=dark-green.png，出走=indigo-blue.png，百宝箱=deep-purple.png，心声=light-pink.png，泡泡机=light-pink.png，关于=dark-green.png，反馈=light-pink.png，恢复类页面=light-pink.png，仪表盘=indigo-blue.png。
+- 日记旧版记录清理改为存储层一次性执行：只保留 `entryKind: "decision_factor"` 的新版记录，写入 `malo_diary_cleanup_version = "0.9C"` 避免重复清理。
+- 移除日记列表、详情、保存承接和仪表盘中的旧版顺毛 / 旧版消耗展示分支。
+- 当前仍不做登录、授权、云开发、AI、后端、真实社区或支付；产品也不是医疗、法律、劳动仲裁或离职决策指令工具。
+
 ## mvp-0.9B-bubble-scale-and-tabbar-icons
 
 - 放大泡泡机页面的机器本体，调整舞台和机器区域高度，让泡泡与机器比例更协调。

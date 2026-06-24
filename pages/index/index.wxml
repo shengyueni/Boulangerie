@@ -4,7 +4,7 @@
     <text class="subtext">{{appMeta.slogan}}</text>
   </view>
 
-  <view class="oracle-card paper-title">
+  <view class="oracle-card paper-title title-pattern-card"><image class="title-pattern-bg" src="/assets/title-patterns/warm-orange.png" mode="aspectFill" />
     <view class="corner-ornament corner-ornament-left corner-ornament--blue"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
     <view class="corner-ornament corner-ornament-bottom-left corner-ornament--purple"></view>

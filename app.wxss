@@ -610,3 +610,41 @@ page {
 .paper-tag.green { color: var(--green); border-color: rgba(47, 123, 103, 0.48); background: #f4fbf7; }
 .paper-tag.orange { color: var(--orange); border-color: rgba(201, 111, 69, 0.48); background: #fff6ef; }
 .paper-tag.dark { color: #fffefb; border-color: var(--purple); background: var(--purple); }
+
+/* MVP 0.9C title-card floral texture layer */
+.title-pattern-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.title-pattern-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.title-pattern-card .corner-ornament,
+.title-pattern-card .paper-corner,
+.title-pattern-card .eyebrow,
+.title-pattern-card .tiny-seal,
+.title-pattern-card .seal-flower,
+.title-pattern-card .paper-title__stamp,
+.title-pattern-card .hero-title,
+.title-pattern-card .bubble-kicker,
+.title-pattern-card .bubble-title,
+.title-pattern-card .bubble-subtitle,
+.title-pattern-card .subtext,
+.title-pattern-card .oracle-sky,
+.title-pattern-card .oracle-title,
+.title-pattern-card .oracle-subtitle,
+.title-pattern-card .oracle-metrics,
+.title-pattern-card .oracle-slip-row,
+.title-pattern-card .oracle-disclaimer,
+.title-pattern-card .paper-title__rail {
+  position: relative;
+  z-index: 2;
+}

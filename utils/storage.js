@@ -5,6 +5,8 @@ const WISH_INIT_KEY = "malo_wish_defaults_initialized";
 const WISH_DEFAULT_VERSION_KEY = "malo_wish_defaults_version";
 const LOCAL_VOICE_KEY = "malo_local_voice_posts";
 const TRIAL_FEEDBACK_KEY = "malo_trial_feedback_posts";
+const DIARY_CLEANUP_VERSION_KEY = "malo_diary_cleanup_version";
+const DIARY_CLEANUP_VERSION = "0.9C";
 const DEFAULT_WISHES = [
   { type: "pre_exit", title: "计算生活费缓冲" },
   { type: "pre_exit", title: "更新简历" },
@@ -28,9 +30,28 @@ function sortByNewest(entries) {
   });
 }
 
-function getDiaryEntries() {
+function isCurrentDiaryEntry(entry) {
+  return !!entry && entry.entryKind === "decision_factor";
+}
+
+function cleanupLegacyDiaryEntries() {
   const entries = wx.getStorageSync(DIARY_KEY);
-  return Array.isArray(entries) ? sortByNewest(entries) : [];
+  if (!Array.isArray(entries)) {
+    wx.setStorageSync(DIARY_CLEANUP_VERSION_KEY, DIARY_CLEANUP_VERSION);
+    return [];
+  }
+
+  const currentEntries = entries.filter(isCurrentDiaryEntry);
+  if (wx.getStorageSync(DIARY_CLEANUP_VERSION_KEY) !== DIARY_CLEANUP_VERSION || currentEntries.length !== entries.length) {
+    wx.setStorageSync(DIARY_KEY, currentEntries);
+    wx.setStorageSync(DIARY_CLEANUP_VERSION_KEY, DIARY_CLEANUP_VERSION);
+  }
+
+  return currentEntries;
+}
+
+function getDiaryEntries() {
+  return sortByNewest(cleanupLegacyDiaryEntries());
 }
 
 function getDiaryEntryById(id) {
@@ -127,6 +148,7 @@ function clearLocalData() {
   wx.removeStorageSync(WISH_DEFAULT_VERSION_KEY);
   wx.removeStorageSync(LOCAL_VOICE_KEY);
   wx.removeStorageSync(TRIAL_FEEDBACK_KEY);
+  wx.removeStorageSync(DIARY_CLEANUP_VERSION_KEY);
 }
 
 function getLocalVoicePosts() {
@@ -167,6 +189,7 @@ module.exports = {
   createId,
   getDiaryEntries,
   getDiaryEntryById,
+  isCurrentDiaryEntry,
   saveDiaryEntry,
   deleteDiaryEntry,
   getWishItems,

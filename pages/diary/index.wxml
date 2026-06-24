@@ -1,5 +1,5 @@
 <view class="page paper-page diary-page">
-  <view class="page-head paper-title diary-title-board">
+  <view class="page-head paper-title diary-title-board title-pattern-card"><image class="title-pattern-bg" src="/assets/title-patterns/dark-green.png" mode="aspectFill" />
     <view class="corner-ornament corner-ornament-left corner-ornament--blue"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
     <view class="paper-corner bottom-left"></view>
@@ -40,7 +40,7 @@
     <view class="paper-corner bottom-right"></view>
     <view class="entry-topline">
       <text class="date">{{item.displayDate}}</text>
-      <text class="paper-seal entry-type {{item.type === 'positive' ? 'positive' : 'negative'}}">{{item.typeLabel}}</text>
+      <text class="paper-seal entry-type negative">{{item.typeLabel}}</text>
     </view>
     <text class="summary">{{item.summary}}</text>
     <view class="entry-meta-grid">

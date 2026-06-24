@@ -4,8 +4,8 @@ const { getCroissantReport } = require("../../utils/croissant");
 
 function formatDate(value) { const date = new Date(value); if (Number.isNaN(date.getTime())) return value || ""; return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate(); }
 function getMemoPreview(factMemo) { const memo = factMemo || "还没有生成事实纪要。"; return memo.length <= 86 ? memo : memo.slice(0, 86) + "..."; }
-function getTypeLabel(entry) { if (entry.entryKind === "decision_factor") return "离职判断记录"; return entry.type === "positive" ? "旧版顺毛记录" : "旧版消耗记录"; }
-function normalizeEntry(entry) { const impactLevel = Number(entry.impactLevel || 0); return { ...entry, impactLevel, displayDate: formatDate(entry.createdAt), typeLabel: getTypeLabel(entry), cardClass: entry.type === "positive" ? "smooth-note" : impactLevel >= 4 ? "worn-note high-impact" : "worn-note", impactClass: impactLevel >= 4 ? "orange" : "green", memoPreview: getMemoPreview(entry.factMemo) }; }
+function getTypeLabel() { return "离职判断记录"; }
+function normalizeEntry(entry) { const impactLevel = Number(entry.impactLevel || 0); return { ...entry, impactLevel, displayDate: formatDate(entry.createdAt), typeLabel: getTypeLabel(), cardClass: impactLevel >= 4 ? "worn-note high-impact" : "worn-note", impactClass: impactLevel >= 4 ? "orange" : "green", memoPreview: getMemoPreview(entry.factMemo) }; }
 function isWithinDays(entry, days) { const created = new Date(entry.createdAt).getTime(); if (Number.isNaN(created)) return false; return Date.now() - created <= days * 24 * 60 * 60 * 1000; }
 function buildDashboardSummary(entries) {
   const croissant = getCroissantReport(entries);
@@ -24,14 +24,14 @@ Page({
     allEntries: [], entries: [], activeFilter: "all", activeReason: "all",
     dashboardSummary: buildDashboardSummary([]),
     typeFilters: [
-      { key: "all", label: "全部" }, { key: "negative", label: "判断记录" }, { key: "positive", label: "旧版顺毛" }, { key: "high", label: "高影响事件" }
+      { key: "all", label: "全部" }, { key: "decision", label: "判断记录" }, { key: "high", label: "高影响事件" }
     ],
     reasonFilters: ["全部归因"].concat(REASON_OPTIONS)
   },
   onShow() { const allEntries = getDiaryEntries().map(normalizeEntry); this.setData({ allEntries, dashboardSummary: buildDashboardSummary(allEntries) }); this.applyFilters(); },
   applyFilters() {
     const entries = this.data.allEntries.filter((entry) => {
-      const typeOk = this.data.activeFilter === "all" || entry.type === this.data.activeFilter || (this.data.activeFilter === "high" && entry.impactLevel >= 4);
+      const typeOk = this.data.activeFilter === "all" || this.data.activeFilter === "decision" || (this.data.activeFilter === "high" && entry.impactLevel >= 4);
       const reasonOk = this.data.activeReason === "all" || entry.primaryReason === this.data.activeReason;
       return typeOk && reasonOk;
     });

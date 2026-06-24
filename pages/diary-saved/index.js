@@ -1,5 +1,5 @@
 const { getDiaryEntryById } = require("../../utils/storage");
-const { buildCompanion, getCroissantStateImage, getElodieVariantImage, getGapchickVariantImage } = require("../../utils/characters");
+const { buildCompanion, getCroissantStateImage, getElodieVariantImage } = require("../../utils/characters");
 
 function preview(text) {
   const value = text || "这条记录还没有事实纪要。";
@@ -7,15 +7,6 @@ function preview(text) {
 }
 
 function buildSavedCompanion(entry) {
-  if (entry && entry.type === "positive") {
-    return buildCompanion("gapchick", "positive", {
-      image: getGapchickVariantImage("drink"),
-      tag: "旧版顺毛记录",
-      message: "Croissant 顺毛了一点。你也替自己留住了一点亮光。",
-      size: "bust",
-      variant: "rest"
-    });
-  }
   if (entry && Number(entry.impactLevel) >= 4) {
     return buildCompanion("croissant", "diarySavedNegative", {
       image: getCroissantStateImage("ball"),
@@ -40,7 +31,7 @@ Page({
     this.setData({
       id,
       entry,
-      message: entry && entry.type === "positive" ? "Croissant 顺毛了一点。你也替自己留住了一点亮光。" : "Croissant 收到了这条记录。它不急着替你做决定，只是陪你把事情放到桌面上看清楚。",
+      message: "Croissant 收到了这条记录。它不急着替你做决定，只是陪你把事情放到桌面上看清楚。",
       memoPreview: preview(entry && entry.factMemo),
       companion: buildSavedCompanion(entry)
     });

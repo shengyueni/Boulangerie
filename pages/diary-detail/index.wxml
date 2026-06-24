@@ -1,5 +1,5 @@
 <view class="page paper-page diary-detail-page">
-  <view class="page-head paper-title detail-title-board">
+  <view class="page-head paper-title detail-title-board title-pattern-card"><image class="title-pattern-bg" src="/assets/title-patterns/dark-green.png" mode="aspectFill" />
     <view class="corner-ornament corner-ornament-left corner-ornament--blue"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
     <view class="paper-corner bottom-left"></view>
@@ -20,7 +20,7 @@
       <view class="corner-ornament corner-ornament-left corner-ornament--gold"></view>
       <view class="corner-ornament corner-ornament-right corner-ornament--blue"></view>
       <view class="paper-corner bottom-right"></view>
-      <view class="row between detail-top"><text class="date">{{entry.displayDate}}</text><text class="paper-seal detail-type {{entry.type === 'positive' ? 'positive' : 'negative'}}">{{entry.typeLabel}}</text></view>
+      <view class="row between detail-top"><text class="date">{{entry.displayDate}}</text><text class="paper-seal detail-type negative">{{entry.typeLabel}}</text></view>
       <text class="section-title detail-title">事件事实</text>
       <text class="detail-text">{{entry.summary}}</text>
     </view>

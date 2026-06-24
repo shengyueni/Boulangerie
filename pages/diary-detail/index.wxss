@@ -20,12 +20,6 @@
   font-size: 22rpx;
 }
 
-.detail-type.positive { color: var(--green); border-color: rgba(47, 123, 103, 0.52); }
-.detail-type.negative { color: var(--purple); border-color: rgba(90, 42, 95, 0.52); }
-
-.detail-title {
-  margin-top: 24rpx;
-}
 
 .detail-text,
 .fact-memo {

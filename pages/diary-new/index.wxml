@@ -1,5 +1,5 @@
 <view class="page paper-page diary-new-page">
-  <view class="page-head paper-title diary-new-head">
+  <view class="page-head paper-title diary-new-head title-pattern-card"><image class="title-pattern-bg" src="/assets/title-patterns/dark-green.png" mode="aspectFill" />
     <view class="corner-ornament corner-ornament-left corner-ornament--red"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--green"></view>
     <view class="paper-corner bottom-left"></view>

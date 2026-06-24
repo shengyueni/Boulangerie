@@ -227,3 +227,15 @@ tabBar 图标使用 `assets/tabbar-source/` 中的用户提供花纸源素材作
 五个 tab 的映射为：今日使用 warm-orange，日记使用 dark-green，出走使用 indigo-blue，百宝箱使用 deep-purple，心声使用 light-pink；normal 图标统一由 black-white 生成低调灰棕小印章。red-gold 作为强视觉备用源素材保留，不接入底栏。
 
 0.9B 不新增大功能，不恢复 LD 泡泡，不恢复“再吹一次 / 记进日记 / 我先收下这句”按钮，也不接入登录、云开发、AI、后端、真实社区、外部网络图片或支付。
+
+## MVP 0.9C 泡泡机平衡、同源标题花纹与日记清理原则
+
+泡泡机页面继续保持“点击机器吹出一句朋友的话”的定位。本轮将机器本体再放大，泡泡卡片略微收窄，并压缩泡泡舞台与机器之间的空隙，让视觉关系更像泡泡从机器上方被吹出来；不恢复 LD 泡泡，也不恢复旧按钮组。
+
+标题卡花纹必须与 tabBar 图标同源。本轮没有使用 81x81 的 tabBar 小图标铺背景，而是从 `assets/tabbar-source/` 的源花纸素材派生出 `assets/title-patterns/` 轻量纹理图，再以低透明度放在标题卡底层，保证第一眼仍先读标题文字。
+
+页面标题纹理映射：今日=warm-orange.png，日记及日记子页=dark-green.png，出走=indigo-blue.png，百宝箱=deep-purple.png，心声=light-pink.png，泡泡机=light-pink.png，关于=dark-green.png，反馈=light-pink.png，恢复类页面=light-pink.png，仪表盘=indigo-blue.png。
+
+日记模块只保留新版判断记录。新版记录的可靠识别点是 `entryKind: "decision_factor"`；旧版 positive / negative 记录缺少该字段，会在读取日记存储时被一次性过滤并写回。清理标记为 `malo_diary_cleanup_version = "0.9C"`，避免每次进入页面重复处理。
+
+0.9C 不新增大功能，不接入登录、云开发、AI、后端、真实社区、外部网络图片或支付；产品不是医疗、法律、劳动仲裁或离职决策指令工具。

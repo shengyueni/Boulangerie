@@ -46,12 +46,12 @@
 .bubble-stage {
   position: relative;
   display: flex;
-  min-height: 390rpx;
+  min-height: 330rpx;
   box-sizing: border-box;
   align-items: center;
   justify-content: center;
   margin-top: 10rpx;
-  padding: 34rpx 22rpx 22rpx;
+  padding: 24rpx 22rpx 4rpx;
   overflow: visible;
 }
 
@@ -95,11 +95,11 @@
 
 .friend-bubble {
   position: relative;
-  width: 86%;
-  max-width: 610rpx;
-  min-height: 250rpx;
+  width: 78%;
+  max-width: 540rpx;
+  min-height: 220rpx;
   box-sizing: border-box;
-  padding: 34rpx 34rpx 36rpx;
+  padding: 30rpx 30rpx 32rpx;
   border: 3rpx solid rgba(255, 255, 255, 0.86);
   border-radius: 54rpx 62rpx 58rpx 50rpx;
   overflow: visible;
@@ -225,7 +225,7 @@
   display: block;
   margin-top: 24rpx;
   color: var(--ink);
-  font-size: 30rpx;
+  font-size: 28rpx;
   font-weight: 800;
   line-height: 1.7;
   word-break: break-word;
@@ -234,13 +234,13 @@
 .bubble-machine-zone {
   position: relative;
   display: flex;
-  min-height: 430rpx;
+  min-height: 410rpx;
   box-sizing: border-box;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  margin-top: auto;
-  padding: 8rpx 0 0;
+  margin-top: -16rpx;
+  padding: 0;
   transition: transform 140ms ease;
 }
 
@@ -253,22 +253,22 @@
   position: relative;
   z-index: 1;
   display: block;
-  width: 70vw;
-  max-width: 560rpx;
-  height: 390rpx;
+  width: 78vw;
+  max-width: 650rpx;
+  height: 450rpx;
 }
 
 .bubble-machine-tip {
   position: relative;
   z-index: 1;
   display: inline-flex;
-  margin-top: 10rpx;
-  padding: 8rpx 18rpx;
-  border: 2rpx solid rgba(184, 138, 74, 0.28);
-  border-radius: 999rpx;
-  color: var(--muted);
-  background: rgba(255, 254, 251, 0.72);
-  font-size: 23rpx;
+  margin-top: 2rpx;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: rgba(139, 122, 110, 0.82);
+  background: transparent;
+  font-size: 22rpx;
   font-weight: 900;
   line-height: 1.25;
 }
@@ -308,13 +308,13 @@
   }
 
   .bubble-stage {
-    min-height: 350rpx;
-    padding: 26rpx 6rpx 18rpx;
+    min-height: 310rpx;
+    padding: 20rpx 6rpx 0;
   }
 
   .friend-bubble {
-    width: 94%;
-    min-height: 240rpx;
+    width: 90%;
+    min-height: 220rpx;
     padding: 30rpx 26rpx 32rpx;
     border-radius: 46rpx;
   }
@@ -325,12 +325,12 @@
   }
 
   .bubble-machine-zone {
-    min-height: 380rpx;
+    min-height: 360rpx;
   }
 
   .bubble-machine-image {
-    width: 74vw;
-    max-width: 480rpx;
-    height: 330rpx;
+    width: 82vw;
+    max-width: 560rpx;
+    height: 390rpx;
   }
 }
