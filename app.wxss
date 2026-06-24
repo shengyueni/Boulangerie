@@ -611,22 +611,31 @@ page {
 .paper-tag.orange { color: var(--orange); border-color: rgba(201, 111, 69, 0.48); background: #fff6ef; }
 .paper-tag.dark { color: #fffefb; border-color: var(--purple); background: var(--purple); }
 
-/* MVP 0.9C title-card floral texture layer */
+/* MVP 0.9D title-card floral texture layer */
 .title-pattern-card {
   position: relative;
   overflow: hidden;
 }
 
-.title-pattern-bg {
+.title-pattern-image {
   position: absolute;
   inset: 0;
   z-index: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.5;
+  opacity: 0.22;
   pointer-events: none;
 }
 
+.title-pattern-mask {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(255, 250, 242, 0.58);
+  pointer-events: none;
+}
+
+.title-pattern-card .title-content,
 .title-pattern-card .corner-ornament,
 .title-pattern-card .paper-corner,
 .title-pattern-card .eyebrow,

@@ -1,5 +1,5 @@
 <view class="page toolbox-page paper-page">
-  <view class="page-head floral-title-box drawer-head title-pattern-card"><image class="title-pattern-bg" src="/assets/title-patterns/deep-purple.png" mode="aspectFill" />
+  <view class="page-head floral-title-box drawer-head title-pattern-card"><image class="title-pattern-image" src="/assets/tabbar-source/deep-purple.png" mode="aspectFill" /><view class="title-pattern-mask"></view>
     <view class="corner-ornament corner-ornament-left corner-ornament--gold"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--green"></view>
     <text class="eyebrow">精致工具抽屉</text>

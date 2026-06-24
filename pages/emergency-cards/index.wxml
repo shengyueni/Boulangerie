@@ -1,5 +1,5 @@
 <view class="page">
-  <view class="page-head floral-title-box title-pattern-card"><image class="title-pattern-bg" src="/assets/title-patterns/light-pink.png" mode="aspectFill" /><view class="corner-ornament corner-ornament-left corner-ornament--red"></view><view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
+  <view class="page-head floral-title-box title-pattern-card"><image class="title-pattern-image" src="/assets/tabbar-source/light-pink.png" mode="aspectFill" /><view class="title-pattern-mask"></view><view class="corner-ornament corner-ornament-left corner-ornament--red"></view><view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
     <text class="eyebrow">护身贴纸</text>
     <text class="hero-title">情绪急救卡片</text>
     <text class="subtext">自责、嫉妒、害怕、无力的时候，先给自己一个温柔但可执行的小回应。</text>

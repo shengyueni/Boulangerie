@@ -4,7 +4,7 @@
     <text class="subtext">{{appMeta.slogan}}</text>
   </view>
 
-  <view class="oracle-card paper-title title-pattern-card"><image class="title-pattern-bg" src="/assets/title-patterns/warm-orange.png" mode="aspectFill" />
+  <view class="oracle-card paper-title title-pattern-card"><image class="title-pattern-image" src="/assets/tabbar-source/warm-orange.png" mode="aspectFill" /><view class="title-pattern-mask"></view>
     <view class="corner-ornament corner-ornament-left corner-ornament--blue"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
     <view class="corner-ornament corner-ornament-bottom-left corner-ornament--purple"></view>
@@ -59,33 +59,17 @@
         <text class="body-text compact-status-text">{{croissant.explanation}}</text>
         <text class="today-companion-line">{{todayStatus.message}}</text>
       </view>
-      <image class="today-status-image" src="{{todayStatus.image}}" mode="aspectFit" />
+      <view class="today-status-figure" bindtap="goDashboard">
+        <image class="today-status-image" src="{{todayStatus.image}}" mode="aspectFit" />
+        <text class="today-status-hint">点点 Croissant 看仪表盘</text>
+      </view>
     </view>
     <view class="today-status-bottom">
       <text class="today-advice-text">{{todayStatus.advice}}</text>
-      <button class="sticker-button secondary compact-button" bindtap="goDashboard">查看决心仪表盘</button>
-    </view>
-  </view>
-
-  <view class="ornament-card quick-card">
-    <view class="corner-ornament corner-ornament-left corner-ornament--red"></view>
-    <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
-    <text class="section-title">今日快捷入口</text>
-    <view class="quick-grid">
-      <view class="quick-entry" bindtap="recordToday">
-        <text class="paper-seal">记录</text>
-        <text class="quick-title">记一条线索</text>
-        <text class="quick-desc">影响判断的事</text>
-      </view>
-      <view class="quick-entry" bindtap="goEmergency">
-        <text class="paper-seal">急救</text>
-        <text class="quick-title">急救一下</text>
-        <text class="quick-desc">先接住自己</text>
-      </view>
-      <view class="quick-entry" bindtap="goPlan">
-        <text class="paper-seal">出走</text>
-        <text class="quick-title">看看计划</text>
-        <text class="quick-desc">慢慢准备</text>
+      <view class="quick-pills">
+        <button class="quick-pill" bindtap="recordToday">写日记</button>
+        <button class="quick-pill" bindtap="goEmergency">急救一下</button>
+        <button class="quick-pill" bindtap="goPlan">查看计划</button>
       </view>
     </view>
   </view>

@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## mvp-0.9D-header-pattern-home-compact-and-bubble-scale
+
+- 修复标题栏花纸背景不明显的问题：标题卡改为真实 `image` 背景层，直接使用 `assets/tabbar-source/` 同源花纸素材，并加米白半透明遮罩压低强度。
+- 今日页进一步压缩：移除 Croissant 状态卡里的“查看决心仪表盘”大按钮，改为点击 Croissant 视觉区域进入仪表盘。
+- 将独立“今日快捷入口”模块合并到 Croissant 今日状态卡底部，保留写日记、急救一下、查看计划三个小按钮。
+- 泡泡机主体继续放大，保持无明显 machine pad / backdrop，不恢复 LD 泡泡，也不恢复旧操作按钮。
+- 当前仍不做登录、授权、云开发、AI、后端、真实社区或支付；产品不是医疗、法律、劳动仲裁或离职决策指令工具。
+
 ## mvp-0.9C-bubble-balance-tabbar-source-headers-and-diary-cleanup
 
 - 继续调整泡泡机比例：机器从 0.9B 的 70vw / 560rpx 上调到 78vw / 650rpx，泡泡卡片 max-width 从 610rpx 收到 540rpx，并缩短舞台和机器区域间距。

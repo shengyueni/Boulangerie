@@ -234,12 +234,12 @@
 .bubble-machine-zone {
   position: relative;
   display: flex;
-  min-height: 410rpx;
+  min-height: 500rpx;
   box-sizing: border-box;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  margin-top: -16rpx;
+  margin-top: -34rpx;
   padding: 0;
   transition: transform 140ms ease;
 }
@@ -253,9 +253,9 @@
   position: relative;
   z-index: 1;
   display: block;
-  width: 78vw;
-  max-width: 650rpx;
-  height: 450rpx;
+  width: 92vw;
+  max-width: 760rpx;
+  height: 560rpx;
 }
 
 .bubble-machine-tip {
@@ -325,12 +325,13 @@
   }
 
   .bubble-machine-zone {
-    min-height: 360rpx;
+    min-height: 430rpx;
+    margin-top: -28rpx;
   }
 
   .bubble-machine-image {
-    width: 82vw;
-    max-width: 560rpx;
-    height: 390rpx;
+    width: 92vw;
+    max-width: 650rpx;
+    height: 470rpx;
   }
 }
