@@ -1,6 +1,13 @@
-<view class="page">
-  <text class="hero-title">隐私与安全说明</text>
-  <text class="subtext">{{appMeta.appName}} · {{appMeta.version}} {{appMeta.stage}}</text>
+<view class="page about-page paper-page">
+  <view class="page-head floral-title-box about-head">
+    <view class="corner-ornament corner-ornament-left corner-ornament--green"></view>
+    <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
+    <text class="eyebrow">隐私与安全说明</text>
+    <text class="hero-title">数据放在哪里</text>
+    <text class="subtext">{{appMeta.appName}} · {{appMeta.version}} {{appMeta.stage}}</text>
+  </view>
+
+  <character-card image="{{companion.image}}" name="{{companion.name}}" tag="{{companion.tag}}" message="{{companion.message}}" sub-message="{{companion.subMessage}}" variant="{{companion.variant}}" size="{{companion.size}}" />
 
   <view class="card">
     <text class="section-title">关于这个小程序</text>
@@ -10,41 +17,39 @@
   </view>
 
   <view class="card">
-    <text class="section-title">数据存在哪里</text>
-    <text class="body-text">当前试用版不会上传数据。</text>
-    <text class="body-text">你的日记、愿望清单和测试内容都保存在当前设备的本地存储中。</text>
+    <text class="section-title">当前试用版不会上传数据</text>
+    <text class="body-text">日记、愿望清单、测试内容、树洞内容和试用反馈，都保存在当前设备的本地存储中。</text>
+    <text class="body-text">它们不会因为你写下来了，就自动发给开发者、公司、同事或任何神秘会议室。</text>
     <text class="body-text">如果你清空小程序缓存、换设备或删除数据，内容可能无法恢复。</text>
   </view>
 
   <view class="card">
-    <text class="section-title">重要提醒</text>
-    <text class="body-text">这个小程序不是：</text>
+    <text class="section-title">当前版本不做什么</text>
     <view class="list">
-      <text>· 医疗诊断工具</text>
-      <text>· 心理治疗工具</text>
-      <text>· 法律咨询工具</text>
-      <text>· 劳动仲裁建议工具</text>
-      <text>· 让你立刻离职的指令机器</text>
+      <text>· 不做登录或授权</text>
+      <text>· 不接入云开发、后端数据库或真实社区</text>
+      <text>· 不使用 AI 生成咨询结论</text>
+      <text>· 不上传反馈、日记、测试或树洞内容</text>
+      <text>· 不使用外部网络图片、支付或身份关联</text>
     </view>
-    <text class="body-text">如果你正在经历严重身体不适、持续惊恐、强烈自伤念头，或无法保证自己的安全，请优先联系现实中的可信任的人、当地紧急帮助或专业支持。</text>
   </view>
 
   <view class="card">
-    <text class="section-title">给试用者</text>
-    <text class="body-text">如果你愿意反馈，请告诉我：</text>
-    <view class="list">
-      <text>· 哪个页面最让你想继续点下去？</text>
-      <text>· 哪句文案让你觉得被理解？</text>
-      <text>· 哪个功能让你困惑？</text>
-      <text>· 你会不会愿意第二天再打开？</text>
-      <text>· 你觉得这个工具更像“记录工具”“情绪陪伴”还是“离职准备工具”？</text>
-    </view>
-    <button class="sticker-button green" bindtap="goFeedback">打开试用反馈问题</button>
+    <text class="section-title">重要但不吓人的提醒</text>
+    <text class="body-text">这个小程序不是医疗诊断工具、心理治疗工具、法律咨询工具、劳动仲裁建议工具，也不是让你立刻离职的指令机器。</text>
+    <text class="body-text">它可以帮你记录和整理，但不能替代现实中的专业支持和安全支持。</text>
+    <text class="body-text">如果你正在经历严重身体不适、持续惊恐、强烈自伤念头，或无法保证自己的安全，请优先联系现实中的可信任的人、当地紧急帮助或专业支持。</text>
+  </view>
+
+  <view class="card feedback-card">
+    <text class="section-title">试用反馈</text>
+    <text class="body-text">如果你愿意递一张小纸条，反馈也只会先保存在本机。你可以之后自己查看、删除，或复制给开发者。</text>
+    <button class="sticker-button green" bindtap="goFeedback">打开试用反馈</button>
   </view>
 
   <view class="card danger-card">
     <text class="section-title">危险操作区</text>
-    <text class="body-text">这里只会清理本设备上的小程序本地数据，不涉及云端。</text>
+    <text class="body-text">这里只会清理本设备上的小程序本地数据，包括日记、愿望清单、测试内容、树洞内容和试用反馈，不涉及云端。</text>
     <button class="danger-button" bindtap="clearData">清空本地数据</button>
   </view>
 </view>

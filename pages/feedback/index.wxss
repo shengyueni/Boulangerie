@@ -1,16 +1,85 @@
-.question-list {
-  display: flex;
-  flex-direction: column;
-  gap: 18rpx;
+.feedback-head {
+  margin-bottom: 22rpx;
 }
 
-.question {
+.privacy-note {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  gap: 8rpx;
+  color: var(--ink);
+  font-size: 26rpx;
+  line-height: 1.62;
+  font-weight: 800;
+}
+
+.privacy-link {
+  color: var(--green);
+  font-weight: 900;
+}
+
+.feedback-card {
+  padding-top: 42rpx;
+}
+
+.type-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10rpx;
+}
+
+.feedback-textarea {
+  min-height: 220rpx;
+  border-color: rgba(184, 138, 74, 0.38);
+  background: rgba(255, 254, 251, 0.94);
+}
+
+.save-feedback {
+  margin-top: 22rpx;
+}
+
+.feedback-empty {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.feedback-post {
+  padding: 28rpx 24rpx 24rpx;
+}
+
+.post-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16rpx;
+}
+
+.post-type {
+  min-height: 40rpx;
+  padding: 4rpx 14rpx;
+  font-size: 21rpx;
+}
+
+.post-date {
+  flex: 0 0 auto;
+  padding-top: 8rpx;
+  color: var(--muted);
+  font-size: 23rpx;
+  font-weight: 900;
+}
+
+.post-content {
   display: block;
-  padding: 18rpx 20rpx;
-  border: 2rpx solid rgba(74, 57, 47, 0.42);
-  border-radius: 18rpx;
-  background: #fffaf0;
-  color: var(--dark);
+  margin-top: 18rpx;
+  color: var(--ink);
   font-size: 28rpx;
-  line-height: 1.55;
+  line-height: 1.72;
+  white-space: pre-wrap;
+}
+
+.delete-feedback {
+  min-height: 70rpx;
+  margin-top: 18rpx;
+  font-size: 25rpx;
 }

@@ -56,3 +56,20 @@
 .tool-card.green { border-color: rgba(47, 107, 79, .52); }
 .tool-card.yellow { border-color: rgba(184, 138, 74, .56); }
 .tool-card.plain { border-color: rgba(90, 70, 56, .32); }
+.feedback-note {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  gap: 8rpx;
+  margin-top: 28rpx;
+  color: var(--ink);
+  font-size: 27rpx;
+  line-height: 1.6;
+  font-weight: 800;
+}
+
+.feedback-title {
+  color: var(--green);
+  font-size: 30rpx;
+  font-weight: 900;
+}

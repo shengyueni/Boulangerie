@@ -2,8 +2,7 @@ const { TOOLBOX_ITEMS } = require("../../utils/constants");
 
 const EXTRA_TOOLS = [
   { title: "吗喽的泡泡机", subtitle: "摇一颗小小的安慰，戳破一句职场废话", path: "/pages/bubble/index", color: "pink", enabled: true },
-  { title: "隐私与安全说明", subtitle: "看看数据存在哪里、这个工具不能替你做什么", path: "/pages/about/index", color: "plain", enabled: true },
-  { title: "试用反馈", subtitle: "复制 6 个问题，帮 Croissant 试走这一步", path: "/pages/feedback/index", color: "green", enabled: true }
+  { title: "隐私与安全说明", subtitle: "看看数据存在哪里、这个工具不能替你做什么", path: "/pages/about/index", color: "plain", enabled: true }
 ];
 const TAB_PATHS = [
   "/pages/index/index",
@@ -26,5 +25,8 @@ Page({
       return;
     }
     wx.navigateTo({ url: item.path });
+  },
+  openFeedback() {
+    wx.navigateTo({ url: "/pages/feedback/index" });
   }
 });

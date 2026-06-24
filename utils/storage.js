@@ -4,6 +4,7 @@ const WISH_KEY = "malo_wish_items";
 const WISH_INIT_KEY = "malo_wish_defaults_initialized";
 const WISH_DEFAULT_VERSION_KEY = "malo_wish_defaults_version";
 const LOCAL_VOICE_KEY = "malo_local_voice_posts";
+const TRIAL_FEEDBACK_KEY = "malo_trial_feedback_posts";
 const DEFAULT_WISHES = [
   { type: "pre_exit", title: "计算生活费缓冲" },
   { type: "pre_exit", title: "更新简历" },
@@ -125,6 +126,7 @@ function clearLocalData() {
   wx.removeStorageSync(WISH_INIT_KEY);
   wx.removeStorageSync(WISH_DEFAULT_VERSION_KEY);
   wx.removeStorageSync(LOCAL_VOICE_KEY);
+  wx.removeStorageSync(TRIAL_FEEDBACK_KEY);
 }
 
 function getLocalVoicePosts() {
@@ -135,6 +137,23 @@ function getLocalVoicePosts() {
 function saveLocalVoicePost(post) {
   const nextPosts = [post].concat(getLocalVoicePosts());
   wx.setStorageSync(LOCAL_VOICE_KEY, nextPosts);
+  return nextPosts;
+}
+
+function getTrialFeedbackPosts() {
+  const posts = wx.getStorageSync(TRIAL_FEEDBACK_KEY);
+  return Array.isArray(posts) ? posts.slice().sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) : [];
+}
+
+function saveTrialFeedbackPost(post) {
+  const nextPosts = [post].concat(getTrialFeedbackPosts());
+  wx.setStorageSync(TRIAL_FEEDBACK_KEY, nextPosts);
+  return nextPosts;
+}
+
+function deleteTrialFeedbackPost(id) {
+  const nextPosts = getTrialFeedbackPosts().filter((post) => post.id !== id);
+  wx.setStorageSync(TRIAL_FEEDBACK_KEY, nextPosts);
   return nextPosts;
 }
 
@@ -157,5 +176,8 @@ module.exports = {
   clearLocalData,
   getLocalVoicePosts,
   saveLocalVoicePost,
-  deleteLocalVoicePost
+  deleteLocalVoicePost,
+  getTrialFeedbackPosts,
+  saveTrialFeedbackPost,
+  deleteTrialFeedbackPost
 };

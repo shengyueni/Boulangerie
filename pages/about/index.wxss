@@ -1,7 +1,11 @@
+.about-head {
+  margin-bottom: 22rpx;
+}
+
 .body-text {
   display: block;
   margin-top: 14rpx;
-  color: var(--dark);
+  color: var(--ink);
   font-size: 28rpx;
   line-height: 1.75;
 }
@@ -10,13 +14,17 @@
   display: flex;
   flex-direction: column;
   gap: 12rpx;
-  margin: 18rpx 0;
-  color: var(--dark);
+  margin: 18rpx 0 4rpx;
+  color: var(--ink);
   font-size: 28rpx;
   line-height: 1.6;
 }
 
+.feedback-card {
+  border-color: rgba(47, 107, 79, 0.42);
+}
+
 .danger-card {
-  border-color: #e9785f;
-  background: #fff1ec;
+  border-color: rgba(184, 74, 58, 0.56);
+  background: #fff8f3;
 }

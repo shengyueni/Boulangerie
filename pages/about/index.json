@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "吗喽的出走"
+  "navigationBarTitleText": "隐私与安全说明",
+  "usingComponents": {
+    "character-card": "/components/character-card/index"
+  }
 }

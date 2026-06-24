@@ -24,4 +24,10 @@
       <text class="subtext">{{item.subtitle}}</text>
     </view>
   </view>
+
+  <view class="feedback-note note-card paper-edge" bindtap="openFeedback">
+    <view class="paper-corner right"></view>
+    <text class="feedback-title">试用反馈</text>
+    <text>帮吗喽捡一点小树枝，让这个王国慢慢变好。</text>
+  </view>
 </view>
