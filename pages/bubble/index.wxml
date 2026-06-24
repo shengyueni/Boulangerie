@@ -9,12 +9,12 @@
 
   <view class="note-card bubble-note paper-edge">
     <view class="paper-corner right"></view>
-    <text>泡泡机只做本地随机展示，不联网、不识别真实聊天，也不会替你做决定。</text>
+    <text>泡泡机只做本地随机展示，不联网、不识别真实聊天，也不替你做决定。</text>
     <view class="bubble-tags">
       <text>模糊评价</text>
       <text>甩锅</text>
       <text>KPI 压迫</text>
-      <text>情绪操控</text>
+      <text>情绪拉扯</text>
     </view>
   </view>
 

@@ -32,7 +32,7 @@
     <text class="result-text">{{result.text}}</text>
     <text class="section-title small-title">下一步建议</text>
     <view wx:for="{{result.suggestions}}" wx:key="*this" class="suggestion">· {{item}}</view>
-    <button class="sticker-button secondary" bindtap="goDiary">去写一条日记</button>
+    <button class="sticker-button secondary" bindtap="goDiary">写一条判断记录</button>
     <button class="sticker-button" bindtap="goWishlist">去愿望清单</button>
     <button class="sticker-button green" bindtap="resetTest">重新测试</button>
   </view>

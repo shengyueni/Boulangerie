@@ -4,9 +4,9 @@
     <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
     <view class="paper-corner bottom-left"></view>
     <view class="paper-corner bottom-right"></view>
-    <text class="paper-title__stamp">日记详情</text>
-    <text class="hero-title">日记详情</text>
-    <text class="subtext">一条记录，就是你把自己从混乱里捞出来的一小步。</text>
+    <text class="paper-title__stamp">记录详情</text>
+    <text class="hero-title">判断记录详情</text>
+    <text class="subtext">一条记录，就是把一团乱线放到桌面上慢慢看。</text>
     <view class="paper-title__rail"><view class="paper-title__rail-line"></view><view class="paper-title__rail-dot"></view><view class="paper-title__rail-dot"></view><view class="paper-title__rail-line"></view></view>
   </view>
 
@@ -21,23 +21,25 @@
       <view class="corner-ornament corner-ornament-right corner-ornament--blue"></view>
       <view class="paper-corner bottom-right"></view>
       <view class="row between detail-top"><text class="date">{{entry.displayDate}}</text><text class="paper-seal detail-type {{entry.type === 'positive' ? 'positive' : 'negative'}}">{{entry.typeLabel}}</text></view>
-      <text class="section-title detail-title">事件描述</text>
+      <text class="section-title detail-title">事件事实</text>
       <text class="detail-text">{{entry.summary}}</text>
     </view>
 
-    <view class="paper-divider"><view class="paper-divider__line"></view><text class="paper-divider__tag">整理后的记录</text><view class="paper-divider__line"></view></view>
+    <view class="paper-divider"><view class="paper-divider__line"></view><text class="paper-divider__tag">整理后的线索</text><view class="paper-divider__line"></view></view>
 
     <view class="archive-card paper-card--record info-card">
       <view class="paper-corner left"></view>
       <view class="paper-corner right"></view>
       <text class="section-title">记录信息</text>
       <view class="info-grid">
-        <view class="info-row"><text>影响等级</text><text>{{entry.impactLevel}}</text></view>
-        <view class="info-row"><text>主要原因</text><text>{{entry.primaryReason}}</text></view>
-        <view class="info-row vertical"><text>补充标签</text><text>{{entry.tagsText}}</text></view>
+        <view class="info-row"><text>影响程度</text><text>{{entry.impactLevel}} 级</text></view>
+        <view class="info-row"><text>主要归因</text><text>{{entry.primaryReason}}</text></view>
+        <view class="info-row vertical"><text>补充线索</text><text>{{entry.tagsText}}</text></view>
         <view class="info-row vertical"><text>身体反应</text><text>{{entry.bodyReactionsText}}</text></view>
-        <view class="info-row vertical"><text>情绪</text><text>{{entry.emotionsText}}</text></view>
+        <view class="info-row vertical"><text>情绪反应</text><text>{{entry.emotionsText}}</text></view>
         <view class="info-row vertical"><text>已尝试处理</text><text>{{entry.triedActionsText}}</text></view>
+        <view class="info-row vertical full"><text>更想离开的部分</text><text>{{entry.leaveReasonText}}</text></view>
+        <view class="info-row vertical full"><text>想靠近的方向</text><text>{{entry.approachClueText}}</text></view>
         <view class="info-row vertical full"><text>下一步我可以做什么</text><text>{{entry.nextStepText}}</text></view>
       </view>
     </view>

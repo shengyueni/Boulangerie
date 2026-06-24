@@ -5,8 +5,8 @@
     <view class="paper-corner bottom-left"></view>
     <view class="paper-corner bottom-right"></view>
     <text class="paper-title__stamp">事实小纸条</text>
-    <text class="hero-title">吗喽的日记本</text>
-    <text class="subtext">记录不是为了立刻做决定，是为了看见自己发生了什么。</text>
+    <text class="hero-title">吗喽的判断记录</text>
+    <text class="subtext">记录不是为了立刻做决定，是为了看清哪些事正在影响你。</text>
     <view class="paper-title__rail"><view class="paper-title__rail-line"></view><view class="paper-title__rail-dot"></view><view class="paper-title__rail-dot"></view><view class="paper-title__rail-line"></view></view>
   </view>
 
@@ -22,16 +22,16 @@
     <button class="sticker-button secondary summary-button" bindtap="goDashboard">查看决心仪表盘</button>
   </view>
 
-  <button class="sticker-button secondary new-diary-button" bindtap="goNew">写一条日记</button>
+  <button class="sticker-button secondary new-diary-button" bindtap="goNew">记录一件影响判断的事</button>
   <view class="filter-panel archive-filter"><view wx:for="{{typeFilters}}" wx:key="key" class="chip {{activeFilter === item.key ? 'pink' : ''}}" data-key="{{item.key}}" bindtap="switchTypeFilter">{{item.label}}</view></view>
-  <scroll-view class="reason-scroll" scroll-x="true"><view class="reason-row-filter"><view wx:for="{{reasonFilters}}" wx:key="*this" class="chip {{(activeReason === 'all' && item === '全部原因') || activeReason === item ? 'green' : ''}}" data-reason="{{item}}" bindtap="switchReasonFilter">{{item}}</view></view></scroll-view>
+  <scroll-view class="reason-scroll" scroll-x="true"><view class="reason-row-filter"><view wx:for="{{reasonFilters}}" wx:key="*this" class="chip {{(activeReason === 'all' && item === '全部归因') || activeReason === item ? 'green' : ''}}" data-reason="{{item}}" bindtap="switchReasonFilter">{{item}}</view></view></scroll-view>
 
   <view wx:if="{{!entries.length}}" class="empty-card diary-empty">
     <view class="paper-divider"><view class="paper-divider__line"></view><text class="paper-divider__tag">空白纸页</text><view class="paper-divider__line"></view></view>
     <text>这里暂时没有符合筛选的记录。</text>
-    <text>第一条日记不需要完美，只要真实。</text>
+    <text>第一条记录不需要完美，只要真实。</text>
     <text>你不是在小题大做，你是在替自己留下线索。</text>
-    <button class="sticker-button green" bindtap="goNew">写下第一条日记</button>
+    <button class="sticker-button green" bindtap="goNew">写一条离职判断记录</button>
   </view>
 
   <view wx:for="{{entries}}" wx:key="id" class="archive-card memo-paper entry-card {{item.cardClass}} paper-edge {{item.impactLevel >= 4 ? 'red-mark' : ''}}" data-id="{{item.id}}" bindtap="goDetail">
@@ -45,7 +45,7 @@
     <text class="summary">{{item.summary}}</text>
     <view class="entry-meta-grid">
       <view class="entry-meta-item"><text class="meta-label">影响</text><text class="meta-value {{item.impactClass}}">{{item.impactLevel}} 级</text></view>
-      <view class="entry-meta-item"><text class="meta-label">原因</text><text class="meta-value">{{item.primaryReason}}</text></view>
+      <view class="entry-meta-item"><text class="meta-label">归因</text><text class="meta-value">{{item.primaryReason}}</text></view>
     </view>
     <view class="memo-slip"><text class="memo-label">事实纪要摘录</text><text class="memo">{{item.memoPreview}}</text></view>
     <text class="detail-hint">点开查看完整记录</text>

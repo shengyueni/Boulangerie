@@ -16,7 +16,7 @@ function getBubbleCategory(text) {
   if (/急|很快|今天先处理|改一下/.test(text)) return "KPI 压迫";
   if (/你自己|主动|不要总想着|大家都是/.test(text)) return "责任转移";
   if (/年轻人|成长|锻炼人/.test(text)) return "空泛鼓励";
-  if (/怎么做了这么久|太计较/.test(text)) return "情绪操控";
+  if (/怎么做了这么久|太计较/.test(text)) return "情绪拉扯";
   return "模糊评价";
 }
 
@@ -77,6 +77,6 @@ Page({
   },
 
   acknowledge() {
-    wx.showToast({ title: "知道了，不把它吞下去。", icon: "none" });
+    wx.showToast({ title: "知道了，先不把它吞下去。", icon: "none" });
   }
 });

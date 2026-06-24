@@ -13,20 +13,26 @@ function toOptions(labels, selected = []) {
   return labels.map((label) => ({ label, selected: selected.includes(label) }));
 }
 
+function joinSections(list, none) {
+  const text = list.filter(Boolean).join("；");
+  return text || none;
+}
+
 function buildFactMemo(entry) {
   const none = "这部分当时没有记录，也没关系。";
   return [
-    "事件时间：" + entry.createdAt,
-    "事件简述：" + entry.summary,
-    "影响等级：" + entry.impactLevel,
-    "主要原因：" + entry.primaryReason,
-    "记录类型：" + (entry.type === "negative" ? "负面记录" : "正面记录"),
+    "事件事实：" + entry.summary,
+    "影响程度：" + entry.impactLevel + " 级",
+    "主要归因：" + entry.primaryReason,
     "补充标签：" + (entry.secondaryTags.length ? entry.secondaryTags.join("、") : none),
-    "身体反应：" + (entry.bodyReactions.length ? entry.bodyReactions.join("、") : none),
-    "情绪：" + (entry.emotions.length ? entry.emotions.join("、") : none),
+    "身体 / 情绪反应：" + joinSections([
+      entry.bodyReactions.length ? entry.bodyReactions.join("、") : "",
+      entry.emotions.length ? entry.emotions.join("、") : ""
+    ], none),
     "已尝试处理：" + (entry.triedActions.length ? entry.triedActions.join("、") : none),
-    "对我的影响：" + (entry.type === "negative" ? "这件事消耗了我，需要被认真看见。" : "这件事给了我一点支持和能量。"),
-    "下一步我可以做：" + (entry.nextStep || "先照顾好自己，再决定下一步。")
+    "离职判断线索：" + (entry.leaveReason || none),
+    "想靠近的方向：" + (entry.approachClue || none),
+    "下一步：" + (entry.nextStep || "先照顾好自己，再决定下一步。")
   ].join("\n");
 }
 
@@ -34,12 +40,15 @@ Page({
   data: {
     summary: "",
     type: "negative",
+    entryKind: "decision_factor",
     impactLevel: 3,
     primaryReason: REASON_OPTIONS[0],
     secondaryTags: [],
     bodyReactions: [],
     emotions: [],
     triedActions: [],
+    leaveReason: "",
+    approachClue: "",
     nextStep: "",
     companion: buildCompanion("elodie", "diaryNew", {
       image: getElodieVariantImage("remind"),
@@ -55,8 +64,9 @@ Page({
   },
 
   onSummaryInput(event) { this.setData({ summary: event.detail.value }); },
+  onLeaveReasonInput(event) { this.setData({ leaveReason: event.detail.value }); },
+  onApproachClueInput(event) { this.setData({ approachClue: event.detail.value }); },
   onNextStepInput(event) { this.setData({ nextStep: event.detail.value }); },
-  selectType(event) { this.setData({ type: event.currentTarget.dataset.type }); },
   selectImpact(event) { this.setData({ impactLevel: Number(event.currentTarget.dataset.value) }); },
 
   selectReason(event) {
@@ -88,7 +98,8 @@ Page({
     const entry = {
       id: createId("diary"),
       createdAt: new Date().toISOString(),
-      type: this.data.type,
+      type: "negative",
+      entryKind: this.data.entryKind,
       summary,
       impactLevel: this.data.impactLevel,
       primaryReason: this.data.primaryReason,
@@ -96,6 +107,8 @@ Page({
       bodyReactions: this.data.bodyReactions,
       emotions: this.data.emotions,
       triedActions: this.data.triedActions,
+      leaveReason: this.data.leaveReason.trim(),
+      approachClue: this.data.approachClue.trim(),
       nextStep: this.data.nextStep.trim(),
       factMemo: ""
     };

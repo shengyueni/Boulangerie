@@ -17,7 +17,7 @@
     </view>
     <text class="paper-title__stamp">{{oracle.dateLabel}}</text>
     <text class="oracle-title">今日职场猩象</text>
-    <text class="oracle-subtitle">来自吗喽宇宙的今日指引</text>
+    <text class="oracle-subtitle">不预测命运，只看今天的职场天气</text>
     <view class="paper-title__rail">
       <view class="paper-title__rail-line"></view>
       <view class="paper-title__rail-dot"></view>
@@ -74,8 +74,8 @@
     <view class="quick-grid">
       <view class="quick-entry" bindtap="recordToday">
         <text class="paper-seal">记录</text>
-        <text class="quick-title">记录今天</text>
-        <text class="quick-desc">放下一件事</text>
+        <text class="quick-title">记一条线索</text>
+        <text class="quick-desc">影响判断的事</text>
       </view>
       <view class="quick-entry" bindtap="goEmergency">
         <text class="paper-seal">急救</text>
