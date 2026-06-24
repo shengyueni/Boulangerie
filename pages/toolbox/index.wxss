@@ -16,21 +16,20 @@
 .tool-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
   gap: 18rpx;
   margin-top: 28rpx;
 }
 
 .tool-card {
-  min-height: 210rpx;
+  box-sizing: border-box;
+  min-height: 244rpx;
+  height: 100%;
   margin-top: 0;
-  padding-top: 42rpx;
+  padding-top: 38rpx;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-}
-
-.tool-card:nth-child(2n) {
-  margin-top: 18rpx;
 }
 
 .tool-title {
@@ -39,6 +38,15 @@
   font-size: 31rpx;
   line-height: 1.28;
   font-weight: 900;
+}
+
+.tool-card .subtext {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  font-size: 24rpx;
+  line-height: 1.45;
 }
 
 .tool-card .corner-ornament {

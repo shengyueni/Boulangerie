@@ -1,25 +1,25 @@
 .diary-title-board {
-  margin-bottom: 20rpx;
-  padding: 28rpx 28rpx 24rpx;
+  margin-bottom: 16rpx;
+  padding: 20rpx 26rpx 18rpx;
 }
 
 .diary-title-board .hero-title {
-  margin-bottom: 8rpx;
-  font-size: 44rpx;
+  margin-bottom: 6rpx;
+  font-size: 40rpx;
 }
 
 .diary-title-board .subtext {
-  font-size: 25rpx;
-  line-height: 1.5;
+  font-size: 24rpx;
+  line-height: 1.4;
 }
 
 .diary-title-board .paper-title__rail {
-  margin-top: 12rpx;
+  margin-top: 8rpx;
 }
 
 .dashboard-summary-card {
-  margin-top: 18rpx;
-  padding: 34rpx 24rpx 24rpx;
+  margin-top: 14rpx;
+  padding: 28rpx 24rpx 22rpx;
   border-color: rgba(184, 138, 74, 0.58);
   background: linear-gradient(180deg, #fffefb, #fff9ef);
 }
@@ -58,13 +58,19 @@
   font-weight: 900;
 }
 
-.summary-button {
-  min-height: 72rpx;
+.summary-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14rpx;
   margin-top: 16rpx;
 }
 
-.new-diary-button {
-  margin-top: 18rpx;
+.summary-button {
+  flex: 1 1 220rpx;
+  min-height: 68rpx;
+  margin-top: 0;
+  padding: 0 20rpx;
+  font-size: 26rpx;
 }
 
 .diary-empty {

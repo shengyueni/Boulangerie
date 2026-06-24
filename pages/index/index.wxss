@@ -4,19 +4,19 @@
 .home-brand-head .subtext { font-size: 25rpx; line-height: 1.45; }
 
 .oracle-card {
-  margin-top: 8rpx;
-  padding: 26rpx 28rpx 28rpx;
+  margin-top: 4rpx;
+  padding: 14rpx 26rpx 24rpx;
   overflow: hidden;
   text-align: center;
 }
 
 .oracle-sky {
   position: absolute;
-  top: 12rpx;
-  right: 26rpx;
-  width: 150rpx;
-  height: 150rpx;
-  opacity: .24;
+  top: 2rpx;
+  right: 22rpx;
+  width: 128rpx;
+  height: 128rpx;
+  opacity: .2;
   pointer-events: none;
 }
 
@@ -45,11 +45,21 @@
 .star-b { right: 20rpx; top: 42rpx; border-color: rgba(184, 74, 58, .75); }
 .star-c { left: 56rpx; bottom: 8rpx; border-color: rgba(47, 107, 79, .75); }
 
+.oracle-card .paper-title__stamp {
+  margin-bottom: 6rpx;
+  padding-top: 6rpx;
+  padding-bottom: 6rpx;
+}
+
+.oracle-card .paper-title__rail {
+  margin-top: 8rpx;
+}
+
 .oracle-title {
   display: block;
-  margin-top: 6rpx;
+  margin-top: 2rpx;
   color: var(--page-theme);
-  font-size: 50rpx;
+  font-size: 48rpx;
   line-height: 1.16;
   font-weight: 900;
   letter-spacing: 1rpx;
@@ -67,13 +77,13 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 10rpx;
-  margin-top: 18rpx;
+  margin-top: 12rpx;
   text-align: left;
 }
 
 .oracle-metric {
   position: relative;
-  padding: 14rpx 16rpx 14rpx 22rpx;
+  padding: 12rpx 16rpx 12rpx 20rpx;
   border: 2rpx solid rgba(184, 138, 74, .38);
   border-left-width: 8rpx;
   border-radius: 18rpx;
@@ -101,7 +111,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 12rpx;
-  margin-top: 20rpx;
+  margin-top: 16rpx;
   text-align: left;
 }
 
