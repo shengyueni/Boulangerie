@@ -2,14 +2,14 @@ const { APP_META } = require("../../utils/constants");
 const { getDiaryEntries } = require("../../utils/storage");
 const { getCroissantReport } = require("../../utils/croissant");
 const { getTodayOracle } = require("../../utils/oracle");
-const { buildCompanion, getCroissantStateImage } = require("../../utils/characters");
+const { getCharacterLine, getCroissantStateImage } = require("../../utils/characters");
 
-function buildHomeCompanion(croissant) {
-  return buildCompanion("croissant", "home", {
+function buildTodayStatus(croissant) {
+  return {
     image: getCroissantStateImage(croissant.statusKey),
-    tag: "今日陪伴",
-    size: "bust"
-  });
+    message: getCharacterLine("home", croissant.wear),
+    advice: croissant.advice
+  };
 }
 
 Page({
@@ -17,7 +17,7 @@ Page({
     appMeta: APP_META,
     oracle: getTodayOracle(),
     croissant: getCroissantReport([]),
-    companion: buildHomeCompanion(getCroissantReport([]))
+    todayStatus: buildTodayStatus(getCroissantReport([]))
   },
 
   onShow() {
@@ -25,7 +25,7 @@ Page({
     this.setData({
       oracle: getTodayOracle(),
       croissant,
-      companion: buildHomeCompanion(croissant)
+      todayStatus: buildTodayStatus(croissant)
     });
   },
 

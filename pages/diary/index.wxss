@@ -1,5 +1,51 @@
-.diary-page .sticker-button.secondary {
-  margin-top: 24rpx;
+.dashboard-summary-card {
+  margin-top: 22rpx;
+  padding: 34rpx 24rpx 24rpx;
+  border-color: rgba(184, 138, 74, 0.58);
+  background: linear-gradient(180deg, #fffefb, #fff9ef);
+}
+
+.dashboard-summary-card.status-smooth { border-color: rgba(47, 123, 103, 0.42); }
+.dashboard-summary-card.status-ruffled { border-color: rgba(185, 139, 75, 0.58); }
+.dashboard-summary-card.status-ball { border-color: rgba(201, 111, 69, 0.56); }
+.dashboard-summary-card.status-protect { border-color: rgba(76, 54, 95, 0.62); }
+
+.summary-title {
+  margin-bottom: 12rpx;
+  font-size: 31rpx;
+  line-height: 1.32;
+}
+
+.summary-text {
+  font-size: 26rpx;
+  line-height: 1.62;
+}
+
+.summary-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12rpx;
+  margin-top: 16rpx;
+}
+
+.summary-meta text {
+  padding: 14rpx;
+  border: 2rpx solid rgba(184, 138, 74, 0.34);
+  border-radius: 16rpx;
+  background: rgba(255, 254, 251, 0.82);
+  color: var(--muted);
+  font-size: 23rpx;
+  line-height: 1.45;
+  font-weight: 900;
+}
+
+.summary-button {
+  min-height: 72rpx;
+  margin-top: 16rpx;
+}
+
+.new-diary-button {
+  margin-top: 22rpx;
 }
 
 .diary-empty {
@@ -137,3 +183,7 @@
 .reason-row-filter { display: inline-flex; padding-bottom: 6rpx; }
 .archive-filter { padding-top: 8rpx; }
 .filter-panel .chip, .reason-row-filter .chip { border-style: solid; border-color: rgba(184,138,74,.52); background: #fffefb; }
+
+@media (max-width: 360px) {
+  .summary-meta { grid-template-columns: 1fr; }
+}

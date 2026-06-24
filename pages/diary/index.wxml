@@ -10,7 +10,19 @@
     <view class="paper-title__rail"><view class="paper-title__rail-line"></view><view class="paper-title__rail-dot"></view><view class="paper-title__rail-dot"></view><view class="paper-title__rail-line"></view></view>
   </view>
 
-  <button class="sticker-button secondary" bindtap="goNew">写一条日记</button>
+  <view class="ornament-card dashboard-summary-card {{dashboardSummary.statusClass}}">
+    <view class="corner-ornament corner-ornament-left corner-ornament--gold"></view>
+    <view class="corner-ornament corner-ornament-right corner-ornament--green"></view>
+    <text class="section-title summary-title">{{dashboardSummary.title}}</text>
+    <text class="body-text summary-text">{{dashboardSummary.text}}</text>
+    <view class="summary-meta">
+      <text>最近共记录 {{dashboardSummary.total}} 条</text>
+      <text>近 7 天高影响事件 {{dashboardSummary.highImpact7Days}} 条</text>
+    </view>
+    <button class="sticker-button secondary summary-button" bindtap="goDashboard">查看决心仪表盘</button>
+  </view>
+
+  <button class="sticker-button secondary new-diary-button" bindtap="goNew">写一条日记</button>
   <view class="filter-panel archive-filter"><view wx:for="{{typeFilters}}" wx:key="key" class="chip {{activeFilter === item.key ? 'pink' : ''}}" data-key="{{item.key}}" bindtap="switchTypeFilter">{{item.label}}</view></view>
   <scroll-view class="reason-scroll" scroll-x="true"><view class="reason-row-filter"><view wx:for="{{reasonFilters}}" wx:key="*this" class="chip {{(activeReason === 'all' && item === '全部原因') || activeReason === item ? 'green' : ''}}" data-reason="{{item}}" bindtap="switchReasonFilter">{{item}}</view></view></scroll-view>
 
