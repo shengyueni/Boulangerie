@@ -22,7 +22,8 @@
     <view class="paper-corner right"></view>
     <text class="paper-seal">第一张纸</text>
     <text class="section-title">今天发生了什么？</text>
-    <textarea class="textarea record-textarea" value="{{summary}}" bindinput="onSummaryInput" placeholder="写下一个职场事件、一个感受，或者一件让你顺毛的事。" />
+    <textarea class="textarea record-textarea" value="{{summary}}" bindinput="onSummaryInput" placeholder-class="form-placeholder" placeholder="写下发生了什么" />
+    <text class="field-hint">可以是一件职场事件、一个感受，或者一件让你顺毛的小事。</text>
   </view>
 
   <view class="paper-divider"><view class="paper-divider__line"></view><text class="paper-divider__tag">记录分类</text><view class="paper-divider__line"></view></view>
@@ -102,7 +103,8 @@
     <view class="paper-corner left"></view>
     <view class="paper-corner right"></view>
     <text class="section-title">下一步我可以做什么？</text>
-    <input class="input record-input" value="{{nextStep}}" bindinput="onNextStepInput" placeholder="比如：下班后先吃饭，明天整理证据，找朋友聊聊。" />
+    <input class="input record-input" value="{{nextStep}}" bindinput="onNextStepInput" placeholder-class="form-placeholder" placeholder="先记一个小动作" />
+    <text class="field-hint">比如：下班后先吃饭，明天整理证据，找朋友聊聊。可以很小，不需要立刻解决人生。</text>
   </view>
 
   <button class="sticker-button save-seal" bindtap="saveEntry">保存这条记录</button>

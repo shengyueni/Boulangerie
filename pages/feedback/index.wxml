@@ -22,7 +22,8 @@
     <view class="type-list">
       <view wx:for="{{feedbackTypes}}" wx:key="*this" class="paper-tag {{activeType === item ? 'green' : ''}}" data-type="{{item}}" bindtap="selectType">{{item}}</view>
     </view>
-    <textarea class="textarea feedback-textarea" value="{{content}}" bindinput="onInput" placeholder="可以只写一点点。比如：哪个页面、发生了什么、你原本期待它怎样。" />
+    <textarea class="textarea feedback-textarea" value="{{content}}" bindinput="onInput" placeholder-class="form-placeholder" placeholder="可以只写一点点" />
+    <text class="field-hint">比如：哪个页面、发生了什么、你原本期待它怎样。</text>
     <button class="sticker-button green save-feedback" bindtap="saveFeedback">保存这张小纸条</button>
   </view>
 

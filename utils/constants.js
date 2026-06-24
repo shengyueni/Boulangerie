@@ -1,8 +1,8 @@
 const APP_META = {
   appName: "吗喽的出走",
   slogan: "保护好你的猩",
-  version: "MVP 0.8A",
-  stage: "导航识别与首页结构微调版"
+  version: "MVP 0.8B",
+  stage: "泡泡机与填写栏可读性打磨版"
 };
 
 const CHARACTERS = {

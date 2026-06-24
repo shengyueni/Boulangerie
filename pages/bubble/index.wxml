@@ -1,42 +1,56 @@
-<view class="page bubble-page">
-  <view class="page-head floral-title-box">
+<view class="page bubble-page paper-page">
+  <view class="page-head floral-title-box bubble-head">
     <view class="corner-ornament corner-ornament-left corner-ornament--blue"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
-    <text class="seal-flower">泡泡站</text>
+    <text class="seal-flower">废话标本室</text>
     <text class="hero-title">吗喽的泡泡机</text>
-    <text class="subtext">不用立刻解决人生。先摇一颗泡泡。</text>
+    <text class="subtext">有些话听起来很大，其实只是空气很多。把职场废话放进泡泡里，会比较容易看清它。</text>
+  </view>
+
+  <view class="note-card bubble-note paper-edge">
+    <view class="paper-corner right"></view>
+    <text>泡泡机只做本地随机展示，不联网、不识别真实聊天，也不会替你做决定。</text>
+    <view class="bubble-tags">
+      <text>模糊评价</text>
+      <text>甩锅</text>
+      <text>KPI 压迫</text>
+      <text>情绪操控</text>
+    </view>
   </view>
 
   <character-card image="{{companion.image}}" name="{{companion.name}}" tag="{{companion.tag}}" message="{{companion.message}}" sub-message="{{companion.subMessage}}" variant="{{companion.variant}}" size="{{companion.size}}" />
 
-  <view class="floral-divider"><view class="floral-divider__line"></view><view class="floral-divider__dot blue"></view><view class="floral-divider__dot"></view><view class="floral-divider__line"></view></view>
-  <view class="note-card bubble-note paper-edge"><text>泡泡会轻轻提醒你：有些话可以接住，有些职场废话可以点破。</text></view>
-
-  <view class="ornament-card ornament-card--blue bubble-machine">
+  <view class="ornament-card bubble-lab">
     <view class="corner-ornament corner-ornament-left corner-ornament--blue"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
-    <view class="machine-window">
-      <view class="machine-circle"></view>
-      <view class="machine-bubble b1"></view>
-      <view class="machine-bubble b2"></view>
-      <view class="machine-bubble b3"></view>
-      <view class="machine-base"></view>
-      <text class="machine-label">MALO BUBBLE</text>
+    <text class="paper-seal">今日废话标本</text>
+    <view class="main-bubble {{popped ? 'is-popped' : ''}}">
+      <view class="tiny-bubble b1"></view>
+      <view class="tiny-bubble b2"></view>
+      <view class="tiny-bubble b3"></view>
+      <block wx:if="{{bubble}}">
+        <text class="bubble-category">{{bubble.category}}</text>
+        <text class="bubble-text">{{bubble.text}}</text>
+      </block>
+      <block wx:else>
+        <text class="bubble-category">待识别</text>
+        <text class="bubble-text empty-bubble-text">按一下按钮，让一颗职场废话浮上来。</text>
+      </block>
+    </view>
+    <button wx:if="{{bubble && !popped}}" class="sticker-button secondary pop-button" bindtap="popLdBubble">戳破这句废话</button>
+    <button wx:if="{{!bubble}}" class="sticker-button pop-button" bindtap="drawBubble">摇一颗泡泡</button>
+  </view>
+
+  <view wx:if="{{popped}}" class="archive-card result-card paper-edge">
+    <view class="paper-corner bottom-right"></view>
+    <text class="paper-seal result-seal">拆解说明纸</text>
+    <text class="result-line strong">已识别职场废话，建议不要内化。</text>
+    <text class="result-line">你可以把它当成一句{{bubble.category}}，而不是事实。</text>
+    <text class="result-line">泡泡已破。它没有你想象中那么坚固。</text>
+    <view class="action-row">
+      <button class="sticker-button" bindtap="drawBubble">再来一个</button>
+      <button class="sticker-button green" bindtap="goDiary">记进日记</button>
+      <button class="sticker-button secondary" bindtap="acknowledge">我知道了</button>
     </view>
   </view>
-
-  <view wx:if="{{bubble}}" class="ornament-card bubble-card {{bubble.tone}} {{bubble.tone === 'ld' && poppedMessage ? 'popped-card' : ''}}">
-    <view class="corner-ornament corner-ornament-left corner-ornament--gold"></view>
-    <view class="corner-ornament corner-ornament-right corner-ornament--purple"></view>
-    <view class="bubble-orb" style="background: {{bubble.color}};"></view>
-    <text class="seal-flower">{{bubble.source}}</text>
-    <text class="chip bubble-type">{{bubble.type}}</text>
-    <text class="bubble-text">{{bubble.text}}</text>
-    <button wx:if="{{bubble.tone === 'ld' && !poppedMessage}}" class="sticker-button secondary" bindtap="popLdBubble">点破这句职场废话</button>
-    <text wx:if="{{poppedMessage}}" class="popped">{{poppedMessage}}</text>
-  </view>
-
-  <view wx:else class="empty-card bubble-empty"><text>泡泡还没出现。按一下按钮，让它咕噜一下。</text></view>
-  <button class="sticker-button" bindtap="drawBubble">摇一颗泡泡</button>
-  <view class="floral-divider"><view class="floral-divider__line"></view><view class="floral-divider__dot red"></view><view class="floral-divider__dot green"></view><view class="floral-divider__line"></view></view>
 </view>

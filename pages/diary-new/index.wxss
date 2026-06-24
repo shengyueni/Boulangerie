@@ -14,7 +14,7 @@
 
 .record-paper {
   margin-top: 0;
-  padding: 42rpx 28rpx 30rpx;
+  padding: 42rpx 28rpx 34rpx;
 }
 
 .summary-paper {
@@ -50,4 +50,11 @@
   background: linear-gradient(180deg, #fffefb, #fff2ee);
   box-shadow: 0 12rpx 28rpx rgba(184, 74, 58, 0.14);
   letter-spacing: 1rpx;
+}
+.record-paper .field-hint {
+  margin-top: 12rpx;
+}
+
+.record-input {
+  margin-bottom: 0;
 }

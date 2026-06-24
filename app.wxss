@@ -239,16 +239,35 @@ page {
 .textarea {
   box-sizing: border-box;
   width: 100%;
-  margin-top: 12rpx;
-  padding: 22rpx;
+  margin-top: 14rpx;
+  padding: 22rpx 24rpx;
   border: 2rpx solid rgba(90, 70, 56, 0.28);
   border-radius: 18rpx;
   background: #fffefb;
   color: var(--ink);
   font-size: 28rpx;
+  line-height: 1.55;
 }
 
-.textarea { min-height: 180rpx; }
+.input {
+  min-height: 84rpx;
+}
+
+.textarea {
+  min-height: 220rpx;
+}
+
+.form-placeholder {
+  color: rgba(139, 122, 110, 0.82);
+}
+
+.field-hint {
+  display: block;
+  margin-top: 10rpx;
+  color: var(--muted);
+  font-size: 24rpx;
+  line-height: 1.55;
+}
 
 .empty,
 .empty-card {
