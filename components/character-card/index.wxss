@@ -3,9 +3,9 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  gap: 20rpx;
-  margin: 24rpx 0;
-  padding: 24rpx 22rpx 22rpx 24rpx;
+  gap: 18rpx;
+  margin: 22rpx 0;
+  padding: 22rpx 20rpx 20rpx 22rpx;
   border: 3rpx double rgba(184, 138, 74, 0.62);
   border-radius: 24rpx;
   background: linear-gradient(180deg, #fffefb, #fff8ed);
@@ -85,14 +85,16 @@
 .character-card__image {
   position: relative;
   z-index: 1;
+  display: block;
   flex: 0 0 auto;
   width: 98rpx;
   height: 98rpx;
+  background: transparent;
 }
 
 .character-card--bust .character-card__image {
-  width: 178rpx;
-  height: 196rpx;
+  width: 158rpx;
+  height: 176rpx;
 }
 
 .character-card--croissant { border-color: rgba(184, 138, 74, 0.68); }
@@ -102,7 +104,7 @@
 .character-card--ld,
 .character-card--warning { border-color: rgba(90, 70, 56, 0.42); background: linear-gradient(180deg, #fffefb, #f7f2ed); }
 .character-card--ld.character-card--bust .character-card__image,
-.character-card--warning.character-card--bust .character-card__image { width: 138rpx; height: 156rpx; }
+.character-card--warning.character-card--bust .character-card__image { width: 126rpx; height: 142rpx; }
 .character-card--ld .character-card__tag,
 .character-card--warning .character-card__tag { color: #5A2A5F; border-color: rgba(90, 42, 95, 0.36); }
 
@@ -119,13 +121,13 @@
   }
 
   .character-card--bust .character-card__image {
-    width: 138rpx;
-    height: 154rpx;
+    width: 126rpx;
+    height: 140rpx;
   }
 
   .character-card--ld.character-card--bust .character-card__image,
   .character-card--warning.character-card--bust .character-card__image {
-    width: 118rpx;
-    height: 136rpx;
+    width: 108rpx;
+    height: 124rpx;
   }
 }
