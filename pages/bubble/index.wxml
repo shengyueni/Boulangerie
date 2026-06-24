@@ -32,7 +32,6 @@
   </view>
 
   <view class="bubble-machine-zone" bindtap="handleBubbleMachineTap" hover-class="bubble-machine-zone-active" hover-stay-time="120">
-    <view class="machine-soft-shadow"></view>
     <image class="bubble-machine-image" src="{{machineImage}}" mode="aspectFit" />
     <text class="bubble-machine-tip">点我吹泡泡</text>
   </view>

@@ -46,12 +46,12 @@
 .bubble-stage {
   position: relative;
   display: flex;
-  min-height: 430rpx;
+  min-height: 390rpx;
   box-sizing: border-box;
   align-items: center;
   justify-content: center;
   margin-top: 10rpx;
-  padding: 42rpx 22rpx 34rpx;
+  padding: 34rpx 22rpx 22rpx;
   overflow: visible;
 }
 
@@ -234,13 +234,13 @@
 .bubble-machine-zone {
   position: relative;
   display: flex;
-  min-height: 360rpx;
+  min-height: 430rpx;
   box-sizing: border-box;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
   margin-top: auto;
-  padding: 18rpx 0 4rpx;
+  padding: 8rpx 0 0;
   transition: transform 140ms ease;
 }
 
@@ -248,25 +248,14 @@
   transform: scale(0.985);
 }
 
-.machine-soft-shadow {
-  position: absolute;
-  left: 50%;
-  bottom: 64rpx;
-  width: 430rpx;
-  height: 118rpx;
-  border-radius: 999rpx;
-  background: rgba(246, 166, 184, 0.16);
-  transform: translateX(-50%);
-  pointer-events: none;
-}
 
 .bubble-machine-image {
   position: relative;
   z-index: 1;
   display: block;
-  width: 58vw;
-  max-width: 440rpx;
-  height: 300rpx;
+  width: 70vw;
+  max-width: 560rpx;
+  height: 390rpx;
 }
 
 .bubble-machine-tip {
@@ -319,8 +308,8 @@
   }
 
   .bubble-stage {
-    min-height: 380rpx;
-    padding: 30rpx 6rpx 24rpx;
+    min-height: 350rpx;
+    padding: 26rpx 6rpx 18rpx;
   }
 
   .friend-bubble {
@@ -336,16 +325,12 @@
   }
 
   .bubble-machine-zone {
-    min-height: 320rpx;
+    min-height: 380rpx;
   }
 
   .bubble-machine-image {
-    width: 64vw;
-    max-width: 390rpx;
-    height: 260rpx;
-  }
-
-  .machine-soft-shadow {
-    width: 360rpx;
+    width: 74vw;
+    max-width: 480rpx;
+    height: 330rpx;
   }
 }

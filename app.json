@@ -33,23 +33,33 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "今日"
+        "text": "今日",
+        "iconPath": "assets/tabbar/today.png",
+        "selectedIconPath": "assets/tabbar/today-active.png"
       },
       {
         "pagePath": "pages/diary/index",
-        "text": "日记"
+        "text": "日记",
+        "iconPath": "assets/tabbar/diary.png",
+        "selectedIconPath": "assets/tabbar/diary-active.png"
       },
       {
         "pagePath": "pages/wishlist/index",
-        "text": "出走"
+        "text": "出走",
+        "iconPath": "assets/tabbar/wishlist.png",
+        "selectedIconPath": "assets/tabbar/wishlist-active.png"
       },
       {
         "pagePath": "pages/toolbox/index",
-        "text": "百宝箱"
+        "text": "百宝箱",
+        "iconPath": "assets/tabbar/toolbox.png",
+        "selectedIconPath": "assets/tabbar/toolbox-active.png"
       },
       {
         "pagePath": "pages/voice/index",
-        "text": "心声"
+        "text": "心声",
+        "iconPath": "assets/tabbar/voice.png",
+        "selectedIconPath": "assets/tabbar/voice-active.png"
       }
     ]
   }

@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## mvp-0.9B-bubble-scale-and-tabbar-icons
+
+- 放大泡泡机页面的机器本体，调整舞台和机器区域高度，让泡泡与机器比例更协调。
+- 移除泡泡机后方明显粉色椭圆遮罩 / 底托，仅保留页面自身留白和轻量点击反馈。
+- 保留 0.9A 的单颗朋友泡泡交互：初始不出泡泡，点击后生成 Elodie 或 Gapchick，二次点击先破掉再生成新泡泡。
+- 检测到 `assets/tabbar-source/` 下 7 张用户提供的花纸源素材，并生成 `assets/tabbar/` 下 10 个 81px PNG tabBar 图标。
+- 图标文件大小控制在约 8KB-12KB，未使用网络图片，也未直接把 4096px 源图接入 tabBar。
+- 在 `app.json` 为今日、日记、出走、百宝箱、心声五个 tab 接入 normal / active 图标。
+- 当前仍不做登录、授权、云开发、AI、后端、真实社区或支付；产品也不是医疗、法律、劳动仲裁或离职决策指令工具。
+
 ## mvp-0.9A-bubble-machine-tap-interaction
 
 - 泡泡机交互从“按钮生成 / 卡片展示”调整为“点击泡泡机生成一个朋友泡泡”。
