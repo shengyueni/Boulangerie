@@ -1,51 +1,39 @@
 <view class="page bubble-page paper-page">
-  <view class="page-head floral-title-box bubble-hero-header">
+  <view class="page-head floral-title-box bubble-header">
     <view class="corner-ornament corner-ornament-left corner-ornament--blue"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
-    <text class="seal-flower">朋友泡泡站</text>
-    <text class="hero-title">吗喽的泡泡机</text>
-    <text class="subtext">这里会飘出两句朋友的话，偶尔也会飘来一句不必太当真的废话。</text>
+    <text class="bubble-kicker">朋友泡泡站</text>
+    <text class="bubble-title">吗喽的泡泡机</text>
+    <text class="bubble-subtitle">点一点泡泡机，让朋友吹来一句话。</text>
   </view>
 
-  <view class="note-card bubble-note paper-edge">
-    <view class="paper-corner right"></view>
-    <text>泡泡机只做本地随机展示，不联网、不识别真实聊天，也不会替你做决定。</text>
+  <view class="bubble-stage">
+    <view class="stage-paper-mark stage-paper-mark-left"></view>
+    <view class="stage-paper-mark stage-paper-mark-right"></view>
+
+    <block wx:if="{{hasBubble && currentBubble}}">
+      <view class="friend-bubble {{currentBubble.type}} {{isPopping ? 'is-popping' : ''}}">
+        <view class="bubble-shine"></view>
+        <view class="bubble-meta">
+          <image wx:if="{{currentBubble.avatar}}" class="bubble-avatar" src="{{currentBubble.avatar}}" mode="aspectFit" />
+          <view wx:else class="bubble-avatar-fallback">{{currentBubble.speaker}}</view>
+          <view class="bubble-meta-text">
+            <text class="bubble-speaker">{{currentBubble.speaker}}</text>
+            <text class="bubble-tag">{{currentBubble.tag}}</text>
+          </view>
+        </view>
+        <text class="bubble-text">{{currentBubble.text}}</text>
+      </view>
+    </block>
+
+    <block wx:else>
+      <view class="bubble-empty-hint">点下面的泡泡机，吹出一颗泡泡。</view>
+    </block>
   </view>
 
-  <view class="ornament-card bubble-machine-stage">
-    <view class="corner-ornament corner-ornament-left corner-ornament--blue"></view>
-    <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
-    <view class="machine-glow"></view>
+  <view class="bubble-machine-zone" bindtap="handleBubbleMachineTap" hover-class="bubble-machine-zone-active" hover-stay-time="120">
+    <view class="machine-soft-shadow"></view>
     <image class="bubble-machine-image" src="{{machineImage}}" mode="aspectFit" />
-    <view class="floating-bubble stage-bubble stage-bubble-soothe"></view>
-    <view class="floating-bubble stage-bubble stage-bubble-clarity"></view>
-    <view wx:if="{{hasLdBubble}}" class="floating-bubble stage-bubble stage-bubble-ld"></view>
-  </view>
-
-  <view class="bubble-message-area">
-    <view class="bubble-card friend-bubble soothe-bubble">
-      <view class="bubble-shine"></view>
-      <text class="bubble-label">{{sootheBubble.speaker}} / {{sootheBubble.tag}}</text>
-      <text class="bubble-copy">{{sootheBubble.text}}</text>
-    </view>
-
-    <view class="bubble-card friend-bubble clarity-bubble">
-      <view class="bubble-shine"></view>
-      <text class="bubble-label">{{clarityBubble.speaker}} / {{clarityBubble.tag}}</text>
-      <text class="bubble-copy">{{clarityBubble.text}}</text>
-    </view>
-  </view>
-
-  <view wx:if="{{hasLdBubble}}" class="ld-noise-card paper-edge">
-    <view class="paper-corner bottom-right"></view>
-    <text class="ld-label">LD 乱入 / {{ldBubble.tag}}</text>
-    <text class="ld-copy">{{ldBubble.text}}</text>
-    <text class="ld-hint">{{ldHint}}</text>
-  </view>
-
-  <view class="bubble-actions">
-    <button class="sticker-button" bindtap="handleRegenerate">再吹一次</button>
-    <button class="sticker-button green" bindtap="handleGoDiary">记进日记</button>
-    <button class="sticker-button secondary" bindtap="handleCollect">我先收下这两句</button>
+    <text class="bubble-machine-tip">点我吹泡泡</text>
   </view>
 </view>

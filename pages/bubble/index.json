@@ -1,6 +1,3 @@
 {
-  "navigationBarTitleText": "吗喽的出走",
-  "usingComponents": {
-    "character-card": "/components/character-card/index"
-  }
+  "navigationBarTitleText": "吗喽的泡泡机"
 }
