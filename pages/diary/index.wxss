@@ -1,5 +1,24 @@
+.diary-title-board {
+  margin-bottom: 20rpx;
+  padding: 28rpx 28rpx 24rpx;
+}
+
+.diary-title-board .hero-title {
+  margin-bottom: 8rpx;
+  font-size: 44rpx;
+}
+
+.diary-title-board .subtext {
+  font-size: 25rpx;
+  line-height: 1.5;
+}
+
+.diary-title-board .paper-title__rail {
+  margin-top: 12rpx;
+}
+
 .dashboard-summary-card {
-  margin-top: 22rpx;
+  margin-top: 18rpx;
   padding: 34rpx 24rpx 24rpx;
   border-color: rgba(184, 138, 74, 0.58);
   background: linear-gradient(180deg, #fffefb, #fff9ef);
@@ -45,7 +64,7 @@
 }
 
 .new-diary-button {
-  margin-top: 22rpx;
+  margin-top: 18rpx;
 }
 
 .diary-empty {

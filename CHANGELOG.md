@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## mvp-0.9E-home-diary-theme-and-tabbar-polish
+
+- 压缩今日页顶部品牌区和今日职场猩象卡片上方空白，移除卡片内“不预测命运，只看今天的职场天气”提示。
+- 新增页面主题色 class，让今日、日记、出走、心声、百宝箱、泡泡机的重点文字跟随各自花纸源素材主色。
+- 日记页标题改为“吗喽的日记本”，副标题缩短，并只保留一个“写一条日记”主入口。
+- tabBar 顺序调整为今日 / 日记 / 出走 / 心声 / 百宝箱，保持 voice 与 toolbox 图标路径不串位。
+- 当前仍不新增登录、授权、云开发、AI、后端、真实社区或支付。
+
 ## mvp-0.9D-header-pattern-home-compact-and-bubble-scale
 
 - 修复标题栏花纸背景不明显的问题：标题卡改为真实 `image` 背景层，直接使用 `assets/tabbar-source/` 同源花纸素材，并加米白半透明遮罩压低强度。

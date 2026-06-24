@@ -73,3 +73,6 @@
   font-size: 30rpx;
   font-weight: 900;
 }
+
+.theme-toolbox .drawer-head { border-color: rgba(94, 59, 115, .46); }
+.theme-toolbox .tiny-seal, .theme-toolbox .feedback-title { color: var(--page-theme); border-color: rgba(94, 59, 115, .38); }

@@ -50,16 +50,16 @@
         "selectedIconPath": "assets/tabbar/wishlist-active.png"
       },
       {
-        "pagePath": "pages/toolbox/index",
-        "text": "百宝箱",
-        "iconPath": "assets/tabbar/toolbox.png",
-        "selectedIconPath": "assets/tabbar/toolbox-active.png"
-      },
-      {
         "pagePath": "pages/voice/index",
         "text": "心声",
         "iconPath": "assets/tabbar/voice.png",
         "selectedIconPath": "assets/tabbar/voice-active.png"
+      },
+      {
+        "pagePath": "pages/toolbox/index",
+        "text": "百宝箱",
+        "iconPath": "assets/tabbar/toolbox.png",
+        "selectedIconPath": "assets/tabbar/toolbox-active.png"
       }
     ]
   }

@@ -1,4 +1,4 @@
-<view class="page toolbox-page paper-page">
+<view class="page theme-toolbox toolbox-page paper-page">
   <view class="page-head floral-title-box drawer-head title-pattern-card"><image class="title-pattern-image" src="/assets/tabbar-source/deep-purple.png" mode="aspectFill" /><view class="title-pattern-mask"></view>
     <view class="corner-ornament corner-ornament-left corner-ornament--gold"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--green"></view>

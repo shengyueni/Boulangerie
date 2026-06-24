@@ -22,3 +22,7 @@
 .storage-bag { padding-top: 40rpx; }
 .checklist-slip { margin-top: 12rpx; padding: 18rpx; border: 2rpx solid rgba(184,138,74,.34); border-radius: 16rpx; background: #fffefb; }
 .wish-row.done .wish-title { text-decoration-color: rgba(47,107,79,.65); text-decoration-thickness: 3rpx; }
+
+.theme-wishlist .luggage-head { border-color: rgba(46, 79, 130, .46); }
+.theme-wishlist .tab.active { color: var(--page-theme); background: var(--page-tint); border-color: rgba(46, 79, 130, .38); }
+.theme-wishlist .delete { color: var(--page-accent); }

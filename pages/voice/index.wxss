@@ -17,3 +17,6 @@
 .paper-note { border-color: rgba(184,138,74,.5); box-shadow: 0 10rpx 24rpx rgba(74,52,40,.08); }
 .voice-id { border-color: rgba(184,74,58,.7); color: #B84A3A; }
 .safe-note { border-color: rgba(90,42,95,.5); color: var(--purple); }
+
+.theme-voice .voice-id, .theme-voice .safe-note { color: var(--page-theme); border-color: rgba(179, 86, 99, .46); }
+.theme-voice .delete { color: var(--page-accent); }

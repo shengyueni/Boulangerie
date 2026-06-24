@@ -1,4 +1,4 @@
-<view class="page paper-page today-page">
+<view class="page paper-page today-page theme-today">
   <view class="page-head home-brand-head">
     <text class="hero-title">{{appMeta.appName}}</text>
     <text class="subtext">{{appMeta.slogan}}</text>
@@ -17,7 +17,6 @@
     </view>
     <text class="paper-title__stamp">{{oracle.dateLabel}}</text>
     <text class="oracle-title">今日职场猩象</text>
-    <text class="oracle-subtitle">不预测命运，只看今天的职场天气</text>
     <view class="paper-title__rail">
       <view class="paper-title__rail-line"></view>
       <view class="paper-title__rail-dot"></view>
@@ -42,8 +41,6 @@
         <text class="slip-text">{{oracle.action}}</text>
       </view>
     </view>
-
-    <text class="oracle-disclaimer">本卡不预测命运，只帮你识别今天的职场天气。</text>
   </view>
 
   <view class="amulet-card amulet-frame status-card {{croissant.statusClass}} today-status-card">

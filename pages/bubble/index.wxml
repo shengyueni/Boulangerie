@@ -1,4 +1,4 @@
-<view class="page bubble-page paper-page">
+<view class="page theme-bubble bubble-page paper-page">
   <view class="page-head floral-title-box bubble-header title-pattern-card"><image class="title-pattern-image" src="/assets/tabbar-source/light-pink.png" mode="aspectFill" /><view class="title-pattern-mask"></view>
     <view class="corner-ornament corner-ornament-left corner-ornament--blue"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>

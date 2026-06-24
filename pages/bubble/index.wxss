@@ -19,7 +19,7 @@
   padding: 8rpx 18rpx;
   border: 2rpx solid rgba(184, 138, 74, 0.34);
   border-radius: 999rpx;
-  color: var(--blue);
+  color: var(--page-theme);
   background: rgba(255, 254, 251, 0.9);
   font-size: 22rpx;
   font-weight: 900;
@@ -28,7 +28,7 @@
 
 .bubble-title {
   display: block;
-  color: var(--ink);
+  color: var(--page-theme);
   font-size: 48rpx;
   font-weight: 900;
   line-height: 1.16;

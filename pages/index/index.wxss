@@ -1,21 +1,22 @@
 .today-page { background: linear-gradient(180deg, #fffefb 0%, #fff9ef 100%); }
-.home-brand-head { margin-bottom: 16rpx; padding-bottom: 4rpx; text-align: center; }
-.home-brand-head .hero-title { margin-bottom: 6rpx; }
+.home-brand-head { margin-bottom: 10rpx; padding: 0 0 2rpx; text-align: center; }
+.home-brand-head .hero-title { margin-bottom: 4rpx; font-size: 44rpx; }
+.home-brand-head .subtext { font-size: 25rpx; line-height: 1.45; }
 
 .oracle-card {
   margin-top: 8rpx;
-  padding: 42rpx 30rpx 32rpx;
+  padding: 26rpx 28rpx 28rpx;
   overflow: hidden;
   text-align: center;
 }
 
 .oracle-sky {
   position: absolute;
-  top: 22rpx;
+  top: 12rpx;
   right: 26rpx;
   width: 150rpx;
   height: 150rpx;
-  opacity: .34;
+  opacity: .24;
   pointer-events: none;
 }
 
@@ -46,8 +47,8 @@
 
 .oracle-title {
   display: block;
-  margin-top: 10rpx;
-  color: var(--ink);
+  margin-top: 6rpx;
+  color: var(--page-theme);
   font-size: 50rpx;
   line-height: 1.16;
   font-weight: 900;
@@ -65,14 +66,14 @@
 .oracle-metrics {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 12rpx;
-  margin-top: 24rpx;
+  gap: 10rpx;
+  margin-top: 18rpx;
   text-align: left;
 }
 
 .oracle-metric {
   position: relative;
-  padding: 16rpx 18rpx 16rpx 24rpx;
+  padding: 14rpx 16rpx 14rpx 22rpx;
   border: 2rpx solid rgba(184, 138, 74, .38);
   border-left-width: 8rpx;
   border-radius: 18rpx;

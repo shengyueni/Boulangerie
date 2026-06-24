@@ -611,6 +611,62 @@ page {
 .paper-tag.orange { color: var(--orange); border-color: rgba(201, 111, 69, 0.48); background: #fff6ef; }
 .paper-tag.dark { color: #fffefb; border-color: var(--purple); background: var(--purple); }
 
+/* MVP 0.9E page theme accents */
+.theme-today { --page-theme: #9B4F2F; --page-accent: #D0623B; --page-tint: #F8E6D8; --page-theme-soft: rgba(155, 79, 47, .34); }
+.theme-diary { --page-theme: #275B4A; --page-accent: #3E7C62; --page-tint: #E5F1EA; --page-theme-soft: rgba(39, 91, 74, .34); }
+.theme-wishlist { --page-theme: #2E4F82; --page-accent: #4D6FA8; --page-tint: #E7EDF8; --page-theme-soft: rgba(46, 79, 130, .34); }
+.theme-voice { --page-theme: #B35663; --page-accent: #D47486; --page-tint: #FCE8EE; --page-theme-soft: rgba(179, 86, 99, .34); }
+.theme-toolbox { --page-theme: #5E3B73; --page-accent: #7A5592; --page-tint: #F0E6F5; --page-theme-soft: rgba(94, 59, 115, .34); }
+.theme-bubble { --page-theme: #B35663; --page-accent: #D47486; --page-tint: #FCE8EE; --page-theme-soft: rgba(179, 86, 99, .34); }
+
+.theme-today .hero-title,
+.theme-diary .hero-title,
+.theme-wishlist .hero-title,
+.theme-voice .hero-title,
+.theme-toolbox .hero-title,
+.theme-bubble .bubble-title,
+.theme-today .oracle-title,
+.theme-diary .section-title,
+.theme-wishlist .section-title,
+.theme-voice .section-title,
+.theme-toolbox .tool-title {
+  color: var(--page-theme);
+}
+
+.theme-today .eyebrow,
+.theme-diary .paper-title__stamp,
+.theme-wishlist .eyebrow,
+.theme-voice .eyebrow,
+.theme-toolbox .eyebrow,
+.theme-bubble .bubble-kicker,
+.theme-today .paper-title__stamp,
+.theme-today .metric-name,
+.theme-diary .summary,
+.theme-wishlist .progress-line,
+.theme-voice .voice-id {
+  color: var(--page-theme);
+  border-color: var(--page-theme-soft);
+}
+
+.theme-today .sticker-button,
+.theme-diary .sticker-button,
+.theme-wishlist .sticker-button,
+.theme-voice .sticker-button,
+.theme-toolbox .sticker-button,
+.theme-today .quick-pill {
+  color: var(--page-theme);
+  border-color: var(--page-theme-soft);
+}
+
+.theme-today .chip.pink,
+.theme-diary .chip.pink,
+.theme-wishlist .tab.active,
+.theme-voice .tag.active {
+  color: var(--page-theme);
+  background: var(--page-tint);
+  border-color: var(--page-theme-soft);
+}
+
 /* MVP 0.9D title-card floral texture layer */
 .title-pattern-card {
   position: relative;
@@ -623,7 +679,7 @@ page {
   z-index: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.22;
+  opacity: 0.18;
   pointer-events: none;
 }
 
@@ -631,7 +687,7 @@ page {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: rgba(255, 250, 242, 0.58);
+  background: rgba(255, 250, 242, 0.66);
   pointer-events: none;
 }
 
