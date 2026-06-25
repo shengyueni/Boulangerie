@@ -48,3 +48,14 @@
 .rescue-card { background: #fffefb; }
 .rescue-card.open { background: linear-gradient(180deg, #fffefb, #fff8ed); }
 .go-wish-card { background: #fffefb; border-color: rgba(47,123,103,.34); }
+/* MVP 1.0A emergency cards toolbox theme */
+.theme-toolbox .rescue-card.open,
+.theme-toolbox .go-wish-card {
+  border-color: var(--page-theme-soft);
+  background: linear-gradient(180deg, #fffefb, var(--page-tint));
+}
+
+.theme-toolbox .toggle-text,
+.theme-toolbox .card-title {
+  color: var(--page-theme);
+}

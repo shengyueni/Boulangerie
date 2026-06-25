@@ -11,8 +11,10 @@ function buildDashboardSummary(entries) {
   const croissant = getCroissantReport(entries);
   const highImpact7Days = entries.filter((entry) => Number(entry.impactLevel || 0) >= 4 && isWithinDays(entry, 7)).length;
   return {
-    title: "Croissant 最近状态：" + croissant.status,
+    status: croissant.status,
+    wear: croissant.wear,
     text: entries.length ? croissant.explanation : "还没有足够记录形成趋势。先写下一件真实发生的事就好。",
+    advice: croissant.advice,
     total: entries.length,
     highImpact7Days,
     statusClass: croissant.statusClass

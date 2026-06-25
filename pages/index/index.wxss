@@ -134,7 +134,6 @@
 
 .today-status-card {
   margin-top: 20rpx;
-  padding: 30rpx 24rpx 22rpx;
 }
 
 .today-status-layout {
@@ -148,25 +147,6 @@
   min-width: 0;
 }
 
-.status-headline {
-  align-items: flex-start;
-  gap: 12rpx;
-}
-
-.today-status-name {
-  flex: 1;
-  min-width: 0;
-  margin: 8rpx 0 10rpx;
-  font-size: 37rpx;
-}
-
-.status-wear {
-  flex: 0 0 auto;
-  margin-top: 8rpx;
-  margin-bottom: 0;
-  padding: 7rpx 14rpx;
-  font-size: 22rpx;
-}
 
 .compact-status-text {
   font-size: 26rpx;
@@ -210,26 +190,7 @@
   text-align: center;
 }
 
-.today-status-bottom {
-  margin-top: 12rpx;
-  padding-top: 12rpx;
-  border-top: 2rpx dashed rgba(184, 138, 74, .34);
-}
 
-.today-advice-text {
-  display: block;
-  color: var(--ink);
-  font-size: 25rpx;
-  line-height: 1.55;
-  font-weight: 900;
-}
-
-.quick-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10rpx;
-  margin-top: 12rpx;
-}
 
 .quick-pill {
   flex: 1 1 150rpx;
@@ -247,11 +208,62 @@
 
 .quick-pill::after { border: 0; }
 
+.croissant-status-actions .quick-pill {
+  min-height: 68rpx;
+  line-height: 68rpx;
+  font-size: 25rpx;
+}
+
 @media (max-width: 360px) {
   .today-status-layout { align-items: flex-start; gap: 14rpx; }
   .today-status-figure { flex-basis: 138rpx; min-height: 158rpx; }
   .today-status-image { width: 136rpx; height: 146rpx; }
   .today-status-hint { font-size: 18rpx; }
-  .status-headline { flex-direction: column; }
-  .status-wear { margin-top: 0; }
+
+}
+/* MVP 1.0A compress today oracle card header */
+.oracle-card {
+  margin-top: 2rpx;
+  padding: 2rpx 24rpx 22rpx;
+}
+
+.oracle-header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -4rpx;
+}
+
+.oracle-card .title-pattern-image {
+  opacity: 0.14;
+}
+
+.oracle-sky {
+  top: -10rpx;
+  right: 18rpx;
+  width: 112rpx;
+  height: 112rpx;
+  opacity: .16;
+}
+
+.oracle-card .paper-title__stamp {
+  margin-bottom: 2rpx;
+  padding-top: 4rpx;
+  padding-bottom: 4rpx;
+}
+
+.oracle-card .paper-title__rail {
+  margin-top: 4rpx;
+}
+
+.oracle-title {
+  margin-top: 0;
+  font-size: 44rpx;
+  line-height: 1.12;
+}
+
+.oracle-metrics {
+  margin-top: 10rpx;
 }

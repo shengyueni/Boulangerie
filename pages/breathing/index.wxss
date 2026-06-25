@@ -77,3 +77,17 @@
 
 .breath-card { background: linear-gradient(180deg, #fffefb, #fff8ed); }
 .breath-ball { border-color: rgba(185,139,75,.48); }
+/* MVP 1.0A breathing page toolbox theme */
+.theme-toolbox .breath-card,
+.theme-toolbox .breath-ball {
+  border-color: var(--page-theme-soft);
+}
+
+.theme-toolbox .breath-card {
+  background: linear-gradient(180deg, #fffefb, var(--page-tint));
+}
+
+.theme-toolbox .countdown,
+.theme-toolbox .phase-label {
+  color: var(--page-theme);
+}

@@ -1,25 +1,9 @@
-.diary-title-board {
-  margin-bottom: 16rpx;
-  padding: 20rpx 26rpx 18rpx;
-}
-
-.diary-title-board .hero-title {
-  margin-bottom: 6rpx;
-  font-size: 40rpx;
-}
-
-.diary-title-board .subtext {
-  font-size: 24rpx;
-  line-height: 1.4;
-}
-
-.diary-title-board .paper-title__rail {
-  margin-top: 8rpx;
+.diary-head {
+  border-color: var(--page-theme-soft);
 }
 
 .dashboard-summary-card {
   margin-top: 14rpx;
-  padding: 28rpx 24rpx 22rpx;
   border-color: rgba(184, 138, 74, 0.58);
   background: linear-gradient(180deg, #fffefb, #fff9ef);
 }
@@ -29,11 +13,6 @@
 .dashboard-summary-card.status-ball { border-color: rgba(201, 111, 69, 0.56); }
 .dashboard-summary-card.status-protect { border-color: rgba(76, 54, 95, 0.62); }
 
-.summary-title {
-  margin-bottom: 12rpx;
-  font-size: 31rpx;
-  line-height: 1.32;
-}
 
 .summary-text {
   font-size: 26rpx;
@@ -61,7 +40,7 @@
 .summary-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 14rpx;
+  gap: 12rpx;
   margin-top: 16rpx;
 }
 

@@ -1,6 +1,6 @@
-<view class="page paper-page dashboard-page">
-  <view class="page-head paper-title dashboard-title-board title-pattern-card"><image class="title-pattern-image" src="/assets/tabbar-source/indigo-blue.png" mode="aspectFill" /><view class="title-pattern-mask"></view>
-    <view class="corner-ornament corner-ornament-left corner-ornament--purple"></view>
+<view class="page paper-page dashboard-page theme-diary">
+  <view class="page-head paper-title dashboard-title-board title-pattern-card"><image class="title-pattern-image" src="/assets/tabbar-source/dark-green.png" mode="aspectFill" /><view class="title-pattern-mask"></view>
+    <view class="corner-ornament corner-ornament-left corner-ornament--green"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
     <view class="paper-corner bottom-left"></view>
     <view class="paper-corner bottom-right"></view>
@@ -15,20 +15,21 @@
   <view class="filter-panel range-tags"><view wx:for="{{ranges}}" wx:key="key" class="chip {{activeRange === item.key ? 'pink' : ''}}" data-key="{{item.key}}" bindtap="switchRange">{{item.label}}</view></view>
   <view wx:if="{{!hasRecords}}" class="empty-card trend-empty"><text>还没有足够记录生成趋势。</text><text>先写下一条真实的日记就好。</text></view>
 
-  <view class="ornament-card amulet-card amulet-frame croissant-amulet status-card {{croissant.statusClass}}">
+  <view class="ornament-card amulet-card amulet-frame croissant-amulet status-card {{croissant.statusClass}} croissant-status-card">
     <view class="corner-ornament corner-ornament-left corner-ornament--gold"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--purple"></view>
     <view class="corner-ornament corner-ornament-bottom-left corner-ornament--green"></view>
     <view class="corner-ornament corner-ornament-bottom-right corner-ornament--red"></view>
-    <text class="amulet-frame__seal">Croissant 状态护身符</text>
-    <text class="section-title">当前状态</text>
-    <text class="status-name">{{croissant.status}}</text>
-    <view class="wear-paper"><text>磨损值</text><text>{{croissant.wear}}</text></view>
-    <text class="body-text status-explain">{{croissant.explanation}}</text>
-    <view class="amulet-note dashboard-protect"><text class="protect-label">保护建议</text><text>{{croissant.advice}}</text></view>
+    <view class="croissant-status-header">
+      <text class="amulet-frame__seal croissant-status-label">Croissant 状态护身符</text>
+      <text class="status-name croissant-status-name">{{croissant.status}}</text>
+      <text class="status-wear croissant-wear-chip">磨损值：{{croissant.wear}}</text>
+    </view>
+    <text class="body-text croissant-status-text status-explain">{{croissant.explanation}}</text>
+    <view class="amulet-note croissant-advice-panel dashboard-protect"><text class="protect-label">保护建议</text><text>{{croissant.advice}}</text></view>
   </view>
 
-  <view class="ornament-card ornament-card--purple tendency-card"><view class="corner-ornament corner-ornament-left corner-ornament--purple"></view><text class="section-title">离职判断提示</text><text class="tendency-title">{{tendency.title}}</text><text class="body-text">{{tendency.text}}</text></view>
+  <view class="ornament-card ornament-card--green tendency-card"><view class="corner-ornament corner-ornament-left corner-ornament--green"></view><text class="section-title">离职判断提示</text><text class="tendency-title">{{tendency.title}}</text><text class="body-text">{{tendency.text}}</text></view>
   <view class="stats-grid"><view class="stat-card"><text class="num">{{stats.total}}</text><text>总记录数</text></view><view class="stat-card"><text class="num">{{stats.decisionFactors}}</text><text>判断记录</text></view><view class="stat-card"><text class="num">{{stats.reasonTypes}}</text><text>归因类型</text></view><view class="stat-card"><text class="num">{{stats.highImpact30Days}}</text><text>高影响事件</text></view></view>
   <view class="ornament-card"><text class="section-title">最常见的主要原因</text><text class="reason">{{stats.topReason}}</text></view>
   <view class="ornament-card"><text class="section-title">主要原因分布</text><view wx:for="{{reasonDistribution}}" wx:key="reason" class="reason-row"><view class="row between"><text>{{item.reason}}</text><text>{{item.count}} 次</text></view><view class="bar-track"><view class="bar-fill" style="width: {{item.percent}}%;"></view></view></view></view>

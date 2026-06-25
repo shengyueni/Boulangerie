@@ -58,3 +58,15 @@
 .record-input {
   margin-bottom: 0;
 }
+/* MVP 1.0A diary form green theme accents */
+.theme-diary .record-textarea,
+.theme-diary .record-input,
+.theme-diary .record-paper {
+  border-color: var(--page-theme-soft);
+}
+
+.theme-diary .save-seal {
+  color: var(--page-theme);
+  border-color: var(--page-theme-soft);
+  background: linear-gradient(180deg, #fffefb, var(--page-tint));
+}

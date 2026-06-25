@@ -1,6 +1,6 @@
 <view class="page theme-bubble bubble-page paper-page">
-  <view class="page-head floral-title-box bubble-header title-pattern-card"><image class="title-pattern-image" src="/assets/tabbar-source/light-pink.png" mode="aspectFill" /><view class="title-pattern-mask"></view>
-    <view class="corner-ornament corner-ornament-left corner-ornament--blue"></view>
+  <view class="page-head floral-title-box bubble-header title-pattern-card"><image class="title-pattern-image" src="/assets/tabbar-source/deep-purple.png" mode="aspectFill" /><view class="title-pattern-mask"></view>
+    <view class="corner-ornament corner-ornament-left corner-ornament--purple"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
     <text class="bubble-kicker">朋友泡泡站</text>
     <text class="bubble-title">吗喽的泡泡机</text>
@@ -29,6 +29,11 @@
     <block wx:else>
       <view class="bubble-empty-hint">点下面的泡泡机，吹出一颗泡泡。</view>
     </block>
+  </view>
+
+  <view wx:if="{{hasBubble && currentBubble}}" class="bubble-trail trail-{{currentBubble.type}}">
+    <view class="mini-bubble mini-bubble-large"></view>
+    <view class="mini-bubble mini-bubble-small"></view>
   </view>
 
   <view class="bubble-machine-zone" bindtap="handleBubbleMachineTap" hover-class="bubble-machine-zone-active" hover-stay-time="120">

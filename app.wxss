@@ -617,7 +617,7 @@ page {
 .theme-wishlist { --page-theme: #2E4F82; --page-accent: #4D6FA8; --page-tint: #E7EDF8; --page-theme-soft: rgba(46, 79, 130, .34); }
 .theme-voice { --page-theme: #B35663; --page-accent: #D47486; --page-tint: #FCE8EE; --page-theme-soft: rgba(179, 86, 99, .34); }
 .theme-toolbox { --page-theme: #5E3B73; --page-accent: #7A5592; --page-tint: #F0E6F5; --page-theme-soft: rgba(94, 59, 115, .34); }
-.theme-bubble { --page-theme: #B35663; --page-accent: #D47486; --page-tint: #FCE8EE; --page-theme-soft: rgba(179, 86, 99, .34); }
+.theme-bubble { --page-theme: #5E3B73; --page-accent: #7A5592; --page-tint: #F0E6F5; --page-theme-soft: rgba(94, 59, 115, .34); }
 
 .theme-today .hero-title,
 .theme-diary .hero-title,
@@ -712,4 +712,286 @@ page {
 .title-pattern-card .paper-title__rail {
   position: relative;
   z-index: 2;
+}
+/* MVP 1.0A unified floral title card metrics and theme accents */
+.page-hero,
+.page-head.title-pattern-card,
+.floral-title-card {
+  box-sizing: border-box;
+  min-height: 260rpx;
+  margin: 0 0 24rpx;
+  padding: 32rpx 28rpx;
+  border-radius: 24rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.page-head.title-pattern-card.floral-title-box,
+.page-head.title-pattern-card.paper-title,
+.floral-title-card {
+  border-color: var(--page-theme-soft, rgba(184, 138, 74, 0.58));
+}
+
+.page-head.title-pattern-card .title-pattern-image,
+.floral-title-card .title-pattern-image {
+  opacity: 0.16;
+}
+
+.page-head.title-pattern-card .title-pattern-mask,
+.floral-title-card .title-pattern-mask {
+  background: rgba(255, 250, 242, 0.68);
+}
+
+.page-head.title-pattern-card .eyebrow,
+.page-head.title-pattern-card .tiny-seal,
+.page-head.title-pattern-card .paper-title__stamp,
+.page-head.title-pattern-card .bubble-kicker,
+.floral-title-card .eyebrow,
+.floral-title-card .tiny-seal,
+.floral-title-card .paper-title__stamp,
+.floral-title-card .bubble-kicker {
+  margin: 0 0 14rpx;
+  padding: 7rpx 18rpx;
+  font-size: 22rpx;
+  line-height: 1.25;
+}
+
+.page-head.title-pattern-card .hero-title,
+.page-head.title-pattern-card .bubble-title,
+.floral-title-card .hero-title,
+.floral-title-card .bubble-title {
+  margin: 0;
+  font-size: 40rpx;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.page-head.title-pattern-card .subtext,
+.page-head.title-pattern-card .bubble-subtitle,
+.floral-title-card .subtext,
+.floral-title-card .bubble-subtitle {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+
+.page-head.title-pattern-card .paper-title__rail,
+.floral-title-card .paper-title__rail {
+  margin-top: 16rpx;
+}
+
+.theme-today .section-title,
+.theme-diary .section-title,
+.theme-wishlist .section-title,
+.theme-voice .section-title,
+.theme-toolbox .section-title,
+.theme-bubble .section-title,
+.theme-today .paper-seal,
+.theme-diary .paper-seal,
+.theme-wishlist .paper-seal,
+.theme-voice .paper-seal,
+.theme-toolbox .paper-seal,
+.theme-bubble .paper-seal,
+.theme-today .num,
+.theme-diary .num,
+.theme-wishlist .num,
+.theme-voice .num,
+.theme-toolbox .num,
+.theme-bubble .num,
+.theme-today .score-total,
+.theme-diary .score-total,
+.theme-wishlist .score-total,
+.theme-voice .score-total,
+.theme-toolbox .score-total,
+.theme-bubble .score-total {
+  color: var(--page-theme);
+}
+
+.theme-today .paper-title__stamp,
+.theme-diary .paper-title__stamp,
+.theme-wishlist .paper-title__stamp,
+.theme-voice .paper-title__stamp,
+.theme-toolbox .paper-title__stamp,
+.theme-bubble .paper-title__stamp,
+.theme-today .eyebrow,
+.theme-diary .eyebrow,
+.theme-wishlist .eyebrow,
+.theme-voice .eyebrow,
+.theme-toolbox .eyebrow,
+.theme-bubble .eyebrow,
+.theme-today .tiny-seal,
+.theme-diary .tiny-seal,
+.theme-wishlist .tiny-seal,
+.theme-voice .tiny-seal,
+.theme-toolbox .tiny-seal,
+.theme-bubble .tiny-seal,
+.theme-today .amulet-frame__seal,
+.theme-diary .amulet-frame__seal,
+.theme-wishlist .amulet-frame__seal,
+.theme-voice .amulet-frame__seal,
+.theme-toolbox .amulet-frame__seal,
+.theme-bubble .amulet-frame__seal,
+.theme-today .chip.pink,
+.theme-today .chip.green,
+.theme-today .chip.orange,
+.theme-diary .chip.pink,
+.theme-diary .chip.green,
+.theme-diary .chip.orange,
+.theme-wishlist .chip.pink,
+.theme-wishlist .chip.green,
+.theme-wishlist .chip.orange,
+.theme-voice .chip.pink,
+.theme-voice .chip.green,
+.theme-voice .chip.orange,
+.theme-toolbox .chip.pink,
+.theme-toolbox .chip.green,
+.theme-toolbox .chip.orange,
+.theme-bubble .chip.pink,
+.theme-bubble .chip.green,
+.theme-bubble .chip.orange,
+.theme-today .paper-tag.pink,
+.theme-today .paper-tag.green,
+.theme-today .paper-tag.orange,
+.theme-diary .paper-tag.pink,
+.theme-diary .paper-tag.green,
+.theme-diary .paper-tag.orange,
+.theme-wishlist .paper-tag.pink,
+.theme-wishlist .paper-tag.green,
+.theme-wishlist .paper-tag.orange,
+.theme-voice .paper-tag.pink,
+.theme-voice .paper-tag.green,
+.theme-voice .paper-tag.orange,
+.theme-toolbox .paper-tag.pink,
+.theme-toolbox .paper-tag.green,
+.theme-toolbox .paper-tag.orange,
+.theme-bubble .paper-tag.pink,
+.theme-bubble .paper-tag.green,
+.theme-bubble .paper-tag.orange {
+  color: var(--page-theme);
+  border-color: var(--page-theme-soft);
+  background: var(--page-tint);
+}
+
+.theme-today .sticker-button,
+.theme-diary .sticker-button,
+.theme-wishlist .sticker-button,
+.theme-voice .sticker-button,
+.theme-toolbox .sticker-button,
+.theme-bubble .sticker-button,
+.theme-today .button-primary,
+.theme-diary .button-primary,
+.theme-wishlist .button-primary,
+.theme-voice .button-primary,
+.theme-toolbox .button-primary,
+.theme-bubble .button-primary,
+.theme-today .button-secondary,
+.theme-diary .button-secondary,
+.theme-wishlist .button-secondary,
+.theme-voice .button-secondary,
+.theme-toolbox .button-secondary,
+.theme-bubble .button-secondary {
+  color: var(--page-theme);
+  border-color: var(--page-theme-soft);
+  background: rgba(255, 254, 251, 0.9);
+}
+/* MVP 1.0A final title alignment */
+.page-hero,
+.page-head.title-pattern-card,
+.floral-title-card {
+  align-items: flex-start;
+}
+.page-head.title-pattern-card .hero-title,
+.page-head.title-pattern-card .bubble-title,
+.page-head.title-pattern-card .subtext,
+.page-head.title-pattern-card .bubble-subtitle,
+.page-head.title-pattern-card .paper-title__rail,
+.floral-title-card .hero-title,
+.floral-title-card .bubble-title,
+.floral-title-card .subtext,
+.floral-title-card .bubble-subtitle,
+.floral-title-card .paper-title__rail {
+  width: 100%;
+}
+
+/* MVP 1.0B shared Croissant status card */
+.croissant-status-card {
+  padding: 34rpx 28rpx 26rpx;
+  text-align: left;
+}
+
+.croissant-status-header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10rpx 14rpx;
+}
+
+.croissant-status-label {
+  margin: 0;
+}
+
+.croissant-status-name {
+  flex: 1 1 100%;
+  min-width: 0;
+  margin: 0;
+  color: var(--page-theme, var(--ink));
+  font-size: 40rpx;
+  line-height: 1.2;
+  font-weight: 900;
+}
+
+.croissant-wear-chip {
+  margin: 0;
+  padding: 7rpx 16rpx;
+  color: var(--page-theme, var(--orange));
+  border-color: var(--page-theme-soft, rgba(184, 138, 74, 0.48));
+  background: rgba(255, 254, 251, 0.9);
+  font-size: 23rpx;
+  line-height: 1.25;
+}
+
+.croissant-status-text {
+  margin-top: 16rpx;
+  font-size: 26rpx;
+  line-height: 1.62;
+}
+
+.croissant-advice-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+  margin-top: 16rpx;
+  padding: 18rpx;
+  border-color: var(--page-theme-soft, rgba(184, 138, 74, 0.46));
+  background: linear-gradient(180deg, rgba(255, 254, 251, 0.94), rgba(255, 249, 239, 0.88));
+  font-size: 25rpx;
+  line-height: 1.56;
+  font-weight: 800;
+}
+
+.protect-label {
+  color: var(--muted);
+  font-size: 22rpx;
+  font-weight: 900;
+  letter-spacing: 1rpx;
+}
+
+.croissant-status-stats {
+  margin-top: 16rpx;
+}
+
+.croissant-status-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-top: 16rpx;
+}
+
+.croissant-status-actions .sticker-button,
+.croissant-status-actions .quick-pill {
+  flex: 1 1 180rpx;
+  margin-top: 0;
 }

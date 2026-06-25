@@ -26,3 +26,21 @@
 .theme-wishlist .luggage-head { border-color: rgba(46, 79, 130, .46); }
 .theme-wishlist .tab.active { color: var(--page-theme); background: var(--page-tint); border-color: rgba(46, 79, 130, .38); }
 .theme-wishlist .delete { color: var(--page-accent); }
+/* MVP 1.0A wishlist blue theme accents */
+.theme-wishlist .progress-card,
+.theme-wishlist .checklist-slip {
+  border-color: var(--page-theme-soft);
+}
+
+.theme-wishlist .progress-line,
+.theme-wishlist .bar-fill {
+  color: var(--page-theme);
+}
+
+.theme-wishlist .wish-row.done {
+  background: rgba(77, 111, 168, 0.12);
+}
+
+.theme-wishlist .wish-row.done .wish-title {
+  text-decoration-color: rgba(77, 111, 168, 0.55);
+}

@@ -1,5 +1,5 @@
-<view class="page">
-  <view class="page-head floral-title-box title-pattern-card"><image class="title-pattern-image" src="/assets/tabbar-source/light-pink.png" mode="aspectFill" /><view class="title-pattern-mask"></view><view class="corner-ornament corner-ornament-left corner-ornament--red"></view><view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
+<view class="page theme-toolbox">
+  <view class="page-head floral-title-box title-pattern-card"><image class="title-pattern-image" src="/assets/tabbar-source/deep-purple.png" mode="aspectFill" /><view class="title-pattern-mask"></view><view class="corner-ornament corner-ornament-left corner-ornament--purple"></view><view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
     <text class="eyebrow">护身贴纸</text>
     <text class="hero-title">情绪急救卡片</text>
     <text class="subtext">自责、嫉妒、害怕、无力的时候，先给自己一个温柔但可执行的小回应。</text>
@@ -12,7 +12,7 @@
     <button class="sticker-button secondary" bindtap="goWishlist">去愿望清单看看</button>
   </view>
 
-  <view class="floral-divider"><view class="floral-divider__line"></view><view class="floral-divider__dot red"></view><view class="floral-divider__dot"></view><view class="floral-divider__line"></view></view><view wx:for="{{cards}}" wx:key="title" class="ornament-card ornament-card--red rescue-card {{item.expanded ? 'open' : ''}}" data-index="{{index}}" bindtap="toggleCard">
+  <view class="floral-divider"><view class="floral-divider__line"></view><view class="floral-divider__dot purple"></view><view class="floral-divider__dot"></view><view class="floral-divider__line"></view></view><view wx:for="{{cards}}" wx:key="title" class="ornament-card ornament-card--purple rescue-card {{item.expanded ? 'open' : ''}}" data-index="{{index}}" bindtap="toggleCard">
     <view class="row between">
       <text class="card-title">{{item.title}}</text>
       <text class="toggle-text">{{item.expanded ? '收起' : '展开'}}</text>

@@ -108,3 +108,14 @@
   background: transparent;
   font-size: 26rpx;
 }
+/* MVP 1.0A diary detail green theme accents */
+.theme-diary .copy-seal,
+.theme-diary .info-row,
+.theme-diary .fact-memo {
+  border-color: var(--page-theme-soft);
+}
+
+.theme-diary .copy-seal,
+.theme-diary .delete-button {
+  color: var(--page-theme);
+}

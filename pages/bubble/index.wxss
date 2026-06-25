@@ -335,3 +335,66 @@
     height: 470rpx;
   }
 }
+/* MVP 1.0A bubble trail bridge */
+.bubble-trail {
+  position: relative;
+  z-index: 2;
+  height: 150rpx;
+  margin: 0 0 -42rpx;
+  pointer-events: none;
+}
+
+.mini-bubble {
+  position: absolute;
+  border: 3rpx solid rgba(255, 255, 255, 0.78);
+  border-radius: 999rpx;
+  box-shadow: 0 10rpx 22rpx rgba(78, 58, 38, 0.06), inset 0 0 0 2rpx rgba(255, 255, 255, 0.36);
+  opacity: 0.86;
+}
+
+.mini-bubble-large {
+  left: 55%;
+  top: 24rpx;
+  width: 42rpx;
+  height: 42rpx;
+}
+
+.mini-bubble-small {
+  left: 44%;
+  top: 96rpx;
+  width: 26rpx;
+  height: 26rpx;
+  opacity: 0.72;
+}
+
+.trail-gapchick .mini-bubble {
+  background: linear-gradient(145deg, rgba(255, 250, 251, 0.92), rgba(255, 225, 235, 0.86));
+  border-color: rgba(246, 166, 184, 0.38);
+}
+
+.trail-elodie .mini-bubble {
+  background: linear-gradient(145deg, rgba(251, 255, 248, 0.94), rgba(222, 242, 216, 0.86));
+  border-color: rgba(156, 207, 154, 0.38);
+}
+
+.theme-bubble .bubble-kicker,
+.theme-bubble .bubble-title {
+  color: var(--page-theme);
+}
+
+.theme-bubble .bubble-kicker {
+  border-color: var(--page-theme-soft);
+  background: var(--page-tint);
+}
+
+@media (max-width: 360px) {
+  .bubble-trail {
+    height: 124rpx;
+    margin: 0 0 -36rpx;
+  }
+
+  .mini-bubble-large {
+    width: 36rpx;
+    height: 36rpx;
+  }
+}

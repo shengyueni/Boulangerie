@@ -1,4 +1,4 @@
-<view class="page paper-page diary-detail-page">
+<view class="page paper-page diary-detail-page theme-diary">
   <view class="page-head paper-title detail-title-board title-pattern-card"><image class="title-pattern-image" src="/assets/tabbar-source/dark-green.png" mode="aspectFill" /><view class="title-pattern-mask"></view>
     <view class="corner-ornament corner-ornament-left corner-ornament--blue"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>

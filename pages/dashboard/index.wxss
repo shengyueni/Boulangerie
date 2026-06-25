@@ -6,47 +6,21 @@
 }
 
 .croissant-amulet {
-  padding-top: 50rpx;
-  text-align: center;
+  text-align: left;
   background: linear-gradient(180deg, #fffefb, #fff8ed) !important;
 }
 
-.status-name {
-  margin: 8rpx 0 18rpx;
+.croissant-amulet .croissant-status-name {
+  margin: 0;
 }
 
-.wear-paper {
-  display: inline-flex;
-  align-items: center;
-  gap: 14rpx;
-  margin-bottom: 20rpx;
-  padding: 10rpx 22rpx;
-  border: 3rpx double rgba(184, 138, 74, 0.66);
-  border-radius: 999rpx;
-  background: #fffefb;
-  color: var(--orange);
-  font-size: 25rpx;
-  font-weight: 900;
-}
-
-.wear-paper text:last-child {
-  font-size: 34rpx;
-  line-height: 1;
-}
 
 .status-explain {
   text-align: left;
 }
 
 .dashboard-protect {
-  display: flex;
-  flex-direction: column;
-  gap: 8rpx;
-  margin-top: 20rpx;
   text-align: left;
-  font-size: 27rpx;
-  line-height: 1.65;
-  font-weight: 900;
 }
 
 .protect-label {
@@ -147,3 +121,19 @@
 .impact-summary { display: block; margin: 8rpx 0 12rpx; font-size: 28rpx; line-height: 1.5; font-weight: 900; }
 .high-empty { margin-top: 12rpx; box-shadow: none; }
 .review-card { background: linear-gradient(135deg, #fffdf6, #fff9ef); }
+/* MVP 1.0A dashboard diary theme accents */
+.theme-diary .stat-card,
+.theme-diary .bar-track,
+.theme-diary .impact-row {
+  border-color: var(--page-theme-soft);
+}
+
+.theme-diary .num,
+.theme-diary .tendency-title,
+.theme-diary .reason {
+  color: var(--page-theme);
+}
+
+.theme-diary .bar-fill {
+  background: var(--page-accent);
+}

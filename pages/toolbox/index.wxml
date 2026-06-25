@@ -19,7 +19,6 @@
     <view wx:for="{{items}}" wx:key="title" class="tool-card ornament-card ornament-card--gold {{item.color}}" data-index="{{index}}" bindtap="openTool">
       <view class="corner-ornament corner-ornament-left corner-ornament--gold"></view>
       <view class="paper-corner bottom-right"></view>
-      <text class="tiny-seal">工具签</text>
       <text class="tool-title">{{item.title}}</text>
       <text class="subtext">{{item.subtitle}}</text>
     </view>

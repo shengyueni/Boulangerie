@@ -26,7 +26,7 @@
   min-height: 244rpx;
   height: 100%;
   margin-top: 0;
-  padding-top: 38rpx;
+  padding-top: 34rpx;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -34,7 +34,7 @@
 
 .tool-title {
   display: block;
-  margin: 10rpx 0 12rpx;
+  margin: 0 0 12rpx;
   font-size: 31rpx;
   line-height: 1.28;
   font-weight: 900;
@@ -83,4 +83,18 @@
 }
 
 .theme-toolbox .drawer-head { border-color: rgba(94, 59, 115, .46); }
-.theme-toolbox .tiny-seal, .theme-toolbox .feedback-title { color: var(--page-theme); border-color: rgba(94, 59, 115, .38); }
+.theme-toolbox .feedback-title { color: var(--page-theme); border-color: rgba(94, 59, 115, .38); }
+/* MVP 1.0A toolbox purple theme accents */
+.theme-toolbox .tool-card.pink,
+.theme-toolbox .tool-card.green,
+.theme-toolbox .tool-card.yellow,
+.theme-toolbox .tool-card.plain,
+.theme-toolbox .feedback-note,
+.theme-toolbox .drawer-note {
+  border-color: var(--page-theme-soft);
+}
+
+.theme-toolbox .tool-title,
+.theme-toolbox .feedback-title {
+  color: var(--page-theme);
+}

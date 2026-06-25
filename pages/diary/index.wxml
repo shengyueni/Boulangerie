@@ -1,25 +1,27 @@
 <view class="page paper-page diary-page theme-diary">
-  <view class="page-head paper-title diary-title-board title-pattern-card"><image class="title-pattern-image" src="/assets/tabbar-source/dark-green.png" mode="aspectFill" /><view class="title-pattern-mask"></view>
-    <view class="corner-ornament corner-ornament-left corner-ornament--blue"></view>
+  <view class="page-head floral-title-box diary-head title-pattern-card"><image class="title-pattern-image" src="/assets/tabbar-source/dark-green.png" mode="aspectFill" /><view class="title-pattern-mask"></view>
+    <view class="corner-ornament corner-ornament-left corner-ornament--green"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
-    <view class="paper-corner bottom-left"></view>
-    <view class="paper-corner bottom-right"></view>
-    <text class="paper-title__stamp">日记本</text>
+    <text class="eyebrow">本地日记记录</text>
     <text class="hero-title">吗喽的日记本</text>
     <text class="subtext">先写下来，再慢慢看清。</text>
-    <view class="paper-title__rail"><view class="paper-title__rail-line"></view><view class="paper-title__rail-dot"></view><view class="paper-title__rail-dot"></view><view class="paper-title__rail-line"></view></view>
   </view>
 
-  <view class="ornament-card dashboard-summary-card {{dashboardSummary.statusClass}}">
+  <view class="ornament-card dashboard-summary-card status-card {{dashboardSummary.statusClass}} croissant-status-card">
     <view class="corner-ornament corner-ornament-left corner-ornament--gold"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--green"></view>
-    <text class="section-title summary-title">{{dashboardSummary.title}}</text>
-    <text class="body-text summary-text">{{dashboardSummary.text}}</text>
-    <view class="summary-meta">
+    <view class="croissant-status-header">
+      <text class="amulet-frame__seal croissant-status-label">Croissant 最近状态</text>
+      <text class="status-name croissant-status-name">{{dashboardSummary.status}}</text>
+      <text class="status-wear croissant-wear-chip">磨损值：{{dashboardSummary.wear}}</text>
+    </view>
+    <text class="body-text croissant-status-text summary-text">{{dashboardSummary.text}}</text>
+    <view class="amulet-note croissant-advice-panel"><text class="protect-label">保护建议</text><text>{{dashboardSummary.advice}}</text></view>
+    <view class="summary-meta croissant-status-stats">
       <text>最近共记录 {{dashboardSummary.total}} 条</text>
       <text>近 7 天高影响事件 {{dashboardSummary.highImpact7Days}} 条</text>
     </view>
-    <view class="summary-actions">
+    <view class="summary-actions croissant-status-actions">
       <button class="sticker-button secondary summary-button" bindtap="goDashboard">查看决心仪表盘</button>
       <button class="sticker-button secondary summary-button" bindtap="goNew">写一条日记</button>
     </view>
