@@ -46,12 +46,12 @@
 .bubble-stage {
   position: relative;
   display: flex;
-  min-height: 330rpx;
+  min-height: 300rpx;
   box-sizing: border-box;
   align-items: center;
   justify-content: center;
   margin-top: 10rpx;
-  padding: 24rpx 22rpx 4rpx;
+  padding: 18rpx 22rpx 0;
   overflow: visible;
 }
 
@@ -234,12 +234,12 @@
 .bubble-machine-zone {
   position: relative;
   display: flex;
-  min-height: 500rpx;
+  min-height: 430rpx;
   box-sizing: border-box;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  margin-top: -34rpx;
+  margin-top: -96rpx;
   padding: 0;
   transition: transform 140ms ease;
 }
@@ -325,8 +325,8 @@
   }
 
   .bubble-machine-zone {
-    min-height: 430rpx;
-    margin-top: -28rpx;
+    min-height: 390rpx;
+    margin-top: -78rpx;
   }
 
   .bubble-machine-image {
@@ -339,8 +339,8 @@
 .bubble-trail {
   position: relative;
   z-index: 2;
-  height: 150rpx;
-  margin: 0 0 -42rpx;
+  height: 178rpx;
+  margin: -8rpx 0 -78rpx;
   pointer-events: none;
 }
 
@@ -353,17 +353,17 @@
 }
 
 .mini-bubble-large {
-  left: 55%;
-  top: 24rpx;
-  width: 42rpx;
-  height: 42rpx;
+  left: 56%;
+  top: 8rpx;
+  width: 64rpx;
+  height: 64rpx;
 }
 
 .mini-bubble-small {
-  left: 44%;
-  top: 96rpx;
-  width: 26rpx;
-  height: 26rpx;
+  left: 42%;
+  top: 98rpx;
+  width: 46rpx;
+  height: 46rpx;
   opacity: 0.72;
 }
 
@@ -389,12 +389,12 @@
 
 @media (max-width: 360px) {
   .bubble-trail {
-    height: 124rpx;
-    margin: 0 0 -36rpx;
+    height: 150rpx;
+    margin: -6rpx 0 -64rpx;
   }
 
   .mini-bubble-large {
-    width: 36rpx;
-    height: 36rpx;
+    width: 54rpx;
+    height: 54rpx;
   }
 }

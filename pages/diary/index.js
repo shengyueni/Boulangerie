@@ -2,21 +2,19 @@ const { REASON_OPTIONS } = require("../../utils/constants");
 const { getDiaryEntries } = require("../../utils/storage");
 const { getCroissantReport } = require("../../utils/croissant");
 
+function stripLegacyMemo(text) { const blocked = [/^\s*\u8ba9\u6211\u5728\u610f\u7684\u7ebf\u7d22\uff1a/, /^\s*\u60f3\u9760\u8fd1\u7684\u65b9\u5411\uff1a/]; return String(text || "").split("\n").filter((line) => !blocked.some((pattern) => pattern.test(line))).join("\n"); }
 function formatDate(value) { const date = new Date(value); if (Number.isNaN(date.getTime())) return value || ""; return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate(); }
-function getMemoPreview(factMemo) { const memo = factMemo || "还没有生成事实纪要。"; return memo.length <= 86 ? memo : memo.slice(0, 86) + "..."; }
-function getTypeLabel() { return "离职判断记录"; }
+function getMemoPreview(factMemo) { const memo = stripLegacyMemo(factMemo) || "还没有生成事实纪要。"; return memo.length <= 86 ? memo : memo.slice(0, 86) + "..."; }
+function getTypeLabel() { return "日记记录"; }
 function normalizeEntry(entry) { const impactLevel = Number(entry.impactLevel || 0); return { ...entry, impactLevel, displayDate: formatDate(entry.createdAt), typeLabel: getTypeLabel(), cardClass: impactLevel >= 4 ? "worn-note high-impact" : "worn-note", impactClass: impactLevel >= 4 ? "orange" : "green", memoPreview: getMemoPreview(entry.factMemo) }; }
-function isWithinDays(entry, days) { const created = new Date(entry.createdAt).getTime(); if (Number.isNaN(created)) return false; return Date.now() - created <= days * 24 * 60 * 60 * 1000; }
 function buildDashboardSummary(entries) {
   const croissant = getCroissantReport(entries);
-  const highImpact7Days = entries.filter((entry) => Number(entry.impactLevel || 0) >= 4 && isWithinDays(entry, 7)).length;
   return {
     status: croissant.status,
+    statusKey: croissant.statusKey,
     wear: croissant.wear,
     text: entries.length ? croissant.explanation : "还没有足够记录形成趋势。先写下一件真实发生的事就好。",
-    advice: croissant.advice,
     total: entries.length,
-    highImpact7Days,
     statusClass: croissant.statusClass
   };
 }
@@ -25,8 +23,12 @@ Page({
   data: {
     allEntries: [], entries: [], activeFilter: "all", activeReason: "all",
     dashboardSummary: buildDashboardSummary([]),
+    summaryButtons: [
+      { label: "查看决心仪表盘", action: "dashboard" },
+      { label: "写一条日记", action: "new" }
+    ],
     typeFilters: [
-      { key: "all", label: "全部" }, { key: "decision", label: "判断记录" }, { key: "high", label: "高影响事件" }
+      { key: "all", label: "全部" }, { key: "decision", label: "日记记录" }, { key: "high", label: "重要记录" }
     ],
     reasonFilters: ["全部归因"].concat(REASON_OPTIONS)
   },
@@ -43,5 +45,6 @@ Page({
   switchReasonFilter(event) { const reason = event.currentTarget.dataset.reason; this.setData({ activeReason: reason === "全部归因" ? "all" : reason }); this.applyFilters(); },
   goNew() { wx.navigateTo({ url: "/pages/diary-new/index" }); },
   goDashboard() { wx.navigateTo({ url: "/pages/dashboard/index" }); },
+  handleCroissantAction(event) { const action = event.detail.action; if (action === "dashboard") this.goDashboard(); if (action === "new") this.goNew(); },
   goDetail(event) { wx.navigateTo({ url: "/pages/diary-detail/index?id=" + event.currentTarget.dataset.id }); }
 });

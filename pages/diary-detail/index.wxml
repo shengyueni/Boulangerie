@@ -5,7 +5,7 @@
     <view class="paper-corner bottom-left"></view>
     <view class="paper-corner bottom-right"></view>
     <text class="paper-title__stamp">记录详情</text>
-    <text class="hero-title">判断记录详情</text>
+    <text class="hero-title">日记记录详情</text>
     <text class="subtext">一条记录，就是把一团乱线放到桌面上慢慢看。</text>
     <view class="paper-title__rail"><view class="paper-title__rail-line"></view><view class="paper-title__rail-dot"></view><view class="paper-title__rail-dot"></view><view class="paper-title__rail-line"></view></view>
   </view>
@@ -38,8 +38,6 @@
         <view class="info-row vertical"><text>身体反应</text><text>{{entry.bodyReactionsText}}</text></view>
         <view class="info-row vertical"><text>情绪反应</text><text>{{entry.emotionsText}}</text></view>
         <view class="info-row vertical"><text>已尝试处理</text><text>{{entry.triedActionsText}}</text></view>
-        <view class="info-row vertical full"><text>更想离开的部分</text><text>{{entry.leaveReasonText}}</text></view>
-        <view class="info-row vertical full"><text>想靠近的方向</text><text>{{entry.approachClueText}}</text></view>
         <view class="info-row vertical full"><text>下一步我可以做什么</text><text>{{entry.nextStepText}}</text></view>
       </view>
     </view>
@@ -55,7 +53,7 @@
       <view class="paper-corner bottom-right"></view>
       <text class="paper-seal memo-seal">事实纪要</text>
       <text class="section-title">完整事实纪要</text>
-      <text class="fact-memo">{{entry.factMemo}}</text>
+      <text class="fact-memo">{{entry.displayFactMemo}}</text>
       <button class="sticker-button copy-seal" bindtap="copyFactMemo">复制事实纪要</button>
     </view>
 

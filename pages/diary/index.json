@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "吗喽的出走"
+  "navigationBarTitleText": "吗喽的出走",
+  "usingComponents": {
+    "croissant-status-amulet": "/components/croissant-status-amulet/index"
+  }
 }

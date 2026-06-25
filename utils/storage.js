@@ -5,7 +5,9 @@ const WISH_INIT_KEY = "malo_wish_defaults_initialized";
 const WISH_DEFAULT_VERSION_KEY = "malo_wish_defaults_version";
 const LOCAL_VOICE_KEY = "malo_local_voice_posts";
 const TRIAL_FEEDBACK_KEY = "malo_trial_feedback_posts";
+const FEATURED_VOICE_HUG_KEY = "malo_featured_voice_hugs";
 const DIARY_CLEANUP_VERSION_KEY = "malo_diary_cleanup_version";
+const CUSTOM_EMERGENCY_CARDS_KEY = "malo_custom_emergency_cards";
 const DIARY_CLEANUP_VERSION = "0.9C";
 const DEFAULT_WISHES = [
   { type: "pre_exit", title: "计算生活费缓冲" },
@@ -96,6 +98,33 @@ function addWishItem(title, type = "post_exit") {
   return item;
 }
 
+
+function getCustomEmergencyCards() {
+  const cards = wx.getStorageSync(CUSTOM_EMERGENCY_CARDS_KEY);
+  return Array.isArray(cards) ? sortByNewest(cards) : [];
+}
+
+function saveCustomEmergencyCard(card) {
+  const title = String(card && card.title || "").trim();
+  const content = String(card && card.content || "").trim();
+  if (!title || !content) return null;
+
+  const nextCard = {
+    id: createId("rescue_card"),
+    createdAt: new Date().toISOString(),
+    title,
+    content
+  };
+  const nextCards = [nextCard].concat(getCustomEmergencyCards());
+  wx.setStorageSync(CUSTOM_EMERGENCY_CARDS_KEY, nextCards);
+  return nextCard;
+}
+
+function deleteCustomEmergencyCard(id) {
+  const nextCards = getCustomEmergencyCards().filter((card) => card.id !== id);
+  wx.setStorageSync(CUSTOM_EMERGENCY_CARDS_KEY, nextCards);
+  return nextCards;
+}
 function initializeDefaultWishItems() {
   const current = getWishItems();
   const version = wx.getStorageSync(WISH_DEFAULT_VERSION_KEY);
@@ -148,7 +177,9 @@ function clearLocalData() {
   wx.removeStorageSync(WISH_DEFAULT_VERSION_KEY);
   wx.removeStorageSync(LOCAL_VOICE_KEY);
   wx.removeStorageSync(TRIAL_FEEDBACK_KEY);
+  wx.removeStorageSync(FEATURED_VOICE_HUG_KEY);
   wx.removeStorageSync(DIARY_CLEANUP_VERSION_KEY);
+  wx.removeStorageSync(CUSTOM_EMERGENCY_CARDS_KEY);
 }
 
 function getLocalVoicePosts() {
@@ -179,6 +210,30 @@ function deleteTrialFeedbackPost(id) {
   return nextPosts;
 }
 
+function getFeaturedVoiceHugMap() {
+  const hugMap = wx.getStorageSync(FEATURED_VOICE_HUG_KEY);
+  return hugMap && typeof hugMap === "object" && !Array.isArray(hugMap) ? hugMap : {};
+}
+
+function saveFeaturedVoiceHugMap(hugMap) {
+  const nextMap = hugMap && typeof hugMap === "object" && !Array.isArray(hugMap) ? hugMap : {};
+  wx.setStorageSync(FEATURED_VOICE_HUG_KEY, nextMap);
+  return nextMap;
+}
+
+function hugFeaturedVoice(id) {
+  const voiceId = String(id || "");
+  if (!voiceId) return getFeaturedVoiceHugMap();
+  const hugMap = getFeaturedVoiceHugMap();
+  const current = hugMap[voiceId] || {};
+  const count = Number(current.count || 0);
+  hugMap[voiceId] = {
+    hugged: true,
+    count: current.hugged ? count : count + 1
+  };
+  return saveFeaturedVoiceHugMap(hugMap);
+}
+
 function deleteLocalVoicePost(id) {
   const nextPosts = getLocalVoicePosts().filter((post) => post.id !== id);
   wx.setStorageSync(LOCAL_VOICE_KEY, nextPosts);
@@ -195,11 +250,17 @@ module.exports = {
   getWishItems,
   saveWishItems,
   addWishItem,
+  getCustomEmergencyCards,
+  saveCustomEmergencyCard,
+  deleteCustomEmergencyCard,
   initializeDefaultWishItems,
   clearLocalData,
   getLocalVoicePosts,
   saveLocalVoicePost,
   deleteLocalVoicePost,
+  getFeaturedVoiceHugMap,
+  saveFeaturedVoiceHugMap,
+  hugFeaturedVoice,
   getTrialFeedbackPosts,
   saveTrialFeedbackPost,
   deleteTrialFeedbackPost

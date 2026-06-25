@@ -3,7 +3,10 @@ const { buildCompanion, getGapchickVariantImage } = require("../../utils/charact
 const {
   addWishItem,
   getWishItems,
-  initializeDefaultWishItems
+  initializeDefaultWishItems,
+  getCustomEmergencyCards,
+  saveCustomEmergencyCard,
+  deleteCustomEmergencyCard
 } = require("../../utils/storage");
 
 function buildCards(expandedIndex = -1) {
@@ -16,6 +19,10 @@ function buildCards(expandedIndex = -1) {
 Page({
   data: {
     cards: buildCards(),
+    customCards: [],
+    showCustomForm: false,
+    customTitle: "",
+    customContent: "",
     lastAdded: false,
     companion: buildCompanion("gapchick", "emergencyCards", {
       image: getGapchickVariantImage("drink"),
@@ -28,6 +35,11 @@ Page({
 
   onShow() {
     initializeDefaultWishItems();
+    this.loadCustomCards();
+  },
+
+  loadCustomCards() {
+    this.setData({ customCards: getCustomEmergencyCards() });
   },
 
   toggleCard(event) {
@@ -57,6 +69,43 @@ Page({
       icon: "none",
       duration: 2200
     });
+  },
+
+  openCustomForm() {
+    this.setData({ showCustomForm: true });
+  },
+
+  closeCustomForm() {
+    this.setData({ showCustomForm: false, customTitle: "", customContent: "" });
+  },
+
+  onCustomTitleInput(event) {
+    this.setData({ customTitle: event.detail.value });
+  },
+
+  onCustomContentInput(event) {
+    this.setData({ customContent: event.detail.value });
+  },
+
+  saveCustomCard() {
+    const title = this.data.customTitle.trim();
+    const content = this.data.customContent.trim();
+    if (!title || !content) {
+      wx.showToast({ title: "先写一点标题和内容吧。", icon: "none" });
+      return;
+    }
+
+    saveCustomEmergencyCard({ title, content });
+    this.setData({ showCustomForm: false, customTitle: "", customContent: "" });
+    this.loadCustomCards();
+    wx.showToast({ title: "已保存到本机。", icon: "none" });
+  },
+
+  deleteCustomCard(event) {
+    const id = event.currentTarget.dataset.id;
+    deleteCustomEmergencyCard(id);
+    this.loadCustomCards();
+    wx.showToast({ title: "已删除这张小卡。", icon: "none" });
   },
 
   goWishlist() {

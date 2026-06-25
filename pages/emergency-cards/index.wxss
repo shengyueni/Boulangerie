@@ -59,3 +59,73 @@
 .theme-toolbox .card-title {
   color: var(--page-theme);
 }
+
+.emergency-cards-page {
+  padding-bottom: calc(82rpx + env(safe-area-inset-bottom));
+}
+
+.custom-rescue-section {
+  margin-top: 28rpx;
+}
+
+.custom-rescue-card,
+.custom-rescue-form {
+  border-color: var(--page-theme-soft);
+  background: linear-gradient(180deg, #fffefb, #fff9ef);
+}
+
+.custom-rescue-title {
+  display: block;
+  color: var(--page-theme);
+  font-size: 31rpx;
+  line-height: 1.42;
+  font-weight: 900;
+}
+
+.custom-rescue-content {
+  margin-top: 12rpx;
+}
+
+.custom-delete-link {
+  display: inline-flex;
+  min-height: 0;
+  margin: 16rpx 0 0;
+  padding: 0;
+  border: 0;
+  color: var(--muted);
+  background: transparent;
+  font-size: 24rpx;
+  font-weight: 800;
+  line-height: 1.4;
+  text-decoration: underline;
+  box-shadow: none;
+}
+
+.custom-delete-link::after {
+  border: 0;
+}
+
+.custom-rescue-hint {
+  margin: 30rpx 8rpx 0;
+  color: var(--muted);
+  font-size: 25rpx;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.custom-rescue-form {
+  margin-top: 28rpx;
+}
+
+.custom-rescue-textarea {
+  min-height: 190rpx;
+}
+
+.custom-rescue-entry {
+  min-height: 88rpx;
+  margin-top: 28rpx;
+  margin-bottom: env(safe-area-inset-bottom);
+  color: var(--page-theme);
+  border-color: var(--page-theme-soft);
+  background: rgba(255, 254, 251, 0.94);
+}

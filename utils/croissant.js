@@ -30,9 +30,9 @@ const STATUS_COPY = [
     key: "ball",
     min: 13,
     max: 20,
-    name: "被揉成毛球",
+    name: "被搓成毛球",
     className: "status-ball",
-    explanation: "Croissant 已经被工作揉成毛球。它不是小题大做，它是在提醒你：这里确实有消耗。",
+    explanation: "Croissant 已经被工作搓成毛球。它不是小题大做，它是在提醒你：这里确实有消耗。",
     advice: "请认真看看最近的高影响事件，先别把它们都吞回身体里。"
   },
   {

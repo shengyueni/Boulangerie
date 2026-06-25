@@ -1,17 +1,21 @@
 <view class="page paper-page diary-new-page theme-diary">
-  <view class="page-head paper-title diary-new-head title-pattern-card"><image class="title-pattern-image" src="/assets/tabbar-source/dark-green.png" mode="aspectFill" /><view class="title-pattern-mask"></view>
+  <view class="page-head paper-title diary-new-head title-pattern-card floral-title-card">
+    <image class="title-pattern-image" src="/assets/tabbar-source/dark-green.png" mode="aspectFill" />
+    <view class="title-pattern-mask"></view>
     <view class="corner-ornament corner-ornament-left corner-ornament--green"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--green"></view>
     <view class="paper-corner bottom-left"></view>
     <view class="paper-corner bottom-right"></view>
-    <text class="paper-title__stamp">离职判断记录纸</text>
-    <text class="hero-title">离职判断与归因复盘</text>
-    <text class="subtext">不用写得漂亮。先把事实、影响和下一步放到纸片上。</text>
-    <view class="paper-title__rail">
-      <view class="paper-title__rail-line"></view>
-      <view class="paper-title__rail-dot"></view>
-      <view class="paper-title__rail-dot"></view>
-      <view class="paper-title__rail-line"></view>
+    <view class="title-content">
+      <text class="paper-title__stamp">日记记录纸</text>
+      <text class="hero-title">日记与归因整理</text>
+      <text class="subtext">不用写得漂亮。先把事实、影响和下一步放到纸片上。</text>
+      <view class="paper-title__rail">
+        <view class="paper-title__rail-line"></view>
+        <view class="paper-title__rail-dot"></view>
+        <view class="paper-title__rail-dot"></view>
+        <view class="paper-title__rail-line"></view>
+      </view>
     </view>
   </view>
 
@@ -85,22 +89,6 @@
     <view class="tag-row">
       <view wx:for="{{triedActionOptions}}" wx:key="label" class="paper-tag {{item.selected ? 'green' : ''}}" data-value="{{item.label}}" bindtap="toggleTriedAction">{{item.label}}</view>
     </view>
-  </view>
-
-  <view class="ornament-card paper-card--record record-paper">
-    <view class="paper-corner left"></view>
-    <view class="paper-corner right"></view>
-    <text class="section-title">这件事让我更想离开什么？</text>
-    <textarea class="textarea record-textarea" value="{{leaveReason}}" bindinput="onLeaveReasonInput" placeholder-class="form-placeholder" placeholder="可选" />
-    <text class="field-hint">可以是一种消耗、边界被碰到的方式，或一个反复出现的模式。</text>
-  </view>
-
-  <view class="ornament-card paper-card--record record-paper">
-    <view class="paper-corner left"></view>
-    <view class="paper-corner right"></view>
-    <text class="section-title">我想靠近什么？</text>
-    <textarea class="textarea record-textarea" value="{{approachClue}}" bindinput="onApproachClueInput" placeholder-class="form-placeholder" placeholder="可选" />
-    <text class="field-hint">这不是正面打卡，只是一点转向线索：生活、节奏、关系或工作方式。</text>
   </view>
 
   <view class="ornament-card paper-card--record record-paper">

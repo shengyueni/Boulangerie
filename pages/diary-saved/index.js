@@ -1,8 +1,10 @@
 const { getDiaryEntryById } = require("../../utils/storage");
 const { buildCompanion, getCroissantStateImage, getElodieVariantImage } = require("../../utils/characters");
 
+function stripLegacyMemo(text) { const blocked = [/^\s*\u8ba9\u6211\u5728\u610f\u7684\u7ebf\u7d22\uff1a/, /^\s*\u60f3\u9760\u8fd1\u7684\u65b9\u5411\uff1a/]; return String(text || "").split("\n").filter((line) => !blocked.some((pattern) => pattern.test(line))).join("\n"); }
+
 function preview(text) {
-  const value = text || "这条记录还没有事实纪要。";
+  const value = stripLegacyMemo(text) || "这条记录还没有事实纪要。";
   return value.length > 120 ? value.slice(0, 120) + "..." : value;
 }
 

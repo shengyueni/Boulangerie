@@ -7,25 +7,15 @@
     <text class="subtext">先写下来，再慢慢看清。</text>
   </view>
 
-  <view class="ornament-card dashboard-summary-card status-card {{dashboardSummary.statusClass}} croissant-status-card">
-    <view class="corner-ornament corner-ornament-left corner-ornament--gold"></view>
-    <view class="corner-ornament corner-ornament-right corner-ornament--green"></view>
-    <view class="croissant-status-header">
-      <text class="amulet-frame__seal croissant-status-label">Croissant 最近状态</text>
-      <text class="status-name croissant-status-name">{{dashboardSummary.status}}</text>
-      <text class="status-wear croissant-wear-chip">磨损值：{{dashboardSummary.wear}}</text>
-    </view>
-    <text class="body-text croissant-status-text summary-text">{{dashboardSummary.text}}</text>
-    <view class="amulet-note croissant-advice-panel"><text class="protect-label">保护建议</text><text>{{dashboardSummary.advice}}</text></view>
-    <view class="summary-meta croissant-status-stats">
-      <text>最近共记录 {{dashboardSummary.total}} 条</text>
-      <text>近 7 天高影响事件 {{dashboardSummary.highImpact7Days}} 条</text>
-    </view>
-    <view class="summary-actions croissant-status-actions">
-      <button class="sticker-button secondary summary-button" bindtap="goDashboard">查看决心仪表盘</button>
-      <button class="sticker-button secondary summary-button" bindtap="goNew">写一条日记</button>
-    </view>
-  </view>
+  <croissant-status-amulet
+    status="{{dashboardSummary.status}}"
+    status-key="{{dashboardSummary.statusKey}}"
+    status-class="{{dashboardSummary.statusClass}}"
+    wear="{{dashboardSummary.wear}}"
+    text="{{dashboardSummary.text}}"
+    buttons="{{summaryButtons}}"
+    bind:actiontap="handleCroissantAction"
+  />
   <view class="filter-panel archive-filter"><view wx:for="{{typeFilters}}" wx:key="key" class="chip {{activeFilter === item.key ? 'pink' : ''}}" data-key="{{item.key}}" bindtap="switchTypeFilter">{{item.label}}</view></view>
   <scroll-view class="reason-scroll" scroll-x="true"><view class="reason-row-filter"><view wx:for="{{reasonFilters}}" wx:key="*this" class="chip {{(activeReason === 'all' && item === '全部归因') || activeReason === item ? 'green' : ''}}" data-reason="{{item}}" bindtap="switchReasonFilter">{{item}}</view></view></scroll-view>
 

@@ -995,3 +995,8 @@ page {
   flex: 1 1 180rpx;
   margin-top: 0;
 }
+
+.page-head.title-pattern-card .title-content,
+.floral-title-card .title-content {
+  width: 100%;
+}

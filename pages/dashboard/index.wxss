@@ -5,29 +5,11 @@
   background: rgba(255, 254, 251, 0.88);
 }
 
-.croissant-amulet {
-  text-align: left;
-  background: linear-gradient(180deg, #fffefb, #fff8ed) !important;
-}
-
-.croissant-amulet .croissant-status-name {
-  margin: 0;
-}
 
 
-.status-explain {
-  text-align: left;
-}
 
-.dashboard-protect {
-  text-align: left;
-}
 
-.protect-label {
-  color: var(--muted);
-  font-size: 22rpx;
-  letter-spacing: 1rpx;
-}
+
 
 .stats-grid {
   display: grid;
@@ -53,10 +35,6 @@
   font-weight: 900;
 }
 
-.reason {
-  font-size: 36rpx;
-  font-weight: 800;
-}
 
 .reason-row {
   margin-top: 22rpx;
@@ -81,23 +59,15 @@
   background: repeating-linear-gradient(90deg, rgba(47,107,79,.72) 0 18rpx, rgba(184,138,74,.72) 18rpx 36rpx);
 }
 
-.tendency-card,
 .review-card,
 .advice-card {
   background: #fffefb;
 }
 
-.tendency-card,
 .review-card {
   padding-top: 42rpx;
 }
 
-.tendency-title {
-  display: block;
-  margin-bottom: 12rpx;
-  font-size: 36rpx;
-  font-weight: 900;
-}
 
 .advice {
   display: block;
@@ -106,34 +76,27 @@
   font-weight: 800;
 }
 
-.impact-row {
-  margin-top: 18rpx;
-  padding: 18rpx;
-  border: 2rpx dashed rgba(185,139,75,.36);
-  border-left-width: 8rpx;
-  border-left-style: solid;
-  border-left-color: #B84A3A;
-  border-radius: 18rpx;
-  background: #fffaf2;
-}
 
-.impact-date { display: block; color: var(--muted); font-size: 23rpx; font-weight: 800; }
-.impact-summary { display: block; margin: 8rpx 0 12rpx; font-size: 28rpx; line-height: 1.5; font-weight: 900; }
-.high-empty { margin-top: 12rpx; box-shadow: none; }
 .review-card { background: linear-gradient(135deg, #fffdf6, #fff9ef); }
 /* MVP 1.0A dashboard diary theme accents */
 .theme-diary .stat-card,
-.theme-diary .bar-track,
-.theme-diary .impact-row {
+.theme-diary .bar-track {
   border-color: var(--page-theme-soft);
 }
 
-.theme-diary .num,
-.theme-diary .tendency-title,
-.theme-diary .reason {
+.theme-diary .num {
   color: var(--page-theme);
 }
 
 .theme-diary .bar-fill {
   background: var(--page-accent);
+}
+.review-more {
+  display: inline-flex;
+  margin-top: 16rpx;
+  color: var(--page-theme, var(--green));
+  font-size: 27rpx;
+  line-height: 1.4;
+  font-weight: 900;
+  text-decoration: underline;
 }

@@ -1,0 +1,33 @@
+<view class="croissant-status-amulet amulet-frame status-card {{statusClass}}">
+  <view class="corner-ornament corner-ornament-left corner-ornament--gold"></view>
+  <view class="corner-ornament corner-ornament-right corner-ornament--green"></view>
+  <view class="corner-ornament corner-ornament-bottom-left corner-ornament--purple"></view>
+  <view class="corner-ornament corner-ornament-bottom-right corner-ornament--red"></view>
+
+  <view class="croissant-amulet-header">
+    <text class="amulet-frame__seal croissant-amulet-label">Croissant状态护身符</text>
+    <text class="status-name croissant-amulet-status">{{status}}</text>
+    <text class="status-wear croissant-amulet-wear">磨损值：{{wear}}</text>
+  </view>
+
+  <view class="croissant-amulet-body">
+    <view class="croissant-amulet-copy">
+      <text class="body-text croissant-amulet-text">{{text}}</text>
+    </view>
+
+    <view class="croissant-amulet-figure" bindtap="handleFigureTap">
+      <image class="croissant-amulet-image" src="{{computedImage}}" mode="aspectFit" />
+      <text wx:if="{{hint}}" class="croissant-amulet-hint">{{hint}}</text>
+    </view>
+  </view>
+
+  <view wx:if="{{buttons.length}}" class="croissant-amulet-actions">
+    <button
+      wx:for="{{buttons}}"
+      wx:key="action"
+      class="croissant-amulet-button croissant-amulet-button--{{item.variant}}"
+      data-action="{{item.action}}"
+      bindtap="handleActionTap"
+    >{{item.label}}</button>
+  </view>
+</view>

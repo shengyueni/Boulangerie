@@ -30,8 +30,6 @@ function buildFactMemo(entry) {
       entry.emotions.length ? entry.emotions.join("、") : ""
     ], none),
     "已尝试处理：" + (entry.triedActions.length ? entry.triedActions.join("、") : none),
-    "离职判断线索：" + (entry.leaveReason || none),
-    "想靠近的方向：" + (entry.approachClue || none),
     "下一步：" + (entry.nextStep || "先照顾好自己，再决定下一步。")
   ].join("\n");
 }
@@ -64,8 +62,6 @@ Page({
   },
 
   onSummaryInput(event) { this.setData({ summary: event.detail.value }); },
-  onLeaveReasonInput(event) { this.setData({ leaveReason: event.detail.value }); },
-  onApproachClueInput(event) { this.setData({ approachClue: event.detail.value }); },
   onNextStepInput(event) { this.setData({ nextStep: event.detail.value }); },
   selectImpact(event) { this.setData({ impactLevel: Number(event.currentTarget.dataset.value) }); },
 
@@ -107,8 +103,8 @@ Page({
       bodyReactions: this.data.bodyReactions,
       emotions: this.data.emotions,
       triedActions: this.data.triedActions,
-      leaveReason: this.data.leaveReason.trim(),
-      approachClue: this.data.approachClue.trim(),
+      leaveReason: "",
+      approachClue: "",
       nextStep: this.data.nextStep.trim(),
       factMemo: ""
     };

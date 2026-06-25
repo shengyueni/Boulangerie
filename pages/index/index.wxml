@@ -4,7 +4,9 @@
     <text class="subtext">{{appMeta.slogan}}</text>
   </view>
 
-  <view class="oracle-card paper-title title-pattern-card"><image class="title-pattern-image" src="/assets/tabbar-source/warm-orange.png" mode="aspectFill" /><view class="title-pattern-mask"></view>
+  <view class="oracle-card paper-title title-pattern-card">
+    <image class="oracle-bg-image title-pattern-image" src="/assets/tabbar-source/warm-orange.png" mode="aspectFill" />
+    <view class="title-pattern-mask oracle-bg"></view>
     <view class="corner-ornament corner-ornament-left corner-ornament--blue"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
     <view class="corner-ornament corner-ornament-bottom-left corner-ornament--purple"></view>
@@ -15,61 +17,54 @@
       <view class="oracle-star star-b"></view>
       <view class="oracle-star star-c"></view>
     </view>
-    <view class="oracle-header">
-      <text class="paper-title__stamp">{{oracle.dateLabel}}</text>
-      <text class="oracle-title">今日职场猩象</text>
-      <view class="paper-title__rail">
-        <view class="paper-title__rail-line"></view>
-        <view class="paper-title__rail-dot"></view>
-        <view class="paper-title__rail-dot"></view>
-        <view class="paper-title__rail-line"></view>
-      </view>
-    </view>
 
-    <view class="oracle-metrics">
-      <view wx:for="{{oracle.metrics}}" wx:key="name" class="oracle-metric">
-        <text class="metric-name">{{item.name}}：{{item.value}}</text>
-        <text class="metric-desc">{{item.description}}</text>
+    <view class="oracle-main">
+      <view class="oracle-title-block">
+        <view class="oracle-header">
+          <text class="paper-title__stamp oracle-date">{{oracle.dateLabel}}</text>
+          <text class="oracle-title">今日职场猩象</text>
+          <view class="paper-title__rail">
+            <view class="paper-title__rail-line"></view>
+            <view class="paper-title__rail-dot"></view>
+            <view class="paper-title__rail-dot"></view>
+            <view class="paper-title__rail-line"></view>
+          </view>
+        </view>
       </view>
-    </view>
 
-    <view class="oracle-slip-row">
-      <view class="oracle-slip amulet-note">
-        <text class="slip-label">今日护身符</text>
-        <text class="slip-text">{{oracle.talisman}}</text>
-      </view>
-      <view class="oracle-slip amulet-note">
-        <text class="slip-label">推荐行动</text>
-        <text class="slip-text">{{oracle.action}}</text>
+      <view class="oracle-content">
+        <view class="oracle-metrics">
+          <view wx:for="{{oracle.metrics}}" wx:key="name" class="oracle-metric">
+            <text class="metric-name">{{item.name}}：{{item.value}}</text>
+            <text class="metric-desc">{{item.description}}</text>
+          </view>
+        </view>
+
+        <view class="oracle-slip-row">
+          <view class="oracle-slip amulet-note">
+            <text class="slip-label">今日护身符</text>
+            <text class="slip-text">{{oracle.talisman}}</text>
+          </view>
+          <view class="oracle-slip amulet-note">
+            <text class="slip-label">推荐行动</text>
+            <text class="slip-text">{{oracle.action}}</text>
+          </view>
+        </view>
       </view>
     </view>
   </view>
 
-  <view class="amulet-card amulet-frame status-card {{croissant.statusClass}} today-status-card croissant-status-card">
-    <view class="corner-ornament corner-ornament-left corner-ornament--gold"></view>
-    <view class="corner-ornament corner-ornament-right corner-ornament--green"></view>
-    <view class="croissant-status-header">
-      <text class="amulet-frame__seal croissant-status-label">Croissant 今日状态</text>
-      <text class="status-name croissant-status-name">{{croissant.status}}</text>
-      <text class="status-wear croissant-wear-chip">磨损值：{{croissant.wear}}</text>
-    </view>
-    <view class="today-status-layout">
-      <view class="today-status-copy">
-        <text class="body-text croissant-status-text compact-status-text">{{croissant.explanation}}</text>
-        <view class="amulet-note croissant-advice-panel"><text class="protect-label">保护建议</text><text>{{todayStatus.advice}}</text></view>
-        <text class="today-companion-line">{{todayStatus.message}}</text>
-      </view>
-      <view class="today-status-figure" bindtap="goDashboard">
-        <image class="today-status-image" src="{{todayStatus.image}}" mode="aspectFit" />
-        <text class="today-status-hint">点点 Croissant 看仪表盘</text>
-      </view>
-    </view>
-    <view class="today-status-bottom croissant-status-actions">
-      <button class="quick-pill" bindtap="recordToday">写日记</button>
-      <button class="quick-pill" bindtap="goEmergency">急救一下</button>
-      <button class="quick-pill" bindtap="goPlan">查看计划</button>
-    </view>
-  </view>
+  <croissant-status-amulet
+    status="{{croissant.status}}"
+    status-key="{{croissant.statusKey}}"
+    status-class="{{croissant.statusClass}}"
+    wear="{{croissant.wear}}"
+    text="{{croissant.explanation}}"
+    hint="点点 Croissant 看仪表盘"
+    buttons="{{todayStatusButtons}}"
+    bind:figuretap="goDashboard"
+    bind:actiontap="handleCroissantAction"
+  />
 
   <text class="version-note">当前版本：{{appMeta.version}} {{appMeta.stage}}</text>
 </view>

@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "吗喽的出走",
   "usingComponents": {
-    "character-card": "/components/character-card/index"
+    "character-card": "/components/character-card/index",
+    "croissant-status-amulet": "/components/croissant-status-amulet/index"
   }
 }

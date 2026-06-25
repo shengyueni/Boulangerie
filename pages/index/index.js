@@ -2,30 +2,25 @@ const { APP_META } = require("../../utils/constants");
 const { getDiaryEntries } = require("../../utils/storage");
 const { getCroissantReport } = require("../../utils/croissant");
 const { getTodayOracle } = require("../../utils/oracle");
-const { getCharacterLine, getCroissantStateImage } = require("../../utils/characters");
 
-function buildTodayStatus(croissant) {
-  return {
-    image: getCroissantStateImage(croissant.statusKey),
-    message: getCharacterLine("home", croissant.wear),
-    advice: croissant.advice
-  };
-}
 
 Page({
   data: {
     appMeta: APP_META,
     oracle: getTodayOracle(),
     croissant: getCroissantReport([]),
-    todayStatus: buildTodayStatus(getCroissantReport([]))
+    todayStatusButtons: [
+      { label: "写日记", action: "record" },
+      { label: "急救一下", action: "emergency" },
+      { label: "查看计划", action: "plan" }
+    ]
   },
 
   onShow() {
     const croissant = getCroissantReport(getDiaryEntries());
     this.setData({
       oracle: getTodayOracle(),
-      croissant,
-      todayStatus: buildTodayStatus(croissant)
+      croissant
     });
   },
 
@@ -43,5 +38,12 @@ Page({
 
   goPlan() {
     wx.switchTab({ url: "/pages/wishlist/index" });
+  },
+
+  handleCroissantAction(event) {
+    const action = event.detail.action;
+    if (action === "record") this.recordToday();
+    if (action === "emergency") this.goEmergency();
+    if (action === "plan") this.goPlan();
   }
 });

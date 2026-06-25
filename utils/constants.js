@@ -143,7 +143,7 @@ const EXIT_TEST_RESULTS = [
     max: 32,
     title: "工作消耗累积型",
     text: "这不是一时矫情，你的消耗可能已经积累了一段时间。现在最重要的不是责备自己，而是看清楚哪些事情正在反复磨你。",
-    suggestions: ["查看决心仪表盘", "整理高影响事件", "开始列离职前准备清单"]
+    suggestions: ["查看决心仪表盘", "整理重要记录", "开始列离职前准备清单"]
   },
   {
     min: 33,
@@ -203,7 +203,7 @@ const EMERGENCY_CARDS = [
 const FEEDBACK_QUESTIONS = [
   "1. 你打开后，能不能立刻看懂这是做什么的？",
   "2. 你最想点哪个模块？",
-  "3. 写判断记录这一步有没有压力？",
+  "3. 写日记记录这一步有没有压力？",
   "4. 哪一句文案让你觉得它懂你？",
   "5. 哪个地方让你困惑、不想继续、觉得多余？",
   "6. 你会不会愿意第二天再打开？"
@@ -226,7 +226,7 @@ const SECONDARY_TAG_GROUPS = {
 
 const PLAN_CATEGORIES = {
   pre_exit: ["钱与保障", "材料与机会", "工作交接", "关系支持", "身体保护"],
-  post_exit: ["第 1 周：睡觉、吃饭、恢复身体", "第 2 周：整理材料、恢复节奏", "第 3 周：探索方向、联系朋友", "第 4 周：建立下一阶段计划", "我想找回的生活"]
+  post_exit: ["general"]
 };
 
 const DEFAULT_PLAN_ITEMS_03B = [
@@ -237,16 +237,16 @@ const DEFAULT_PLAN_ITEMS_03B = [
   { type: "pre_exit", category: "工作交接", title: "保存重要工作材料" },
   { type: "pre_exit", category: "关系支持", title: "找一个可信任的人聊聊状态" },
   { type: "pre_exit", category: "身体保护", title: "预约一次真正的休息" },
-  { type: "post_exit", category: "第 1 周：睡觉、吃饭、恢复身体", title: "连续睡满三天" },
-  { type: "post_exit", category: "第 2 周：整理材料、恢复节奏", title: "整理离职后的材料文件夹" },
-  { type: "post_exit", category: "第 3 周：探索方向、联系朋友", title: "约一个喜欢的朋友见面" },
-  { type: "post_exit", category: "第 4 周：建立下一阶段计划", title: "写下一阶段的三个小目标" },
-  { type: "post_exit", category: "我想找回的生活", title: "去喜欢的咖啡馆写东西" },
-  { type: "post_exit", category: "我想找回的生活", title: "晒太阳" },
-  { type: "post_exit", category: "我想找回的生活", title: "和喜欢的朋友见面" },
-  { type: "post_exit", category: "我想找回的生活", title: "做自己的项目 demo" },
-  { type: "post_exit", category: "我想找回的生活", title: "找回“我喜欢的生活”" },
-  { type: "post_exit", category: "我想找回的生活", title: "给自己一个没有 KPI 的下午" }
+  { type: "post_exit", category: "general", title: "连续睡满三天" },
+  { type: "post_exit", category: "general", title: "整理离职后的材料文件夹" },
+  { type: "post_exit", category: "general", title: "约一个喜欢的朋友见面" },
+  { type: "post_exit", category: "general", title: "写下一阶段的三个小目标" },
+  { type: "post_exit", category: "general", title: "去喜欢的咖啡馆写东西" },
+  { type: "post_exit", category: "general", title: "晒太阳" },
+  { type: "post_exit", category: "general", title: "和喜欢的朋友见面" },
+  { type: "post_exit", category: "general", title: "做自己的项目 demo" },
+  { type: "post_exit", category: "general", title: "找回“我喜欢的生活”" },
+  { type: "post_exit", category: "general", title: "给自己一个没有 KPI 的下午" }
 ];
 
 const LOCAL_VOICE_PREFIXES = ["荔枝吗喽", "顺毛吗喽", "加班逃生吗喽", "树洞里的一只猴", "今天也想出走的喽", "被工作搓毛的喽", "暂时不想上班的喽"];

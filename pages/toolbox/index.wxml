@@ -7,13 +7,7 @@
     <text class="subtext">泡泡机、呼吸、自测、急救卡片和出走小技能，都先收在这个小抽屉里。</text>
   </view>
 
-  <view class="drawer-note note-card paper-edge">
-    <view class="paper-corner right"></view>
-    <text>这里放的是临时接住自己的工具。</text>
-    <text>需要记录事实时，回到底部「日记」；需要整理现实准备时，去「出走」。</text>
-  </view>
 
-  <view class="floral-divider"><view class="floral-divider__line"></view><view class="floral-divider__dot green"></view><view class="floral-divider__dot gold"></view><view class="floral-divider__line"></view></view>
 
   <view class="tool-grid">
     <view wx:for="{{items}}" wx:key="title" class="tool-card ornament-card ornament-card--gold {{item.color}}" data-index="{{index}}" bindtap="openTool">

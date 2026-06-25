@@ -52,7 +52,7 @@ const CHARACTERS = {
 
 const CHARACTER_COPY = {
   home: [
-    "Croissant 在这里。今天先保护自己，不急着做决定。",
+    "今天先把自己照顾好，不急着下结论。",
     "先看看自己还剩多少电，再决定今天要处理什么。",
     "你可以先记录，不用立刻解释自己。",
     "今天的出走不一定是离开，也可以是把注意力从消耗里拿回来一点。",
@@ -64,7 +64,7 @@ const CHARACTER_COPY = {
   dashboard: {
     smooth: "Croissant 今天毛还算顺。也别等到耗尽才允许自己记录。",
     ruffled: "Croissant 有点炸毛。可能有些事不是一次不舒服，而是在反复磨你。",
-    ball: "Croissant 已经被工作揉成毛球。它不是小题大做，它是在提醒你这里确实有消耗。",
+    ball: "Croissant 已经被工作搓成毛球。它不是小题大做，它是在提醒你这里确实有消耗。",
     protect: "Croissant 进入保护模式。现在最重要的不是继续硬撑，而是先保护身体、尊严和现实安全感。"
   },
   diaryNew: [

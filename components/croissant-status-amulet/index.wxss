@@ -1,0 +1,230 @@
+.status-smooth { border-color: rgba(47, 123, 103, 0.42); }
+.status-ruffled { border-color: rgba(185, 139, 75, 0.58); }
+.status-ball { border-color: rgba(201, 111, 69, 0.56); }
+.status-protect { border-color: rgba(76, 54, 95, 0.62); }
+
+.corner-ornament {
+  width: 52rpx;
+  height: 52rpx;
+  box-sizing: border-box;
+  border: 4rpx double #B88A4A;
+  border-right: 0;
+  border-bottom: 0;
+  border-radius: 18rpx 0 0 0;
+}
+
+.corner-ornament::after {
+  content: "";
+  display: block;
+  width: 22rpx;
+  height: 22rpx;
+  margin: 12rpx 0 0 12rpx;
+  border: 3rpx solid currentColor;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(45deg);
+}
+
+.corner-ornament--red { color: #B84A3A; border-color: #B84A3A; }
+.corner-ornament--green { color: #2F6B4F; border-color: #2F6B4F; }
+.corner-ornament--gold { color: #B88A4A; border-color: #B88A4A; }
+.corner-ornament--purple { color: #5A2A5F; border-color: #5A2A5F; }
+
+.corner-ornament-left,
+.corner-ornament-right,
+.corner-ornament-bottom-left,
+.corner-ornament-bottom-right {
+  position: absolute;
+  z-index: 1;
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.corner-ornament-left { left: 16rpx; top: 16rpx; }
+.corner-ornament-right { right: 16rpx; top: 16rpx; transform: rotate(90deg); }
+.corner-ornament-bottom-right { right: 16rpx; bottom: 16rpx; transform: rotate(180deg); }
+.corner-ornament-bottom-left { left: 16rpx; bottom: 16rpx; transform: rotate(270deg); }
+
+.amulet-frame__seal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38rpx;
+  padding: 6rpx 16rpx;
+  border: 2rpx solid var(--page-theme-soft, rgba(184, 74, 58, 0.62));
+  border-radius: 999rpx;
+  color: var(--page-theme, #B84A3A);
+  background: var(--page-tint, #fffefb);
+  font-size: 22rpx;
+  font-weight: 900;
+  letter-spacing: 1rpx;
+}
+
+.status-name {
+  display: block;
+}
+
+.status-wear {
+  display: inline-flex;
+  border: 2rpx solid rgba(185, 139, 75, 0.48);
+  border-radius: 999rpx;
+  font-weight: 900;
+}
+
+.body-text {
+  display: block;
+  color: var(--ink, #4A3428);
+}
+
+.amulet-note {
+  border: 3rpx double rgba(184, 138, 74, 0.66);
+  border-radius: 22rpx;
+}
+
+.croissant-status-amulet {
+  position: relative;
+  box-sizing: border-box;
+  margin-top: 16rpx;
+  padding: 24rpx 22rpx 18rpx;
+  border: 4rpx double rgba(184, 138, 74, 0.78);
+  border-radius: 30rpx;
+  background: linear-gradient(180deg, #fffefb, #fff9ef);
+  box-shadow: 0 16rpx 42rpx rgba(74, 52, 40, 0.12);
+  overflow: hidden;
+  text-align: left;
+}
+
+.croissant-amulet-header,
+.croissant-amulet-body,
+.croissant-amulet-actions {
+  position: relative;
+  z-index: 2;
+}
+
+.croissant-amulet-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6rpx 10rpx;
+}
+
+.croissant-amulet-label {
+  margin: 0;
+}
+
+.croissant-amulet-status {
+  flex: 1 1 100%;
+  min-width: 0;
+  margin: 0;
+  color: var(--page-theme, var(--ink));
+  font-size: 37rpx;
+  line-height: 1.12;
+  font-weight: 900;
+}
+
+.croissant-amulet-wear {
+  margin: 0;
+  padding: 6rpx 14rpx;
+  color: var(--page-theme, var(--orange));
+  border-color: var(--page-theme-soft, rgba(184, 138, 74, 0.48));
+  background: rgba(255, 254, 251, 0.9);
+  font-size: 22rpx;
+  line-height: 1.25;
+}
+
+.croissant-amulet-body {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  margin-top: 4rpx;
+}
+
+.croissant-amulet-copy {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.croissant-amulet-text {
+  font-size: 25rpx;
+  line-height: 1.46;
+}
+
+
+.croissant-amulet-figure {
+  flex: 0 0 226rpx;
+  display: flex;
+  min-height: 222rpx;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.croissant-amulet-image {
+  display: block;
+  width: 226rpx;
+  height: 226rpx;
+  background: transparent;
+}
+
+.croissant-amulet-hint {
+  display: block;
+  margin-top: -18rpx;
+  color: rgba(139, 122, 110, 0.72);
+  font-size: 18rpx;
+  font-weight: 900;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.croissant-amulet-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+  margin-top: 8rpx;
+}
+
+.croissant-amulet-button {
+  flex: 1 1 172rpx;
+  min-height: 60rpx;
+  margin: 0;
+  padding: 0 18rpx;
+  border: 2rpx solid var(--page-theme-soft, rgba(184, 138, 74, 0.42));
+  border-radius: 999rpx;
+  color: var(--page-theme, var(--ink));
+  background: rgba(255, 254, 251, 0.9);
+  font-size: 24rpx;
+  font-weight: 900;
+  line-height: 60rpx;
+  box-shadow: 0 8rpx 20rpx rgba(78, 58, 38, 0.08);
+}
+
+.croissant-amulet-button::after {
+  border: 0;
+}
+
+@media (max-width: 360px) {
+  .croissant-amulet-body {
+    align-items: center;
+    gap: 6rpx;
+  }
+
+  .croissant-amulet-figure {
+    flex-basis: 176rpx;
+    min-height: 188rpx;
+  }
+
+  .croissant-amulet-image {
+    width: 194rpx;
+    height: 194rpx;
+  }
+
+  .croissant-amulet-hint {
+    font-size: 18rpx;
+  }
+
+
+}
+
+
+

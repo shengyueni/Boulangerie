@@ -1,8 +1,14 @@
-<view class="page theme-toolbox">
-  <view class="page-head floral-title-box title-pattern-card"><image class="title-pattern-image" src="/assets/tabbar-source/deep-purple.png" mode="aspectFill" /><view class="title-pattern-mask"></view><view class="corner-ornament corner-ornament-left corner-ornament--purple"></view><view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
-    <text class="eyebrow">护身贴纸</text>
-    <text class="hero-title">情绪急救卡片</text>
-    <text class="subtext">自责、嫉妒、害怕、无力的时候，先给自己一个温柔但可执行的小回应。</text>
+<view class="page theme-toolbox emergency-cards-page">
+  <view class="page-head floral-title-box title-pattern-card">
+    <image class="title-pattern-image" src="/assets/tabbar-source/deep-purple.png" mode="aspectFill" />
+    <view class="title-pattern-mask"></view>
+    <view class="corner-ornament corner-ornament-left corner-ornament--purple"></view>
+    <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
+    <view class="title-content">
+      <text class="eyebrow">护身贴纸</text>
+      <text class="hero-title">情绪急救卡片</text>
+      <text class="subtext">自责、嫉妒、害怕、无力的时候，先给自己一个温柔但可执行的小回应。</text>
+    </view>
   </view>
 
   <character-card image="{{companion.image}}" name="{{companion.name}}" tag="{{companion.tag}}" message="{{companion.message}}" sub-message="{{companion.subMessage}}" variant="{{companion.variant}}" size="{{companion.size}}" />
@@ -12,7 +18,9 @@
     <button class="sticker-button secondary" bindtap="goWishlist">去愿望清单看看</button>
   </view>
 
-  <view class="floral-divider"><view class="floral-divider__line"></view><view class="floral-divider__dot purple"></view><view class="floral-divider__dot"></view><view class="floral-divider__line"></view></view><view wx:for="{{cards}}" wx:key="title" class="ornament-card ornament-card--purple rescue-card {{item.expanded ? 'open' : ''}}" data-index="{{index}}" bindtap="toggleCard">
+  <view class="floral-divider"><view class="floral-divider__line"></view><view class="floral-divider__dot purple"></view><view class="floral-divider__dot"></view><view class="floral-divider__line"></view></view>
+
+  <view wx:for="{{cards}}" wx:key="title" class="ornament-card ornament-card--purple rescue-card {{item.expanded ? 'open' : ''}}" data-index="{{index}}" bindtap="toggleCard">
     <view class="row between">
       <text class="card-title">{{item.title}}</text>
       <text class="toggle-text">{{item.expanded ? '收起' : '展开'}}</text>
@@ -27,4 +35,26 @@
       <button class="sticker-button green" data-index="{{index}}" catchtap="addAction">把这个小动作加入愿望清单</button>
     </view>
   </view>
+
+  <view wx:if="{{customCards.length}}" class="custom-rescue-section">
+    <text class="section-title">我的急救卡片</text>
+    <view wx:for="{{customCards}}" wx:key="id" class="ornament-card custom-rescue-card">
+      <text class="custom-rescue-title">{{item.title}}</text>
+      <text class="body-text custom-rescue-content">{{item.content}}</text>
+      <button class="custom-delete-link" data-id="{{item.id}}" bindtap="deleteCustomCard">删除</button>
+    </view>
+  </view>
+
+  <view wx:if="{{!customCards.length && !showCustomForm}}" class="custom-rescue-hint">你可以给未来某个难受的自己留一张小卡。</view>
+
+  <view wx:if="{{showCustomForm}}" class="ornament-card custom-rescue-form">
+    <text class="section-title">写给难受时的自己</text>
+    <input class="input" value="{{customTitle}}" bindinput="onCustomTitleInput" placeholder-class="form-placeholder" placeholder="比如「先稳住自己」" />
+    <textarea class="textarea custom-rescue-textarea" value="{{customContent}}" bindinput="onCustomContentInput" placeholder-class="form-placeholder" placeholder="写一句你希望难受时的自己能看到的话" />
+    <text class="field-hint">保存到本机，不会上传。</text>
+    <button class="sticker-button green" bindtap="saveCustomCard">保存这张急救卡</button>
+    <button class="sticker-button secondary" bindtap="closeCustomForm">先不写了</button>
+  </view>
+
+  <button wx:if="{{!showCustomForm}}" class="sticker-button custom-rescue-entry" bindtap="openCustomForm">为自己写一张情绪急救卡片</button>
 </view>

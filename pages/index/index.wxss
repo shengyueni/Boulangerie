@@ -1,23 +1,100 @@
-.today-page { background: linear-gradient(180deg, #fffefb 0%, #fff9ef 100%); }
-.home-brand-head { margin-bottom: 10rpx; padding: 0 0 2rpx; text-align: center; }
-.home-brand-head .hero-title { margin-bottom: 4rpx; font-size: 44rpx; }
-.home-brand-head .subtext { font-size: 25rpx; line-height: 1.45; }
+.today-page {
+  background: linear-gradient(180deg, #fffefb 0%, #fff9ef 100%);
+}
+
+.home-brand-head {
+  margin-bottom: 10rpx;
+  padding: 0 0 2rpx;
+  text-align: center;
+}
+
+.home-brand-head .hero-title {
+  margin-bottom: 4rpx;
+  font-size: 44rpx;
+}
+
+.home-brand-head .subtext {
+  font-size: 25rpx;
+  line-height: 1.45;
+}
 
 .oracle-card {
-  margin-top: 4rpx;
-  padding: 14rpx 26rpx 24rpx;
+  margin-top: 2rpx;
+  padding: 34rpx 24rpx 24rpx;
   overflow: hidden;
   text-align: center;
 }
 
-.oracle-sky {
+.oracle-bg,
+.oracle-bg-image,
+.oracle-sky,
+.oracle-card .corner-ornament {
   position: absolute;
-  top: 2rpx;
-  right: 22rpx;
-  width: 128rpx;
-  height: 128rpx;
-  opacity: .2;
   pointer-events: none;
+}
+
+.oracle-card .title-pattern-image,
+.oracle-bg-image {
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.14;
+}
+
+.oracle-bg {
+  inset: 0;
+  z-index: 1;
+  background: rgba(255, 250, 242, 0.66);
+}
+
+.oracle-main,
+.oracle-title-block,
+.oracle-content {
+  position: relative;
+  z-index: 2;
+}
+
+.oracle-title-block {
+  display: block;
+  margin: 0 auto;
+}
+
+.oracle-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.oracle-date,
+.oracle-card .paper-title__stamp {
+  margin: 0 0 6rpx;
+  padding: 6rpx 18rpx;
+  line-height: 1.25;
+}
+
+.oracle-card .paper-title__rail {
+  width: 100%;
+  margin-top: 8rpx;
+}
+
+.oracle-title {
+  display: block;
+  margin: 0;
+  color: var(--page-theme);
+  font-size: 44rpx;
+  line-height: 1.12;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.oracle-sky {
+  z-index: 1;
+  top: 8rpx;
+  right: 18rpx;
+  width: 112rpx;
+  height: 112rpx;
+  opacity: .16;
 }
 
 .oracle-ring {
@@ -45,39 +122,14 @@
 .star-b { right: 20rpx; top: 42rpx; border-color: rgba(184, 74, 58, .75); }
 .star-c { left: 56rpx; bottom: 8rpx; border-color: rgba(47, 107, 79, .75); }
 
-.oracle-card .paper-title__stamp {
-  margin-bottom: 6rpx;
-  padding-top: 6rpx;
-  padding-bottom: 6rpx;
-}
-
-.oracle-card .paper-title__rail {
-  margin-top: 8rpx;
-}
-
-.oracle-title {
-  display: block;
-  margin-top: 2rpx;
-  color: var(--page-theme);
-  font-size: 48rpx;
-  line-height: 1.16;
-  font-weight: 900;
-  letter-spacing: 1rpx;
-}
-
-.oracle-subtitle {
-  display: block;
-  margin-top: 10rpx;
-  color: var(--blue);
-  font-size: 26rpx;
-  font-weight: 900;
+.oracle-content {
+  margin-top: 18rpx;
 }
 
 .oracle-metrics {
   display: grid;
   grid-template-columns: 1fr;
   gap: 10rpx;
-  margin-top: 12rpx;
   text-align: left;
 }
 
@@ -115,155 +167,23 @@
   text-align: left;
 }
 
-.oracle-slip { min-height: 104rpx; }
-.slip-label { display: block; margin-bottom: 8rpx; color: var(--muted); font-size: 22rpx; font-weight: 900; letter-spacing: 1rpx; }
-.slip-text { display: block; color: var(--ink); font-size: 27rpx; line-height: 1.56; font-weight: 900; }
+.oracle-slip {
+  min-height: 104rpx;
+}
 
-.oracle-disclaimer {
+.slip-label {
   display: block;
-  margin-top: 20rpx;
-  padding: 14rpx 16rpx;
-  border: 2rpx dashed rgba(27, 58, 92, .32);
-  border-radius: 18rpx;
+  margin-bottom: 8rpx;
   color: var(--muted);
-  background: rgba(255, 254, 251, .72);
-  font-size: 24rpx;
-  line-height: 1.55;
-  text-align: left;
-}
-
-.today-status-card {
-  margin-top: 20rpx;
-}
-
-.today-status-layout {
-  display: flex;
-  align-items: center;
-  gap: 22rpx;
-}
-
-.today-status-copy {
-  flex: 1;
-  min-width: 0;
-}
-
-
-.compact-status-text {
-  font-size: 26rpx;
-  line-height: 1.58;
-}
-
-.today-companion-line {
-  display: block;
-  margin-top: 10rpx;
-  color: var(--muted);
-  font-size: 24rpx;
-  line-height: 1.55;
-  font-weight: 800;
-}
-
-.today-status-figure {
-  flex: 0 0 178rpx;
-  display: flex;
-  min-height: 190rpx;
-  box-sizing: border-box;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 4rpx 0 0;
-}
-
-.today-status-image {
-  display: block;
-  width: 168rpx;
-  height: 172rpx;
-  background: transparent;
-}
-
-.today-status-hint {
-  display: block;
-  margin-top: -4rpx;
-  color: rgba(139, 122, 110, 0.72);
-  font-size: 20rpx;
+  font-size: 22rpx;
   font-weight: 900;
-  line-height: 1.25;
-  text-align: center;
+  letter-spacing: 1rpx;
 }
 
-
-
-.quick-pill {
-  flex: 1 1 150rpx;
-  min-height: 56rpx;
-  margin: 0;
-  padding: 0 16rpx;
-  border: 2rpx solid rgba(184, 138, 74, .42);
-  border-radius: 999rpx;
+.slip-text {
+  display: block;
   color: var(--ink);
-  background: rgba(255, 254, 251, .82);
-  font-size: 23rpx;
+  font-size: 27rpx;
+  line-height: 1.56;
   font-weight: 900;
-  line-height: 56rpx;
-}
-
-.quick-pill::after { border: 0; }
-
-.croissant-status-actions .quick-pill {
-  min-height: 68rpx;
-  line-height: 68rpx;
-  font-size: 25rpx;
-}
-
-@media (max-width: 360px) {
-  .today-status-layout { align-items: flex-start; gap: 14rpx; }
-  .today-status-figure { flex-basis: 138rpx; min-height: 158rpx; }
-  .today-status-image { width: 136rpx; height: 146rpx; }
-  .today-status-hint { font-size: 18rpx; }
-
-}
-/* MVP 1.0A compress today oracle card header */
-.oracle-card {
-  margin-top: 2rpx;
-  padding: 2rpx 24rpx 22rpx;
-}
-
-.oracle-header {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: -4rpx;
-}
-
-.oracle-card .title-pattern-image {
-  opacity: 0.14;
-}
-
-.oracle-sky {
-  top: -10rpx;
-  right: 18rpx;
-  width: 112rpx;
-  height: 112rpx;
-  opacity: .16;
-}
-
-.oracle-card .paper-title__stamp {
-  margin-bottom: 2rpx;
-  padding-top: 4rpx;
-  padding-bottom: 4rpx;
-}
-
-.oracle-card .paper-title__rail {
-  margin-top: 4rpx;
-}
-
-.oracle-title {
-  margin-top: 0;
-  font-size: 44rpx;
-  line-height: 1.12;
-}
-
-.oracle-metrics {
-  margin-top: 10rpx;
 }

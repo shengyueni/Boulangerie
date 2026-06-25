@@ -2,16 +2,6 @@
   margin-bottom: 24rpx;
 }
 
-.drawer-note {
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  gap: 8rpx;
-  color: var(--ink);
-  font-size: 27rpx;
-  line-height: 1.6;
-  font-weight: 800;
-}
 
 .tool-grid {
   display: grid;
@@ -89,8 +79,7 @@
 .theme-toolbox .tool-card.green,
 .theme-toolbox .tool-card.yellow,
 .theme-toolbox .tool-card.plain,
-.theme-toolbox .feedback-note,
-.theme-toolbox .drawer-note {
+.theme-toolbox .feedback-note {
   border-color: var(--page-theme-soft);
 }
 

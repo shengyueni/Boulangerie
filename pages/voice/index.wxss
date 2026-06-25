@@ -13,10 +13,61 @@
 .safe-note { padding: 14rpx 16rpx; border: 2rpx dashed rgba(185,139,75,.34); border-radius: 16rpx; background: #fffaf2; }
 .reply-slip { background: #fffaf2; border-color: rgba(185,139,75,.34); }
 
-.tree-hole-input { padding-top: 42rpx; }
+.local-voices-card { margin-bottom: calc(48rpx + env(safe-area-inset-bottom)); padding-top: 42rpx; padding-bottom: 34rpx; }
+.local-add-button { margin-top: 20rpx; }
+.local-composer { margin-top: 18rpx; }
+.local-composer .textarea { min-height: 168rpx; }
 .paper-note { border-color: rgba(184,138,74,.5); box-shadow: 0 10rpx 24rpx rgba(74,52,40,.08); }
 .voice-id { border-color: rgba(184,74,58,.7); color: #B84A3A; }
 .safe-note { border-color: rgba(90,42,95,.5); color: var(--purple); }
 
 .theme-voice .voice-id, .theme-voice .safe-note { color: var(--page-theme); border-color: rgba(179, 86, 99, .46); }
 .theme-voice .delete { color: var(--page-accent); }
+.hug-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16rpx;
+}
+
+.hug-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8rpx;
+  min-height: 56rpx;
+  margin: 0;
+  padding: 0 18rpx 0 8rpx;
+  border: 2rpx solid rgba(179, 86, 99, .34);
+  border-radius: 999rpx;
+  color: var(--page-theme);
+  background: #fff7f8;
+  font-size: 23rpx;
+  font-weight: 900;
+  line-height: 56rpx;
+}
+
+.hug-button::after {
+  border: 0;
+}
+
+.hug-button.is-hugged {
+  color: rgba(179, 86, 99, .78);
+  background: rgba(255, 247, 248, .68);
+}
+
+.hug-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42rpx;
+  height: 42rpx;
+  border-radius: 50%;
+  color: #fffefb;
+  background: var(--page-theme);
+  font-size: 20rpx;
+  line-height: 42rpx;
+}
+
+.hug-count {
+  color: var(--muted);
+  font-size: 21rpx;
+}
