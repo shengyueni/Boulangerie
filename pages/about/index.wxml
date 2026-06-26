@@ -1,6 +1,6 @@
-<view class="page about-page paper-page">
-  <view class="page-head floral-title-box about-head title-pattern-card"><image class="title-pattern-image" src="/assets/tabbar-source/dark-green.png" mode="aspectFill" /><view class="title-pattern-mask"></view>
-    <view class="corner-ornament corner-ornament-left corner-ornament--green"></view>
+<view class="page about-page paper-page theme-toolbox">
+  <view class="page-head floral-title-box about-head title-pattern-card"><image class="title-pattern-image" src="/assets/tabbar-source/deep-purple.png" mode="aspectFill" /><view class="title-pattern-mask"></view>
+    <view class="corner-ornament corner-ornament-left corner-ornament--purple"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
     <text class="eyebrow">隐私与安全说明</text>
     <text class="hero-title">数据放在哪里</text>
@@ -18,7 +18,7 @@
 
   <view class="card">
     <text class="section-title">当前试用版不会上传数据</text>
-    <text class="body-text">日记、愿望清单、测试内容、树洞内容和试用反馈，都保存在当前设备的本地存储中。</text>
+    <text class="body-text">日记、愿望清单、测试内容、本地心声和试用反馈，都保存在当前设备的本地存储中。</text>
     <text class="body-text">它们不会因为你写下来了，就自动发给开发者、公司、同事或任何神秘会议室。</text>
     <text class="body-text">如果你清空小程序缓存、换设备或删除数据，内容可能无法恢复。</text>
   </view>
@@ -29,7 +29,7 @@
       <text>· 不做登录或授权</text>
       <text>· 不接入云开发、后端数据库或真实社区</text>
       <text>· 不使用 AI 生成咨询结论</text>
-      <text>· 不上传反馈、日记、测试或树洞内容</text>
+      <text>· 不上传反馈、日记、测试或本地心声内容</text>
       <text>· 不使用外部网络图片、支付或身份关联</text>
     </view>
   </view>
@@ -49,7 +49,7 @@
 
   <view class="card danger-card">
     <text class="section-title">危险操作区</text>
-    <text class="body-text">这里只会清理本设备上的小程序本地数据，包括日记、愿望清单、测试内容、树洞内容和试用反馈，不涉及云端。</text>
+    <text class="body-text">这里只会清理本设备上的小程序本地数据，包括日记、愿望清单、测试内容、本地心声和试用反馈，不涉及云端。</text>
     <button class="danger-button" bindtap="clearData">清空本地数据</button>
   </view>
 </view>

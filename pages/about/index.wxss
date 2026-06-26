@@ -20,8 +20,9 @@
   line-height: 1.6;
 }
 
-.feedback-card {
-  border-color: rgba(47, 107, 79, 0.42);
+.theme-toolbox .about-head,
+.theme-toolbox .feedback-card {
+  border-color: var(--page-theme-soft);
 }
 
 .danger-card {

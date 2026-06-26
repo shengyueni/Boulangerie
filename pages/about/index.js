@@ -15,7 +15,7 @@ Page({
   clearData() {
     wx.showModal({
       title: "确认清空",
-      content: "这些内容只保存在当前设备。清空后，日记、愿望清单、测试内容、树洞内容和试用反馈可能无法恢复。确定要继续吗？",
+      content: "这些内容只保存在当前设备。清空后，日记、愿望清单、测试内容、本地心声和试用反馈可能无法恢复。确定要继续吗？",
       confirmText: "清空",
       confirmColor: "#e9785f",
       success: (res) => {
