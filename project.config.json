@@ -79,24 +79,8 @@
         "value": ".fig"
       },
       {
-        "type": "file",
-        "value": "assets/characters/ld-avatar.png"
-      },
-      {
-        "type": "file",
-        "value": "assets/characters/ld-bust.png"
-      },
-      {
-        "type": "file",
-        "value": "assets/characters/ld-nonsense-bust.png"
-      },
-      {
-        "type": "file",
-        "value": "assets/characters/ld-blame-bust.png"
-      },
-      {
-        "type": "file",
-        "value": "assets/characters/ld-exposed-bust.png"
+        "type": "suffix",
+        "value": ".tmp.png"
       }
     ],
     "include": []
