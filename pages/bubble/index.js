@@ -86,7 +86,7 @@ function pick(list, avoidIndex = -1) {
 
 Page({
   data: {
-    machineImage: "/assets/bubble/bubble-machine.png",
+    machineImage: "/pages/bubble/assets/bubble-machine.png",
     currentBubble: null,
     hasBubble: false,
     isPopping: false,

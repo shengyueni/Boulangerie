@@ -1,5 +1,5 @@
 <view class="page theme-bubble bubble-page paper-page">
-  <view class="page-head floral-title-box bubble-header title-pattern-card"><image class="title-pattern-image" src="/assets/tabbar-source/deep-purple.png" mode="aspectFill" /><view class="title-pattern-mask"></view>
+  <view class="page-head floral-title-box bubble-header title-pattern-card"><image class="title-pattern-image" src="/assets/title-patterns/deep-purple.png" mode="aspectFill" /><view class="title-pattern-mask"></view>
     <view class="corner-ornament corner-ornament-left corner-ornament--purple"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
     <text class="bubble-kicker">朋友泡泡站</text>

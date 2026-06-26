@@ -5,7 +5,7 @@
   </view>
 
   <view class="oracle-card paper-title title-pattern-card">
-    <image class="oracle-bg-image title-pattern-image" src="/assets/tabbar-source/warm-orange.png" mode="aspectFill" />
+    <image class="oracle-bg-image title-pattern-image" src="/assets/title-patterns/warm-orange.png" mode="aspectFill" />
     <view class="title-pattern-mask oracle-bg"></view>
     <view class="corner-ornament corner-ornament-left corner-ornament--blue"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>

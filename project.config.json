@@ -1,7 +1,104 @@
 {
   "description": "吗喽的出走 MVP 0.1",
   "packOptions": {
-    "ignore": [],
+    "ignore": [
+      {
+        "type": "folder",
+        "value": "assets/tabbar-source"
+      },
+      {
+        "type": "folder",
+        "value": "docs"
+      },
+      {
+        "type": "folder",
+        "value": "screenshots"
+      },
+      {
+        "type": "folder",
+        "value": "raw-assets"
+      },
+      {
+        "type": "folder",
+        "value": "backup"
+      },
+      {
+        "type": "folder",
+        "value": "backups"
+      },
+      {
+        "type": "folder",
+        "value": "design"
+      },
+      {
+        "type": "folder",
+        "value": "designs"
+      },
+      {
+        "type": "suffix",
+        "value": ".md"
+      },
+      {
+        "type": "suffix",
+        "value": ".psd"
+      },
+      {
+        "type": "suffix",
+        "value": ".ai"
+      },
+      {
+        "type": "suffix",
+        "value": ".zip"
+      },
+      {
+        "type": "suffix",
+        "value": ".rar"
+      },
+      {
+        "type": "suffix",
+        "value": ".7z"
+      },
+      {
+        "type": "suffix",
+        "value": ".mp3"
+      },
+      {
+        "type": "suffix",
+        "value": ".mp4"
+      },
+      {
+        "type": "suffix",
+        "value": ".mov"
+      },
+      {
+        "type": "suffix",
+        "value": ".sketch"
+      },
+      {
+        "type": "suffix",
+        "value": ".fig"
+      },
+      {
+        "type": "file",
+        "value": "assets/characters/ld-avatar.png"
+      },
+      {
+        "type": "file",
+        "value": "assets/characters/ld-bust.png"
+      },
+      {
+        "type": "file",
+        "value": "assets/characters/ld-nonsense-bust.png"
+      },
+      {
+        "type": "file",
+        "value": "assets/characters/ld-blame-bust.png"
+      },
+      {
+        "type": "file",
+        "value": "assets/characters/ld-exposed-bust.png"
+      }
+    ],
     "include": []
   },
   "setting": {
@@ -31,7 +128,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "latest",
-  "appid": "touristappid",
+  "appid": "wxdef0e64ee2549870",
   "projectname": "malo-runaway",
   "condition": {},
   "simulatorPluginLibVersion": {},

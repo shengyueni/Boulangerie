@@ -1,6 +1,6 @@
 <view class="page paper-page dashboard-page theme-diary">
   <view class="page-head paper-title dashboard-title-board title-pattern-card floral-title-card">
-    <image class="title-pattern-image" src="/assets/tabbar-source/dark-green.png" mode="aspectFill" />
+    <image class="title-pattern-image" src="/assets/title-patterns/dark-green.png" mode="aspectFill" />
     <view class="title-pattern-mask"></view>
     <view class="corner-ornament corner-ornament-left corner-ornament--green"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>

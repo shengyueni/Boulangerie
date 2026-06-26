@@ -2,19 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/diary/index",
-    "pages/diary-new/index",
-    "pages/diary-detail/index",
-    "pages/diary-saved/index",
-    "pages/dashboard/index",
-    "pages/bubble/index",
     "pages/wishlist/index",
     "pages/toolbox/index",
-    "pages/skills/index",
-    "pages/feedback/index",
-    "pages/about/index",
-    "pages/breathing/index",
-    "pages/exit-test/index",
-    "pages/emergency-cards/index",
     "pages/voice/index"
   ],
   "window": {
@@ -62,5 +51,73 @@
         "selectedIconPath": "assets/tabbar/toolbox-active.png"
       }
     ]
-  }
+  },
+  "subPackages": [
+    {
+      "root": "pages/diary-new",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "pages/diary-detail",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "pages/diary-saved",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "pages/dashboard",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "pages/bubble",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "pages/skills",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "pages/feedback",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "pages/about",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "pages/breathing",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "pages/exit-test",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "pages/emergency-cards",
+      "pages": [
+        "index"
+      ]
+    }
+  ]
 }

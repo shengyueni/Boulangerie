@@ -1,5 +1,5 @@
 <view class="page paper-page diary-page theme-diary">
-  <view class="page-head floral-title-box diary-head title-pattern-card"><image class="title-pattern-image" src="/assets/tabbar-source/dark-green.png" mode="aspectFill" /><view class="title-pattern-mask"></view>
+  <view class="page-head floral-title-box diary-head title-pattern-card"><image class="title-pattern-image" src="/assets/title-patterns/dark-green.png" mode="aspectFill" /><view class="title-pattern-mask"></view>
     <view class="corner-ornament corner-ornament-left corner-ornament--green"></view>
     <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
     <text class="eyebrow">本地日记记录</text>
