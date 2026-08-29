@@ -9,7 +9,14 @@ const users = db.collection("users");
 const userBackups = db.collection("user_backups");
 const MAX_SNAPSHOT_BYTES = 1024 * 1024;
 const SCHEMA_VERSION = 1;
-const SUPPORTED_ACTIONS = new Set(["saveBackup", "getStatus", "getBackup"]);
+const SUPPORTED_ACTIONS = new Set([
+  "saveBackup",
+  "getStatus",
+  "getBackup",
+  "getPreference",
+  "setPreference"
+]);
+const BACKUP_CONSENT_VERSION = 1;
 
 function safeErrorDetails(error) {
   return {
@@ -256,6 +263,53 @@ async function getBackup(openid) {
   };
 }
 
+function getPreference(user) {
+  const mode = user.backupMode === "enabled" || user.backupMode === "disabled"
+    ? user.backupMode
+    : "unconfigured";
+  return {
+    ok: true,
+    mode,
+    consentVersion: mode === "unconfigured" ? null : (user.backupConsentVersion || null),
+    consentUpdatedAt: mode === "unconfigured" ? null : (user.backupConsentUpdatedAt || null)
+  };
+}
+
+async function setPreference(event, user) {
+  if (event.mode !== "enabled" && event.mode !== "disabled") {
+    return {
+      ok: false,
+      code: "INVALID_PREFERENCE_MODE",
+      message: "不支持的云备份偏好。"
+    };
+  }
+
+  const responseUpdatedAt = new Date().toISOString();
+  try {
+    await users.doc(user._id).update({
+      data: {
+        backupMode: event.mode,
+        backupConsentVersion: BACKUP_CONSENT_VERSION,
+        backupConsentUpdatedAt: db.serverDate()
+      }
+    });
+  } catch (error) {
+    console.error("syncBackup preference update failed", safeErrorDetails(error));
+    return {
+      ok: false,
+      code: "PREFERENCE_UPDATE_FAILED",
+      message: "云备份偏好保存失败。"
+    };
+  }
+
+  return {
+    ok: true,
+    mode: event.mode,
+    consentVersion: BACKUP_CONSENT_VERSION,
+    consentUpdatedAt: responseUpdatedAt
+  };
+}
+
 exports.main = async (event = {}) => {
   const wxContext = cloud.getWXContext();
   const openid = wxContext && wxContext.OPENID;
@@ -273,11 +327,24 @@ exports.main = async (event = {}) => {
     return { ok: false, code: "USER_NOT_FOUND", message: "当前微信用户尚未注册。" };
   }
 
+  if (
+    (event.action === "saveBackup" || event.action === "getBackup")
+    && userResult.user.backupMode !== "enabled"
+  ) {
+    return { ok: false, code: "BACKUP_NOT_ENABLED", message: "当前用户尚未开启云备份。" };
+  }
+
   if (event.action === "saveBackup") {
     return saveBackup(event, openid, userResult.user);
   }
   if (event.action === "getStatus") {
     return getStatus(openid);
   }
-  return getBackup(openid);
+  if (event.action === "getBackup") {
+    return getBackup(openid);
+  }
+  if (event.action === "getPreference") {
+    return getPreference(userResult.user);
+  }
+  return setPreference(event, userResult.user);
 };

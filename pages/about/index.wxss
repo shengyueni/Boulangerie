@@ -29,3 +29,33 @@
   border-color: rgba(184, 74, 58, 0.56);
   background: #fff8f3;
 }
+
+.cloud-backup-card {
+  border-color: var(--page-theme-soft);
+}
+
+.backup-status,
+.backup-time {
+  display: block;
+  margin-top: 12rpx;
+}
+
+.backup-status {
+  color: var(--page-theme);
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.backup-time {
+  color: var(--muted);
+  font-size: 25rpx;
+}
+
+.backup-secondary-button {
+  margin-top: 16rpx;
+  border: 2rpx solid rgba(89, 71, 102, 0.35);
+  border-radius: 999rpx;
+  background: #fff;
+  color: var(--ink);
+  font-size: 27rpx;
+}

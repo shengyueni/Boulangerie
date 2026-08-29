@@ -1,5 +1,6 @@
 const { ensureCloudIdentity } = require("./utils/cloud-auth");
 const cloudBackup = require("./utils/cloud-backup");
+const cloudBackupLifecycle = require("./utils/cloud-backup-lifecycle");
 
 const CLOUD_ENV = "cloud1-d7giej4xy92b740d4";
 
@@ -11,11 +12,16 @@ App({
   globalData: {
     // Development-only manual hooks. Nothing here uploads automatically.
     __devCloudBackup: {
-      saveCloudBackup: cloudBackup.saveCloudBackup,
+      saveCloudBackup: cloudBackupLifecycle.backupNow,
       getCloudBackupStatus: cloudBackup.getCloudBackupStatus,
       downloadCloudBackup: cloudBackup.downloadCloudBackup,
-      restoreCloudBackup: cloudBackup.restoreCloudBackup
+      restoreCloudBackup: cloudBackupLifecycle.restoreAfterIntentionalClear,
+      getPreference: cloudBackup.getCloudBackupPreference,
+      setPreference: cloudBackupLifecycle.setCloudBackupMode,
+      initializeLifecycle: cloudBackupLifecycle.initializeCloudBackupLifecycle,
+      getLifecycleState: cloudBackupLifecycle.getLifecycleState
     },
+    cloudBackupLifecycle: cloudBackupLifecycle.getLifecycleState(),
     cloudIdentity: {
       status: "idle",
       userId: null,
@@ -25,6 +31,10 @@ App({
   },
 
   onLaunch() {
+    cloudBackupLifecycle.subscribeLifecycle((state) => {
+      this.globalData.cloudBackupLifecycle = state;
+    });
+
     if (!wx.cloud || typeof wx.cloud.init !== "function") {
       this.globalData.cloudIdentity = {
         status: "failed",
@@ -65,6 +75,7 @@ App({
           isNewUser: identity.isNewUser,
           error: null
         };
+        cloudBackupLifecycle.initializeCloudBackupLifecycle();
         return;
       }
 
@@ -75,5 +86,9 @@ App({
         error: identity.error
       };
     });
+  },
+
+  onHide() {
+    cloudBackupLifecycle.handleAppHide();
   }
 });

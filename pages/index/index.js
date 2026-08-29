@@ -2,6 +2,7 @@ const { APP_META } = require("../../utils/constants");
 const { getDiaryEntries } = require("../../utils/storage");
 const { getCroissantReport } = require("../../utils/croissant");
 const { getTodayOracle } = require("../../utils/oracle");
+const cloudBackupLifecycle = require("../../utils/cloud-backup-lifecycle");
 
 
 Page({
@@ -16,11 +17,45 @@ Page({
     ]
   },
 
+  onLoad() {
+    this.pageVisible = true;
+    this.unsubscribeCloudBackup = cloudBackupLifecycle.subscribeLifecycle(() => {
+      this.maybePromptCloudBackup();
+    });
+  },
+
   onShow() {
+    this.pageVisible = true;
     const croissant = getCroissantReport(getDiaryEntries());
     this.setData({
       oracle: getTodayOracle(),
       croissant
+    });
+    this.maybePromptCloudBackup();
+  },
+
+  onHide() {
+    this.pageVisible = false;
+  },
+
+  onUnload() {
+    this.pageVisible = false;
+    if (this.unsubscribeCloudBackup) this.unsubscribeCloudBackup();
+  },
+
+  maybePromptCloudBackup() {
+    if (!this.pageVisible) return;
+    cloudBackupLifecycle.maybePromptBackupOptIn(() => {
+      return new Promise((resolve) => {
+        wx.showModal({
+          title: "要开启云端备份吗？",
+          content: "开启后，你的日记、本地心声、出走清单和自定义急救卡会与你的小程序微信身份关联并备份到云端，用于清除缓存或更换设备后恢复。\n\nMalo 不需要获取你的微信昵称、头像或手机号。\n\n你也可以暂不开启，继续只保存在本机。",
+          cancelText: "暂不开启",
+          confirmText: "开启备份",
+          success: (result) => resolve(result.confirm ? "enabled" : "disabled"),
+          fail: () => resolve(null)
+        });
+      });
     });
   },
 
