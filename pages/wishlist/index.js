@@ -5,7 +5,7 @@ const { buildCompanion, getGapchickVariantImage } = require("../../utils/charact
 const POST_EXIT_CATEGORY = "general";
 
 function getProgressText(percent) {
-  if (percent === 0) return "出走计划还没开始。没关系，第一步可以小到离谱。";
+  if (percent === 0) return "计划还没开始。没关系，第一步可以小到离谱。";
   if (percent <= 40) return "你已经开始把出走从情绪变成准备。";
   if (percent <= 80) return "这不是冲动，这是你一点点搭起来的过渡容器。";
   return "Croissant 已经收拾好很多东西了。你正在把人生从工作手里拿回来。";
@@ -26,7 +26,7 @@ function getPlanCopy(type) {
     formTitle: "新增一个小计划",
     inputPlaceholder: "新增一个小事项",
     fieldHint: "可以小到离谱，重点是现实、可做、能保护你。",
-    buttonText: "加入出走计划",
+    buttonText: "加入计划",
     showCategorySelector: true
   };
 }
@@ -135,7 +135,7 @@ Page({
     saveWishItems([item].concat(this.data.items));
     this.setData({ newTitle: "" });
     this.refresh();
-    wx.showToast({ title: isPostExit ? "已经加入清单。" : "已经加入出走计划。", icon: "none" });
+    wx.showToast({ title: isPostExit ? "已经加入清单。" : "已经加入计划。", icon: "none" });
   },
 
   toggleItem(event) {

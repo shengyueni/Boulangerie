@@ -34,7 +34,7 @@
       },
       {
         "pagePath": "pages/wishlist/index",
-        "text": "出走",
+        "text": "计划",
         "iconPath": "assets/tabbar/wishlist.png",
         "selectedIconPath": "assets/tabbar/wishlist-active.png"
       },

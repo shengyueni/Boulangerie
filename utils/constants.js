@@ -95,7 +95,7 @@ const BUBBLES = [
 
 const TOOLBOX_ITEMS = [
   { title: "深呼吸练习", subtitle: "4-4-6，把自己从工作现场里拿回来一点", path: "/pages/breathing/index", color: "green", enabled: true },
-  { title: "离职状态自测", subtitle: "看见自己现在更接近哪种过渡状态", path: "/pages/exit-test/index", color: "pink", enabled: true },
+  { title: "离职状态自测", subtitle: "正在校准｜我们想把这套问题整理得更可靠一点。", path: "/pages/exit-test/index", color: "pink", enabled: false },
   { title: "情绪急救卡片", subtitle: "自责、害怕、无力时，先把自己接住一点", path: "/pages/emergency-cards/index", color: "yellow", enabled: true },
   { title: "出走小技能", subtitle: "事实纪要、算钱、求助和离职后第一周", path: "/pages/skills/index", color: "plain", enabled: true }
 ];
@@ -203,7 +203,7 @@ const EMERGENCY_CARDS = [
 const FEEDBACK_QUESTIONS = [
   "1. 你打开后，能不能立刻看懂这是做什么的？",
   "2. 你最想点哪个模块？",
-  "3. 写日记记录这一步有没有压力？",
+  "3. 写日记这一步有没有压力？",
   "4. 哪一句文案让你觉得它懂你？",
   "5. 哪个地方让你困惑、不想继续、觉得多余？",
   "6. 你会不会愿意第二天再打开？"

@@ -10,7 +10,7 @@
 
 
   <view class="tool-grid">
-    <view wx:for="{{items}}" wx:key="title" class="tool-card ornament-card ornament-card--gold {{item.color}}" data-index="{{index}}" bindtap="openTool">
+    <view wx:for="{{items}}" wx:key="title" class="tool-card ornament-card ornament-card--gold {{item.color}} {{!item.enabled ? 'is-disabled' : ''}}" data-index="{{index}}" bindtap="openTool">
       <view class="corner-ornament corner-ornament-left corner-ornament--gold"></view>
       <view class="paper-corner bottom-right"></view>
       <text class="tool-title">{{item.title}}</text>

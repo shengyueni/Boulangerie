@@ -5,7 +5,7 @@
     <view class="paper-corner bottom-left"></view>
     <view class="paper-corner bottom-right"></view>
     <text class="paper-title__stamp">记录详情</text>
-    <text class="hero-title">日记记录详情</text>
+    <text class="hero-title">日记详情</text>
     <text class="subtext">一条记录，就是把一团乱线放到桌面上慢慢看。</text>
     <view class="paper-title__rail"><view class="paper-title__rail-line"></view><view class="paper-title__rail-dot"></view><view class="paper-title__rail-dot"></view><view class="paper-title__rail-line"></view></view>
   </view>

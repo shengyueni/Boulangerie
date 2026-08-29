@@ -5,7 +5,7 @@ const { getCroissantReport } = require("../../utils/croissant");
 function stripLegacyMemo(text) { const blocked = [/^\s*\u8ba9\u6211\u5728\u610f\u7684\u7ebf\u7d22\uff1a/, /^\s*\u60f3\u9760\u8fd1\u7684\u65b9\u5411\uff1a/]; return String(text || "").split("\n").filter((line) => !blocked.some((pattern) => pattern.test(line))).join("\n"); }
 function formatDate(value) { const date = new Date(value); if (Number.isNaN(date.getTime())) return value || ""; return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate(); }
 function getMemoPreview(factMemo) { const memo = stripLegacyMemo(factMemo) || "还没有生成事实纪要。"; return memo.length <= 86 ? memo : memo.slice(0, 86) + "..."; }
-function getTypeLabel() { return "日记记录"; }
+function getTypeLabel() { return "日记"; }
 function normalizeEntry(entry) { const impactLevel = Number(entry.impactLevel || 0); return { ...entry, impactLevel, displayDate: formatDate(entry.createdAt), typeLabel: getTypeLabel(), cardClass: impactLevel >= 4 ? "worn-note high-impact" : "worn-note", impactClass: impactLevel >= 4 ? "orange" : "green", memoPreview: getMemoPreview(entry.factMemo) }; }
 function buildDashboardSummary(entries) {
   const croissant = getCroissantReport(entries);
@@ -28,7 +28,7 @@ Page({
       { label: "写一条日记", action: "new" }
     ],
     typeFilters: [
-      { key: "all", label: "全部" }, { key: "decision", label: "日记记录" }, { key: "high", label: "重要记录" }
+      { key: "all", label: "全部" }, { key: "decision", label: "日记" }, { key: "high", label: "重要记录" }
     ],
     reasonFilters: ["全部归因"].concat(REASON_OPTIONS)
   },

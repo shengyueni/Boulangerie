@@ -7,7 +7,7 @@
     <view class="paper-corner bottom-left"></view>
     <view class="paper-corner bottom-right"></view>
     <view class="title-content">
-      <text class="paper-title__stamp">日记记录纸</text>
+      <text class="paper-title__stamp">日记纸</text>
       <text class="hero-title">日记与归因整理</text>
       <text class="subtext">不用写得漂亮。先把事实、影响和下一步放到纸片上。</text>
       <view class="paper-title__rail">
