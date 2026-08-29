@@ -12,7 +12,9 @@ App({
     // Development-only manual hooks. Nothing here uploads automatically.
     __devCloudBackup: {
       saveCloudBackup: cloudBackup.saveCloudBackup,
-      getCloudBackupStatus: cloudBackup.getCloudBackupStatus
+      getCloudBackupStatus: cloudBackup.getCloudBackupStatus,
+      downloadCloudBackup: cloudBackup.downloadCloudBackup,
+      restoreCloudBackup: cloudBackup.restoreCloudBackup
     },
     cloudIdentity: {
       status: "idle",

@@ -2,7 +2,8 @@ const { APP_META } = require("./constants");
 const {
   collectBackupSnapshot,
   validateBackupSnapshot,
-  estimateSnapshotSize
+  estimateSnapshotSize,
+  restoreBackupSnapshot
 } = require("./backup-snapshot");
 
 const MAX_SNAPSHOT_BYTES = 1024 * 1024;
@@ -134,8 +135,220 @@ async function getCloudBackupStatus() {
   }
 }
 
+async function downloadCloudBackup() {
+  if (!canCallCloudFunction()) {
+    return createFailure("CLOUD_UNAVAILABLE", "微信云开发能力不可用。");
+  }
+
+  try {
+    const response = await wx.cloud.callFunction({
+      name: FUNCTION_NAME,
+      data: {
+        action: "getBackup"
+      }
+    });
+    const result = response && response.result;
+    if (!result || result.ok !== true) {
+      return createFailure(
+        result && result.code ? result.code : "BACKUP_DOWNLOAD_FAILED",
+        result && result.message ? result.message : "云备份下载失败。",
+        result && Number.isInteger(result.estimatedBytes)
+          ? { estimatedBytes: result.estimatedBytes }
+          : {}
+      );
+    }
+    if (!result.exists) {
+      return { ok: true, exists: false, backup: null };
+    }
+
+    const backup = result.backup;
+    const snapshot = backup && backup.snapshot;
+    const validation = validateBackupSnapshot(snapshot);
+    if (!validation.valid) {
+      return createFailure(
+        "INVALID_DOWNLOADED_SNAPSHOT",
+        validation.error || "下载的 Snapshot 无效。"
+      );
+    }
+
+    const size = estimateSnapshotSize(snapshot);
+    if (size.error || !Number.isInteger(size.estimatedBytes)) {
+      return createFailure(
+        "INVALID_DOWNLOADED_SNAPSHOT",
+        size.error || "无法估算下载 Snapshot 的大小。"
+      );
+    }
+    if (size.estimatedBytes > MAX_SNAPSHOT_BYTES) {
+      return createFailure(
+        "DOWNLOADED_SNAPSHOT_TOO_LARGE",
+        "下载的 Snapshot 超过恢复上限。",
+        { estimatedBytes: size.estimatedBytes }
+      );
+    }
+
+    return {
+      ok: true,
+      exists: true,
+      backup: {
+        backupId: backup.backupId,
+        schemaVersion: backup.schemaVersion,
+        appVersion: backup.appVersion,
+        snapshotBytes: size.estimatedBytes,
+        createdAt: backup.createdAt,
+        updatedAt: backup.updatedAt,
+        duplicateBackupCount: Number(backup.duplicateBackupCount || 0),
+        snapshot
+      }
+    };
+  } catch (error) {
+    return normalizeCloudError(error);
+  }
+}
+
+function hasMeaningfulLocalData(snapshot) {
+  const validation = validateBackupSnapshot(snapshot);
+  if (!validation.valid) return false;
+
+  const payload = snapshot.payload;
+  const escapePlan = payload.escapePlan;
+  const hasDefaultWishState = escapePlan.defaultItemStates.some((item) => {
+    return !!item && (!!item.completed || !!item.completedAt);
+  });
+
+  return payload.diaryEntries.length > 0
+    || escapePlan.userItems.length > 0
+    || hasDefaultWishState
+    || payload.localVoicePosts.length > 0
+    || payload.customEmergencyCards.length > 0;
+}
+
+function jsonEqual(left, right) {
+  return JSON.stringify(left) === JSON.stringify(right);
+}
+
+function snapshotsSemanticallyEquivalent(source, restored, ignoredDefaultStateCount) {
+  if (!validateBackupSnapshot(source).valid || !validateBackupSnapshot(restored).valid) return false;
+
+  const sourcePayload = source.payload;
+  const restoredPayload = restored.payload;
+  if (!jsonEqual(sourcePayload.diaryEntries, restoredPayload.diaryEntries)) return false;
+  if (!jsonEqual(sourcePayload.localVoicePosts, restoredPayload.localVoicePosts)) return false;
+  if (!jsonEqual(sourcePayload.customEmergencyCards, restoredPayload.customEmergencyCards)) return false;
+  if (!jsonEqual(sourcePayload.escapePlan.userItems, restoredPayload.escapePlan.userItems)) return false;
+
+  const restoredStates = new Map(
+    restoredPayload.escapePlan.defaultItemStates.map((item) => [item && item.id, item])
+  );
+  let ignoredStates = 0;
+  const matched = sourcePayload.escapePlan.defaultItemStates.every((sourceState) => {
+    const restoredState = sourceState && restoredStates.get(sourceState.id);
+    if (!restoredState) {
+      ignoredStates += 1;
+      return true;
+    }
+    return !!sourceState.completed === !!restoredState.completed
+      && (sourceState.completedAt || null) === (restoredState.completedAt || null);
+  });
+
+  return matched && ignoredStates === Number(ignoredDefaultStateCount || 0);
+}
+
+function rollbackLocalSnapshot(preRestoreSnapshot) {
+  try {
+    const rollbackResult = restoreBackupSnapshot(preRestoreSnapshot);
+    if (!rollbackResult || rollbackResult.success !== true) return false;
+
+    const rollbackSnapshot = collectBackupSnapshot();
+    return validateBackupSnapshot(rollbackSnapshot).valid
+      && snapshotsSemanticallyEquivalent(
+        preRestoreSnapshot,
+        rollbackSnapshot,
+        rollbackResult.ignoredDefaultStateCount
+      );
+  } catch (error) {
+    return false;
+  }
+}
+
+async function restoreCloudBackup(options = {}) {
+  const downloaded = await downloadCloudBackup();
+  if (!downloaded.ok) return downloaded;
+  if (!downloaded.exists || !downloaded.backup) {
+    return createFailure("CLOUD_BACKUP_NOT_FOUND", "当前微信用户没有可恢复的云备份。");
+  }
+
+  let preRestoreSnapshot;
+  try {
+    preRestoreSnapshot = collectBackupSnapshot();
+  } catch (error) {
+    return createFailure(
+      "LOCAL_SNAPSHOT_FAILED",
+      error && error.message ? error.message : "无法生成恢复前的本地 Snapshot。"
+    );
+  }
+
+  const preRestoreValidation = validateBackupSnapshot(preRestoreSnapshot);
+  if (!preRestoreValidation.valid) {
+    return createFailure(
+      "LOCAL_SNAPSHOT_FAILED",
+      preRestoreValidation.error || "恢复前的本地 Snapshot 无效。"
+    );
+  }
+
+  const force = !!options && options.force === true;
+  if (hasMeaningfulLocalData(preRestoreSnapshot) && !force) {
+    return createFailure("LOCAL_DATA_EXISTS", "本地已有 Malo 核心数据，必须显式 force 才能覆盖。");
+  }
+
+  let restoreResult;
+  let restoreSucceeded = false;
+  try {
+    restoreResult = restoreBackupSnapshot(downloaded.backup.snapshot);
+    if (!restoreResult || restoreResult.success !== true) {
+      throw new Error("Snapshot restore returned a failure result.");
+    }
+
+    const postRestoreSnapshot = collectBackupSnapshot();
+    restoreSucceeded = validateBackupSnapshot(postRestoreSnapshot).valid
+      && snapshotsSemanticallyEquivalent(
+        downloaded.backup.snapshot,
+        postRestoreSnapshot,
+        restoreResult.ignoredDefaultStateCount
+      );
+  } catch (error) {
+    restoreSucceeded = false;
+  }
+
+  if (!restoreSucceeded) {
+    const rolledBack = rollbackLocalSnapshot(preRestoreSnapshot);
+    return createFailure(
+      rolledBack ? "RESTORE_FAILED_ROLLED_BACK" : "RESTORE_FAILED_ROLLBACK_FAILED",
+      rolledBack ? "云备份恢复失败，本地数据已回滚。" : "云备份恢复和本地回滚均失败。"
+    );
+  }
+
+  return {
+    ok: true,
+    restored: true,
+    backup: {
+      backupId: downloaded.backup.backupId,
+      appVersion: downloaded.backup.appVersion,
+      schemaVersion: downloaded.backup.schemaVersion,
+      snapshotBytes: downloaded.backup.snapshotBytes,
+      updatedAt: downloaded.backup.updatedAt
+    },
+    restore: {
+      ignoredDefaultStateCount: Number(restoreResult.ignoredDefaultStateCount || 0)
+    }
+  };
+}
+
 module.exports = {
   MAX_SNAPSHOT_BYTES,
   saveCloudBackup,
-  getCloudBackupStatus
+  getCloudBackupStatus,
+  downloadCloudBackup,
+  restoreCloudBackup,
+  hasMeaningfulLocalData,
+  snapshotsSemanticallyEquivalent
 };

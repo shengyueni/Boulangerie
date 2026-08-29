@@ -9,7 +9,7 @@ const users = db.collection("users");
 const userBackups = db.collection("user_backups");
 const MAX_SNAPSHOT_BYTES = 1024 * 1024;
 const SCHEMA_VERSION = 1;
-const SUPPORTED_ACTIONS = new Set(["saveBackup", "getStatus"]);
+const SUPPORTED_ACTIONS = new Set(["saveBackup", "getStatus", "getBackup"]);
 
 function safeErrorDetails(error) {
   return {
@@ -205,6 +205,57 @@ async function getStatus(openid) {
   };
 }
 
+async function getBackup(openid) {
+  const backupQuery = await findBackups(openid, "BACKUP_QUERY_FAILED");
+  if (!backupQuery.ok) return backupQuery;
+
+  const duplicateBackupCount = reportDuplicates(backupQuery.backups);
+  const currentBackup = backupQuery.backups[0];
+  if (!currentBackup) {
+    return { ok: true, exists: false, backup: null };
+  }
+
+  if (!validateSnapshot(currentBackup.snapshot)) {
+    return {
+      ok: false,
+      code: "INVALID_CLOUD_SNAPSHOT",
+      message: "云端 Snapshot 结构无效。"
+    };
+  }
+
+  const snapshotBytes = estimateSnapshotBytes(currentBackup.snapshot);
+  if (!Number.isInteger(snapshotBytes)) {
+    return {
+      ok: false,
+      code: "INVALID_CLOUD_SNAPSHOT",
+      message: "云端 Snapshot 无法序列化。"
+    };
+  }
+  if (snapshotBytes > MAX_SNAPSHOT_BYTES) {
+    return {
+      ok: false,
+      code: "CLOUD_SNAPSHOT_TOO_LARGE",
+      message: "云端 Snapshot 超过下载上限。",
+      estimatedBytes: snapshotBytes
+    };
+  }
+
+  return {
+    ok: true,
+    exists: true,
+    backup: {
+      backupId: currentBackup._id,
+      schemaVersion: currentBackup.snapshot.schemaVersion,
+      appVersion: currentBackup.appVersion,
+      snapshotBytes,
+      createdAt: currentBackup.createdAt,
+      updatedAt: currentBackup.updatedAt,
+      duplicateBackupCount,
+      snapshot: currentBackup.snapshot
+    }
+  };
+}
+
 exports.main = async (event = {}) => {
   const wxContext = cloud.getWXContext();
   const openid = wxContext && wxContext.OPENID;
@@ -225,5 +276,8 @@ exports.main = async (event = {}) => {
   if (event.action === "saveBackup") {
     return saveBackup(event, openid, userResult.user);
   }
-  return getStatus(openid);
+  if (event.action === "getStatus") {
+    return getStatus(openid);
+  }
+  return getBackup(openid);
 };
