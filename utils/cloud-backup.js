@@ -135,6 +135,75 @@ async function getCloudBackupStatus() {
   }
 }
 
+async function getCloudBackupPreference() {
+  if (!canCallCloudFunction()) {
+    return createFailure("CLOUD_UNAVAILABLE", "微信云开发能力不可用。");
+  }
+
+  try {
+    const response = await wx.cloud.callFunction({
+      name: FUNCTION_NAME,
+      data: {
+        action: "getPreference"
+      }
+    });
+    const result = response && response.result;
+    if (!result || result.ok !== true) {
+      return createFailure(
+        result && result.code ? result.code : "PREFERENCE_QUERY_FAILED",
+        result && result.message ? result.message : "云备份偏好读取失败。"
+      );
+    }
+
+    const mode = result.mode === "enabled" || result.mode === "disabled"
+      ? result.mode
+      : "unconfigured";
+    return {
+      ok: true,
+      mode,
+      consentVersion: mode === "unconfigured" ? null : (result.consentVersion || null),
+      consentUpdatedAt: mode === "unconfigured" ? null : (result.consentUpdatedAt || null)
+    };
+  } catch (error) {
+    return normalizeCloudError(error);
+  }
+}
+
+async function setCloudBackupPreference(mode) {
+  if (mode !== "enabled" && mode !== "disabled") {
+    return createFailure("INVALID_PREFERENCE_MODE", "云备份偏好只能是 enabled 或 disabled。");
+  }
+  if (!canCallCloudFunction()) {
+    return createFailure("CLOUD_UNAVAILABLE", "微信云开发能力不可用。");
+  }
+
+  try {
+    const response = await wx.cloud.callFunction({
+      name: FUNCTION_NAME,
+      data: {
+        action: "setPreference",
+        mode
+      }
+    });
+    const result = response && response.result;
+    if (!result || result.ok !== true) {
+      return createFailure(
+        result && result.code ? result.code : "PREFERENCE_UPDATE_FAILED",
+        result && result.message ? result.message : "云备份偏好保存失败。"
+      );
+    }
+
+    return {
+      ok: true,
+      mode: result.mode,
+      consentVersion: result.consentVersion,
+      consentUpdatedAt: result.consentUpdatedAt
+    };
+  } catch (error) {
+    return normalizeCloudError(error);
+  }
+}
+
 async function downloadCloudBackup() {
   if (!canCallCloudFunction()) {
     return createFailure("CLOUD_UNAVAILABLE", "微信云开发能力不可用。");
@@ -347,6 +416,8 @@ module.exports = {
   MAX_SNAPSHOT_BYTES,
   saveCloudBackup,
   getCloudBackupStatus,
+  getCloudBackupPreference,
+  setCloudBackupPreference,
   downloadCloudBackup,
   restoreCloudBackup,
   hasMeaningfulLocalData,

@@ -51,7 +51,7 @@
     <text class="section-title">写给难受时的自己</text>
     <input class="input" value="{{customTitle}}" bindinput="onCustomTitleInput" placeholder-class="form-placeholder" placeholder="比如「先稳住自己」" />
     <textarea class="textarea custom-rescue-textarea" value="{{customContent}}" bindinput="onCustomContentInput" placeholder-class="form-placeholder" placeholder="写一句你希望难受时的自己能看到的话" />
-    <text class="field-hint">保存到本机，不会上传。</text>
+    <text class="field-hint">默认保存到本机；仅在你开启云端备份后进入恢复用备份。</text>
     <button class="sticker-button green" bindtap="saveCustomCard">保存这张急救卡</button>
     <button class="sticker-button secondary" bindtap="closeCustomForm">先不写了</button>
   </view>
