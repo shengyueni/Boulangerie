@@ -8,7 +8,6 @@ const TRIAL_FEEDBACK_KEY = "malo_trial_feedback_posts";
 const FEATURED_VOICE_HUG_KEY = "malo_featured_voice_hugs";
 const DIARY_CLEANUP_VERSION_KEY = "malo_diary_cleanup_version";
 const CUSTOM_EMERGENCY_CARDS_KEY = "malo_custom_emergency_cards";
-const DIARY_CLEANUP_VERSION = "0.9C";
 const DEFAULT_WISHES = [
   { type: "pre_exit", title: "计算生活费缓冲" },
   { type: "pre_exit", title: "更新简历" },
@@ -36,24 +35,13 @@ function isCurrentDiaryEntry(entry) {
   return !!entry && entry.entryKind === "decision_factor";
 }
 
-function cleanupLegacyDiaryEntries() {
+function getRawDiaryEntries() {
   const entries = wx.getStorageSync(DIARY_KEY);
-  if (!Array.isArray(entries)) {
-    wx.setStorageSync(DIARY_CLEANUP_VERSION_KEY, DIARY_CLEANUP_VERSION);
-    return [];
-  }
-
-  const currentEntries = entries.filter(isCurrentDiaryEntry);
-  if (wx.getStorageSync(DIARY_CLEANUP_VERSION_KEY) !== DIARY_CLEANUP_VERSION || currentEntries.length !== entries.length) {
-    wx.setStorageSync(DIARY_KEY, currentEntries);
-    wx.setStorageSync(DIARY_CLEANUP_VERSION_KEY, DIARY_CLEANUP_VERSION);
-  }
-
-  return currentEntries;
+  return Array.isArray(entries) ? entries.slice() : [];
 }
 
 function getDiaryEntries() {
-  return sortByNewest(cleanupLegacyDiaryEntries());
+  return sortByNewest(getRawDiaryEntries().filter(isCurrentDiaryEntry));
 }
 
 function getDiaryEntryById(id) {
@@ -61,15 +49,15 @@ function getDiaryEntryById(id) {
 }
 
 function saveDiaryEntry(entry) {
-  const nextEntries = sortByNewest([entry].concat(getDiaryEntries()));
+  const nextEntries = [entry].concat(getRawDiaryEntries());
   wx.setStorageSync(DIARY_KEY, nextEntries);
-  return nextEntries;
+  return sortByNewest(nextEntries.filter(isCurrentDiaryEntry));
 }
 
 function deleteDiaryEntry(id) {
-  const nextEntries = getDiaryEntries().filter((entry) => entry.id !== id);
+  const nextEntries = getRawDiaryEntries().filter((entry) => entry.id !== id);
   wx.setStorageSync(DIARY_KEY, nextEntries);
-  return nextEntries;
+  return sortByNewest(nextEntries.filter(isCurrentDiaryEntry));
 }
 
 function getWishItems() {
@@ -125,6 +113,20 @@ function deleteCustomEmergencyCard(id) {
   wx.setStorageSync(CUSTOM_EMERGENCY_CARDS_KEY, nextCards);
   return nextCards;
 }
+
+function createDefaultWishItems(createdAt = new Date().toISOString()) {
+  return (DEFAULT_PLAN_ITEMS_03B || []).map((item, index) => ({
+    id: "wish_default_03b_" + (index + 1),
+    type: item.type,
+    category: item.category || "",
+    source: "default_0.3B",
+    title: item.title,
+    completed: false,
+    createdAt,
+    completedAt: null
+  }));
+}
+
 function initializeDefaultWishItems() {
   const current = getWishItems();
   const version = wx.getStorageSync(WISH_DEFAULT_VERSION_KEY);
@@ -132,16 +134,7 @@ function initializeDefaultWishItems() {
   const baseDefaults = DEFAULT_PLAN_ITEMS_03B || [];
 
   if (!current.length) {
-    const defaults = baseDefaults.map((item, index) => ({
-      id: 'wish_default_03b_' + (index + 1),
-      type: item.type,
-      category: item.category || '',
-      source: 'default_0.3B',
-      title: item.title,
-      completed: false,
-      createdAt: now,
-      completedAt: null
-    }));
+    const defaults = createDefaultWishItems(now);
     saveWishItems(defaults);
     wx.setStorageSync(WISH_INIT_KEY, true);
     wx.setStorageSync(WISH_DEFAULT_VERSION_KEY, '0.3B');
@@ -242,6 +235,7 @@ function deleteLocalVoicePost(id) {
 
 module.exports = {
   createId,
+  getRawDiaryEntries,
   getDiaryEntries,
   getDiaryEntryById,
   isCurrentDiaryEntry,
@@ -253,6 +247,7 @@ module.exports = {
   getCustomEmergencyCards,
   saveCustomEmergencyCard,
   deleteCustomEmergencyCard,
+  createDefaultWishItems,
   initializeDefaultWishItems,
   clearLocalData,
   getLocalVoicePosts,

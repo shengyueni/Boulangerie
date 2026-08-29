@@ -1,5 +1,6 @@
 {
   "description": "吗喽的出走 MVP 0.1",
+  "cloudfunctionRoot": "cloudfunctions/",
   "packOptions": {
     "ignore": [
       {
