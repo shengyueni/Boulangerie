@@ -197,6 +197,17 @@ function saveTrialFeedbackPost(post) {
   return nextPosts;
 }
 
+function updateTrialFeedbackPost(id, updates) {
+  let updatedPost = null;
+  const nextPosts = getTrialFeedbackPosts().map((post) => {
+    if (post.id !== id) return post;
+    updatedPost = { ...post, ...updates, id: post.id };
+    return updatedPost;
+  });
+  wx.setStorageSync(TRIAL_FEEDBACK_KEY, nextPosts);
+  return updatedPost;
+}
+
 function deleteTrialFeedbackPost(id) {
   const nextPosts = getTrialFeedbackPosts().filter((post) => post.id !== id);
   wx.setStorageSync(TRIAL_FEEDBACK_KEY, nextPosts);
@@ -258,5 +269,6 @@ module.exports = {
   hugFeaturedVoice,
   getTrialFeedbackPosts,
   saveTrialFeedbackPost,
+  updateTrialFeedbackPost,
   deleteTrialFeedbackPost
 };

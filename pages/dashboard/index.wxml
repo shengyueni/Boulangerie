@@ -23,5 +23,5 @@
   <view class="stats-grid"><view class="stat-card"><text class="num">{{stats.total}}</text><text>总记录数</text></view><view class="stat-card"><text class="num">{{stats.decisionFactors}}</text><text>日记条目</text></view><view class="stat-card"><text class="num">{{stats.reasonTypes}}</text><text>归因类型</text></view><view class="stat-card"><text class="num">{{stats.highImpact30Days}}</text><text>重要记录</text></view></view>
   <view class="ornament-card"><text class="section-title">主要原因分布</text><view wx:for="{{reasonDistribution}}" wx:key="reason" class="reason-row"><view class="row between"><text>{{item.reason}}</text><text>{{item.count}} 次</text></view><view class="bar-track"><view class="bar-fill" style="width: {{item.percent}}%;"></view></view></view></view>
   <view class="ornament-card ornament-card--gold review-card"><view class="corner-ornament corner-ornament-left corner-ornament--gold"></view><view class="corner-ornament corner-ornament-right corner-ornament--gold"></view><text class="section-title">本周复盘小纸条</text><text class="body-text">{{reviewText}}</text><text class="review-more" bindtap="goDiary">查看更多</text></view>
-  <button class="sticker-button secondary" bindtap="goNewDiary">写一条日记</button><button class="sticker-button green" disabled="true">离职状态自测正在校准</button>
+  <button class="sticker-button secondary" bindtap="goNewDiary">写一条日记</button>
 </view>

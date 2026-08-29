@@ -10,40 +10,24 @@
   <character-card image="{{companion.image}}" name="{{companion.name}}" tag="{{companion.tag}}" message="{{companion.message}}" sub-message="{{companion.subMessage}}" variant="{{companion.variant}}" size="{{companion.size}}" />
 
   <view class="card">
-    <text class="section-title">关于这个小程序</text>
-    <text class="body-text">「吗喽的出走」是一个帮助你记录职场消耗、整理离职想法、准备过渡计划的小工具。</text>
-    <text class="body-text">它不会替你决定要不要离职，也不会评价你是不是“太脆弱”。</text>
-    <text class="body-text">它只是陪你把混乱的感受整理成记录、趋势和下一步。</text>
+    <text class="section-title">Malo 能做什么</text>
+    <text class="body-text">Malo 帮你记录职场消耗、整理事实与趋势，也陪你准备下一步计划。</text>
+    <text class="body-text">它不是医疗、心理治疗、法律或劳动仲裁工具，也不会替你决定是否离职。</text>
   </view>
 
   <view class="card">
-    <text class="section-title">本地优先与云端备份</text>
-    <text class="body-text">如果你没有开启云端备份，日记、本地心声、出走清单和自定义急救卡等内容仍只保存在当前设备。</text>
-    <text class="body-text">如果你主动开启云端备份，上述核心记录会与你的小程序微信身份关联并保存到云端，用于清除缓存或更换设备后的数据恢复。</text>
-    <text class="body-text">Malo 当前不需要获取你的微信昵称、头像或手机号，也不会把云端备份描述成实时多设备同步或永久保存。</text>
-  </view>
-
-  <view class="card">
-    <text class="section-title">当前版本不做什么</text>
-    <view class="list">
-      <text>· 不获取微信昵称、头像或手机号</text>
-      <text>· 不做实时多设备同步、数据合并或冲突解决</text>
-      <text>· 不使用 AI 生成咨询结论</text>
-      <text>· 试用反馈、离职测试结果和精选心声抱抱状态不进入云备份</text>
-      <text>· 未经你主动开启，不上传核心私人记录</text>
-    </view>
-  </view>
-
-  <view class="card">
-    <text class="section-title">重要但不吓人的提醒</text>
-    <text class="body-text">这个小程序不是医疗诊断工具、心理治疗工具、法律咨询工具、劳动仲裁建议工具，也不是让你立刻离职的指令机器。</text>
-    <text class="body-text">它可以帮你记录和整理，但不能替代现实中的专业支持和安全支持。</text>
-    <text class="body-text">如果你正在经历严重身体不适、持续惊恐、强烈自伤念头，或无法保证自己的安全，请优先联系现实中的可信任的人、当地紧急帮助或专业支持。</text>
+    <text class="section-title">你的数据怎么保存</text>
+    <text class="body-text">日记、心声、计划清单和自定义急救卡默认保存在当前设备。</text>
+    <text class="body-text">如果你主动开启云端备份，这些核心记录会与你的小程序微信身份关联保存到云端，用于缓存丢失或更换设备后的恢复。</text>
+    <text class="body-text">Malo 当前不需要获取微信昵称、头像或手机号。</text>
+    <text class="body-text">当前不是实时多设备同步。</text>
   </view>
 
   <view class="card feedback-card">
     <text class="section-title">试用反馈</text>
-    <text class="body-text">如果你愿意递一张小纸条，反馈也只会先保存在本机。你可以之后自己查看、删除，或复制给开发者。</text>
+    <text class="body-text">试用反馈只有在你主动点击提交后，才会发送给 Malo。</text>
+    <text class="body-text">它用于帮助我们改进产品，不属于你的私人云备份内容。</text>
+    <text class="body-text">以前在“仅本地保存”版本中写下的反馈，不会被自动上传。</text>
     <button class="sticker-button green" bindtap="goFeedback">打开试用反馈</button>
   </view>
 

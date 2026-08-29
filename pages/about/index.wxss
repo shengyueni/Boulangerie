@@ -10,16 +10,6 @@
   line-height: 1.75;
 }
 
-.list {
-  display: flex;
-  flex-direction: column;
-  gap: 12rpx;
-  margin: 18rpx 0 4rpx;
-  color: var(--ink);
-  font-size: 28rpx;
-  line-height: 1.6;
-}
-
 .theme-toolbox .about-head,
 .theme-toolbox .feedback-card {
   border-color: var(--page-theme-soft);

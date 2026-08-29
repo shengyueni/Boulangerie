@@ -5,6 +5,14 @@ const APP_META = {
   stage: "云备份发布候选版"
 };
 
+const FEEDBACK_TYPES = [
+  "我觉得好用的地方",
+  "我觉得别扭的地方",
+  "我遇到的小 bug",
+  "我希望之后增加的内容",
+  "我不确定，但想说两句"
+];
+
 const CHARACTERS = {
   croissant: {
     name: "Croissant",
@@ -270,6 +278,7 @@ const SKILL_CARDS = [
 
 module.exports = {
   APP_META,
+  FEEDBACK_TYPES,
   CHARACTERS,
   REASON_OPTIONS,
   IMPACT_LEVELS,

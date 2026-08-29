@@ -78,6 +78,45 @@
   white-space: pre-wrap;
 }
 
+.post-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16rpx;
+  margin-top: 16rpx;
+}
+
+.post-status {
+  padding: 6rpx 14rpx;
+  border: 2rpx solid rgba(184, 138, 74, 0.32);
+  border-radius: 999rpx;
+  color: var(--muted);
+  font-size: 22rpx;
+  font-weight: 900;
+}
+
+.post-status--submitted {
+  border-color: rgba(93, 143, 101, 0.42);
+  color: var(--green);
+}
+
+.retry-feedback {
+  min-height: 58rpx;
+  margin: 0;
+  padding: 0 22rpx;
+  border: 2rpx solid rgba(93, 143, 101, 0.42);
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--green);
+  font-size: 23rpx;
+  font-weight: 900;
+  line-height: 58rpx;
+}
+
+.retry-feedback::after {
+  border: 0;
+}
+
 .delete-feedback {
   min-height: 70rpx;
   margin-top: 18rpx;
