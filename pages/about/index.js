@@ -45,7 +45,11 @@ function buildCloudBackupCard(state) {
     detailText,
     lastBackupText: formatCloudTime(state.lastBackupAt),
     showEnable: !loading && !unavailable && !enabled,
-    showBackup: enabled && !suppressed && state.recoveryChecked && !state.restoreInFlight,
+    showBackup: enabled
+      && !suppressed
+      && state.recoveryChecked
+      && state.recoveryStatus !== "failed"
+      && !state.restoreInFlight,
     showDisable: enabled,
     showRestore: suppressed
   };

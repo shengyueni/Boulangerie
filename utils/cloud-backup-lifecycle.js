@@ -235,6 +235,9 @@ function backupNow(reason = "manual") {
   if (!lifecycleState.recoveryChecked) {
     return Promise.resolve(createFailure("RECOVERY_PENDING", "恢复检查尚未完成。"));
   }
+  if (lifecycleState.recoveryStatus === "failed") {
+    return Promise.resolve(createFailure("RECOVERY_FAILED", "恢复检查未成功，暂不更新云端备份。"));
+  }
   if (lifecycleState.restoreInFlight) {
     return Promise.resolve(createFailure("RESTORE_IN_PROGRESS", "云端恢复正在进行。"));
   }

@@ -1,5 +1,4 @@
 const { ensureCloudIdentity } = require("./utils/cloud-auth");
-const cloudBackup = require("./utils/cloud-backup");
 const cloudBackupLifecycle = require("./utils/cloud-backup-lifecycle");
 
 const CLOUD_ENV = "cloud1-d7giej4xy92b740d4";
@@ -10,17 +9,6 @@ function createCloudError(code, message) {
 
 App({
   globalData: {
-    // Development-only manual hooks. Nothing here uploads automatically.
-    __devCloudBackup: {
-      saveCloudBackup: cloudBackupLifecycle.backupNow,
-      getCloudBackupStatus: cloudBackup.getCloudBackupStatus,
-      downloadCloudBackup: cloudBackup.downloadCloudBackup,
-      restoreCloudBackup: cloudBackupLifecycle.restoreAfterIntentionalClear,
-      getPreference: cloudBackup.getCloudBackupPreference,
-      setPreference: cloudBackupLifecycle.setCloudBackupMode,
-      initializeLifecycle: cloudBackupLifecycle.initializeCloudBackupLifecycle,
-      getLifecycleState: cloudBackupLifecycle.getLifecycleState
-    },
     cloudBackupLifecycle: cloudBackupLifecycle.getLifecycleState(),
     cloudIdentity: {
       status: "idle",
