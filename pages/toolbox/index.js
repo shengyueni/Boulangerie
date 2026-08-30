@@ -1,4 +1,5 @@
 const { TOOLBOX_ITEMS } = require("../../utils/constants");
+const { getMaloNickname } = require("../../utils/storage");
 
 const EXTRA_TOOLS = [
   { title: "吗喽的泡泡机", subtitle: "吹出两句朋友的话，偶尔飘过一点噪音", path: "/pages/bubble/index", color: "pink", enabled: true },
@@ -14,8 +15,20 @@ const TAB_PATHS = [
 ];
 const VISIBLE_TOOLBOX_ITEMS = TOOLBOX_ITEMS.filter((item) => item.path !== "/pages/exit-test/index");
 
+function buildToolItems(nickname) {
+  return EXTRA_TOOLS.slice(0, 1)
+    .concat(VISIBLE_TOOLBOX_ITEMS, EXTRA_TOOLS.slice(1))
+    .map((item) => item.path === "/pages/nickname/index" ? {
+      ...item,
+      subtitle: nickname ? `当前：${nickname}` : "还没有设置，留一个只存在本机的称呼"
+    } : item);
+}
+
 Page({
-  data: { items: EXTRA_TOOLS.slice(0, 1).concat(VISIBLE_TOOLBOX_ITEMS, EXTRA_TOOLS.slice(1)) },
+  data: { items: buildToolItems("") },
+  onShow() {
+    this.setData({ items: buildToolItems(getMaloNickname()) });
+  },
   openTool(event) {
     const item = this.data.items[event.currentTarget.dataset.index];
     if (!item || !item.enabled) {

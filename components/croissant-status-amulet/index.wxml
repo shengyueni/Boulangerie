@@ -12,6 +12,7 @@
 
   <view class="croissant-amulet-body">
     <view class="croissant-amulet-copy">
+      <text class="croissant-amulet-reminder">{{reminderLabel}}</text>
       <text class="body-text croissant-amulet-text">{{text}}</text>
     </view>
 

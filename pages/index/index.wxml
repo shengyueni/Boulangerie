@@ -95,6 +95,7 @@
     status-class="{{croissant.statusClass}}"
     wear="{{croissant.wear}}"
     text="{{croissant.explanation}}"
+    reminder-label="{{croissantReminderLabel}}"
     hint="点点 Croissant 看仪表盘"
     buttons="{{todayStatusButtons}}"
     actions-layout="grid"

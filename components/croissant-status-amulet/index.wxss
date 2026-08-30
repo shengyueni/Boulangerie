@@ -148,6 +148,16 @@
   line-height: 1.46;
 }
 
+.croissant-amulet-reminder {
+  display: block;
+  margin-bottom: 8rpx;
+  color: var(--page-theme, var(--green));
+  font-size: 23rpx;
+  line-height: 1.45;
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
 
 .croissant-amulet-figure {
   flex: 0 0 226rpx;

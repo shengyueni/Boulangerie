@@ -7,10 +7,15 @@ const cloudBackupLifecycle = require("../../utils/cloud-backup-lifecycle");
 
 const FIRST_USE_GUIDE_KEY = "hasSeenFirstUseGuide";
 
+function getCroissantReminderLabel(nickname) {
+  return nickname ? `${nickname}，Croissant 今天想提醒你：` : "Croissant 今天想提醒你：";
+}
+
 Page({
   data: {
     appMeta: APP_META,
     nickname: "",
+    croissantReminderLabel: getCroissantReminderLabel(""),
     oracle: getTodayOracle(),
     isSavingOraclePoster: false,
     croissant: getCroissantReport([]),
@@ -26,8 +31,10 @@ Page({
 
   onLoad() {
     this.pageVisible = true;
+    const nickname = getMaloNickname();
     this.setData({
-      nickname: getMaloNickname(),
+      nickname,
+      croissantReminderLabel: getCroissantReminderLabel(nickname),
       showAutomaticFirstUseGuide: wx.getStorageSync(FIRST_USE_GUIDE_KEY) !== true,
       showManualFirstUseGuide: false
     });
@@ -40,9 +47,11 @@ Page({
     this.pageVisible = true;
     const oracle = getTodayOracle();
     const croissant = getCroissantReport(getDiaryEntries());
+    const nickname = getMaloNickname();
     this.setData({
       oracle,
-      nickname: getMaloNickname(),
+      nickname,
+      croissantReminderLabel: getCroissantReminderLabel(nickname),
       croissant
     });
     this.maybePromptCloudBackup();
