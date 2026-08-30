@@ -81,6 +81,9 @@
             <text class="slip-text">{{oracle.action}}</text>
           </view>
         </view>
+        <view class="oracle-action-row">
+          <button class="oracle-save-button {{isTodayOracleSaved ? 'is-saved' : ''}}" bindtap="saveTodayOracle">{{isTodayOracleSaved ? '今天已收好' : '收下今天'}}</button>
+        </view>
       </view>
     </view>
   </view>

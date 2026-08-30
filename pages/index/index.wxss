@@ -419,3 +419,33 @@
   line-height: 1.56;
   font-weight: 900;
 }
+
+.oracle-action-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18rpx;
+}
+
+.oracle-save-button {
+  min-width: 196rpx;
+  min-height: 72rpx;
+  margin: 0;
+  padding: 8rpx 24rpx;
+  border: 2rpx solid rgba(184, 74, 58, .34);
+  border-radius: 999rpx;
+  color: #9d4235;
+  background: rgba(255, 254, 251, .88);
+  font-size: 24rpx;
+  font-weight: 900;
+  line-height: 1.35;
+}
+
+.oracle-save-button::after {
+  border: 0;
+}
+
+.oracle-save-button.is-saved {
+  border-color: rgba(39, 91, 74, .22);
+  color: var(--green);
+  background: rgba(235, 245, 238, .78);
+}

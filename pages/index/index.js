@@ -1,5 +1,5 @@
 const { APP_META } = require("../../utils/constants");
-const { getDiaryEntries } = require("../../utils/storage");
+const { getDiaryEntries, getOracleSnapshots, saveOracleSnapshot } = require("../../utils/storage");
 const { getCroissantReport } = require("../../utils/croissant");
 const { getTodayOracle } = require("../../utils/oracle");
 const cloudBackupLifecycle = require("../../utils/cloud-backup-lifecycle");
@@ -10,6 +10,7 @@ Page({
   data: {
     appMeta: APP_META,
     oracle: getTodayOracle(),
+    isTodayOracleSaved: false,
     croissant: getCroissantReport([]),
     showAutomaticFirstUseGuide: false,
     showManualFirstUseGuide: false,
@@ -34,9 +35,11 @@ Page({
 
   onShow() {
     this.pageVisible = true;
+    const oracle = getTodayOracle();
     const croissant = getCroissantReport(getDiaryEntries());
     this.setData({
-      oracle: getTodayOracle(),
+      oracle,
+      isTodayOracleSaved: getOracleSnapshots().some((item) => item.dateLabel === oracle.dateLabel),
       croissant
     });
     this.maybePromptCloudBackup();
@@ -69,6 +72,16 @@ Page({
 
   recordToday() {
     wx.navigateTo({ url: "/pages/diary-new/index" });
+  },
+
+  saveTodayOracle() {
+    const result = saveOracleSnapshot(this.data.oracle);
+    if (!result.snapshot) {
+      wx.showToast({ title: "今天暂时没有可以收下的内容。", icon: "none" });
+      return;
+    }
+    this.setData({ isTodayOracleSaved: true });
+    wx.showToast({ title: result.created ? "今天收好啦。" : "今天已经收好啦。", icon: "none" });
   },
 
   dismissFirstUseGuide() {
