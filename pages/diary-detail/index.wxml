@@ -62,11 +62,12 @@
       <text class="paper-seal memo-seal">事实纪要</text>
       <text class="section-title">完整事实纪要</text>
       <text class="fact-memo">{{entry.displayFactMemo}}</text>
-      <button class="sticker-button copy-seal" bindtap="copyFactMemo">复制事实纪要</button>
+      <view class="detail-action-grid">
+        <button class="detail-action detail-action--primary" bindtap="copyFactMemo">复制事实纪要</button>
+        <button class="detail-action" bindtap="goDiary">回到日记本</button>
+        <button class="detail-action" bindtap="goDashboard">去看决心仪表盘</button>
+        <button class="detail-action detail-action--danger" bindtap="deleteEntry">删除这条记录</button>
+      </view>
     </view>
-
-    <button class="sticker-button secondary" bindtap="goDiary">回到日记本</button>
-    <button class="sticker-button green" bindtap="goDashboard">去看决心仪表盘</button>
-    <button class="danger-button" bindtap="deleteEntry">删除这条记录</button>
   </block>
 </view>
