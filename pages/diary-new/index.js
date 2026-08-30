@@ -20,6 +20,13 @@ function joinSections(list, none) {
 
 function buildFactMemo(entry) {
   const none = "这部分当时没有记录，也没关系。";
+  if (entry.entryMode === "quick") {
+    return [
+      "事件事实：" + entry.summary,
+      "当时感受：" + (entry.emotions.length ? entry.emotions.join("、") : none),
+      "整理状态：这是一条 30 秒记录，影响与归因可以以后再慢慢整理。"
+    ].join("\n");
+  }
   return [
     "事件事实：" + entry.summary,
     "影响程度：" + entry.impactLevel + " 级",
@@ -36,6 +43,7 @@ function buildFactMemo(entry) {
 
 Page({
   data: {
+    formMode: "full",
     summary: "",
     type: "negative",
     entryKind: "decision_factor",
@@ -65,6 +73,11 @@ Page({
   onNextStepInput(event) { this.setData({ nextStep: event.detail.value }); },
   selectImpact(event) { this.setData({ impactLevel: Number(event.currentTarget.dataset.value) }); },
 
+  selectFormMode(event) {
+    const formMode = event.currentTarget.dataset.mode === "quick" ? "quick" : "full";
+    this.setData({ formMode });
+  },
+
   selectReason(event) {
     const primaryReason = event.currentTarget.dataset.reason;
     this.setData({ primaryReason, secondaryTags: [], tagOptions: toOptions(SECONDARY_TAG_GROUPS[primaryReason] || []) });
@@ -91,23 +104,25 @@ Page({
       return;
     }
 
+    const isQuick = this.data.formMode === "quick";
     const entry = {
       id: createId("diary"),
       createdAt: new Date().toISOString(),
       type: "negative",
       entryKind: this.data.entryKind,
       summary,
-      impactLevel: this.data.impactLevel,
-      primaryReason: this.data.primaryReason,
-      secondaryTags: this.data.secondaryTags,
-      bodyReactions: this.data.bodyReactions,
+      impactLevel: isQuick ? 0 : this.data.impactLevel,
+      primaryReason: isQuick ? "" : this.data.primaryReason,
+      secondaryTags: isQuick ? [] : this.data.secondaryTags,
+      bodyReactions: isQuick ? [] : this.data.bodyReactions,
       emotions: this.data.emotions,
-      triedActions: this.data.triedActions,
+      triedActions: isQuick ? [] : this.data.triedActions,
       leaveReason: "",
       approachClue: "",
-      nextStep: this.data.nextStep.trim(),
+      nextStep: isQuick ? "" : this.data.nextStep.trim(),
       factMemo: ""
     };
+    if (isQuick) entry.entryMode = "quick";
     entry.factMemo = buildFactMemo(entry);
     saveDiaryEntry(entry);
     wx.redirectTo({ url: "/pages/diary-saved/index?id=" + entry.id });

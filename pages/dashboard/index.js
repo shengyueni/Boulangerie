@@ -14,7 +14,7 @@ function getReasonCounts(entries) { return REASON_OPTIONS.map((reason) => ({ rea
 function withPercent(items) { const max = Math.max(...items.map((item) => item.count), 1); return items.map((item) => ({ ...item, percent: item.count ? Math.round((item.count / max) * 100) : 0 })); }
 function getTopReason(distribution) { const sorted = distribution.slice().sort((a, b) => b.count - a.count); return sorted[0] && sorted[0].count ? sorted[0].reason : "还没有足够记录"; }
 function preview(text) { const value = text || "没有写下事件描述"; return value.length > 34 ? value.slice(0, 34) + "..." : value; }
-function buildReview(entries, topReason, croissant) { if (!entries.length) return "这段时间还没有记录。先给混乱一个落脚点，Croissant 会慢慢陪你看清楚。"; return "这段时间你记录了 " + entries.length + " 件事，其中最常出现的是「" + topReason + "」。Croissant 现在是「" + croissant.status + "」。先别急着判断自己是不是太敏感，反复出现的线索本来就该被看见。"; }
+function buildReview(entries, topReason, croissant) { if (!entries.length) return "这段时间还没有记录。先给混乱一个落脚点，Croissant 会慢慢陪你看清楚。"; if (topReason === "还没有足够记录") return "这段时间你记录了 " + entries.length + " 件事，其中有些还是 30 秒记录，暂时没有整理归因。先留下事实就已经算数，Croissant 不会催你补完。"; return "这段时间你记录了 " + entries.length + " 件事，其中最常出现的是「" + topReason + "」。Croissant 现在是「" + croissant.status + "」。先别急着判断自己是不是太敏感，反复出现的线索本来就该被看见。"; }
 function buildDashboardCompanion(croissant) { return buildCompanion("croissant", "dashboard." + croissant.statusKey, { image: getCroissantStateImage(croissant.statusKey), tag: "Croissant 状态陪伴", message: getCharacterLine("dashboard." + croissant.statusKey), size: "bust" }); }
 
 Page({

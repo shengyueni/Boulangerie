@@ -8,14 +8,22 @@
     <view class="paper-corner bottom-right"></view>
     <view class="title-content">
       <text class="paper-title__stamp">日记纸</text>
-      <text class="hero-title">日记与归因整理</text>
-      <text class="subtext">不用写得漂亮。先把事实、影响和下一步放到纸片上。</text>
+      <text class="hero-title">{{formMode === 'quick' ? '30 秒记录' : '日记与归因整理'}}</text>
+      <text class="subtext">{{formMode === 'quick' ? '先留下一句话。有力气时，再慢慢整理也可以。' : '不用写得漂亮。先把事实、影响和下一步放到纸片上。'}}</text>
       <view class="paper-title__rail">
         <view class="paper-title__rail-line"></view>
         <view class="paper-title__rail-dot"></view>
         <view class="paper-title__rail-dot"></view>
         <view class="paper-title__rail-line"></view>
       </view>
+    </view>
+  </view>
+
+  <view class="entry-mode-card">
+    <text class="entry-mode-card__label">今天想怎么记？</text>
+    <view class="entry-mode-switch">
+      <button class="entry-mode-option {{formMode === 'full' ? 'is-active' : ''}}" data-mode="full" bindtap="selectFormMode"><text>完整记录</text><text class="entry-mode-option__hint">慢慢梳理</text></button>
+      <button class="entry-mode-option {{formMode === 'quick' ? 'is-active' : ''}}" data-mode="quick" bindtap="selectFormMode"><text>快速记一下</text><text class="entry-mode-option__hint">大约 30 秒</text></button>
     </view>
   </view>
 
@@ -26,10 +34,21 @@
     <view class="paper-corner right"></view>
     <text class="paper-seal">第一张纸</text>
     <text class="section-title">发生了什么？</text>
-    <textarea class="textarea record-textarea" value="{{summary}}" bindinput="onSummaryInput" placeholder-class="form-placeholder" placeholder="只写事实" />
-    <text class="field-hint">谁、什么时候、做了什么、说了什么。先不用急着解释。</text>
+    <textarea class="textarea record-textarea" value="{{summary}}" bindinput="onSummaryInput" placeholder-class="form-placeholder" placeholder="{{formMode === 'quick' ? '一句话写下刚刚发生的事' : '只写事实'}}" />
+    <text class="field-hint">{{formMode === 'quick' ? '不用完整，也不用现在解释。先让这件事有个落脚点。' : '谁、什么时候、做了什么、说了什么。先不用急着解释。'}}</text>
   </view>
 
+  <view wx:if="{{formMode === 'quick'}}" class="ornament-card paper-card--record record-paper quick-feeling-paper">
+    <view class="paper-corner left"></view>
+    <view class="paper-corner right"></view>
+    <text class="section-title">现在感觉怎么样？</text>
+    <text class="subtext">可选。点一两个最接近的就好。</text>
+    <view class="tag-row">
+      <view wx:for="{{emotionOptions}}" wx:key="label" class="paper-tag {{item.selected ? 'pink' : ''}}" data-value="{{item.label}}" bindtap="toggleEmotion">{{item.label}}</view>
+    </view>
+  </view>
+
+  <block wx:if="{{formMode === 'full'}}">
   <view class="paper-divider"><view class="paper-divider__line"></view><text class="paper-divider__tag">影响与归因</text><view class="paper-divider__line"></view></view>
 
   <view class="ornament-card paper-card--record record-paper">
@@ -98,6 +117,7 @@
     <input class="input record-input" value="{{nextStep}}" bindinput="onNextStepInput" placeholder-class="form-placeholder" placeholder="先记一个小动作" />
     <text class="field-hint">比如：下班后先吃饭，明天整理材料，找朋友聊聊。可以很小，不需要立刻解决人生。</text>
   </view>
+  </block>
 
-  <button class="sticker-button save-seal" bindtap="saveEntry">保存这条记录</button>
+  <button class="sticker-button save-seal" bindtap="saveEntry">{{formMode === 'quick' ? '先存下这一句' : '保存这条记录'}}</button>
 </view>
