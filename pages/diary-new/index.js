@@ -23,8 +23,9 @@ function buildFactMemo(entry) {
   if (entry.entryMode === "quick") {
     return [
       "事件事实：" + entry.summary,
-      "当时感受：" + (entry.emotions.length ? entry.emotions.join("、") : none),
-      "整理状态：这是一条 30 秒记录，影响与归因可以以后再慢慢整理。"
+      "影响程度：" + entry.impactLevel + " 级",
+      "主要归因：" + entry.primaryReason,
+      "整理状态：这是一条 30 秒记录，其他线索可以以后再慢慢整理。"
     ].join("\n");
   }
   return [
@@ -78,12 +79,23 @@ Page({
     const entry = getDiaryEntryById(id);
     if (!entry || entry.entryMode !== "quick") return;
     const emotions = Array.isArray(entry.emotions) ? entry.emotions : [];
+    const impactLevel = IMPACT_LEVELS.some((item) => item.value === Number(entry.impactLevel))
+      ? Number(entry.impactLevel)
+      : 3;
+    const primaryReason = REASON_OPTIONS.includes(entry.primaryReason)
+      ? entry.primaryReason
+      : REASON_OPTIONS[0];
+    const secondaryTags = Array.isArray(entry.secondaryTags) ? entry.secondaryTags : [];
     this.setData({
       formMode: "full",
       isUpgradingQuick: true,
       editingEntryId: entry.id,
       editingCreatedAt: entry.createdAt,
       summary: entry.summary || "",
+      impactLevel,
+      primaryReason,
+      secondaryTags,
+      tagOptions: toOptions(SECONDARY_TAG_GROUPS[primaryReason] || [], secondaryTags),
       emotions,
       emotionOptions: toOptions(EMOTION_OPTIONS, emotions)
     });
@@ -125,14 +137,18 @@ Page({
     }
 
     const isQuick = this.data.formMode === "quick";
+    if (isQuick && (!this.data.primaryReason || !Number(this.data.impactLevel))) {
+      wx.showToast({ title: "再选一下问题分类和事件等级。", icon: "none" });
+      return;
+    }
     const entry = {
       id: this.data.editingEntryId || createId("diary"),
       createdAt: this.data.editingCreatedAt || new Date().toISOString(),
       type: "negative",
       entryKind: this.data.entryKind,
       summary,
-      impactLevel: isQuick ? 0 : this.data.impactLevel,
-      primaryReason: isQuick ? "" : this.data.primaryReason,
+      impactLevel: this.data.impactLevel,
+      primaryReason: this.data.primaryReason,
       secondaryTags: isQuick ? [] : this.data.secondaryTags,
       bodyReactions: isQuick ? [] : this.data.bodyReactions,
       emotions: this.data.emotions,

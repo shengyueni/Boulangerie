@@ -9,7 +9,7 @@
     <view class="title-content">
       <text class="paper-title__stamp">日记纸</text>
       <text class="hero-title">{{isUpgradingQuick ? '继续整理这条记录' : (formMode === 'quick' ? '30 秒记录' : '日记与归因整理')}}</text>
-      <text class="subtext">{{isUpgradingQuick ? '原来的事实和感受已经替你放好了。补充完后，会更新同一条记录。' : (formMode === 'quick' ? '先留下一句话。有力气时，再慢慢整理也可以。' : '不用写得漂亮。先把事实、影响和下一步放到纸片上。')}}</text>
+      <text class="subtext">{{isUpgradingQuick ? '原来的事实、分类和事件等级已经替你放好了。补充完后，会更新同一条记录。' : (formMode === 'quick' ? '先记事实、问题分类和事件等级。有力气时，再慢慢整理也可以。' : '不用写得漂亮。先把事实、影响和下一步放到纸片上。')}}</text>
       <view class="paper-title__rail">
         <view class="paper-title__rail-line"></view>
         <view class="paper-title__rail-dot"></view>
@@ -38,23 +38,13 @@
     <text class="field-hint">{{formMode === 'quick' ? '不用完整，也不用现在解释。先让这件事有个落脚点。' : '谁、什么时候、做了什么、说了什么。先不用急着解释。'}}</text>
   </view>
 
-  <view wx:if="{{formMode === 'quick'}}" class="ornament-card paper-card--record record-paper quick-feeling-paper">
-    <view class="paper-corner left"></view>
-    <view class="paper-corner right"></view>
-    <text class="section-title">现在感觉怎么样？</text>
-    <text class="subtext">可选。点一两个最接近的就好。</text>
-    <view class="tag-row">
-      <view wx:for="{{emotionOptions}}" wx:key="label" class="paper-tag {{item.selected ? 'pink' : ''}}" data-value="{{item.label}}" bindtap="toggleEmotion">{{item.label}}</view>
-    </view>
-  </view>
-
-  <block wx:if="{{formMode === 'full'}}">
   <view class="paper-divider"><view class="paper-divider__line"></view><text class="paper-divider__tag">影响与归因</text><view class="paper-divider__line"></view></view>
 
   <view class="ornament-card paper-card--record record-paper">
     <view class="paper-corner left"></view>
     <view class="paper-corner right"></view>
     <text class="section-title">这件事影响了我什么？</text>
+    <text wx:if="{{formMode === 'quick'}}" class="subtext">必选。沿用完整记录的 1–5 级标准。</text>
     <view class="tag-row">
       <view wx:for="{{impactLevels}}" wx:key="value" class="paper-tag {{impactLevel === item.value ? 'orange' : ''}}" data-value="{{item.value}}" bindtap="selectImpact">{{item.label}}</view>
     </view>
@@ -64,11 +54,13 @@
     <view class="paper-corner left"></view>
     <view class="paper-corner right"></view>
     <text class="section-title">它主要碰到了哪一类问题？</text>
+    <text wx:if="{{formMode === 'quick'}}" class="subtext">必选。之后整理完整记录时仍可调整。</text>
     <view class="tag-row">
       <view wx:for="{{reasonOptions}}" wx:key="*this" class="paper-tag {{primaryReason === item ? 'pink' : ''}}" data-reason="{{item}}" bindtap="selectReason">{{item}}</view>
     </view>
   </view>
 
+  <block wx:if="{{formMode === 'full'}}">
   <view class="ornament-card paper-card--record record-paper">
     <view class="paper-corner left"></view>
     <view class="paper-corner right"></view>
@@ -117,6 +109,7 @@
     <input class="input record-input" value="{{nextStep}}" bindinput="onNextStepInput" placeholder-class="form-placeholder" placeholder="先记一个小动作" />
     <text class="field-hint">比如：下班后先吃饭，明天整理材料，找朋友聊聊。可以很小，不需要立刻解决人生。</text>
   </view>
+
   </block>
 
   <button class="sticker-button save-seal" bindtap="saveEntry">{{isUpgradingQuick ? '保存为完整记录' : (formMode === 'quick' ? '先存下这一句' : '保存这条记录')}}</button>
