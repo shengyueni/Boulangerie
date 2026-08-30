@@ -45,6 +45,7 @@ Page({
   switchReasonFilter(event) { const reason = event.currentTarget.dataset.reason; this.setData({ activeReason: reason === "全部归因" ? "all" : reason }); this.applyFilters(); },
   goNew() { wx.navigateTo({ url: "/pages/diary-new/index" }); },
   goDashboard() { wx.navigateTo({ url: "/pages/dashboard/index" }); },
+  goWeeklyReview() { wx.navigateTo({ url: "/pages/weekly-review/index" }); },
   handleCroissantAction(event) { const action = event.detail.action; if (action === "dashboard") this.goDashboard(); if (action === "new") this.goNew(); },
   goDetail(event) { wx.navigateTo({ url: "/pages/diary-detail/index?id=" + event.currentTarget.dataset.id }); }
 });

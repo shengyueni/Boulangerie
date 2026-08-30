@@ -130,6 +130,12 @@
       "pages": [
         "index"
       ]
+    },
+    {
+      "root": "pages/weekly-review",
+      "pages": [
+        "index"
+      ]
     }
   ]
 }

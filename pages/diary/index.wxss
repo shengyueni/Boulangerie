@@ -59,6 +59,11 @@
   background: rgba(255, 254, 251, 0.88);
 }
 
+.weekly-entry { border-color: var(--page-theme-soft); background: linear-gradient(180deg, #fffefb, var(--page-tint)); }
+.weekly-entry .section-title { margin-bottom: 10rpx; }
+.weekly-entry .body-text { color: var(--muted); }
+.weekly-entry__action { display: block; margin-top: 14rpx; color: var(--page-theme); font-size: 25rpx; font-weight: 900; }
+
 .entry-card {
   padding: 46rpx 26rpx 26rpx;
   line-height: 1.6;

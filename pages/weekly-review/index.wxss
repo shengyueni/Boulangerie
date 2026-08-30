@@ -1,0 +1,15 @@
+.stats-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16rpx; }
+.stat-card { box-sizing: border-box; padding: 24rpx 20rpx; border: 2rpx solid var(--page-theme-soft); border-radius: 20rpx; background: #fffefb; }
+.stat-card.wide { grid-column: 1 / -1; }
+.stat-value { display: block; color: var(--page-theme); font-size: 44rpx; line-height: 1.2; font-weight: 900; }
+.reason-value { font-size: 34rpx; }
+.stat-label { display: block; margin-top: 8rpx; color: var(--muted); font-size: 23rpx; line-height: 1.45; }
+.highest-card { border-color: var(--page-theme-soft); background: linear-gradient(180deg, #fffefb, var(--page-tint)); }
+.highest-summary { display: block; font-size: 31rpx; line-height: 1.5; font-weight: 900; }
+.highest-meta { display: flex; justify-content: space-between; gap: 16rpx; margin-top: 16rpx; color: var(--muted); font-size: 23rpx; }
+.detail-hint { display: block; margin-top: 14rpx; color: var(--page-theme); font-size: 24rpx; font-weight: 900; }
+.repeat-list { display: flex; flex-wrap: wrap; }
+.empty-review { display: flex; flex-direction: column; gap: 12rpx; }
+.reflection-card { border-color: var(--page-theme-soft); background: #f6fbf7; }
+.question { display: block; margin-top: 16rpx; padding: 18rpx; border-left: 6rpx solid var(--page-theme-soft); background: #fffefb; font-size: 27rpx; line-height: 1.58; }
+.privacy-note { display: block; margin-top: 20rpx; color: var(--muted); font-size: 23rpx; line-height: 1.6; }
