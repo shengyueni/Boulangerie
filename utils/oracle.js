@@ -72,6 +72,22 @@ const ACTIONS = [
   "进泡泡机，听听两位朋友怎么说。"
 ];
 
+const METRIC_VISUALS = {
+  "耗电量": { key: "energy" },
+  "边界天气": { key: "weather", icons: { "晴": "☀", "有雾": "≋", "小雨": "☂", "打雷": "⚡" } },
+  "废话云层": { key: "cloud" },
+  "顺毛概率": {
+    key: "fur",
+    images: [
+      "/assets/characters/croissant-state-frizzy-bust.png",
+      "/assets/characters/croissant-state-protect-bust.png",
+      "/assets/characters/croissant-state-smooth-bust.png",
+      "/assets/characters/croissant-state-smooth-bust.png"
+    ]
+  },
+  "安全感库存": { key: "safety", reverseLevel: true }
+};
+
 function pad(value) {
   return String(value).padStart(2, "0");
 }
@@ -99,10 +115,17 @@ function getTodayOracle(date = new Date()) {
     dateLabel,
     metrics: METRIC_POOLS.map((metric, index) => {
       const selected = pick(metric.options, seed, index + 1);
+      const selectedIndex = metric.options.indexOf(selected);
+      const visual = METRIC_VISUALS[metric.name];
+      const visualLevel = visual && visual.reverseLevel ? metric.options.length - selectedIndex : selectedIndex + 1;
       return {
         name: metric.name,
         value: selected.value,
-        description: selected.description
+        description: selected.description,
+        visualKey: visual && visual.key,
+        visualLevel,
+        visualIcon: visual && visual.icons ? visual.icons[selected.value] : "",
+        visualImage: visual && visual.images ? visual.images[selectedIndex] : ""
       };
     }),
     talisman: pick(TALISMANS, seed, 11),

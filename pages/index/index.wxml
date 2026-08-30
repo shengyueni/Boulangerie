@@ -34,9 +34,21 @@
 
       <view class="oracle-content">
         <view class="oracle-metrics">
-          <view wx:for="{{oracle.metrics}}" wx:key="name" class="oracle-metric">
-            <text class="metric-name">{{item.name}}：{{item.value}}</text>
-            <text class="metric-desc">{{item.description}}</text>
+          <view wx:for="{{oracle.metrics}}" wx:key="name" class="oracle-metric metric--{{item.visualKey}}">
+            <view class="metric-visual" aria-hidden="true">
+              <text wx:if="{{item.visualKey === 'weather'}}" class="weather-symbol">{{item.visualIcon}}</text>
+              <view wx:elif="{{item.visualKey === 'fur'}}" class="fur-state"><image class="fur-state__image" src="{{item.visualImage}}" mode="aspectFit" /></view>
+              <view wx:else class="visual-meter visual-meter--{{item.visualKey}}">
+                <view class="visual-meter__bar {{item.visualLevel >= 1 ? 'is-on' : ''}}"></view>
+                <view class="visual-meter__bar {{item.visualLevel >= 2 ? 'is-on' : ''}}"></view>
+                <view class="visual-meter__bar {{item.visualLevel >= 3 ? 'is-on' : ''}}"></view>
+                <view class="visual-meter__bar {{item.visualLevel >= 4 ? 'is-on' : ''}}"></view>
+              </view>
+            </view>
+            <view class="metric-copy">
+              <text class="metric-name">{{item.name}}：{{item.value}}</text>
+              <text class="metric-desc">{{item.description}}</text>
+            </view>
           </view>
         </view>
 
