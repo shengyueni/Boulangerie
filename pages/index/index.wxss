@@ -19,6 +19,7 @@
 }
 
 .first-use-card {
+  position: relative;
   margin: 18rpx 0 24rpx;
   padding: 24rpx;
   border: 2rpx solid rgba(47, 123, 103, .28);
@@ -28,10 +29,8 @@
 }
 
 .first-use-card__head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16rpx;
+  min-width: 0;
+  padding-right: 64rpx;
 }
 
 .first-use-card__eyebrow,
@@ -55,19 +54,21 @@
 }
 
 .first-use-card__close {
+  position: absolute;
+  top: 12rpx;
+  right: 12rpx;
   display: flex;
-  flex: 0 0 64rpx;
   align-items: center;
   justify-content: center;
-  width: 64rpx;
-  height: 64rpx;
-  margin: -10rpx -10rpx 0 0;
+  width: 72rpx;
+  height: 72rpx;
+  margin: 0;
   padding: 0;
   border: 0;
   border-radius: 50%;
   color: var(--muted);
   background: transparent;
-  font-size: 42rpx;
+  font-size: 38rpx;
   font-weight: 400;
   line-height: 1;
 }
