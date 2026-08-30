@@ -429,9 +429,13 @@
 
 .oracle-save-button,
 .oracle-insights-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   min-width: 0;
   min-height: 72rpx;
+  box-sizing: border-box;
   margin: 0;
   padding: 8rpx 24rpx;
   border: 2rpx solid rgba(184, 74, 58, .34);
@@ -441,6 +445,7 @@
   font-size: 24rpx;
   font-weight: 900;
   line-height: 1.35;
+  text-align: center;
 }
 
 .oracle-save-button::after {
