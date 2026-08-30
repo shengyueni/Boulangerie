@@ -1,0 +1,30 @@
+<view class="page theme-wishlist">
+  <view class="page-head floral-title-box title-pattern-card">
+    <image class="title-pattern-image" src="/assets/title-patterns/indigo-blue.png" mode="aspectFill" />
+    <view class="title-pattern-mask"></view>
+    <view class="corner-ornament corner-ornament-left corner-ornament--blue"></view>
+    <text class="eyebrow">可选准备清单</text>
+    <text class="hero-title">离职准备模板</text>
+    <text class="subtext">如果你正在考虑离开，可以先把现实问题拆小。这里不是裸辞建议，也不会替你做决定。</text>
+  </view>
+
+  <view class="note-card safety-note">
+    <text class="section-title">只挑现在有用的</text>
+    <text class="body-text">不必全部添加。模板事项会进入原有「计划」，之后仍可完成或删除。</text>
+  </view>
+
+  <view wx:for="{{groups}}" wx:key="title" class="ornament-card template-group">
+    <text class="section-title">{{item.title}}</text>
+    <text class="group-note">{{item.note}}</text>
+    <view wx:for="{{item.items}}" wx:for-item="template" wx:key="id" class="template-item {{template.selected ? 'selected' : ''}} {{template.alreadyAdded ? 'added' : ''}}" data-id="{{template.id}}" data-added="{{template.alreadyAdded}}" bindtap="toggleItem">
+      <view class="check-mark">{{template.alreadyAdded ? '✓' : (template.selected ? '✓' : '')}}</view>
+      <text class="template-title">{{template.title}}</text>
+      <text wx:if="{{template.alreadyAdded}}" class="added-label">已在计划</text>
+    </view>
+  </view>
+
+  <view class="save-dock">
+    <text class="selection-count">已选 {{selectedCount}} 项</text>
+    <button class="sticker-button add-button" bindtap="addSelected">加入我的计划</button>
+  </view>
+</view>

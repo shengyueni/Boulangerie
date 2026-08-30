@@ -124,6 +124,12 @@
       "pages": [
         "index"
       ]
+    },
+    {
+      "root": "pages/resignation-templates",
+      "pages": [
+        "index"
+      ]
     }
   ]
 }
