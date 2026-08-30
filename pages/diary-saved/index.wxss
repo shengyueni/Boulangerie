@@ -1,2 +1,40 @@
 .amulet-card { text-align: left; }
-.route-button { border-color: rgba(184,138,74,.58); }
+.next-actions {
+  margin-top: 12rpx;
+  padding: 24rpx;
+  border: 2rpx solid rgba(184, 138, 74, 0.22);
+  border-radius: 28rpx;
+  background: rgba(255, 254, 251, 0.68);
+}
+.next-actions__title {
+  display: block;
+  margin-bottom: 18rpx;
+  color: #6f5b4d;
+  font-size: 25rpx;
+  font-weight: 800;
+  letter-spacing: 1rpx;
+}
+.next-actions__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16rpx;
+}
+.next-actions .route-button {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 92rpx;
+  margin: 0;
+  padding: 12rpx 14rpx;
+  border-color: rgba(184, 138, 74, 0.42);
+  border-radius: 24rpx;
+  color: #6f5b4d;
+  background: rgba(255, 254, 251, 0.92);
+  font-size: 25rpx;
+  line-height: 1.28;
+  white-space: normal;
+}
+.next-actions .route-button--primary {
+  color: var(--green);
+  border-color: rgba(47, 123, 103, 0.42);
+  background: #f4faf6;
+}
