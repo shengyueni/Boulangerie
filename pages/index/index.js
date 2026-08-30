@@ -82,7 +82,9 @@ Page({
   },
 
   openFirstUseGuide() {
-    this.setData({ showManualFirstUseGuide: true });
+    this.setData({ showManualFirstUseGuide: true }, () => {
+      wx.pageScrollTo({ scrollTop: 0, duration: 300 });
+    });
   },
 
   startFirstDiary() {
