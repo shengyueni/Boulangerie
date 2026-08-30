@@ -11,9 +11,10 @@ const TAB_PATHS = [
   "/pages/toolbox/index",
   "/pages/voice/index"
 ];
+const VISIBLE_TOOLBOX_ITEMS = TOOLBOX_ITEMS.filter((item) => item.path !== "/pages/exit-test/index");
 
 Page({
-  data: { items: EXTRA_TOOLS.slice(0, 1).concat(TOOLBOX_ITEMS, EXTRA_TOOLS.slice(1)) },
+  data: { items: EXTRA_TOOLS.slice(0, 1).concat(VISIBLE_TOOLBOX_ITEMS, EXTRA_TOOLS.slice(1)) },
   openTool(event) {
     const item = this.data.items[event.currentTarget.dataset.index];
     if (!item || !item.enabled) {
