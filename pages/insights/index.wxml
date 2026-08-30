@@ -1,0 +1,62 @@
+<view class="page paper-page theme-diary insights-page">
+  <view class="page-head floral-title-box title-pattern-card">
+    <image class="title-pattern-image" src="/assets/title-patterns/dark-green.png" mode="aspectFill" />
+    <view class="title-pattern-mask"></view>
+    <view class="corner-ornament corner-ornament-left corner-ornament--green"></view>
+    <text class="eyebrow">真实记录回看</text>
+    <text class="hero-title">最近职场状态</text>
+    <text class="subtext">只整理你真实记下来的事，不把每日猩象当成心理测量。</text>
+  </view>
+
+  <view class="range-switch" aria-label="选择回看时间范围">
+    <button wx:for="{{rangeOptions}}" wx:key="days" class="range-option {{activeDays === item.days ? 'is-active' : ''}}" data-days="{{item.days}}" bindtap="switchRange">{{item.label}}</button>
+  </view>
+
+  <block wx:if="{{hasRecords}}">
+    <view class="stats-grid">
+      <view class="stat-card"><text class="stat-value">{{total}}</text><text class="stat-label">真实记录次数</text></view>
+      <view class="stat-card"><text class="stat-value">{{averageImpact}}</text><text class="stat-label">平均事件等级</text></view>
+      <view class="stat-card"><text class="stat-value">{{highImpactCount}}</text><text class="stat-label">4–5 级事件</text></view>
+      <view class="stat-card"><text class="stat-value wear-value">{{wearContributionText}}</text><text class="stat-label">区间磨损贡献</text></view>
+      <view class="stat-card wide"><text class="stat-value reason-value">{{topReason}}</text><text class="stat-label">最常出现 · {{topReasonCount}} 次</text></view>
+    </view>
+
+    <view class="ornament-card facts-card">
+      <text class="section-title">这一段时间发生了什么</text>
+      <view wx:for="{{trendNotes}}" wx:key="*this" class="fact-row"><text class="fact-dot">•</text><text>{{item}}</text></view>
+      <text class="method-note">这里只描述记录数量、等级和分类变化，不判断你的情况好坏。</text>
+    </view>
+
+    <view class="ornament-card">
+      <text class="section-title">最近反复出现</text>
+      <view wx:if="{{repeatedReasons.length}}" class="repeat-list"><view wx:for="{{repeatedReasons}}" wx:key="reason" class="paper-tag green">{{item.reason}} × {{item.count}}</view></view>
+      <text wx:else class="body-text muted">当前区间还没有出现两次以上的同类问题。</text>
+    </view>
+
+    <view wx:if="{{highestEntry}}" class="ornament-card highest-card" bindtap="openHighestEntry">
+      <text class="section-title">最高影响事件</text>
+      <text class="highest-summary">{{highestEntry.summaryPreview}}</text>
+      <view class="highest-meta"><text>{{highestEntry.displayDate}}</text><text>{{highestEntry.impactLevel}} 级 · {{highestEntry.primaryReason}}</text></view>
+      <text class="detail-hint">点开回看这条记录 →</text>
+    </view>
+  </block>
+
+  <view wx:else class="empty-card empty-insights">
+    <text class="section-title">最近的记录还不多</text>
+    <text>先记下几件真实发生的事，之后再回来看看变化。</text>
+    <button class="sticker-button green" bindtap="writeDiary">写一条日记</button>
+  </view>
+
+  <view class="saved-oracle-section">
+    <text class="section-title">我收下的职场天气</text>
+    <text class="oracle-boundary-note">这些卡片按日期生成并由你主动收藏，只是当天的陪伴内容，不代表真实状态趋势。</text>
+    <view wx:if="{{savedOracles.length}}" class="saved-oracle-list">
+      <view wx:for="{{savedOracles}}" wx:key="dateLabel" class="saved-oracle-card">
+        <text class="saved-oracle-date">{{item.displayDate}}</text>
+        <text class="saved-oracle-metrics">{{item.metricSummary}}</text>
+        <text class="saved-oracle-talisman">护身符：{{item.talisman}}</text>
+      </view>
+    </view>
+    <text wx:else class="body-text muted">还没有收下过职场天气卡。可以从首页的“收下今天”开始。</text>
+  </view>
+</view>

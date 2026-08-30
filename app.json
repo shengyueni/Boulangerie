@@ -136,6 +136,12 @@
       "pages": [
         "index"
       ]
+    },
+    {
+      "root": "pages/insights",
+      "pages": [
+        "index"
+      ]
     }
   ]
 }

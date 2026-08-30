@@ -84,6 +84,10 @@ Page({
     wx.showToast({ title: result.created ? "今天收好啦。" : "今天已经收好啦。", icon: "none" });
   },
 
+  goInsights() {
+    wx.navigateTo({ url: "/pages/insights/index" });
+  },
+
   dismissFirstUseGuide() {
     if (this.data.showAutomaticFirstUseGuide) {
       wx.setStorageSync(FIRST_USE_GUIDE_KEY, true);
