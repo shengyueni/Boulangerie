@@ -7,7 +7,7 @@
   <view wx:if="{{showAutomaticFirstUseGuide || showManualFirstUseGuide}}" class="first-use-card">
     <view class="first-use-card__head">
       <view>
-        <text class="first-use-card__eyebrow">第一次来吗？</text>
+        <text class="first-use-card__eyebrow">{{nickname ? nickname + '，第一次来吗？' : '第一次来吗？'}}</text>
         <text class="first-use-card__title">可以从这里慢慢开始</text>
       </view>
       <view class="first-use-card__close" role="button" aria-label="跳过首次使用引导" bindtap="dismissFirstUseGuide"><text class="first-use-card__close-icon">×</text></view>

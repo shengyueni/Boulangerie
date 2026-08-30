@@ -2,6 +2,7 @@ const { TOOLBOX_ITEMS } = require("../../utils/constants");
 
 const EXTRA_TOOLS = [
   { title: "吗喽的泡泡机", subtitle: "吹出两句朋友的话，偶尔飘过一点噪音", path: "/pages/bubble/index", color: "pink", enabled: true },
+  { title: "Malo 怎么称呼你？", subtitle: "留一个只存在本机、可以随时修改的称呼", path: "/pages/nickname/index", color: "green", enabled: true },
   { title: "隐私与安全说明", subtitle: "看看数据存在哪里、这个工具不能替你做什么", path: "/pages/about/index", color: "plain", enabled: true }
 ];
 const TAB_PATHS = [

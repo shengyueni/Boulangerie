@@ -1,4 +1,4 @@
-const { getDiaryEntries } = require("../../utils/storage");
+const { getDiaryEntries, getMaloNickname } = require("../../utils/storage");
 const { buildWeeklyReview } = require("../../utils/weekly-review");
 
 function formatDate(value) {
@@ -20,10 +20,12 @@ Page({
     topReasonCount: 0,
     averageImpact: "—",
     highestEntry: null,
-    repeatedReasons: []
+    repeatedReasons: [],
+    greeting: "先看见事实和重复，不急着替这一周下结论。"
   },
 
   onShow() {
+    const nickname = getMaloNickname();
     const review = buildWeeklyReview(getDiaryEntries());
     const highestEntry = review.highestEntry ? {
       ...review.highestEntry,
@@ -36,6 +38,9 @@ Page({
       topReason: review.topReason,
       topReasonCount: review.topReasonCount,
       averageImpact: review.averageImpact,
+      greeting: nickname
+        ? `${nickname}，先看见事实和重复，不急着替这一周下结论。`
+        : "先看见事实和重复，不急着替这一周下结论。",
       highestEntry,
       repeatedReasons: review.repeatedReasons
     });

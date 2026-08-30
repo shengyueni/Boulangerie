@@ -1,5 +1,5 @@
 const { APP_META } = require("../../utils/constants");
-const { getDiaryEntries, getOracleSnapshots, saveOracleSnapshot } = require("../../utils/storage");
+const { getDiaryEntries, getOracleSnapshots, saveOracleSnapshot, getMaloNickname } = require("../../utils/storage");
 const { getCroissantReport } = require("../../utils/croissant");
 const { getTodayOracle } = require("../../utils/oracle");
 const cloudBackupLifecycle = require("../../utils/cloud-backup-lifecycle");
@@ -9,6 +9,7 @@ const FIRST_USE_GUIDE_KEY = "hasSeenFirstUseGuide";
 Page({
   data: {
     appMeta: APP_META,
+    nickname: "",
     oracle: getTodayOracle(),
     isTodayOracleSaved: false,
     croissant: getCroissantReport([]),
@@ -25,6 +26,7 @@ Page({
   onLoad() {
     this.pageVisible = true;
     this.setData({
+      nickname: getMaloNickname(),
       showAutomaticFirstUseGuide: wx.getStorageSync(FIRST_USE_GUIDE_KEY) !== true,
       showManualFirstUseGuide: false
     });
@@ -39,6 +41,7 @@ Page({
     const croissant = getCroissantReport(getDiaryEntries());
     this.setData({
       oracle,
+      nickname: getMaloNickname(),
       isTodayOracleSaved: getOracleSnapshots().some((item) => item.dateLabel === oracle.dateLabel),
       croissant
     });

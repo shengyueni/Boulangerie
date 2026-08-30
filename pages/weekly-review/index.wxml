@@ -5,7 +5,7 @@
     <view class="corner-ornament corner-ornament-left corner-ornament--green"></view>
     <text class="eyebrow">最近 7 天</text>
     <text class="hero-title">本周回看</text>
-    <text class="subtext">先看见事实和重复，不急着替这一周下结论。</text>
+    <text class="subtext">{{greeting}}</text>
   </view>
 
   <block wx:if="{{hasRecords}}">

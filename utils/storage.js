@@ -9,6 +9,7 @@ const FEATURED_VOICE_HUG_KEY = "malo_featured_voice_hugs";
 const DIARY_CLEANUP_VERSION_KEY = "malo_diary_cleanup_version";
 const CUSTOM_EMERGENCY_CARDS_KEY = "malo_custom_emergency_cards";
 const ORACLE_SNAPSHOTS_KEY = "malo_oracle_snapshots";
+const MALO_NICKNAME_KEY = "malo_nickname";
 const DEFAULT_WISHES = [
   { type: "pre_exit", title: "计算生活费缓冲" },
   { type: "pre_exit", title: "更新简历" },
@@ -113,6 +114,21 @@ function saveOracleSnapshot(oracle, savedAt = new Date().toISOString()) {
   };
   wx.setStorageSync(ORACLE_SNAPSHOTS_KEY, [snapshot].concat(current));
   return { snapshot, created: true };
+}
+
+function normalizeMaloNickname(value) {
+  return Array.from(String(value || "").trim()).slice(0, 16).join("");
+}
+
+function getMaloNickname() {
+  return normalizeMaloNickname(wx.getStorageSync(MALO_NICKNAME_KEY));
+}
+
+function saveMaloNickname(value) {
+  const nickname = normalizeMaloNickname(value);
+  if (nickname) wx.setStorageSync(MALO_NICKNAME_KEY, nickname);
+  else wx.removeStorageSync(MALO_NICKNAME_KEY);
+  return nickname;
 }
 
 function getWishItems() {
@@ -229,6 +245,7 @@ function clearLocalData() {
   wx.removeStorageSync(DIARY_CLEANUP_VERSION_KEY);
   wx.removeStorageSync(CUSTOM_EMERGENCY_CARDS_KEY);
   wx.removeStorageSync(ORACLE_SNAPSHOTS_KEY);
+  wx.removeStorageSync(MALO_NICKNAME_KEY);
 }
 
 function getLocalVoicePosts() {
@@ -311,6 +328,9 @@ module.exports = {
   deleteDiaryEntry,
   getOracleSnapshots,
   saveOracleSnapshot,
+  normalizeMaloNickname,
+  getMaloNickname,
+  saveMaloNickname,
   getWishItems,
   saveWishItems,
   addWishItem,
