@@ -46,17 +46,4 @@
     <text>先记下几件真实发生的事，之后再回来看看变化。</text>
     <button class="sticker-button green" bindtap="writeDiary">写一条日记</button>
   </view>
-
-  <view class="saved-oracle-section">
-    <text class="section-title">我收下的职场天气</text>
-    <text class="oracle-boundary-note">这些卡片按日期生成并由你主动收藏，只是当天的陪伴内容，不代表真实状态趋势。</text>
-    <view wx:if="{{savedOracles.length}}" class="saved-oracle-list">
-      <view wx:for="{{savedOracles}}" wx:key="dateLabel" class="saved-oracle-card">
-        <text class="saved-oracle-date">{{item.displayDate}}</text>
-        <text class="saved-oracle-metrics">{{item.metricSummary}}</text>
-        <text class="saved-oracle-talisman">护身符：{{item.talisman}}</text>
-      </view>
-    </view>
-    <text wx:else class="body-text muted">还没有收下过职场天气卡。可以从首页的“收下今天”开始。</text>
-  </view>
 </view>

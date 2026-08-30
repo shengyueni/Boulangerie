@@ -1,7 +1,8 @@
 const { APP_META } = require("../../utils/constants");
-const { getDiaryEntries, getOracleSnapshots, saveOracleSnapshot, getMaloNickname } = require("../../utils/storage");
+const { getDiaryEntries, getMaloNickname } = require("../../utils/storage");
 const { getCroissantReport } = require("../../utils/croissant");
 const { getTodayOracle } = require("../../utils/oracle");
+const { POSTER_HEIGHT, POSTER_SCALE, POSTER_WIDTH, drawOraclePoster } = require("../../utils/oracle-poster");
 const cloudBackupLifecycle = require("../../utils/cloud-backup-lifecycle");
 
 const FIRST_USE_GUIDE_KEY = "hasSeenFirstUseGuide";
@@ -11,7 +12,7 @@ Page({
     appMeta: APP_META,
     nickname: "",
     oracle: getTodayOracle(),
-    isTodayOracleSaved: false,
+    isSavingOraclePoster: false,
     croissant: getCroissantReport([]),
     showAutomaticFirstUseGuide: false,
     showManualFirstUseGuide: false,
@@ -42,7 +43,6 @@ Page({
     this.setData({
       oracle,
       nickname: getMaloNickname(),
-      isTodayOracleSaved: getOracleSnapshots().some((item) => item.dateLabel === oracle.dateLabel),
       croissant
     });
     this.maybePromptCloudBackup();
@@ -78,13 +78,80 @@ Page({
   },
 
   saveTodayOracle() {
-    const result = saveOracleSnapshot(this.data.oracle);
-    if (!result.snapshot) {
-      wx.showToast({ title: "今天暂时没有可以收下的内容。", icon: "none" });
-      return;
-    }
-    this.setData({ isTodayOracleSaved: true });
-    wx.showToast({ title: result.created ? "今天收好啦。" : "今天已经收好啦。", icon: "none" });
+    if (this.data.isSavingOraclePoster) return;
+    wx.getSetting({
+      success: (settings) => {
+        if (settings.authSetting["scope.writePhotosAlbum"] === false) {
+          this.showAlbumPermissionGuide();
+          return;
+        }
+        this.generateAndSaveOraclePoster();
+      },
+      fail: () => this.generateAndSaveOraclePoster()
+    });
+  },
+
+  generateAndSaveOraclePoster() {
+    this.setData({ isSavingOraclePoster: true });
+    wx.showLoading({ title: "正在生成卡片", mask: true });
+    this.createOraclePoster()
+      .then((filePath) => new Promise((resolve, reject) => {
+        wx.saveImageToPhotosAlbum({ filePath, success: resolve, fail: reject });
+      }))
+      .then(() => {
+        wx.showToast({ title: "今天的职场天气已经收进相册啦。", icon: "none" });
+      })
+      .catch((error) => {
+        const message = String((error && error.errMsg) || error || "");
+        if (/auth deny|auth denied|authorize:fail/i.test(message)) {
+          this.showAlbumPermissionGuide();
+          return;
+        }
+        wx.showToast({ title: "保存没有成功，请稍后再试。", icon: "none" });
+      })
+      .then(() => {
+        wx.hideLoading();
+        this.setData({ isSavingOraclePoster: false });
+      });
+  },
+
+  createOraclePoster() {
+    return new Promise((resolve, reject) => {
+      wx.createSelectorQuery()
+        .in(this)
+        .select("#oraclePosterCanvas")
+        .fields({ node: true, size: true })
+        .exec((result) => {
+          const canvas = result && result[0] && result[0].node;
+          if (!canvas) {
+            reject(new Error("oracle poster canvas unavailable"));
+            return;
+          }
+          canvas.width = POSTER_WIDTH * POSTER_SCALE;
+          canvas.height = POSTER_HEIGHT * POSTER_SCALE;
+          const context = canvas.getContext("2d");
+          context.scale(POSTER_SCALE, POSTER_SCALE);
+          drawOraclePoster(context, this.data.oracle);
+          wx.canvasToTempFilePath({
+            canvas,
+            fileType: "png",
+            success: (response) => resolve(response.tempFilePath),
+            fail: reject
+          }, this);
+        });
+    });
+  },
+
+  showAlbumPermissionGuide() {
+    wx.showModal({
+      title: "还不能保存到相册",
+      content: "可以在设置里允许访问相册，再回来保存今天的卡片。",
+      cancelText: "暂不设置",
+      confirmText: "去设置",
+      success: (result) => {
+        if (result.confirm) wx.openSetting();
+      }
+    });
   },
 
   goInsights() {

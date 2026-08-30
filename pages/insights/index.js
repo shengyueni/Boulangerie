@@ -1,4 +1,4 @@
-const { getDiaryEntries, getOracleSnapshots } = require("../../utils/storage");
+const { getDiaryEntries } = require("../../utils/storage");
 const { buildRecentInsights } = require("../../utils/recent-insights");
 
 function formatDate(value) {
@@ -10,14 +10,6 @@ function formatDate(value) {
 function preview(value, length = 58) {
   const text = String(value || "未填写事件摘要");
   return text.length > length ? text.slice(0, length) + "…" : text;
-}
-
-function presentSnapshot(snapshot) {
-  return {
-    ...snapshot,
-    displayDate: String(snapshot.dateLabel || "").replace(/^(\d{4})-(\d{2})-(\d{2})$/, "$1 年 $2 月 $3 日"),
-    metricSummary: (snapshot.metrics || []).map((item) => `${item.name}：${item.value}`).join(" · ")
-  };
 }
 
 Page({
@@ -36,8 +28,7 @@ Page({
     wearContributionText: "0",
     repeatedReasons: [],
     trendNotes: [],
-    highestEntry: null,
-    savedOracles: []
+    highestEntry: null
   },
 
   onShow() {
@@ -62,8 +53,7 @@ Page({
       wearContributionText: wear > 0 ? `+${wear}` : String(wear),
       repeatedReasons: report.repeatedReasons,
       trendNotes: report.trendNotes,
-      highestEntry,
-      savedOracles: getOracleSnapshots().map(presentSnapshot)
+      highestEntry
     });
   },
 

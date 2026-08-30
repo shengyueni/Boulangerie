@@ -82,7 +82,7 @@
           </view>
         </view>
         <view class="oracle-action-row">
-          <button class="oracle-save-button {{isTodayOracleSaved ? 'is-saved' : ''}}" bindtap="saveTodayOracle">{{isTodayOracleSaved ? '今天已收好' : '收下今天'}}</button>
+          <button class="oracle-save-button" loading="{{isSavingOraclePoster}}" disabled="{{isSavingOraclePoster}}" bindtap="saveTodayOracle">保存到相册</button>
           <button class="oracle-insights-button" bindtap="goInsights">查看最近状态</button>
         </view>
       </view>
@@ -101,6 +101,8 @@
     bind:figuretap="goDashboard"
     bind:actiontap="handleCroissantAction"
   />
+
+  <canvas type="2d" id="oraclePosterCanvas" class="oracle-poster-canvas" aria-hidden="true"></canvas>
 
   <text class="version-note">当前版本：{{appMeta.version}} {{appMeta.stage}}</text>
 </view>

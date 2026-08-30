@@ -457,8 +457,12 @@
   border: 0;
 }
 
-.oracle-save-button.is-saved {
-  border-color: rgba(39, 91, 74, .22);
-  color: var(--green);
-  background: rgba(235, 245, 238, .78);
+.oracle-poster-canvas {
+  position: fixed;
+  left: -9999px;
+  top: 0;
+  width: 720px;
+  height: 1180px;
+  opacity: 0;
+  pointer-events: none;
 }
