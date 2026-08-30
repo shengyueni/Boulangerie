@@ -8,8 +8,8 @@
     <view class="paper-corner bottom-right"></view>
     <view class="title-content">
       <text class="paper-title__stamp">日记纸</text>
-      <text class="hero-title">{{formMode === 'quick' ? '30 秒记录' : '日记与归因整理'}}</text>
-      <text class="subtext">{{formMode === 'quick' ? '先留下一句话。有力气时，再慢慢整理也可以。' : '不用写得漂亮。先把事实、影响和下一步放到纸片上。'}}</text>
+      <text class="hero-title">{{isUpgradingQuick ? '继续整理这条记录' : (formMode === 'quick' ? '30 秒记录' : '日记与归因整理')}}</text>
+      <text class="subtext">{{isUpgradingQuick ? '原来的事实和感受已经替你放好了。补充完后，会更新同一条记录。' : (formMode === 'quick' ? '先留下一句话。有力气时，再慢慢整理也可以。' : '不用写得漂亮。先把事实、影响和下一步放到纸片上。')}}</text>
       <view class="paper-title__rail">
         <view class="paper-title__rail-line"></view>
         <view class="paper-title__rail-dot"></view>
@@ -19,7 +19,7 @@
     </view>
   </view>
 
-  <view class="entry-mode-card">
+  <view wx:if="{{!isUpgradingQuick}}" class="entry-mode-card">
     <text class="entry-mode-card__label">今天想怎么记？</text>
     <view class="entry-mode-switch">
       <button class="entry-mode-option {{formMode === 'full' ? 'is-active' : ''}}" data-mode="full" bindtap="selectFormMode"><text>完整记录</text><text class="entry-mode-option__hint">慢慢梳理</text></button>
@@ -119,5 +119,5 @@
   </view>
   </block>
 
-  <button class="sticker-button save-seal" bindtap="saveEntry">{{formMode === 'quick' ? '先存下这一句' : '保存这条记录'}}</button>
+  <button class="sticker-button save-seal" bindtap="saveEntry">{{isUpgradingQuick ? '保存为完整记录' : (formMode === 'quick' ? '先存下这一句' : '保存这条记录')}}</button>
 </view>

@@ -6,7 +6,7 @@ const {
   EMOTION_OPTIONS,
   TRIED_ACTION_OPTIONS
 } = require("../../utils/constants");
-const { createId, saveDiaryEntry } = require("../../utils/storage");
+const { createId, getDiaryEntryById, saveDiaryEntry, updateDiaryEntry } = require("../../utils/storage");
 const { buildCompanion, getElodieVariantImage } = require("../../utils/characters");
 
 function toOptions(labels, selected = []) {
@@ -44,6 +44,9 @@ function buildFactMemo(entry) {
 Page({
   data: {
     formMode: "full",
+    isUpgradingQuick: false,
+    editingEntryId: "",
+    editingCreatedAt: "",
     summary: "",
     type: "negative",
     entryKind: "decision_factor",
@@ -67,6 +70,23 @@ Page({
     bodyReactionOptions: toOptions(BODY_REACTION_OPTIONS),
     emotionOptions: toOptions(EMOTION_OPTIONS),
     triedActionOptions: toOptions(TRIED_ACTION_OPTIONS)
+  },
+
+  onLoad(options) {
+    const id = options && options.id ? options.id : "";
+    if (!id) return;
+    const entry = getDiaryEntryById(id);
+    if (!entry || entry.entryMode !== "quick") return;
+    const emotions = Array.isArray(entry.emotions) ? entry.emotions : [];
+    this.setData({
+      formMode: "full",
+      isUpgradingQuick: true,
+      editingEntryId: entry.id,
+      editingCreatedAt: entry.createdAt,
+      summary: entry.summary || "",
+      emotions,
+      emotionOptions: toOptions(EMOTION_OPTIONS, emotions)
+    });
   },
 
   onSummaryInput(event) { this.setData({ summary: event.detail.value }); },
@@ -106,8 +126,8 @@ Page({
 
     const isQuick = this.data.formMode === "quick";
     const entry = {
-      id: createId("diary"),
-      createdAt: new Date().toISOString(),
+      id: this.data.editingEntryId || createId("diary"),
+      createdAt: this.data.editingCreatedAt || new Date().toISOString(),
       type: "negative",
       entryKind: this.data.entryKind,
       summary,
@@ -124,7 +144,15 @@ Page({
     };
     if (isQuick) entry.entryMode = "quick";
     entry.factMemo = buildFactMemo(entry);
-    saveDiaryEntry(entry);
+    if (this.data.isUpgradingQuick) {
+      const updatedEntry = updateDiaryEntry(this.data.editingEntryId, entry);
+      if (!updatedEntry) {
+        wx.showToast({ title: "没有找到这条记录，请返回后重试。", icon: "none" });
+        return;
+      }
+    } else {
+      saveDiaryEntry(entry);
+    }
     wx.redirectTo({ url: "/pages/diary-saved/index?id=" + entry.id });
   }
 });

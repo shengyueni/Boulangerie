@@ -54,6 +54,24 @@ function saveDiaryEntry(entry) {
   return sortByNewest(nextEntries.filter(isCurrentDiaryEntry));
 }
 
+function updateDiaryEntry(id, entry) {
+  const entryId = String(id || "");
+  if (!entryId || !entry) return null;
+  let updatedEntry = null;
+  const nextEntries = getRawDiaryEntries().map((current) => {
+    if (!current || current.id !== entryId) return current;
+    updatedEntry = {
+      ...entry,
+      id: current.id,
+      createdAt: current.createdAt
+    };
+    return updatedEntry;
+  });
+  if (!updatedEntry) return null;
+  wx.setStorageSync(DIARY_KEY, nextEntries);
+  return updatedEntry;
+}
+
 function deleteDiaryEntry(id) {
   const nextEntries = getRawDiaryEntries().filter((entry) => entry.id !== id);
   wx.setStorageSync(DIARY_KEY, nextEntries);
@@ -251,6 +269,7 @@ module.exports = {
   getDiaryEntryById,
   isCurrentDiaryEntry,
   saveDiaryEntry,
+  updateDiaryEntry,
   deleteDiaryEntry,
   getWishItems,
   saveWishItems,

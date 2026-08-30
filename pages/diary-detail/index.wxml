@@ -45,6 +45,7 @@
         <view class="info-row vertical"><text>已尝试处理</text><text>{{entry.triedActionsText}}</text></view>
         <view class="info-row vertical full"><text>下一步我可以做什么</text><text>{{entry.nextStepText}}</text></view>
       </view>
+      <button wx:if="{{entry.isQuick}}" class="sticker-button green" bindtap="continueOrganizing">继续整理成完整记录</button>
     </view>
 
     <view class="paper-divider"><view class="paper-divider__line"></view><text class="paper-divider__tag">可复制证据纸</text><view class="paper-divider__line"></view></view>
