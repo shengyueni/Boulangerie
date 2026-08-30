@@ -5,7 +5,26 @@ function formatDate(value) { const date = new Date(value); if (Number.isNaN(date
 function joinList(list) { return Array.isArray(list) && list.length ? list.join("、") : EMPTY_TEXT; }
 function getTypeLabel(entry) { return entry && entry.entryMode === "quick" ? "30 秒记录" : "日记记录"; }
 function stripLegacyMemo(text) { const blocked = [/^\s*\u8ba9\u6211\u5728\u610f\u7684\u7ebf\u7d22\uff1a/, /^\s*\u60f3\u9760\u8fd1\u7684\u65b9\u5411\uff1a/]; return String(text || "").split("\n").filter((line) => !blocked.some((pattern) => pattern.test(line))).join("\n"); }
-function normalizeEntry(entry) { if (!entry) return null; return { ...entry, isQuick: entry.entryMode === "quick", displayDate: formatDate(entry.createdAt), typeLabel: getTypeLabel(entry), tagsText: joinList(entry.secondaryTags), bodyReactionsText: joinList(entry.bodyReactions), emotionsText: joinList(entry.emotions), triedActionsText: joinList(entry.triedActions), nextStepText: entry.nextStep || "先照顾好自己，再决定下一步。", displayFactMemo: stripLegacyMemo(entry.factMemo) }; }
+function normalizeEntry(entry) {
+  if (!entry) return null;
+  const emotions = Array.isArray(entry.emotions) ? entry.emotions : [];
+  const impactLevel = Number(entry.impactLevel || 0);
+  return {
+    ...entry,
+    isQuick: entry.entryMode === "quick",
+    displayDate: formatDate(entry.createdAt),
+    typeLabel: getTypeLabel(entry),
+    primaryReasonText: entry.primaryReason || EMPTY_TEXT,
+    impactLevelText: impactLevel ? impactLevel + " 级" : EMPTY_TEXT,
+    hasEmotions: emotions.length > 0,
+    tagsText: joinList(entry.secondaryTags),
+    bodyReactionsText: joinList(entry.bodyReactions),
+    emotionsText: joinList(emotions),
+    triedActionsText: joinList(entry.triedActions),
+    nextStepText: entry.nextStep || "先照顾好自己，再决定下一步。",
+    displayFactMemo: stripLegacyMemo(entry.factMemo)
+  };
+}
 Page({
   data: { id: "", entry: null, companion: buildCompanion("elodie", "diaryDetail", { image: getElodieVariantImage("think"), tag: "线索整理", message: "Elodie 会帮你把混乱放回事实里，不急着替你下结论。", size: "bust" }) },
   onLoad(options) { const id = options && options.id ? options.id : ""; this.setData({ id, entry: normalizeEntry(getDiaryEntryById(id)) }); },

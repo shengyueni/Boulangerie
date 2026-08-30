@@ -70,6 +70,16 @@
   grid-column: span 2;
 }
 
+.quick-info-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.quick-info-grid .info-row {
+  width: 100%;
+  min-height: 0;
+  grid-column: auto;
+}
+
 .evidence-card {
   margin-top: 0;
   padding: 46rpx 28rpx 30rpx;
