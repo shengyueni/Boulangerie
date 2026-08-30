@@ -8,7 +8,6 @@
     <text class="amulet-frame__seal croissant-amulet-label">Croissant状态护身符</text>
     <text class="status-name croissant-amulet-status">{{status}}</text>
     <text class="status-wear croissant-amulet-wear">累计磨损点：{{wear}}</text>
-    <text class="croissant-amulet-wear-note">按记录中的职场消耗累积，并非百分比。</text>
   </view>
 
   <view class="croissant-amulet-body">
