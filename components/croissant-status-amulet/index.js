@@ -26,7 +26,8 @@ Component({
     text: { type: String, value: "" },
     hint: { type: String, value: "" },
     image: { type: String, value: "" },
-    buttons: { type: Array, value: [] }
+    buttons: { type: Array, value: [] },
+    actionsLayout: { type: String, value: "default" }
   },
 
   data: {

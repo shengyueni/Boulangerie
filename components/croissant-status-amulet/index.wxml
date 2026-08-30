@@ -21,7 +21,7 @@
     </view>
   </view>
 
-  <view wx:if="{{buttons.length}}" class="croissant-amulet-actions">
+  <view wx:if="{{buttons.length}}" class="croissant-amulet-actions croissant-amulet-actions--{{actionsLayout}}">
     <button
       wx:for="{{buttons}}"
       wx:key="action"

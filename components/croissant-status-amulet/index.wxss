@@ -184,6 +184,17 @@
   margin-top: 8rpx;
 }
 
+.croissant-amulet-actions--grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.croissant-amulet-actions--grid .croissant-amulet-button {
+  width: 100%;
+  min-width: 0;
+  padding: 0 12rpx;
+}
+
 .croissant-amulet-button {
   flex: 1 1 172rpx;
   min-height: 60rpx;

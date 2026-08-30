@@ -11,17 +11,22 @@ Page({
     appMeta: APP_META,
     oracle: getTodayOracle(),
     croissant: getCroissantReport([]),
-    showFirstUseGuide: false,
+    showAutomaticFirstUseGuide: false,
+    showManualFirstUseGuide: false,
     todayStatusButtons: [
       { label: "写日记", action: "record" },
       { label: "急救一下", action: "emergency" },
-      { label: "查看计划", action: "plan" }
+      { label: "查看计划", action: "plan" },
+      { label: "查看引导", action: "guide" }
     ]
   },
 
   onLoad() {
     this.pageVisible = true;
-    this.setData({ showFirstUseGuide: wx.getStorageSync(FIRST_USE_GUIDE_KEY) !== true });
+    this.setData({
+      showAutomaticFirstUseGuide: wx.getStorageSync(FIRST_USE_GUIDE_KEY) !== true,
+      showManualFirstUseGuide: false
+    });
     this.unsubscribeCloudBackup = cloudBackupLifecycle.subscribeLifecycle(() => {
       this.maybePromptCloudBackup();
     });
@@ -67,8 +72,17 @@ Page({
   },
 
   dismissFirstUseGuide() {
-    wx.setStorageSync(FIRST_USE_GUIDE_KEY, true);
-    this.setData({ showFirstUseGuide: false });
+    if (this.data.showAutomaticFirstUseGuide) {
+      wx.setStorageSync(FIRST_USE_GUIDE_KEY, true);
+    }
+    this.setData({
+      showAutomaticFirstUseGuide: false,
+      showManualFirstUseGuide: false
+    });
+  },
+
+  openFirstUseGuide() {
+    this.setData({ showManualFirstUseGuide: true });
   },
 
   startFirstDiary() {
@@ -93,5 +107,6 @@ Page({
     if (action === "record") this.recordToday();
     if (action === "emergency") this.goEmergency();
     if (action === "plan") this.goPlan();
+    if (action === "guide") this.openFirstUseGuide();
   }
 });
