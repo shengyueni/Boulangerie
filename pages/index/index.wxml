@@ -4,6 +4,25 @@
     <text class="subtext">{{appMeta.slogan}}</text>
   </view>
 
+  <view wx:if="{{showFirstUseGuide}}" class="first-use-card">
+    <view class="first-use-card__head">
+      <view>
+        <text class="first-use-card__eyebrow">第一次来吗？</text>
+        <text class="first-use-card__title">可以从这里慢慢开始</text>
+      </view>
+      <button class="first-use-card__close" aria-label="跳过首次使用引导" bindtap="dismissFirstUseGuide">×</button>
+    </view>
+    <view class="first-use-steps">
+      <view class="first-use-step"><text class="first-use-step__number">1</text><text>看看今天的职场天气</text></view>
+      <view class="first-use-step"><text class="first-use-step__number">2</text><text>写下一件最近真实发生的事</text></view>
+      <view class="first-use-step"><text class="first-use-step__number">3</text><text>看看 Croissant 现在怎么说</text></view>
+    </view>
+    <view class="first-use-card__actions">
+      <button class="first-use-card__skip" bindtap="dismissFirstUseGuide">先随便逛逛</button>
+      <button class="first-use-card__start" bindtap="startFirstDiary">写一条日记</button>
+    </view>
+  </view>
+
   <view class="oracle-card paper-title title-pattern-card">
     <image class="oracle-bg-image title-pattern-image" src="/assets/title-patterns/warm-orange.png" mode="aspectFill" />
     <view class="title-pattern-mask oracle-bg"></view>

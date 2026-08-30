@@ -18,6 +18,127 @@
   line-height: 1.45;
 }
 
+.first-use-card {
+  margin: 18rpx 0 24rpx;
+  padding: 24rpx;
+  border: 2rpx solid rgba(47, 123, 103, .28);
+  border-radius: 28rpx;
+  background: linear-gradient(145deg, rgba(244, 250, 246, .98), rgba(255, 250, 242, .96));
+  box-shadow: 0 12rpx 28rpx rgba(75, 91, 72, .08);
+}
+
+.first-use-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16rpx;
+}
+
+.first-use-card__eyebrow,
+.first-use-card__title {
+  display: block;
+}
+
+.first-use-card__eyebrow {
+  color: var(--green);
+  font-size: 22rpx;
+  font-weight: 900;
+  letter-spacing: 1rpx;
+}
+
+.first-use-card__title {
+  margin-top: 5rpx;
+  color: var(--ink);
+  font-size: 30rpx;
+  line-height: 1.3;
+  font-weight: 900;
+}
+
+.first-use-card__close {
+  display: flex;
+  flex: 0 0 64rpx;
+  align-items: center;
+  justify-content: center;
+  width: 64rpx;
+  height: 64rpx;
+  margin: -10rpx -10rpx 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: var(--muted);
+  background: transparent;
+  font-size: 42rpx;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.first-use-card__close::after,
+.first-use-card__skip::after,
+.first-use-card__start::after {
+  border: 0;
+}
+
+.first-use-steps {
+  display: grid;
+  gap: 12rpx;
+  margin-top: 20rpx;
+}
+
+.first-use-step {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  color: #6f5b4d;
+  font-size: 25rpx;
+  line-height: 1.4;
+}
+
+.first-use-step__number {
+  display: flex;
+  flex: 0 0 40rpx;
+  align-items: center;
+  justify-content: center;
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  color: #fffefb;
+  background: #6f9c82;
+  font-size: 21rpx;
+  font-weight: 900;
+}
+
+.first-use-card__actions {
+  display: flex;
+  gap: 14rpx;
+  margin-top: 22rpx;
+}
+
+.first-use-card__skip,
+.first-use-card__start {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-height: 78rpx;
+  margin: 0;
+  padding: 8rpx 14rpx;
+  border: 2rpx solid rgba(47, 123, 103, .3);
+  border-radius: 22rpx;
+  font-size: 25rpx;
+  line-height: 1.25;
+  font-weight: 900;
+}
+
+.first-use-card__skip {
+  color: #6f5b4d;
+  background: rgba(255, 254, 251, .8);
+}
+
+.first-use-card__start {
+  color: var(--green);
+  background: rgba(232, 245, 237, .92);
+}
+
 .oracle-card {
   margin-top: 2rpx;
   padding: 34rpx 24rpx 24rpx;

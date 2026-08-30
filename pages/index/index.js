@@ -4,12 +4,14 @@ const { getCroissantReport } = require("../../utils/croissant");
 const { getTodayOracle } = require("../../utils/oracle");
 const cloudBackupLifecycle = require("../../utils/cloud-backup-lifecycle");
 
+const FIRST_USE_GUIDE_KEY = "hasSeenFirstUseGuide";
 
 Page({
   data: {
     appMeta: APP_META,
     oracle: getTodayOracle(),
     croissant: getCroissantReport([]),
+    showFirstUseGuide: false,
     todayStatusButtons: [
       { label: "写日记", action: "record" },
       { label: "急救一下", action: "emergency" },
@@ -19,6 +21,7 @@ Page({
 
   onLoad() {
     this.pageVisible = true;
+    this.setData({ showFirstUseGuide: wx.getStorageSync(FIRST_USE_GUIDE_KEY) !== true });
     this.unsubscribeCloudBackup = cloudBackupLifecycle.subscribeLifecycle(() => {
       this.maybePromptCloudBackup();
     });
@@ -61,6 +64,16 @@ Page({
 
   recordToday() {
     wx.navigateTo({ url: "/pages/diary-new/index" });
+  },
+
+  dismissFirstUseGuide() {
+    wx.setStorageSync(FIRST_USE_GUIDE_KEY, true);
+    this.setData({ showFirstUseGuide: false });
+  },
+
+  startFirstDiary() {
+    this.dismissFirstUseGuide();
+    this.recordToday();
   },
 
   goDashboard() {
