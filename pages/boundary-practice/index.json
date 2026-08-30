@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "女性职场边界练习",
+  "usingComponents": {
+    "character-card": "/components/character-card/index"
+  }
+}

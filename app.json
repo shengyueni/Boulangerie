@@ -118,6 +118,12 @@
       "pages": [
         "index"
       ]
+    },
+    {
+      "root": "pages/boundary-practice",
+      "pages": [
+        "index"
+      ]
     }
   ]
 }
