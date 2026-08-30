@@ -83,7 +83,7 @@
         </view>
         <view class="oracle-action-row">
           <button class="oracle-save-button" loading="{{isSavingOraclePoster}}" disabled="{{isSavingOraclePoster}}" bindtap="saveTodayOracle">保存到相册</button>
-          <button class="oracle-insights-button" bindtap="goInsights">查看最近状态</button>
+          <button class="oracle-insights-button" bindtap="goDashboard">去复盘一下</button>
         </view>
       </view>
     </view>

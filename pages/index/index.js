@@ -154,10 +154,6 @@ Page({
     });
   },
 
-  goInsights() {
-    wx.navigateTo({ url: "/pages/insights/index" });
-  },
-
   dismissFirstUseGuide() {
     if (this.data.showAutomaticFirstUseGuide) {
       wx.setStorageSync(FIRST_USE_GUIDE_KEY, true);

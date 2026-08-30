@@ -2,42 +2,46 @@ const { REASON_OPTIONS, PROTECTION_ADVICE } = require("../../utils/constants");
 const { getDiaryEntries } = require("../../utils/storage");
 const { getCroissantReport } = require("../../utils/croissant");
 const { buildCompanion, getCharacterLine, getCroissantStateImage } = require("../../utils/characters");
+const { DAY_MS, buildRecentInsights } = require("../../utils/recent-insights");
 
 const RANGES = [
   { key: "7", label: "近 7 天", days: 7 },
-  { key: "30", label: "近 30 天", days: 30 },
-  { key: "all", label: "全部", days: 0 }
+  { key: "30", label: "近 30 天", days: 30 }
 ];
 function formatDate(value) { const date = new Date(value); if (Number.isNaN(date.getTime())) return ""; return (date.getMonth() + 1) + "-" + date.getDate(); }
-function inRange(entry, rangeKey) { if (rangeKey === "all") return true; const range = RANGES.find((item) => item.key === rangeKey) || RANGES[1]; const created = new Date(entry.createdAt).getTime(); return Date.now() - created <= range.days * 24 * 60 * 60 * 1000; }
 function getReasonCounts(entries) { return REASON_OPTIONS.map((reason) => ({ reason, count: entries.filter((entry) => entry.primaryReason === reason).length, percent: 0 })); }
 function withPercent(items) { const max = Math.max(...items.map((item) => item.count), 1); return items.map((item) => ({ ...item, percent: item.count ? Math.round((item.count / max) * 100) : 0 })); }
-function getTopReason(distribution) { const sorted = distribution.slice().sort((a, b) => b.count - a.count); return sorted[0] && sorted[0].count ? sorted[0].reason : "还没有足够记录"; }
 function preview(text) { const value = text || "没有写下事件描述"; return value.length > 34 ? value.slice(0, 34) + "..." : value; }
-function buildReview(entries, topReason, croissant) { if (!entries.length) return "这段时间还没有记录。先给混乱一个落脚点，Croissant 会慢慢陪你看清楚。"; if (topReason === "还没有足够记录") return "这段时间你记录了 " + entries.length + " 件事，其中有些还是 30 秒记录，暂时没有整理归因。先留下事实就已经算数，Croissant 不会催你补完。"; return "这段时间你记录了 " + entries.length + " 件事，其中最常出现的是「" + topReason + "」。Croissant 现在是「" + croissant.status + "」。先别急着判断自己是不是太敏感，反复出现的线索本来就该被看见。"; }
 function buildDashboardCompanion(croissant) { return buildCompanion("croissant", "dashboard." + croissant.statusKey, { image: getCroissantStateImage(croissant.statusKey), tag: "Croissant 状态陪伴", message: getCharacterLine("dashboard." + croissant.statusKey), size: "bust" }); }
 
 Page({
-  data: { ranges: RANGES, activeRange: "30", hasRecords: false, croissant: getCroissantReport([]), companion: buildDashboardCompanion(getCroissantReport([])), stats: { total: 0, decisionFactors: 0, reasonTypes: 0, highImpact30Days: 0, topReason: "还没有足够记录", advice: "本周先保护好自己。第一步不是判断，而是记录。" }, reasonDistribution: [], highImpactEntries: [], reviewText: "" },
+  data: { ranges: RANGES, activeRange: "30", hasRecords: false, croissant: getCroissantReport([]), companion: buildDashboardCompanion(getCroissantReport([])), stats: { total: 0, averageImpact: "—", reasonTypes: 0, highImpactCount: 0, topReason: "还没有足够记录", topReasonCount: 0, advice: "先保护好自己。第一步不是判断，而是记录。" }, reasonDistribution: [], repeatedReasons: [], trendNotes: [], highestEntry: null },
   onShow() { this.refresh(); },
   switchRange(event) { this.setData({ activeRange: event.currentTarget.dataset.key }); this.refresh(); },
   refresh() {
-    const entries = getDiaryEntries().filter((entry) => inRange(entry, this.data.activeRange));
-    const hasRecords = entries.length > 0;
+    const days = this.data.activeRange === "7" ? 7 : 30;
+    const now = Date.now();
+    const entries = getDiaryEntries().filter((entry) => {
+      const createdAt = new Date(entry && entry.createdAt).getTime();
+      return Number.isFinite(createdAt) && createdAt >= now - days * DAY_MS && createdAt <= now;
+    });
+    const report = buildRecentInsights(getDiaryEntries(), days, now);
+    const hasRecords = report.hasRecords;
     const croissant = getCroissantReport(entries);
     const reasonDistribution = withPercent(getReasonCounts(entries));
-    const topReason = getTopReason(reasonDistribution);
-    const highImpactEntries = entries.filter((entry) => Number(entry.impactLevel) >= 4).slice(0, 5).map((entry) => ({ ...entry, displayDate: formatDate(entry.createdAt), summaryPreview: preview(entry.summary) }));
+    const highestEntry = report.highestEntry ? { ...report.highestEntry, displayDate: formatDate(report.highestEntry.createdAt), summaryPreview: preview(report.highestEntry.summary) } : null;
     this.setData({
       hasRecords,
       croissant,
       companion: buildDashboardCompanion(croissant),
-      stats: { total: entries.length, decisionFactors: entries.length, reasonTypes: reasonDistribution.filter((item) => item.count > 0).length, highImpact30Days: highImpactEntries.length, topReason, advice: hasRecords ? PROTECTION_ADVICE[topReason] || croissant.advice : "本周先保护好自己。第一步不是判断，而是记录。" },
+      stats: { total: report.total, averageImpact: report.averageImpact, reasonTypes: reasonDistribution.filter((item) => item.count > 0).length, highImpactCount: report.highImpactCount, topReason: report.topReason, topReasonCount: report.topReasonCount, advice: hasRecords ? PROTECTION_ADVICE[report.topReason] || croissant.advice : "先保护好自己。第一步不是判断，而是记录。" },
       reasonDistribution,
-      highImpactEntries,
-      reviewText: buildReview(entries, topReason, croissant)
+      repeatedReasons: report.repeatedReasons,
+      trendNotes: report.trendNotes,
+      highestEntry
     });
   },
+  openHighestEntry() { if (this.data.highestEntry) wx.navigateTo({ url: "/pages/diary-detail/index?id=" + this.data.highestEntry.id }); },
   goDiary() { wx.switchTab({ url: "/pages/diary/index" }); },
   goNewDiary() { wx.navigateTo({ url: "/pages/diary-new/index" }); },
   goExitTest() { wx.navigateTo({ url: "/pages/exit-test/index" }); }
