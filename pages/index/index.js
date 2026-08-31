@@ -6,6 +6,7 @@ const { POSTER_HEIGHT, POSTER_SCALE, POSTER_WIDTH, drawOraclePoster } = require(
 const cloudBackupLifecycle = require("../../utils/cloud-backup-lifecycle");
 
 const FIRST_USE_GUIDE_KEY = "hasSeenFirstUseGuide";
+const ORACLE_POSTER_CROISSANT = "/assets/characters/croissant-state-smooth-bust.png";
 
 function getCroissantReminderLabel(nickname) {
   return nickname ? `${nickname}，Croissant 今天想提醒你：` : "Croissant 今天想提醒你：";
@@ -140,13 +141,23 @@ Page({
           canvas.height = POSTER_HEIGHT * POSTER_SCALE;
           const context = canvas.getContext("2d");
           context.scale(POSTER_SCALE, POSTER_SCALE);
-          drawOraclePoster(context, this.data.oracle);
-          wx.canvasToTempFilePath({
-            canvas,
-            fileType: "png",
-            success: (response) => resolve(response.tempFilePath),
-            fail: reject
-          }, this);
+          const drawAndExport = (croissantImage) => {
+            drawOraclePoster(context, this.data.oracle, croissantImage);
+            wx.canvasToTempFilePath({
+              canvas,
+              fileType: "png",
+              success: (response) => resolve(response.tempFilePath),
+              fail: reject
+            }, this);
+          };
+          if (!canvas.createImage) {
+            drawAndExport(null);
+            return;
+          }
+          const croissantImage = canvas.createImage();
+          croissantImage.onload = () => drawAndExport(croissantImage);
+          croissantImage.onerror = () => drawAndExport(null);
+          croissantImage.src = ORACLE_POSTER_CROISSANT;
         });
     });
   },
