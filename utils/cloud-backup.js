@@ -120,6 +120,10 @@ async function getCloudBackupStatus() {
     return {
       ok: true,
       exists: !!result.exists,
+      backupEnabled: result.backupEnabled === true,
+      mode: result.mode === "enabled" || result.mode === "disabled"
+        ? result.mode
+        : "unconfigured",
       backup: result.backup ? {
         backupId: result.backup.backupId,
         schemaVersion: result.backup.schemaVersion,
@@ -129,6 +133,45 @@ async function getCloudBackupStatus() {
         updatedAt: result.backup.updatedAt,
         duplicateBackupCount: Number(result.backup.duplicateBackupCount || 0)
       } : null
+    };
+  } catch (error) {
+    return normalizeCloudError(error);
+  }
+}
+
+async function deleteCloudBackup() {
+  if (!canCallCloudFunction()) {
+    return createFailure("CLOUD_UNAVAILABLE", "微信云开发能力不可用。");
+  }
+
+  try {
+    const response = await wx.cloud.callFunction({
+      name: FUNCTION_NAME,
+      data: {
+        action: "deleteBackup"
+      }
+    });
+    const result = response && response.result;
+    if (!result || result.ok !== true) {
+      return createFailure(
+        result && result.code ? result.code : "BACKUP_DELETE_FAILED",
+        result && result.message ? result.message : "云端备份删除未完成。",
+        result ? {
+          backupEnabled: result.backupEnabled,
+          mode: result.mode,
+          deletedCount: Number(result.deletedCount || 0)
+        } : {}
+      );
+    }
+
+    return {
+      ok: true,
+      deleted: !!result.deleted,
+      deletedCount: Number(result.deletedCount || 0),
+      backupEnabled: false,
+      mode: "disabled",
+      consentVersion: result.consentVersion || null,
+      consentUpdatedAt: result.consentUpdatedAt || null
     };
   } catch (error) {
     return normalizeCloudError(error);
@@ -418,6 +461,7 @@ module.exports = {
   getCloudBackupStatus,
   getCloudBackupPreference,
   setCloudBackupPreference,
+  deleteCloudBackup,
   downloadCloudBackup,
   restoreCloudBackup,
   hasMeaningfulLocalData,

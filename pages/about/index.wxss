@@ -49,3 +49,37 @@
   color: var(--ink);
   font-size: 27rpx;
 }
+
+.backup-manage-button {
+  margin-top: 14rpx;
+  border: 0;
+  background: transparent;
+  color: var(--page-theme);
+  font-size: 26rpx;
+  text-decoration: underline;
+}
+
+.backup-management-panel {
+  margin-top: 18rpx;
+  padding: 20rpx;
+  border: 2rpx dashed rgba(89, 71, 102, 0.28);
+  border-radius: 20rpx;
+  background: rgba(255, 255, 255, 0.68);
+}
+
+.management-note {
+  display: block;
+  margin-top: 12rpx;
+  color: var(--muted);
+  font-size: 25rpx;
+  line-height: 1.6;
+}
+
+.backup-delete-button {
+  margin-top: 18rpx;
+  border: 2rpx solid rgba(184, 74, 58, 0.48);
+  border-radius: 999rpx;
+  background: transparent;
+  color: #a64235;
+  font-size: 26rpx;
+}

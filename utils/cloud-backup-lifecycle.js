@@ -3,6 +3,7 @@ const {
   getCloudBackupStatus,
   getCloudBackupPreference,
   setCloudBackupPreference,
+  deleteCloudBackup,
   restoreCloudBackup,
   hasMeaningfulLocalData
 } = require("./cloud-backup");
@@ -17,7 +18,9 @@ const lifecycleState = {
   recoveryChecked: false,
   recoverySuppressed: false,
   backupInFlight: false,
+  deleteInFlight: false,
   restoreInFlight: false,
+  backupExists: null,
   lastBackupAt: null,
   lastRestoreAt: null,
   error: null,
@@ -28,6 +31,7 @@ const lifecycleState = {
 const listeners = new Set();
 let initializationPromise = null;
 let backupPromise = null;
+let deletePromise = null;
 let restorePromise = null;
 
 function getLifecycleState() {
@@ -229,6 +233,9 @@ function initializeCloudBackupLifecycle() {
 
 function backupNow(reason = "manual") {
   if (backupPromise) return backupPromise;
+  if (deletePromise || lifecycleState.deleteInFlight) {
+    return Promise.resolve(createFailure("BACKUP_DELETE_IN_PROGRESS", "正在删除云端备份。"));
+  }
   if (lifecycleState.preference !== "enabled") {
     return Promise.resolve(createFailure("BACKUP_NOT_ENABLED", "云备份尚未开启。"));
   }
@@ -251,9 +258,17 @@ function backupNow(reason = "manual") {
     const result = await saveCloudBackup();
     if (result.ok) {
       updateState({
+        backupExists: true,
         lastBackupAt: result.backup && result.backup.updatedAt
           ? result.backup.updatedAt
           : new Date().toISOString(),
+        error: null
+      });
+    } else if (result.code === "BACKUP_DISABLED" || result.code === "BACKUP_NOT_ENABLED") {
+      updateState({
+        preference: "disabled",
+        recoveryStatus: "idle",
+        recoveryChecked: true,
         error: null
       });
     } else {
@@ -266,6 +281,44 @@ function backupNow(reason = "manual") {
   });
 
   return backupPromise;
+}
+
+function deleteCloudBackupData() {
+  if (deletePromise) return deletePromise;
+
+  updateState({ deleteInFlight: true, error: null });
+  deletePromise = (async () => {
+    if (backupPromise) await backupPromise;
+    const result = await deleteCloudBackup();
+    if (result.ok) {
+      writeRecoverySuppressed(false);
+      updateState({
+        status: "ready",
+        preference: "disabled",
+        recoveryStatus: "idle",
+        recoveryChecked: true,
+        recoverySuppressed: false,
+        backupExists: false,
+        lastBackupAt: null,
+        error: null
+      });
+      return result;
+    }
+
+    const serverDisabled = result.backupEnabled === false || result.mode === "disabled";
+    updateState({
+      preference: serverDisabled ? "disabled" : lifecycleState.preference,
+      recoveryStatus: serverDisabled ? "idle" : lifecycleState.recoveryStatus,
+      recoveryChecked: serverDisabled ? true : lifecycleState.recoveryChecked,
+      error: result
+    });
+    return result;
+  })().finally(() => {
+    deletePromise = null;
+    updateState({ deleteInFlight: false });
+  });
+
+  return deletePromise;
 }
 
 async function setCloudBackupMode(mode) {
@@ -308,12 +361,20 @@ function handleAppHide() {
 }
 
 async function refreshCloudBackupStatus() {
-  if (lifecycleState.preference !== "enabled") {
-    return createFailure("BACKUP_NOT_ENABLED", "云备份尚未开启。");
+  if (lifecycleState.preference === "unknown") {
+    return createFailure("BACKUP_STATUS_UNAVAILABLE", "云备份状态尚未就绪。");
   }
   const result = await getCloudBackupStatus();
-  if (result.ok && result.exists && result.backup) {
-    updateState({ lastBackupAt: result.backup.updatedAt || null, error: null });
+  if (result.ok) {
+    const nextPreference = result.mode === "enabled" || result.mode === "disabled"
+      ? result.mode
+      : lifecycleState.preference;
+    updateState({
+      preference: nextPreference,
+      backupExists: !!result.exists,
+      lastBackupAt: result.exists && result.backup ? result.backup.updatedAt || null : null,
+      error: null
+    });
   } else if (!result.ok) {
     updateState({ error: result });
   }
@@ -377,6 +438,7 @@ module.exports = {
   setCloudBackupMode,
   maybePromptBackupOptIn,
   backupNow,
+  deleteCloudBackupData,
   handleAppHide,
   refreshCloudBackupStatus,
   markIntentionalLocalClear,

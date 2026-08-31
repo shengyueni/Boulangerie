@@ -16,6 +16,7 @@ function buildCloudBackupCard(state) {
   const loading = state.status === "idle" || state.status === "loading";
   const unavailable = state.status === "failed" && state.preference === "unknown";
   const enabled = state.preference === "enabled";
+  const backupExists = state.backupExists === true;
   const suppressed = enabled && state.recoverySuppressed;
   let statusText = "未开启";
   let detailText = "开启后，可在清除缓存或更换设备后恢复核心记录。";
@@ -35,6 +36,12 @@ function buildCloudBackupCard(state) {
   } else if (enabled) {
     statusText = "已开启";
     detailText = "本地优先；离开小程序时会尝试更新云端备份。";
+  } else if (backupExists) {
+    statusText = "已关闭 · 云端仍有备份";
+    detailText = "Malo 不会继续自动上传；你可以重新开启，或在管理云备份中删除云端副本。";
+  } else if (state.preference === "disabled") {
+    statusText = "已关闭";
+    detailText = "当前云端没有备份。只有你再次主动开启后，Malo 才会创建新备份。";
   }
 
   return {
@@ -43,6 +50,7 @@ function buildCloudBackupCard(state) {
     suppressed,
     statusText,
     detailText,
+    backupExists,
     lastBackupText: formatCloudTime(state.lastBackupAt),
     showEnable: !loading && !unavailable && !enabled,
     showBackup: enabled
@@ -51,7 +59,8 @@ function buildCloudBackupCard(state) {
       && state.recoveryStatus !== "failed"
       && !state.restoreInFlight,
     showDisable: enabled,
-    showRestore: suppressed
+    showRestore: suppressed,
+    showManage: !loading && !unavailable && (enabled || backupExists)
   };
 }
 
@@ -64,7 +73,8 @@ Page({
       message: "Elodie 在这里负责把边界说清楚：是否开启云端备份由你决定，工具也不会替你决定人生。"
     }),
     cloudBackup: buildCloudBackupCard(cloudBackupLifecycle.getLifecycleState()),
-    backupActionInFlight: false
+    backupActionInFlight: false,
+    showBackupManagement: false
   },
 
   onLoad() {
@@ -77,9 +87,7 @@ Page({
     const app = getApp();
     if (app.globalData.cloudIdentity && app.globalData.cloudIdentity.status === "ready") {
       cloudBackupLifecycle.initializeCloudBackupLifecycle().then(() => {
-        if (cloudBackupLifecycle.getLifecycleState().preference === "enabled") {
-          cloudBackupLifecycle.refreshCloudBackupStatus();
-        }
+        cloudBackupLifecycle.refreshCloudBackupStatus();
       });
     }
   },
@@ -111,6 +119,42 @@ Page({
     const result = await cloudBackupLifecycle.backupNow("manual_about");
     this.setData({ backupActionInFlight: false });
     this.showBackupToast(result.ok, "已完成云端备份");
+  },
+
+  toggleBackupManagement() {
+    if (this.data.backupActionInFlight) return;
+    this.setData({ showBackupManagement: !this.data.showBackupManagement });
+  },
+
+  deleteCloudBackup() {
+    if (this.data.backupActionInFlight) return;
+    wx.showModal({
+      title: "删除云端备份？",
+      content: "云端保存的备份会被删除，这台手机上的日记、计划和其他本地内容不会受到影响。\n\n同时，云端备份会被关闭。",
+      cancelText: "取消",
+      confirmText: "删除云端备份",
+      confirmColor: "#b84a3a",
+      success: async (modalResult) => {
+        if (!modalResult.confirm) return;
+        this.setData({ backupActionInFlight: true });
+        const result = await cloudBackupLifecycle.deleteCloudBackupData();
+        this.setData({
+          backupActionInFlight: false,
+          showBackupManagement: result.ok ? false : this.data.showBackupManagement
+        });
+        if (result.ok) {
+          this.showBackupToast(true, "云端备份已删除并关闭");
+          return;
+        }
+        wx.showToast({
+          title: result.mode === "disabled"
+            ? "自动备份已关闭，但删除未完成，请重试"
+            : "云端备份删除未完成，本地内容不受影响",
+          icon: "none",
+          duration: 3000
+        });
+      }
+    });
   },
 
   disableCloudBackup() {
