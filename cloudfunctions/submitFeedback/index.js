@@ -7,7 +7,10 @@ const db = cloud.database();
 const users = db.collection("users");
 const feedbackPosts = db.collection("feedback_posts");
 const MAX_FEEDBACK_CONTENT_LENGTH = 2000;
-const APP_VERSION = "MVP 1.0H";
+const APP_VERSIONS = new Set([
+  "MVP 1.0H",
+  "MVP 1.1"
+]);
 const FEEDBACK_TYPES = [
   "我觉得好用的地方",
   "我觉得别扭的地方",
@@ -30,7 +33,7 @@ function validateInput(event) {
   if (!FEEDBACK_TYPES.includes(event.type)) return fail("INVALID_TYPE");
   if (!content) return fail("EMPTY_CONTENT");
   if (content.length > MAX_FEEDBACK_CONTENT_LENGTH) return fail("CONTENT_TOO_LONG");
-  if (appVersion !== APP_VERSION) return fail("INVALID_APP_VERSION");
+  if (!APP_VERSIONS.has(appVersion)) return fail("INVALID_APP_VERSION");
   if (!clientCreatedAt || Number.isNaN(Date.parse(clientCreatedAt))) return fail("INVALID_CREATED_AT");
 
   return {
