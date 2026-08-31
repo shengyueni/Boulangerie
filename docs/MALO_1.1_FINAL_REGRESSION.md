@@ -8,23 +8,23 @@ Runtime 基线：`feature/malo-1.1 @ f9396e0`
 
 ## 1. Executive result
 
-- Final Regression status：**DEVICE GATES PENDING — no P0/P1 found**。
+- Final Regression status：**PASS — GO for Malo 1.1 Release Candidate**。
 - Simulator / local automation：**21 / 24 PASS**。R、S、T 使用既有 Production evidence，不计为 Simulator PASS。
-- Device release evidence：**6 / 6 PASS**。
+- Device / manual release evidence：**8 / 8 PASS**（既有 6 项 Release Evidence + B、D 最终真机 Gate）。
 - Real Cloud：**4 / 4 PASS**。
 - Privacy / WeChat Console：用户已人工确认 **PASS**，本轮未重复。
 - P0：**0**；P1：**0**；P2：**5**（维持既有 backlog，本轮未处理）。
 - Codex 本轮负责的 14 项：**14 / 14 PASS**（B、D、F、G、H、I、J、K、M、N、O、Q、V、W）。
-- 仍需用户真机确认：**2 项**，即 B 的 Preview 真机视觉确认、D 的真实相册权限闭环。
+- Release manual gates：**全部 PASS**；没有剩余人工 Gate。
 
 ## 2. A–X regression matrix
 
 | ID | Area | Result | Evidence |
 |---|---|---|---|
 | A | 5 TabBar | PASS | 今日、日记、计划、心声、百宝箱均可进入并渲染 |
-| B | 首次引导 | PASS（Simulator）；Preview 视觉待确认 | iPhone 5 窄屏手动打开、关闭位置、单击热区、重载后不自动重现均 PASS |
+| B | 首次引导 | PASS（Simulator + Preview 真机） | 窄屏与真机均确认关闭位置、热区、不压标题及关闭后不自动重现 |
 | C | 今日职场猩象 | PASS | 日期、天气卡、陪伴文案及 CTA 正常 |
-| D | 保存相册 | PASS（Simulator / static）；真机权限闭环待确认 | Simulator 生成 PNG 并进入保存交接；720×1180 绘制边界与完整内容自动断言 PASS；拒绝与“去设置”代码路径 PASS |
+| D | 保存相册 | PASS（Simulator / static + 真机） | Canvas、权限拒绝、去设置、重新允许、保存及相册成图完整性全部 PASS |
 | E | Croissant | PASS | 累计磨损点、状态、图片、名称和 2×2 入口正常 |
 | F | Full Diary | PASS | 隔离桩完成完整字段保存与事实纪要生成；iPhone 5 编辑器布局正常 |
 | G | 30 秒记录 | PASS | 隔离桩完成 quick 保存，事实、等级、归因与可选情绪保留；Simulator 模式切换正常 |
@@ -48,17 +48,17 @@ Runtime 基线：`feature/malo-1.1 @ f9396e0`
 
 ## 3. Codex 本轮逐项 Evidence
 
-### B｜首次引导 — PASS
+### B｜首次引导 — PASS（Simulator + Preview 真机）
 
 - 实际操作：iPhone 5（320×568）Simulator 手动点击“查看引导”，检查卡片和右上角关闭控件；单击关闭；重载小程序。
 - Evidence：关闭按钮位于卡片右上安全区、不压标题；小图标配有足够圆形热区；一次点击关闭；重载后未自动重新出现。隔离桩另确认手动状态不改变 `hasSeenFirstUseGuide=true`。
-- 剩余：Preview 真机只需做一次最终视觉确认。
+- Preview 真机 Evidence：关闭按钮位置自然、热区正常、不压标题；手动关闭后重新进入不会自动再次出现。
 
-### D｜保存相册 — PASS（Simulator / static）
+### D｜保存相册 — PASS（Simulator / static + 真机）
 
 - 实际操作：Simulator 点击“保存到相册”，Canvas 完成生成并进入 PNG 保存交接；未把 Simulator 当作真机权限结果。自动桩执行完整 poster renderer，并验证拒绝分支弹窗与“去设置”回调。
 - Evidence：画布为 720×1180；标题、日期、5 个指标、Croissant、护身符、推荐行动、免责声明及页脚均执行绘制，文本最大纵坐标 1102，小于 1180，无纵向截断；Simulator 生成了 PNG 文件交接。
-- 剩余：真机“拒绝 → 设置 → 重新允许 → 保存”人工 Gate。
+- 真机 Evidence：拒绝权限后无异常；权限恢复 / “去设置”路径正常；重新允许后保存成功；相册成图完整；无稳定业务 Error。
 
 ### F｜Full Diary — PASS
 
@@ -143,7 +143,7 @@ Runtime 基线：`feature/malo-1.1 @ f9396e0`
 
 ## 5. Existing Release Evidence
 
-### Device release gates — 6 / 6 PASS
+### Device / manual release gates — 8 / 8 PASS
 
 1. Feedback MVP 1.0H Production Smoke：PASS。
 2. Feedback MVP 1.1 Production Smoke：PASS。
@@ -151,6 +151,8 @@ Runtime 基线：`feature/malo-1.1 @ f9396e0`
 4. 普通 Cloud Backup 关闭 → 保留 snapshot → 重开 → 立即备份：PASS。
 5. Preview upload：PASS；main package 1772.4 KB。
 6. 分包迁移角色图片真机：PASS。
+7. B 首次引导 Preview 真机视觉与状态闭环：PASS。
+8. D 相册真实权限“拒绝 → 设置 → 重新允许 → 保存”闭环：PASS。
 
 ### Real Cloud workflows — 4 / 4 PASS
 
@@ -181,11 +183,8 @@ Runtime 基线：`feature/malo-1.1 @ f9396e0`
 - P2：**5**，不在本轮处理。
 - Blocking bugs：**None found**。
 
-当前仍需两个人工真机 Gate：
+所有 manual gates 已 PASS，且 P0 = 0、P1 = 0。
 
-1. B：Preview 真机确认首次引导关闭按钮最终视觉位置与热区。
-2. D：真实手机完成“拒绝 → 设置 → 重新允许 → 保存”权限闭环。
+最终结论：**GO for Malo 1.1 Release Candidate**。
 
-在这两项完成前：**NO-GO for final Release Candidate sign-off（仅因真机证据未闭环）**。
-
-两项均 PASS 且无新增 P0/P1 后：可直接改判 **GO**，无需重复 Feedback、B11、Cloud Backup Disable、Package Size 或 Production Cloud 测试。
+本结论只允许进入 RC Freeze；本轮不 merge master、不创建 final release tag，等待后续 RC Freeze 指令。无需重复 Feedback、B11、Cloud Backup Disable、Package Size 或 Production Cloud 测试。
