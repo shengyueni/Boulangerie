@@ -132,7 +132,7 @@ Page({
       title: "删除云端备份？",
       content: "云端保存的备份会被删除，这台手机上的日记、计划和其他本地内容不会受到影响。\n\n同时，云端备份会被关闭。",
       cancelText: "取消",
-      confirmText: "删除云端备份",
+      confirmText: "确认删除",
       confirmColor: "#b84a3a",
       success: async (modalResult) => {
         if (!modalResult.confirm) return;
