@@ -162,8 +162,8 @@ Page({
     wx.showModal({
       title: "关闭云端备份？",
       content: "关闭后，Malo 将停止新的云端备份和自动恢复。\n\n当前已有的云端备份暂时不会被删除。",
-      cancelText: "继续使用备份",
-      confirmText: "关闭云备份",
+      cancelText: "继续备份",
+      confirmText: "确认关闭",
       confirmColor: "#e9785f",
       success: async (modalResult) => {
         if (!modalResult.confirm) return;

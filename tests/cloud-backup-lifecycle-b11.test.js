@@ -165,6 +165,39 @@ async function testDeleteAndReEnable() {
   assert.equal(lifecycle.getLifecycleState().lastBackupAt, "2026-08-31T10:00:00.000Z");
 }
 
+async function testDisablePreservesBackupAndBlocksOnHide() {
+  const wxMock = createWxMock();
+  global.wx = wxMock.api;
+  const cloudBackupStub = createCloudBackupStub("enabled");
+  const lifecycle = loadLifecycle(cloudBackupStub, meaningfulSnapshot());
+  await lifecycle.initializeCloudBackupLifecycle();
+
+  const disabled = await lifecycle.setCloudBackupMode("disabled");
+  assert.equal(disabled.ok, true);
+  assert.equal(cloudBackupStub.server.mode, "disabled");
+  assert.equal(cloudBackupStub.server.exists, true);
+  assert.equal(lifecycle.getLifecycleState().preference, "disabled");
+
+  const saveCountAfterDisable = cloudBackupStub.server.saveCalls;
+  const hidden = await lifecycle.handleAppHide();
+  assert.equal(hidden.ok, false);
+  assert.equal(hidden.code, "BACKUP_NOT_ENABLED");
+  assert.equal(cloudBackupStub.server.saveCalls, saveCountAfterDisable);
+
+  const refreshed = await lifecycle.refreshCloudBackupStatus();
+  assert.equal(refreshed.ok, true);
+  assert.equal(lifecycle.getLifecycleState().preference, "disabled");
+  assert.equal(lifecycle.getLifecycleState().backupExists, true);
+
+  const enabled = await lifecycle.setCloudBackupMode("enabled");
+  assert.equal(enabled.ok, true);
+  assert.equal(cloudBackupStub.server.mode, "enabled");
+  assert.equal(enabled.initialBackup.ok, true);
+  const manual = await lifecycle.backupNow("manual_about");
+  assert.equal(manual.ok, true);
+  assert.equal(cloudBackupStub.server.saveCalls, saveCountAfterDisable + 2);
+}
+
 async function testDeleteBlocksNewLocalBackup() {
   const wxMock = createWxMock();
   global.wx = wxMock.api;
@@ -238,11 +271,12 @@ async function testDeleteRequestContainsNoOwner() {
 }
 
 async function main() {
+  await testDisablePreservesBackupAndBlocksOnHide();
   await testDeleteAndReEnable();
   await testDeleteBlocksNewLocalBackup();
   await testExistingRestoreRules();
   await testDeleteRequestContainsNoOwner();
-  console.log("cloud-backup-lifecycle-b11: 4 scenarios passed");
+  console.log("cloud-backup-lifecycle-b11: 5 scenarios passed");
 }
 
 main().catch((error) => {

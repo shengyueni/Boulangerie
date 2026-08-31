@@ -255,6 +255,12 @@ async function main() {
     backupMode: "enabled",
     backupGeneration: 7
   });
+  databaseMock.state.users.set("user_c", {
+    _id: "user_c",
+    openid: "openid_c",
+    backupMode: "enabled",
+    backupGeneration: 4
+  });
   databaseMock.state.user_backups.set("backup_a_1", {
     _id: "backup_a_1",
     ownerOpenid: "openid_a",
@@ -271,6 +277,51 @@ async function main() {
     snapshot: createSnapshot("old-b"),
     updatedAt: "2026-01-01T00:00:00.000Z"
   });
+  databaseMock.state.user_backups.set("user_c", {
+    _id: "user_c",
+    ownerOpenid: "openid_c",
+    userId: "user_c",
+    schemaVersion: 1,
+    snapshot: createSnapshot("old-c"),
+    updatedAt: "2026-01-01T00:00:00.000Z"
+  });
+
+  context.OPENID = "openid_c";
+  const oldClientDisable = await syncBackup.main({ action: "setPreference", mode: "disabled" });
+  assert.equal(oldClientDisable.ok, true);
+  assert.equal(databaseMock.state.users.get("user_c").backupMode, "disabled");
+  assert.equal(databaseMock.state.users.get("user_c").backupGeneration, 5);
+  assert.equal(databaseMock.state.user_backups.has("user_c"), true);
+  const preservedUpdatedAt = databaseMock.state.user_backups.get("user_c").updatedAt;
+
+  const blockedAfterDisable = await syncBackup.main({
+    action: "saveBackup",
+    snapshot: createSnapshot("must-not-save"),
+    appVersion: "Malo 1.0H"
+  });
+  assert.equal(blockedAfterDisable.ok, false);
+  assert.equal(blockedAfterDisable.code, "BACKUP_DISABLED");
+  assert.equal(databaseMock.state.user_backups.get("user_c").updatedAt, preservedUpdatedAt);
+
+  const disabledStatus = await syncBackup.main({ action: "getStatus" });
+  assert.equal(disabledStatus.ok, true);
+  assert.equal(disabledStatus.exists, true);
+  assert.equal(disabledStatus.backupEnabled, false);
+  assert.equal(disabledStatus.mode, "disabled");
+
+  const reenabledAfterDisable = await syncBackup.main({ action: "setPreference", mode: "enabled" });
+  assert.equal(reenabledAfterDisable.ok, true);
+  assert.equal(databaseMock.state.users.get("user_c").backupMode, "enabled");
+  assert.equal(databaseMock.state.users.get("user_c").backupGeneration, 6);
+  const savedAfterReenable = await syncBackup.main({
+    action: "saveBackup",
+    snapshot: createSnapshot("new-c"),
+    appVersion: "Malo 1.1"
+  });
+  assert.equal(savedAfterReenable.ok, true);
+  assert.equal(databaseMock.state.user_backups.get("user_c").snapshot.payload.diaryEntries[0].id, "new-c");
+
+  context.OPENID = "openid_a";
 
   const forgedDelete = await syncBackup.main({
     action: "deleteBackup",
@@ -362,7 +413,7 @@ async function main() {
   assert.equal(userBDownload.backup.backupId, "backup_b_1");
   assert.equal(userBDownload.backup.snapshot.schemaVersion, 1);
 
-  console.log("sync-backup-b11: 18 assertions groups passed");
+  console.log("sync-backup-b11: disable, delete, race, and compatibility scenarios passed");
 }
 
 main().catch((error) => {
