@@ -113,6 +113,10 @@ Page({
     this.setData({ newTitle: event.detail.value });
   },
 
+  openResignationTemplates() {
+    wx.navigateTo({ url: "/pages/resignation-templates/index" });
+  },
+
   addItem() {
     const title = this.data.newTitle.trim();
     if (!title) {

@@ -100,3 +100,55 @@
   font-weight: 900;
   text-decoration: underline;
 }
+
+.pattern-reason,
+.highest-summary {
+  display: block;
+  margin: 12rpx 0 8rpx;
+  color: var(--ink);
+  font-size: 32rpx;
+  line-height: 1.5;
+  font-weight: 900;
+}
+
+.fact-row {
+  display: flex;
+  gap: 12rpx;
+  margin-top: 14rpx;
+  color: var(--ink);
+  font-size: 26rpx;
+  line-height: 1.55;
+}
+
+.fact-dot {
+  color: var(--page-theme, var(--green));
+  font-weight: 900;
+}
+
+.detail-hint {
+  display: block;
+  margin-top: 16rpx;
+  color: var(--muted);
+  font-size: 23rpx;
+  line-height: 1.55;
+}
+
+.repeat-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-top: 16rpx;
+}
+
+.highest-card {
+  cursor: pointer;
+}
+
+.highest-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10rpx;
+  color: var(--muted);
+  font-size: 23rpx;
+}

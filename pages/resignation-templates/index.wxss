@@ -1,0 +1,15 @@
+.page { padding-bottom: 180rpx; }
+.safety-note { border-color: var(--page-theme-soft); background: var(--page-tint); }
+.safety-note .section-title { margin-bottom: 10rpx; }
+.template-group { border-color: var(--page-theme-soft); }
+.group-note { display: block; margin: -4rpx 0 18rpx; color: var(--muted); font-size: 24rpx; line-height: 1.6; }
+.template-item { display: flex; align-items: center; gap: 16rpx; min-height: 82rpx; padding: 12rpx 0; border-top: 2rpx dashed rgba(46, 79, 130, 0.2); }
+.check-mark { display: flex; flex: 0 0 42rpx; align-items: center; justify-content: center; width: 42rpx; height: 42rpx; box-sizing: border-box; border: 3rpx solid var(--page-theme-soft); border-radius: 12rpx; color: #fff; background: #fffefb; font-size: 25rpx; font-weight: 900; }
+.template-item.selected .check-mark { border-color: var(--page-theme); background: var(--page-theme); }
+.template-title { flex: 1; font-size: 27rpx; line-height: 1.48; }
+.template-item.added { opacity: 0.58; }
+.template-item.added .check-mark { color: var(--page-theme); background: var(--page-tint); }
+.added-label { flex: 0 0 auto; color: var(--muted); font-size: 21rpx; }
+.save-dock { position: fixed; z-index: 10; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 20rpx; padding: 18rpx 30rpx calc(18rpx + env(safe-area-inset-bottom)); border-top: 2rpx solid var(--page-theme-soft); background: rgba(255, 250, 242, 0.96); box-shadow: 0 -10rpx 28rpx rgba(46, 79, 130, 0.08); }
+.selection-count { flex: 0 0 auto; color: var(--page-theme); font-size: 25rpx; font-weight: 900; }
+.add-button { flex: 1; min-height: 76rpx; margin-top: 0; color: #fffefb !important; border-color: var(--page-theme) !important; background: var(--page-theme) !important; }

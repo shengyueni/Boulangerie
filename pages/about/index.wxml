@@ -19,6 +19,7 @@
     <text class="section-title">你的数据怎么保存</text>
     <text class="body-text">日记、心声、计划清单和自定义急救卡默认保存在当前设备。</text>
     <text class="body-text">如果你主动开启云端备份，这些核心记录会与你的小程序微信身份关联保存到云端，用于缓存丢失或更换设备后的恢复。</text>
+    <text class="body-text">你可以在下方管理并删除云端备份。删除只影响云端副本，不会删除本机内容；删除后云端备份也会同时关闭，只有你再次主动开启后才会创建新备份。</text>
     <text class="body-text">Malo 当前不需要获取微信昵称、头像或手机号。</text>
     <text class="body-text">当前不是实时多设备同步。</text>
   </view>
@@ -35,11 +36,17 @@
     <text class="section-title">云端备份</text>
     <text class="backup-status">{{cloudBackup.statusText}}</text>
     <text class="body-text">{{cloudBackup.detailText}}</text>
-    <text wx:if="{{cloudBackup.enabled && !cloudBackup.suppressed}}" class="backup-time">最近备份：{{cloudBackup.lastBackupText}}</text>
+    <text wx:if="{{cloudBackup.backupExists && !cloudBackup.suppressed}}" class="backup-time">最近备份：{{cloudBackup.lastBackupText}}</text>
     <button wx:if="{{cloudBackup.showEnable}}" class="sticker-button green" disabled="{{backupActionInFlight}}" bindtap="enableCloudBackup">开启云端备份</button>
     <button wx:if="{{cloudBackup.showBackup}}" class="sticker-button green" disabled="{{backupActionInFlight}}" bindtap="backupNow">立即备份</button>
     <button wx:if="{{cloudBackup.showRestore}}" class="sticker-button green" disabled="{{backupActionInFlight}}" bindtap="restoreAfterClear">从云端恢复</button>
     <button wx:if="{{cloudBackup.showDisable}}" class="backup-secondary-button" disabled="{{backupActionInFlight}}" bindtap="disableCloudBackup">关闭云端备份</button>
+    <button wx:if="{{cloudBackup.showManage}}" class="backup-manage-button" disabled="{{backupActionInFlight}}" bindtap="toggleBackupManagement">{{showBackupManagement ? '收起云备份管理' : '管理云备份'}}</button>
+    <view wx:if="{{showBackupManagement && cloudBackup.showManage}}" class="backup-management-panel">
+      <text class="body-text">删除云端备份只会移除云端副本。手机里的日记、计划、本地心声和自定义急救卡都会保留。</text>
+      <text class="management-note">删除完成后，自动云备份会同时关闭。</text>
+      <button class="backup-delete-button" disabled="{{backupActionInFlight}}" bindtap="deleteCloudBackup">删除云端备份</button>
+    </view>
   </view>
 
   <view class="card danger-card">

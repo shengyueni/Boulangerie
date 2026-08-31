@@ -1,0 +1,27 @@
+<view class="page paper-page theme-toolbox nickname-page">
+  <view class="page-head floral-title-box title-pattern-card">
+    <image class="title-pattern-image" src="/assets/title-patterns/deep-purple.png" mode="aspectFill" />
+    <view class="title-pattern-mask"></view>
+    <view class="corner-ornament corner-ornament-left corner-ornament--gold"></view>
+    <text class="eyebrow">只属于你的称呼</text>
+    <text class="hero-title">Malo 怎么称呼你？</text>
+    <text class="subtext">可选、可以随时修改，也可以什么都不留。</text>
+  </view>
+
+  <view class="ornament-card nickname-card">
+    <text class="field-label">Malo 怎么称呼你？</text>
+    <input class="nickname-input" value="{{nickname}}" maxlength="16" placeholder="例如：小月、鱼鱼、今天不想上班的人" bindinput="onNicknameInput" />
+    <text class="input-count">还可以输入 {{remaining}} 个字符</text>
+    <view class="nickname-actions">
+      <button class="sticker-button green" bindtap="saveNickname">保存称呼</button>
+      <button wx:if="{{savedNickname}}" class="clear-button" bindtap="clearNickname">清空</button>
+    </view>
+  </view>
+
+  <view class="note-card privacy-card">
+    <text class="section-title">这个称呼存在哪里？</text>
+    <text class="privacy-copy">这是你自己给 Malo 留的称呼，只保存在当前设备。Malo 不读取微信昵称，也不会把它当作登录身份或公开用户名。</text>
+  </view>
+
+  <button class="back-button" bindtap="goBack">先不设置，返回百宝箱</button>
+</view>

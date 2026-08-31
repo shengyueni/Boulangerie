@@ -18,8 +18,8 @@ const CHARACTERS = {
     avatar: "/assets/characters/elodie-avatar.png",
     bust: "/assets/characters/elodie-bust.png",
     variants: {
-      remind: "/assets/characters/elodie-remind-bust.png",
-      encourage: "/assets/characters/elodie-encourage-bust.png",
+      remind: "/pages/diary-new/assets/elodie-remind-bust.png",
+      encourage: "/pages/diary-saved/assets/elodie-encourage-bust.png",
       think: "/assets/characters/elodie-think-bust.png"
     },
     role: "清醒提醒 / 事实整理"
@@ -31,8 +31,8 @@ const CHARACTERS = {
     bust: "/assets/characters/gapchick-bust.png",
     variants: {
       rest: "/assets/characters/gapchick-rest-bust.png",
-      breathe: "/assets/characters/gapchick-breathe-bust.png",
-      drink: "/assets/characters/gapchick-drink-bust.png"
+      breathe: "/pages/breathing/assets/gapchick-breathe-bust.png",
+      drink: "/pages/emergency-cards/assets/gapchick-drink-bust.png"
     },
     role: "休息恢复 / 生命力重建"
   },

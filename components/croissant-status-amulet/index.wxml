@@ -7,11 +7,12 @@
   <view class="croissant-amulet-header">
     <text class="amulet-frame__seal croissant-amulet-label">Croissant状态护身符</text>
     <text class="status-name croissant-amulet-status">{{status}}</text>
-    <text class="status-wear croissant-amulet-wear">磨损值：{{wear}}</text>
+    <text class="status-wear croissant-amulet-wear">累计磨损点：{{wear}}</text>
   </view>
 
   <view class="croissant-amulet-body">
     <view class="croissant-amulet-copy">
+      <text class="croissant-amulet-reminder">{{reminderLabel}}</text>
       <text class="body-text croissant-amulet-text">{{text}}</text>
     </view>
 
@@ -21,7 +22,7 @@
     </view>
   </view>
 
-  <view wx:if="{{buttons.length}}" class="croissant-amulet-actions">
+  <view wx:if="{{buttons.length}}" class="croissant-amulet-actions croissant-amulet-actions--{{actionsLayout}}">
     <button
       wx:for="{{buttons}}"
       wx:key="action"

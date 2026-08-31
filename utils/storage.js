@@ -8,6 +8,8 @@ const TRIAL_FEEDBACK_KEY = "malo_trial_feedback_posts";
 const FEATURED_VOICE_HUG_KEY = "malo_featured_voice_hugs";
 const DIARY_CLEANUP_VERSION_KEY = "malo_diary_cleanup_version";
 const CUSTOM_EMERGENCY_CARDS_KEY = "malo_custom_emergency_cards";
+const ORACLE_SNAPSHOTS_KEY = "malo_oracle_snapshots";
+const MALO_NICKNAME_KEY = "malo_nickname";
 const DEFAULT_WISHES = [
   { type: "pre_exit", title: "计算生活费缓冲" },
   { type: "pre_exit", title: "更新简历" },
@@ -54,10 +56,79 @@ function saveDiaryEntry(entry) {
   return sortByNewest(nextEntries.filter(isCurrentDiaryEntry));
 }
 
+function updateDiaryEntry(id, entry) {
+  const entryId = String(id || "");
+  if (!entryId || !entry) return null;
+  let updatedEntry = null;
+  const nextEntries = getRawDiaryEntries().map((current) => {
+    if (!current || current.id !== entryId) return current;
+    updatedEntry = {
+      ...entry,
+      id: current.id,
+      createdAt: current.createdAt
+    };
+    return updatedEntry;
+  });
+  if (!updatedEntry) return null;
+  wx.setStorageSync(DIARY_KEY, nextEntries);
+  return updatedEntry;
+}
+
 function deleteDiaryEntry(id) {
   const nextEntries = getRawDiaryEntries().filter((entry) => entry.id !== id);
   wx.setStorageSync(DIARY_KEY, nextEntries);
   return sortByNewest(nextEntries.filter(isCurrentDiaryEntry));
+}
+
+function getOracleSnapshots() {
+  const snapshots = wx.getStorageSync(ORACLE_SNAPSHOTS_KEY);
+  return Array.isArray(snapshots)
+    ? snapshots.slice().sort((a, b) => String(b.dateLabel || "").localeCompare(String(a.dateLabel || "")))
+    : [];
+}
+
+function saveOracleSnapshot(oracle, savedAt = new Date().toISOString()) {
+  const dateLabel = String(oracle && oracle.dateLabel || "").trim();
+  const metrics = Array.isArray(oracle && oracle.metrics) ? oracle.metrics : [];
+  if (!dateLabel || !metrics.length) return { snapshot: null, created: false };
+
+  const current = getOracleSnapshots();
+  const existing = current.find((item) => item && item.dateLabel === dateLabel);
+  if (existing) return { snapshot: existing, created: false };
+
+  const snapshot = {
+    dateLabel,
+    source: "deterministic_date_hash_v1",
+    savedAt,
+    metrics: metrics.map((metric) => ({
+      name: String(metric && metric.name || ""),
+      value: String(metric && metric.value || ""),
+      description: String(metric && metric.description || ""),
+      visualKey: String(metric && metric.visualKey || ""),
+      visualLevel: Number(metric && metric.visualLevel || 0),
+      visualIcon: String(metric && metric.visualIcon || ""),
+      visualImage: String(metric && metric.visualImage || "")
+    })),
+    talisman: String(oracle && oracle.talisman || ""),
+    action: String(oracle && oracle.action || "")
+  };
+  wx.setStorageSync(ORACLE_SNAPSHOTS_KEY, [snapshot].concat(current));
+  return { snapshot, created: true };
+}
+
+function normalizeMaloNickname(value) {
+  return Array.from(String(value || "").trim()).slice(0, 16).join("");
+}
+
+function getMaloNickname() {
+  return normalizeMaloNickname(wx.getStorageSync(MALO_NICKNAME_KEY));
+}
+
+function saveMaloNickname(value) {
+  const nickname = normalizeMaloNickname(value);
+  if (nickname) wx.setStorageSync(MALO_NICKNAME_KEY, nickname);
+  else wx.removeStorageSync(MALO_NICKNAME_KEY);
+  return nickname;
 }
 
 function getWishItems() {
@@ -173,6 +244,8 @@ function clearLocalData() {
   wx.removeStorageSync(FEATURED_VOICE_HUG_KEY);
   wx.removeStorageSync(DIARY_CLEANUP_VERSION_KEY);
   wx.removeStorageSync(CUSTOM_EMERGENCY_CARDS_KEY);
+  wx.removeStorageSync(ORACLE_SNAPSHOTS_KEY);
+  wx.removeStorageSync(MALO_NICKNAME_KEY);
 }
 
 function getLocalVoicePosts() {
@@ -251,7 +324,13 @@ module.exports = {
   getDiaryEntryById,
   isCurrentDiaryEntry,
   saveDiaryEntry,
+  updateDiaryEntry,
   deleteDiaryEntry,
+  getOracleSnapshots,
+  saveOracleSnapshot,
+  normalizeMaloNickname,
+  getMaloNickname,
+  saveMaloNickname,
   getWishItems,
   saveWishItems,
   addWishItem,

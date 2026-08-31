@@ -24,9 +24,11 @@ Component({
     statusClass: { type: String, value: "" },
     wear: { type: Number, value: 0 },
     text: { type: String, value: "" },
+    reminderLabel: { type: String, value: "Croissant 今天想提醒你：" },
     hint: { type: String, value: "" },
     image: { type: String, value: "" },
-    buttons: { type: Array, value: [] }
+    buttons: { type: Array, value: [] },
+    actionsLayout: { type: String, value: "default" }
   },
 
   data: {

@@ -118,6 +118,36 @@
       "pages": [
         "index"
       ]
+    },
+    {
+      "root": "pages/boundary-practice",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "pages/resignation-templates",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "pages/weekly-review",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "pages/insights",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "pages/nickname",
+      "pages": [
+        "index"
+      ]
     }
   ]
 }

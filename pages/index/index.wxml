@@ -4,6 +4,25 @@
     <text class="subtext">{{appMeta.slogan}}</text>
   </view>
 
+  <view wx:if="{{showAutomaticFirstUseGuide || showManualFirstUseGuide}}" class="first-use-card">
+    <view class="first-use-card__head">
+      <view>
+        <text class="first-use-card__eyebrow">{{nickname ? nickname + '，第一次来吗？' : '第一次来吗？'}}</text>
+        <text class="first-use-card__title">可以从这里慢慢开始</text>
+      </view>
+      <view class="first-use-card__close" role="button" aria-label="跳过首次使用引导" bindtap="dismissFirstUseGuide"><text class="first-use-card__close-icon">×</text></view>
+    </view>
+    <view class="first-use-steps">
+      <view class="first-use-step"><text class="first-use-step__number">1</text><text>看看今天的职场天气</text></view>
+      <view class="first-use-step"><text class="first-use-step__number">2</text><text>写下一件最近真实发生的事</text></view>
+      <view class="first-use-step"><text class="first-use-step__number">3</text><text>看看 Croissant 现在怎么说</text></view>
+    </view>
+    <view class="first-use-card__actions">
+      <button class="first-use-card__skip" bindtap="dismissFirstUseGuide">先随便逛逛</button>
+      <button class="first-use-card__start" bindtap="startFirstDiary">写一条日记</button>
+    </view>
+  </view>
+
   <view class="oracle-card paper-title title-pattern-card">
     <image class="oracle-bg-image title-pattern-image" src="/assets/title-patterns/warm-orange.png" mode="aspectFill" />
     <view class="title-pattern-mask oracle-bg"></view>
@@ -34,9 +53,21 @@
 
       <view class="oracle-content">
         <view class="oracle-metrics">
-          <view wx:for="{{oracle.metrics}}" wx:key="name" class="oracle-metric">
-            <text class="metric-name">{{item.name}}：{{item.value}}</text>
-            <text class="metric-desc">{{item.description}}</text>
+          <view wx:for="{{oracle.metrics}}" wx:key="name" class="oracle-metric metric--{{item.visualKey}}">
+            <view class="metric-visual" aria-hidden="true">
+              <text wx:if="{{item.visualKey === 'weather'}}" class="weather-symbol">{{item.visualIcon}}</text>
+              <view wx:elif="{{item.visualKey === 'fur'}}" class="fur-state"><image class="fur-state__image" src="{{item.visualImage}}" mode="aspectFit" /></view>
+              <view wx:else class="visual-meter visual-meter--{{item.visualKey}}">
+                <view class="visual-meter__bar {{item.visualLevel >= 1 ? 'is-on' : ''}}"></view>
+                <view class="visual-meter__bar {{item.visualLevel >= 2 ? 'is-on' : ''}}"></view>
+                <view class="visual-meter__bar {{item.visualLevel >= 3 ? 'is-on' : ''}}"></view>
+                <view class="visual-meter__bar {{item.visualLevel >= 4 ? 'is-on' : ''}}"></view>
+              </view>
+            </view>
+            <view class="metric-copy">
+              <text class="metric-name">{{item.name}}：{{item.value}}</text>
+              <text class="metric-desc">{{item.description}}</text>
+            </view>
           </view>
         </view>
 
@@ -50,6 +81,10 @@
             <text class="slip-text">{{oracle.action}}</text>
           </view>
         </view>
+        <view class="oracle-action-row">
+          <button class="oracle-save-button" loading="{{isSavingOraclePoster}}" disabled="{{isSavingOraclePoster}}" bindtap="saveTodayOracle">保存到相册</button>
+          <button class="oracle-insights-button" bindtap="goDashboard">去复盘一下</button>
+        </view>
       </view>
     </view>
   </view>
@@ -60,11 +95,15 @@
     status-class="{{croissant.statusClass}}"
     wear="{{croissant.wear}}"
     text="{{croissant.explanation}}"
+    reminder-label="{{croissantReminderLabel}}"
     hint="点点 Croissant 看仪表盘"
     buttons="{{todayStatusButtons}}"
+    actions-layout="grid"
     bind:figuretap="goDashboard"
     bind:actiontap="handleCroissantAction"
   />
+
+  <canvas type="2d" id="oraclePosterCanvas" class="oracle-poster-canvas" aria-hidden="true"></canvas>
 
   <text class="version-note">当前版本：{{appMeta.version}} {{appMeta.stage}}</text>
 </view>

@@ -1,0 +1,57 @@
+<view class="page theme-toolbox boundary-page paper-page">
+  <view class="page-head floral-title-box title-pattern-card">
+    <image class="title-pattern-image" src="/assets/title-patterns/deep-purple.png" mode="aspectFill" />
+    <view class="title-pattern-mask"></view>
+    <view class="corner-ornament corner-ornament-left corner-ornament--purple"></view>
+    <view class="corner-ornament corner-ornament-right corner-ornament--gold"></view>
+    <text class="eyebrow">Elodie 的练习纸</text>
+    <text class="hero-title">女性职场边界练习</text>
+    <text class="subtext">看清发生了什么、责任在哪里，再选择适合当下安全感的回应。</text>
+  </view>
+
+  <character-card image="{{companion.image}}" name="{{companion.name}}" tag="{{companion.tag}}" message="{{companion.message}}" sub-message="{{companion.subMessage}}" variant="{{companion.variant}}" size="{{companion.size}}" />
+
+  <view class="boundary-note note-card">
+    <text class="boundary-note__title">先保护现实安全</text>
+    <text>参考表达不是标准答案，也不代表你必须当场回应。如果直接表达可能带来风险，可以先暂缓、记录事实，再找可信任的人讨论。</text>
+  </view>
+
+  <view class="paper-divider"><view class="paper-divider__line"></view><text class="paper-divider__tag">8 个真实场景</text><view class="paper-divider__line"></view></view>
+
+  <view wx:for="{{scenarios}}" wx:key="title" class="ornament-card ornament-card--purple boundary-card {{item.expanded ? 'is-open' : ''}}" data-index="{{index}}" bindtap="toggleScenario">
+    <view class="row between boundary-card__head">
+      <view class="boundary-card__heading"><text class="tiny-seal">场景 {{index + 1}}</text><text class="card-title">{{item.title}}</text></view>
+      <text class="toggle-text">{{item.expanded ? '收起' : '一起拆解'}}</text>
+    </view>
+    <text class="boundary-prompt">你先怎么看？可以停一秒，再展开。</text>
+
+    <view wx:if="{{item.expanded}}" class="boundary-body">
+      <text class="boundary-label">发生了什么</text>
+      <text class="body-text">{{item.fact}}</text>
+
+      <text class="boundary-label">边界信号</text>
+      <view class="tag-row boundary-signals"><text wx:for="{{item.signals}}" wx:key="*this" class="paper-tag green">{{item}}</text></view>
+
+      <text class="boundary-label">先分清责任</text>
+      <view class="responsibility-grid">
+        <view class="responsibility-card"><text class="responsibility-title">我可以负责</text><text>{{item.mine}}</text></view>
+        <view class="responsibility-card"><text class="responsibility-title">不必全背在我身上</text><text>{{item.notMine}}</text></view>
+      </view>
+
+      <text class="boundary-label">可选回应</text>
+      <view class="response-list">
+        <view wx:for="{{item.responses}}" wx:for-item="response" wx:key="level" class="response-card">
+          <text class="response-level">{{response.level}}</text>
+          <text class="body-text">{{response.text}}</text>
+        </view>
+      </view>
+
+      <block wx:if="{{item.evidence}}">
+        <text class="boundary-label">留证提醒</text>
+        <text class="evidence-note">{{item.evidence}}</text>
+      </block>
+
+      <view class="malo-reminder"><text class="boundary-label">Malo 提醒</text><text>{{item.reminder}}</text></view>
+    </view>
+  </view>
+</view>

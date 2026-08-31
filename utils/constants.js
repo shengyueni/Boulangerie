@@ -1,8 +1,8 @@
 const APP_META = {
   appName: "吗喽的出走",
   slogan: "保护好你的猩",
-  version: "MVP 1.0H",
-  stage: "云备份发布候选版"
+  version: "MVP 1.1",
+  stage: "正式版"
 };
 
 const FEEDBACK_TYPES = [
@@ -102,6 +102,7 @@ const BUBBLES = [
 ];
 
 const TOOLBOX_ITEMS = [
+  { title: "女性职场边界练习", subtitle: "看清越界、分清责任，练习更安全的回应", path: "/pages/boundary-practice/index", color: "green", enabled: true },
   { title: "深呼吸练习", subtitle: "4-4-6，把自己从工作现场里拿回来一点", path: "/pages/breathing/index", color: "green", enabled: true },
   { title: "离职状态自测", subtitle: "正在校准｜我们想把这套问题整理得更可靠一点。", path: "/pages/exit-test/index", color: "pink", enabled: false },
   { title: "情绪急救卡片", subtitle: "自责、害怕、无力时，先把自己接住一点", path: "/pages/emergency-cards/index", color: "yellow", enabled: true },

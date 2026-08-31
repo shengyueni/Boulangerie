@@ -70,6 +70,16 @@
   grid-column: span 2;
 }
 
+.quick-info-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.quick-info-grid .info-row {
+  width: 100%;
+  min-height: 0;
+  grid-column: auto;
+}
+
 .evidence-card {
   margin-top: 0;
   padding: 46rpx 28rpx 30rpx;
@@ -92,30 +102,62 @@
   font-size: 27rpx;
 }
 
-.copy-seal {
-  min-height: 78rpx;
+.detail-action-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12rpx;
   margin-top: 22rpx;
-  border: 4rpx double rgba(184, 74, 58, 0.74);
-  color: #B84A3A;
-  background: #fffefb;
 }
 
-.delete-button {
-  margin-top: 30rpx;
+.detail-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
   min-height: 76rpx;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 10rpx 12rpx;
+  border: 2rpx solid var(--page-theme-soft);
+  border-radius: 18rpx;
+  color: var(--page-theme);
+  background: rgba(255, 254, 251, .9);
+  font-size: 24rpx;
+  font-weight: 900;
+  line-height: 1.3;
+  white-space: normal;
+  box-shadow: 0 6rpx 14rpx rgba(39, 91, 74, .06);
+}
+
+.detail-action::after {
   border: 0;
-  color: var(--orange);
+}
+
+.detail-action--primary {
+  border-style: double;
+  border-width: 4rpx;
+  background: var(--page-tint);
+}
+
+.detail-action--danger {
+  border-style: dashed;
+  border-color: rgba(161, 61, 54, .34);
+  color: rgba(161, 61, 54, .78);
   background: transparent;
-  font-size: 26rpx;
+  box-shadow: none;
+  font-weight: 800;
 }
 /* MVP 1.0A diary detail green theme accents */
-.theme-diary .copy-seal,
 .theme-diary .info-row,
 .theme-diary .fact-memo {
   border-color: var(--page-theme-soft);
 }
 
-.theme-diary .copy-seal,
-.theme-diary .delete-button {
-  color: var(--page-theme);
+@media (max-width: 360px) {
+  .detail-action {
+    min-height: 72rpx;
+    padding: 8rpx 10rpx;
+    font-size: 22rpx;
+  }
 }

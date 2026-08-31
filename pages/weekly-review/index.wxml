@@ -1,0 +1,45 @@
+<view class="page paper-page theme-diary">
+  <view class="page-head floral-title-box title-pattern-card">
+    <image class="title-pattern-image" src="/assets/title-patterns/dark-green.png" mode="aspectFill" />
+    <view class="title-pattern-mask"></view>
+    <view class="corner-ornament corner-ornament-left corner-ornament--green"></view>
+    <text class="eyebrow">最近 7 天</text>
+    <text class="hero-title">本周回看</text>
+    <text class="subtext">{{greeting}}</text>
+  </view>
+
+  <block wx:if="{{hasRecords}}">
+    <view class="stats-grid">
+      <view class="stat-card"><text class="stat-value">{{total}}</text><text class="stat-label">本周记录</text></view>
+      <view class="stat-card"><text class="stat-value">{{averageImpact}}</text><text class="stat-label">平均事件等级</text></view>
+      <view class="stat-card wide"><text class="stat-value reason-value">{{topReason}}</text><text class="stat-label">最常出现 · {{topReasonCount}} 次</text></view>
+    </view>
+
+    <view class="ornament-card highest-card" bindtap="openHighestEntry">
+      <text class="section-title">最高影响事件</text>
+      <text class="highest-summary">{{highestEntry.summaryPreview}}</text>
+      <view class="highest-meta"><text>{{highestEntry.displayDate}}</text><text>{{highestEntry.impactLevel}} 级 · {{highestEntry.primaryReason}}</text></view>
+      <text class="detail-hint">点开回看这条记录 →</text>
+    </view>
+
+    <view class="ornament-card">
+      <text class="section-title">本周重复出现</text>
+      <view wx:if="{{repeatedReasons.length}}" class="repeat-list"><view wx:for="{{repeatedReasons}}" wx:key="reason" class="paper-tag green">{{item.reason}} × {{item.count}}</view></view>
+      <text wx:else class="body-text muted">还没有出现两次以上的同类问题。一次性事件和长期模式，都可以继续观察。</text>
+    </view>
+  </block>
+
+  <view wx:else class="empty-card empty-review">
+    <text class="section-title">这一周还没有记录</text>
+    <text>没有数据也不代表什么。等你想写时，再从一件具体发生的事开始。</text>
+    <button class="sticker-button green" bindtap="writeDiary">写一条日记</button>
+  </view>
+
+  <view class="note-card reflection-card">
+    <text class="section-title">可以轻轻问自己</text>
+    <text class="question">1. 哪件事现在回头看，已经没那么严重了？</text>
+    <text class="question">2. 哪个问题这周反复出现？</text>
+    <text class="question">3. 下周有什么需要继续观察？</text>
+    <text class="privacy-note">这些问题本轮不保存答案，也不会生成健康或离职结论。</text>
+  </view>
+</view>

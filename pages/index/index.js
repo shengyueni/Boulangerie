@@ -1,24 +1,44 @@
 const { APP_META } = require("../../utils/constants");
-const { getDiaryEntries } = require("../../utils/storage");
+const { getDiaryEntries, getMaloNickname } = require("../../utils/storage");
 const { getCroissantReport } = require("../../utils/croissant");
 const { getTodayOracle } = require("../../utils/oracle");
+const { POSTER_HEIGHT, POSTER_SCALE, POSTER_WIDTH, drawOraclePoster } = require("../../utils/oracle-poster");
 const cloudBackupLifecycle = require("../../utils/cloud-backup-lifecycle");
 
+const FIRST_USE_GUIDE_KEY = "hasSeenFirstUseGuide";
+const ORACLE_POSTER_CROISSANT = "/assets/characters/croissant-state-smooth-bust.png";
+
+function getCroissantReminderLabel(nickname) {
+  return nickname ? `${nickname}，Croissant 今天想提醒你：` : "Croissant 今天想提醒你：";
+}
 
 Page({
   data: {
     appMeta: APP_META,
+    nickname: "",
+    croissantReminderLabel: getCroissantReminderLabel(""),
     oracle: getTodayOracle(),
+    isSavingOraclePoster: false,
     croissant: getCroissantReport([]),
+    showAutomaticFirstUseGuide: false,
+    showManualFirstUseGuide: false,
     todayStatusButtons: [
       { label: "写日记", action: "record" },
       { label: "急救一下", action: "emergency" },
-      { label: "查看计划", action: "plan" }
+      { label: "查看计划", action: "plan" },
+      { label: "查看引导", action: "guide" }
     ]
   },
 
   onLoad() {
     this.pageVisible = true;
+    const nickname = getMaloNickname();
+    this.setData({
+      nickname,
+      croissantReminderLabel: getCroissantReminderLabel(nickname),
+      showAutomaticFirstUseGuide: wx.getStorageSync(FIRST_USE_GUIDE_KEY) !== true,
+      showManualFirstUseGuide: false
+    });
     this.unsubscribeCloudBackup = cloudBackupLifecycle.subscribeLifecycle(() => {
       this.maybePromptCloudBackup();
     });
@@ -26,9 +46,13 @@ Page({
 
   onShow() {
     this.pageVisible = true;
+    const oracle = getTodayOracle();
     const croissant = getCroissantReport(getDiaryEntries());
+    const nickname = getMaloNickname();
     this.setData({
-      oracle: getTodayOracle(),
+      oracle,
+      nickname,
+      croissantReminderLabel: getCroissantReminderLabel(nickname),
       croissant
     });
     this.maybePromptCloudBackup();
@@ -63,6 +87,114 @@ Page({
     wx.navigateTo({ url: "/pages/diary-new/index" });
   },
 
+  saveTodayOracle() {
+    if (this.data.isSavingOraclePoster) return;
+    wx.getSetting({
+      success: (settings) => {
+        if (settings.authSetting["scope.writePhotosAlbum"] === false) {
+          this.showAlbumPermissionGuide();
+          return;
+        }
+        this.generateAndSaveOraclePoster();
+      },
+      fail: () => this.generateAndSaveOraclePoster()
+    });
+  },
+
+  generateAndSaveOraclePoster() {
+    this.setData({ isSavingOraclePoster: true });
+    wx.showLoading({ title: "正在生成卡片", mask: true });
+    this.createOraclePoster()
+      .then((filePath) => new Promise((resolve, reject) => {
+        wx.saveImageToPhotosAlbum({ filePath, success: resolve, fail: reject });
+      }))
+      .then(() => {
+        wx.showToast({ title: "今天的职场天气已经收进相册啦。", icon: "none" });
+      })
+      .catch((error) => {
+        const message = String((error && error.errMsg) || error || "");
+        if (/auth deny|auth denied|authorize:fail/i.test(message)) {
+          this.showAlbumPermissionGuide();
+          return;
+        }
+        wx.showToast({ title: "保存没有成功，请稍后再试。", icon: "none" });
+      })
+      .then(() => {
+        wx.hideLoading();
+        this.setData({ isSavingOraclePoster: false });
+      });
+  },
+
+  createOraclePoster() {
+    return new Promise((resolve, reject) => {
+      wx.createSelectorQuery()
+        .in(this)
+        .select("#oraclePosterCanvas")
+        .fields({ node: true, size: true })
+        .exec((result) => {
+          const canvas = result && result[0] && result[0].node;
+          if (!canvas) {
+            reject(new Error("oracle poster canvas unavailable"));
+            return;
+          }
+          canvas.width = POSTER_WIDTH * POSTER_SCALE;
+          canvas.height = POSTER_HEIGHT * POSTER_SCALE;
+          const context = canvas.getContext("2d");
+          context.scale(POSTER_SCALE, POSTER_SCALE);
+          const drawAndExport = (croissantImage) => {
+            drawOraclePoster(context, this.data.oracle, croissantImage);
+            wx.canvasToTempFilePath({
+              canvas,
+              fileType: "png",
+              success: (response) => resolve(response.tempFilePath),
+              fail: reject
+            }, this);
+          };
+          if (!canvas.createImage) {
+            drawAndExport(null);
+            return;
+          }
+          const croissantImage = canvas.createImage();
+          croissantImage.onload = () => drawAndExport(croissantImage);
+          croissantImage.onerror = () => drawAndExport(null);
+          croissantImage.src = ORACLE_POSTER_CROISSANT;
+        });
+    });
+  },
+
+  showAlbumPermissionGuide() {
+    wx.showModal({
+      title: "还不能保存到相册",
+      content: "可以在设置里允许访问相册，再回来保存今天的卡片。",
+      cancelText: "暂不设置",
+      confirmText: "去设置",
+      success: (result) => {
+        if (result.confirm) wx.openSetting();
+      }
+    });
+  },
+
+  dismissFirstUseGuide() {
+    if (this.data.showAutomaticFirstUseGuide) {
+      wx.setStorageSync(FIRST_USE_GUIDE_KEY, true);
+    }
+    this.setData({
+      showAutomaticFirstUseGuide: false,
+      showManualFirstUseGuide: false
+    });
+  },
+
+  openFirstUseGuide() {
+    this.setData({ showManualFirstUseGuide: true }, () => {
+      wx.pageScrollTo({ scrollTop: 0, duration: 300 });
+    });
+  },
+
+  startFirstDiary() {
+    this.dismissFirstUseGuide();
+    this.recordToday();
+  },
+
   goDashboard() {
     wx.navigateTo({ url: "/pages/dashboard/index" });
   },
@@ -80,5 +212,6 @@ Page({
     if (action === "record") this.recordToday();
     if (action === "emergency") this.goEmergency();
     if (action === "plan") this.goPlan();
+    if (action === "guide") this.openFirstUseGuide();
   }
 });

@@ -31,7 +31,14 @@
       <view class="paper-corner left"></view>
       <view class="paper-corner right"></view>
       <text class="section-title">记录信息</text>
-      <view class="info-grid">
+      <view wx:if="{{entry.isQuick}}" class="info-grid quick-info-grid">
+        <view class="info-row"><text>记录方式</text><text>30 秒记录</text></view>
+        <view class="info-row"><text>问题分类</text><text>{{entry.primaryReasonText}}</text></view>
+        <view class="info-row"><text>事件等级</text><text>{{entry.impactLevelText}}</text></view>
+        <view class="info-row"><text>整理进度</text><text>核心事件已记录，其他线索待整理</text></view>
+        <view wx:if="{{entry.hasEmotions}}" class="info-row"><text>当时的感受</text><text>{{entry.emotionsText}}</text></view>
+      </view>
+      <view wx:else class="info-grid">
         <view class="info-row"><text>影响程度</text><text>{{entry.impactLevel}} 级</text></view>
         <view class="info-row"><text>主要归因</text><text>{{entry.primaryReason}}</text></view>
         <view class="info-row vertical"><text>补充线索</text><text>{{entry.tagsText}}</text></view>
@@ -40,6 +47,7 @@
         <view class="info-row vertical"><text>已尝试处理</text><text>{{entry.triedActionsText}}</text></view>
         <view class="info-row vertical full"><text>下一步我可以做什么</text><text>{{entry.nextStepText}}</text></view>
       </view>
+      <button wx:if="{{entry.isQuick}}" class="sticker-button green" bindtap="continueOrganizing">继续整理成完整记录</button>
     </view>
 
     <view class="paper-divider"><view class="paper-divider__line"></view><text class="paper-divider__tag">可复制证据纸</text><view class="paper-divider__line"></view></view>
@@ -54,11 +62,12 @@
       <text class="paper-seal memo-seal">事实纪要</text>
       <text class="section-title">完整事实纪要</text>
       <text class="fact-memo">{{entry.displayFactMemo}}</text>
-      <button class="sticker-button copy-seal" bindtap="copyFactMemo">复制事实纪要</button>
+      <view class="detail-action-grid">
+        <button class="detail-action detail-action--primary" bindtap="copyFactMemo">复制事实纪要</button>
+        <button class="detail-action" bindtap="goDiary">回到日记本</button>
+        <button class="detail-action" bindtap="goDashboard">去看决心仪表盘</button>
+        <button class="detail-action detail-action--danger" bindtap="deleteEntry">删除这条记录</button>
+      </view>
     </view>
-
-    <button class="sticker-button secondary" bindtap="goDiary">回到日记本</button>
-    <button class="sticker-button green" bindtap="goDashboard">去看决心仪表盘</button>
-    <button class="danger-button" bindtap="deleteEntry">删除这条记录</button>
   </block>
 </view>
