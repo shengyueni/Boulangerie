@@ -11,12 +11,15 @@ const MAX_SNAPSHOT_BYTES = 1024 * 1024;
 const SCHEMA_VERSION = 1;
 const SUPPORTED_ACTIONS = new Set([
   "saveBackup",
+  "deleteBackup",
   "getStatus",
   "getBackup",
   "getPreference",
   "setPreference"
 ]);
 const BACKUP_CONSENT_VERSION = 1;
+const TRANSACTION_RETRY_TIMES = 5;
+const BACKUP_DELETE_BATCH_SIZE = 100;
 
 function safeErrorDetails(error) {
   return {
@@ -68,6 +71,31 @@ function estimateSnapshotBytes(snapshot) {
 
 function normalizeAppVersion(value) {
   return typeof value === "string" && value.length <= 50 ? value : "unknown";
+}
+
+function createBusinessError(code, message) {
+  const error = new Error(message);
+  error.backupCode = code;
+  return error;
+}
+
+function getDocumentData(result) {
+  if (!result || !result.data) return null;
+  if (Array.isArray(result.data)) return result.data[0] || null;
+  return result.data;
+}
+
+function nextBackupGeneration(user) {
+  const current = Number(user && user.backupGeneration);
+  return Number.isSafeInteger(current) && current >= 0 ? current + 1 : 1;
+}
+
+function normalizeTransactionError(error, fallbackCode, fallbackMessage) {
+  if (error && error.backupCode) {
+    return { ok: false, code: error.backupCode, message: error.message || fallbackMessage };
+  }
+  console.error("syncBackup transaction failed", safeErrorDetails(error));
+  return { ok: false, code: fallbackCode, message: fallbackMessage };
 }
 
 async function findCurrentUser(openid) {
@@ -127,79 +155,89 @@ async function saveBackup(event, openid, user) {
   const currentBackup = backupQuery.backups[0];
   const appVersion = normalizeAppVersion(event.appVersion);
   const responseUpdatedAt = new Date().toISOString();
+  const backupId = currentBackup ? currentBackup._id : user._id;
+  const created = !currentBackup;
+  try {
+    await db.runTransaction(async (transaction) => {
+      const userRef = transaction.collection("users").doc(user._id);
+      const transactionUser = getDocumentData(await userRef.get());
+      if (!transactionUser || transactionUser.openid !== openid) {
+        throw createBusinessError("USER_NOT_FOUND", "当前微信用户尚未注册。");
+      }
+      if (transactionUser.backupMode !== "enabled") {
+        throw createBusinessError("BACKUP_DISABLED", "云端备份已关闭，不会重新创建备份。");
+      }
 
-  if (currentBackup) {
-    try {
-      await userBackups.doc(currentBackup._id).update({
+      await userRef.update({
         data: {
-          userId: user._id,
-          schemaVersion: SCHEMA_VERSION,
-          appVersion,
-          snapshot,
-          snapshotBytes,
-          updatedAt: db.serverDate()
+          backupGeneration: nextBackupGeneration(transactionUser)
         }
       });
-    } catch (error) {
-      console.error("syncBackup update failed", safeErrorDetails(error));
-      return { ok: false, code: "BACKUP_UPDATE_FAILED", message: "云备份更新失败。" };
-    }
+
+      const backupRef = transaction.collection("user_backups").doc(backupId);
+      if (currentBackup) {
+        await backupRef.update({
+          data: {
+            userId: user._id,
+            schemaVersion: SCHEMA_VERSION,
+            appVersion,
+            snapshot,
+            snapshotBytes,
+            updatedAt: db.serverDate()
+          }
+        });
+      } else {
+        await backupRef.set({
+          data: {
+            userId: user._id,
+            ownerOpenid: openid,
+            schemaVersion: SCHEMA_VERSION,
+            appVersion,
+            snapshot,
+            snapshotBytes,
+            createdAt: db.serverDate(),
+            updatedAt: db.serverDate()
+          }
+        });
+      }
+    }, TRANSACTION_RETRY_TIMES);
 
     return {
       ok: true,
       backup: {
-        backupId: currentBackup._id,
-        created: false,
+        backupId,
+        created,
         updatedAt: responseUpdatedAt,
         snapshotBytes,
         duplicateBackupCount
       }
     };
-  }
-
-  try {
-    const createdBackup = await userBackups.add({
-      data: {
-        userId: user._id,
-        ownerOpenid: openid,
-        schemaVersion: SCHEMA_VERSION,
-        appVersion,
-        snapshot,
-        snapshotBytes,
-        createdAt: db.serverDate(),
-        updatedAt: db.serverDate()
-      }
-    });
-
-    return {
-      ok: true,
-      backup: {
-        backupId: createdBackup._id,
-        created: true,
-        updatedAt: responseUpdatedAt,
-        snapshotBytes,
-        duplicateBackupCount: 0
-      }
-    };
   } catch (error) {
-    console.error("syncBackup creation failed", safeErrorDetails(error));
-    return { ok: false, code: "BACKUP_CREATE_FAILED", message: "云备份创建失败。" };
+    return normalizeTransactionError(error, "BACKUP_SAVE_FAILED", "云备份保存失败。");
   }
 }
 
-async function getStatus(openid) {
+async function getStatus(openid, user) {
   const backupQuery = await findBackups(openid, "BACKUP_STATUS_FAILED");
   if (!backupQuery.ok) return backupQuery;
 
   const duplicateBackupCount = reportDuplicates(backupQuery.backups);
   const currentBackup = backupQuery.backups[0];
   if (!currentBackup) {
-    return { ok: true, exists: false, backup: null };
+    return {
+      ok: true,
+      exists: false,
+      backupEnabled: user.backupMode === "enabled",
+      mode: getPreference(user).mode,
+      backup: null
+    };
   }
 
   return {
     ok: true,
     exists: true,
+    backupEnabled: user.backupMode === "enabled",
+    mode: getPreference(user).mode,
     backup: {
       backupId: currentBackup._id,
       schemaVersion: currentBackup.schemaVersion,
@@ -286,20 +324,23 @@ async function setPreference(event, user) {
 
   const responseUpdatedAt = new Date().toISOString();
   try {
-    await users.doc(user._id).update({
-      data: {
-        backupMode: event.mode,
-        backupConsentVersion: BACKUP_CONSENT_VERSION,
-        backupConsentUpdatedAt: db.serverDate()
+    await db.runTransaction(async (transaction) => {
+      const userRef = transaction.collection("users").doc(user._id);
+      const transactionUser = getDocumentData(await userRef.get());
+      if (!transactionUser) {
+        throw createBusinessError("USER_NOT_FOUND", "当前微信用户尚未注册。");
       }
-    });
+      await userRef.update({
+        data: {
+          backupMode: event.mode,
+          backupGeneration: nextBackupGeneration(transactionUser),
+          backupConsentVersion: BACKUP_CONSENT_VERSION,
+          backupConsentUpdatedAt: db.serverDate()
+        }
+      });
+    }, TRANSACTION_RETRY_TIMES);
   } catch (error) {
-    console.error("syncBackup preference update failed", safeErrorDetails(error));
-    return {
-      ok: false,
-      code: "PREFERENCE_UPDATE_FAILED",
-      message: "云备份偏好保存失败。"
-    };
+    return normalizeTransactionError(error, "PREFERENCE_UPDATE_FAILED", "云备份偏好保存失败。");
   }
 
   return {
@@ -307,6 +348,97 @@ async function setPreference(event, user) {
     mode: event.mode,
     consentVersion: BACKUP_CONSENT_VERSION,
     consentUpdatedAt: responseUpdatedAt
+  };
+}
+
+async function disableBackupWithFence(openid, user) {
+  const responseUpdatedAt = new Date().toISOString();
+  try {
+    await db.runTransaction(async (transaction) => {
+      const userRef = transaction.collection("users").doc(user._id);
+      const transactionUser = getDocumentData(await userRef.get());
+      if (!transactionUser || transactionUser.openid !== openid) {
+        throw createBusinessError("USER_NOT_FOUND", "当前微信用户尚未注册。");
+      }
+      await userRef.update({
+        data: {
+          backupMode: "disabled",
+          backupGeneration: nextBackupGeneration(transactionUser),
+          backupConsentVersion: BACKUP_CONSENT_VERSION,
+          backupConsentUpdatedAt: db.serverDate()
+        }
+      });
+    }, TRANSACTION_RETRY_TIMES);
+  } catch (error) {
+    return normalizeTransactionError(error, "BACKUP_DISABLE_FAILED", "无法安全关闭云端备份。");
+  }
+
+  return { ok: true, consentUpdatedAt: responseUpdatedAt };
+}
+
+async function deleteAllBackups(openid) {
+  let deletedCount = 0;
+  try {
+    while (true) {
+      const result = await userBackups
+        .where({ ownerOpenid: openid })
+        .limit(BACKUP_DELETE_BATCH_SIZE)
+        .get();
+      const backups = Array.isArray(result.data) ? result.data : [];
+      if (!backups.length) break;
+
+      for (const backup of backups) {
+        if (!backup || !backup._id) continue;
+        await userBackups.doc(backup._id).remove();
+        deletedCount += 1;
+      }
+    }
+
+    const verification = await userBackups
+      .where({ ownerOpenid: openid })
+      .limit(1)
+      .get();
+    if (Array.isArray(verification.data) && verification.data.length) {
+      return {
+        ok: false,
+        code: "BACKUP_DELETE_PARTIAL",
+        message: "云端备份未能全部删除，请重试。",
+        deletedCount
+      };
+    }
+    return { ok: true, deletedCount };
+  } catch (error) {
+    console.error("syncBackup delete failed", safeErrorDetails(error));
+    return {
+      ok: false,
+      code: "BACKUP_DELETE_FAILED",
+      message: "云端备份删除未完成，请重试。",
+      deletedCount
+    };
+  }
+}
+
+async function deleteBackup(openid, user) {
+  const disabled = await disableBackupWithFence(openid, user);
+  if (!disabled.ok) return disabled;
+
+  const deletion = await deleteAllBackups(openid);
+  if (!deletion.ok) {
+    return {
+      ...deletion,
+      backupEnabled: false,
+      mode: "disabled"
+    };
+  }
+
+  return {
+    ok: true,
+    deleted: deletion.deletedCount > 0,
+    deletedCount: deletion.deletedCount,
+    backupEnabled: false,
+    mode: "disabled",
+    consentVersion: BACKUP_CONSENT_VERSION,
+    consentUpdatedAt: disabled.consentUpdatedAt
   };
 }
 
@@ -327,10 +459,7 @@ exports.main = async (event = {}) => {
     return { ok: false, code: "USER_NOT_FOUND", message: "当前微信用户尚未注册。" };
   }
 
-  if (
-    (event.action === "saveBackup" || event.action === "getBackup")
-    && userResult.user.backupMode !== "enabled"
-  ) {
+  if (event.action === "getBackup" && userResult.user.backupMode !== "enabled") {
     return { ok: false, code: "BACKUP_NOT_ENABLED", message: "当前用户尚未开启云备份。" };
   }
 
@@ -338,13 +467,16 @@ exports.main = async (event = {}) => {
     return saveBackup(event, openid, userResult.user);
   }
   if (event.action === "getStatus") {
-    return getStatus(openid);
+    return getStatus(openid, userResult.user);
   }
   if (event.action === "getBackup") {
     return getBackup(openid);
   }
   if (event.action === "getPreference") {
     return getPreference(userResult.user);
+  }
+  if (event.action === "deleteBackup") {
+    return deleteBackup(openid, userResult.user);
   }
   return setPreference(event, userResult.user);
 };
