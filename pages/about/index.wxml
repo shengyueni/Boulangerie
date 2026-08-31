@@ -19,6 +19,7 @@
     <text class="section-title">你的数据怎么保存</text>
     <text class="body-text">日记、心声、计划清单和自定义急救卡默认保存在当前设备。</text>
     <text class="body-text">如果你主动开启云端备份，这些核心记录会与你的小程序微信身份关联保存到云端，用于缓存丢失或更换设备后的恢复。</text>
+    <text class="body-text">你可以在下方管理并删除云端备份。删除只影响云端副本，不会删除本机内容；删除后云端备份也会同时关闭，只有你再次主动开启后才会创建新备份。</text>
     <text class="body-text">Malo 当前不需要获取微信昵称、头像或手机号。</text>
     <text class="body-text">当前不是实时多设备同步。</text>
   </view>
